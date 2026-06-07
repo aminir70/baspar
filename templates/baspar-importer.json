@@ -1,0 +1,547 @@
+{
+    "version": "0.4",
+    "title": "Baspar — واردکننده مواد اولیه",
+    "type": "page",
+    "content": [
+        {
+            "id": "c7c7ee1",
+            "elType": "section",
+            "settings": {},
+            "elements": [
+                {
+                    "id": "6993f0b",
+                    "elType": "column",
+                    "settings": {
+                        "_column_size": 100,
+                        "_inline_size": null
+                    },
+                    "elements": [
+                        {
+                            "id": "6225a3a",
+                            "elType": "widget",
+                            "settings": {},
+                            "elements": [],
+                            "widgetType": "baspar-topbar"
+                        }
+                    ],
+                    "isInner": false
+                }
+            ],
+            "isInner": false
+        },
+        {
+            "id": "dee8063",
+            "elType": "section",
+            "settings": {},
+            "elements": [
+                {
+                    "id": "e0c4a4b",
+                    "elType": "column",
+                    "settings": {
+                        "_column_size": 100,
+                        "_inline_size": null
+                    },
+                    "elements": [
+                        {
+                            "id": "b0ab0bc",
+                            "elType": "widget",
+                            "settings": {},
+                            "elements": [],
+                            "widgetType": "baspar-header"
+                        }
+                    ],
+                    "isInner": false
+                }
+            ],
+            "isInner": false
+        },
+        {
+            "id": "8a591db",
+            "elType": "section",
+            "settings": {},
+            "elements": [
+                {
+                    "id": "44a644f",
+                    "elType": "column",
+                    "settings": {
+                        "_column_size": 100,
+                        "_inline_size": null
+                    },
+                    "elements": [
+                        {
+                            "id": "171b9f0",
+                            "elType": "widget",
+                            "settings": {},
+                            "elements": [],
+                            "widgetType": "baspar-importer-hero"
+                        }
+                    ],
+                    "isInner": false
+                }
+            ],
+            "isInner": false
+        },
+        {
+            "id": "341b0f5",
+            "elType": "section",
+            "settings": {
+                "padding": {
+                    "unit": "px",
+                    "top": "80",
+                    "right": "24",
+                    "bottom": "80",
+                    "left": "24",
+                    "isLinked": false
+                }
+            },
+            "elements": [
+                {
+                    "id": "5cd3025",
+                    "elType": "column",
+                    "settings": {
+                        "_column_size": 100,
+                        "_inline_size": null
+                    },
+                    "elements": [
+                        {
+                            "id": "218d9f6",
+                            "elType": "widget",
+                            "settings": {},
+                            "elements": [],
+                            "widgetType": "baspar-trust"
+                        }
+                    ],
+                    "isInner": false
+                }
+            ],
+            "isInner": false
+        },
+        {
+            "id": "7ef6a0f",
+            "elType": "section",
+            "settings": {
+                "padding": {
+                    "unit": "px",
+                    "top": "80",
+                    "right": "24",
+                    "bottom": "80",
+                    "left": "24",
+                    "isLinked": false
+                }
+            },
+            "elements": [
+                {
+                    "id": "9688096",
+                    "elType": "column",
+                    "settings": {
+                        "_column_size": 100,
+                        "_inline_size": null
+                    },
+                    "elements": [
+                        {
+                            "id": "799eeb5",
+                            "elType": "widget",
+                            "settings": {
+                                "kicker": "WHY DIRECT IMPORT",
+                                "title": "چرا واردات مستقیم؟"
+                            },
+                            "elements": [],
+                            "widgetType": "baspar-section-heading"
+                        },
+                        {
+                            "id": "5c61cf0",
+                            "elType": "widget",
+                            "settings": {},
+                            "elements": [],
+                            "widgetType": "baspar-process"
+                        }
+                    ],
+                    "isInner": false
+                }
+            ],
+            "isInner": false
+        },
+        {
+            "id": "485d0d6",
+            "elType": "section",
+            "settings": {
+                "padding": {
+                    "unit": "px",
+                    "top": "80",
+                    "right": "24",
+                    "bottom": "80",
+                    "left": "24",
+                    "isLinked": false
+                }
+            },
+            "elements": [
+                {
+                    "id": "0dd3b31",
+                    "elType": "column",
+                    "settings": {
+                        "_column_size": 100,
+                        "_inline_size": null
+                    },
+                    "elements": [
+                        {
+                            "id": "62beabd",
+                            "elType": "widget",
+                            "settings": {
+                                "kicker": "ORIGIN COUNTRIES",
+                                "title": "کشورهای مبدأ"
+                            },
+                            "elements": [],
+                            "widgetType": "baspar-section-heading"
+                        },
+                        {
+                            "id": "edc3f85",
+                            "elType": "widget",
+                            "settings": {},
+                            "elements": [],
+                            "widgetType": "baspar-origin-countries"
+                        }
+                    ],
+                    "isInner": false
+                }
+            ],
+            "isInner": false
+        },
+        {
+            "id": "a2d8eff",
+            "elType": "section",
+            "settings": {
+                "padding": {
+                    "unit": "px",
+                    "top": "80",
+                    "right": "24",
+                    "bottom": "80",
+                    "left": "24",
+                    "isLinked": false
+                }
+            },
+            "elements": [
+                {
+                    "id": "ca8bf96",
+                    "elType": "column",
+                    "settings": {
+                        "_column_size": 100,
+                        "_inline_size": null
+                    },
+                    "elements": [
+                        {
+                            "id": "159a3a6",
+                            "elType": "widget",
+                            "settings": {
+                                "align": "center",
+                                "kicker": "CATEGORIES",
+                                "title": "دسته‌بندی محصولات وارداتی"
+                            },
+                            "elements": [],
+                            "widgetType": "baspar-section-heading"
+                        },
+                        {
+                            "id": "969d305",
+                            "elType": "widget",
+                            "settings": {
+                                "orderby": "date",
+                                "count": 8,
+                                "columns": "4"
+                            },
+                            "elements": [],
+                            "widgetType": "baspar-products"
+                        }
+                    ],
+                    "isInner": false
+                }
+            ],
+            "isInner": false
+        },
+        {
+            "id": "3d1b176",
+            "elType": "section",
+            "settings": {
+                "padding": {
+                    "unit": "px",
+                    "top": "80",
+                    "right": "24",
+                    "bottom": "80",
+                    "left": "24",
+                    "isLinked": false
+                }
+            },
+            "elements": [
+                {
+                    "id": "3739e59",
+                    "elType": "column",
+                    "settings": {
+                        "_column_size": 100,
+                        "_inline_size": null
+                    },
+                    "elements": [
+                        {
+                            "id": "40d70e8",
+                            "elType": "widget",
+                            "settings": {
+                                "align": "center",
+                                "kicker": "IMPORT PROCESS",
+                                "title": "فرآیند واردات"
+                            },
+                            "elements": [],
+                            "widgetType": "baspar-section-heading"
+                        },
+                        {
+                            "id": "5e01703",
+                            "elType": "widget",
+                            "settings": {},
+                            "elements": [],
+                            "widgetType": "baspar-timeline"
+                        }
+                    ],
+                    "isInner": false
+                }
+            ],
+            "isInner": false
+        },
+        {
+            "id": "5fa193c",
+            "elType": "section",
+            "settings": {
+                "padding": {
+                    "unit": "px",
+                    "top": "80",
+                    "right": "24",
+                    "bottom": "80",
+                    "left": "24",
+                    "isLinked": false
+                }
+            },
+            "elements": [
+                {
+                    "id": "934253d",
+                    "elType": "column",
+                    "settings": {
+                        "_column_size": 100,
+                        "_inline_size": null
+                    },
+                    "elements": [
+                        {
+                            "id": "f2254a0",
+                            "elType": "widget",
+                            "settings": {},
+                            "elements": [],
+                            "widgetType": "baspar-industries"
+                        }
+                    ],
+                    "isInner": false
+                }
+            ],
+            "isInner": false
+        },
+        {
+            "id": "ef07611",
+            "elType": "section",
+            "settings": {
+                "padding": {
+                    "unit": "px",
+                    "top": "80",
+                    "right": "24",
+                    "bottom": "80",
+                    "left": "24",
+                    "isLinked": false
+                }
+            },
+            "elements": [
+                {
+                    "id": "234772e",
+                    "elType": "column",
+                    "settings": {
+                        "_column_size": 100,
+                        "_inline_size": null
+                    },
+                    "elements": [
+                        {
+                            "id": "0112d9e",
+                            "elType": "widget",
+                            "settings": {
+                                "align": "center",
+                                "kicker": "COMPARE",
+                                "title": "چرا بسپارمارکت؟"
+                            },
+                            "elements": [],
+                            "widgetType": "baspar-section-heading"
+                        },
+                        {
+                            "id": "27981be",
+                            "elType": "widget",
+                            "settings": {},
+                            "elements": [],
+                            "widgetType": "baspar-compare-table"
+                        }
+                    ],
+                    "isInner": false
+                }
+            ],
+            "isInner": false
+        },
+        {
+            "id": "66d2995",
+            "elType": "section",
+            "settings": {
+                "padding": {
+                    "unit": "px",
+                    "top": "80",
+                    "right": "24",
+                    "bottom": "80",
+                    "left": "24",
+                    "isLinked": false
+                }
+            },
+            "elements": [
+                {
+                    "id": "2f737ed",
+                    "elType": "column",
+                    "settings": {
+                        "_column_size": 100,
+                        "_inline_size": null
+                    },
+                    "elements": [
+                        {
+                            "id": "30f759f",
+                            "elType": "widget",
+                            "settings": {},
+                            "elements": [],
+                            "widgetType": "baspar-mid-cta"
+                        }
+                    ],
+                    "isInner": false
+                }
+            ],
+            "isInner": false
+        },
+        {
+            "id": "c40fcf3",
+            "elType": "section",
+            "settings": {
+                "padding": {
+                    "unit": "px",
+                    "top": "80",
+                    "right": "24",
+                    "bottom": "80",
+                    "left": "24",
+                    "isLinked": false
+                }
+            },
+            "elements": [
+                {
+                    "id": "9035a53",
+                    "elType": "column",
+                    "settings": {
+                        "_column_size": 100,
+                        "_inline_size": null
+                    },
+                    "elements": [
+                        {
+                            "id": "786e6ce",
+                            "elType": "widget",
+                            "settings": {
+                                "align": "center",
+                                "kicker": "FAQ",
+                                "title": "سوالات متداول واردات"
+                            },
+                            "elements": [],
+                            "widgetType": "baspar-section-heading"
+                        },
+                        {
+                            "id": "bfcb49f",
+                            "elType": "widget",
+                            "settings": {},
+                            "elements": [],
+                            "widgetType": "baspar-faq"
+                        }
+                    ],
+                    "isInner": false
+                }
+            ],
+            "isInner": false
+        },
+        {
+            "id": "940fbe5",
+            "elType": "section",
+            "settings": {},
+            "elements": [
+                {
+                    "id": "bd1efb7",
+                    "elType": "column",
+                    "settings": {
+                        "_column_size": 100,
+                        "_inline_size": null
+                    },
+                    "elements": [
+                        {
+                            "id": "207c7da",
+                            "elType": "widget",
+                            "settings": {},
+                            "elements": [],
+                            "widgetType": "baspar-final-cta"
+                        }
+                    ],
+                    "isInner": false
+                }
+            ],
+            "isInner": false
+        },
+        {
+            "id": "c8e1b28",
+            "elType": "section",
+            "settings": {},
+            "elements": [
+                {
+                    "id": "5eaf73f",
+                    "elType": "column",
+                    "settings": {
+                        "_column_size": 100,
+                        "_inline_size": null
+                    },
+                    "elements": [
+                        {
+                            "id": "f9cd62a",
+                            "elType": "widget",
+                            "settings": {},
+                            "elements": [],
+                            "widgetType": "baspar-footer"
+                        }
+                    ],
+                    "isInner": false
+                }
+            ],
+            "isInner": false
+        },
+        {
+            "id": "193339d",
+            "elType": "section",
+            "settings": {},
+            "elements": [
+                {
+                    "id": "6105188",
+                    "elType": "column",
+                    "settings": {
+                        "_column_size": 100,
+                        "_inline_size": null
+                    },
+                    "elements": [
+                        {
+                            "id": "32ad384",
+                            "elType": "widget",
+                            "settings": {},
+                            "elements": [],
+                            "widgetType": "baspar-float-whatsapp"
+                        }
+                    ],
+                    "isInner": false
+                }
+            ],
+            "isInner": false
+        }
+    ],
+    "page_settings": {}
+}

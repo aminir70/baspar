@@ -1,0 +1,494 @@
+{
+    "version": "0.4",
+    "title": "Baspar — خرید مواد اولیه (پیلار)",
+    "type": "page",
+    "content": [
+        {
+            "id": "d1b6e75",
+            "elType": "section",
+            "settings": {},
+            "elements": [
+                {
+                    "id": "af0ba9a",
+                    "elType": "column",
+                    "settings": {
+                        "_column_size": 100,
+                        "_inline_size": null
+                    },
+                    "elements": [
+                        {
+                            "id": "37a4f16",
+                            "elType": "widget",
+                            "settings": {},
+                            "elements": [],
+                            "widgetType": "baspar-topbar"
+                        }
+                    ],
+                    "isInner": false
+                }
+            ],
+            "isInner": false
+        },
+        {
+            "id": "c38d446",
+            "elType": "section",
+            "settings": {},
+            "elements": [
+                {
+                    "id": "09e8f12",
+                    "elType": "column",
+                    "settings": {
+                        "_column_size": 100,
+                        "_inline_size": null
+                    },
+                    "elements": [
+                        {
+                            "id": "82a62d6",
+                            "elType": "widget",
+                            "settings": {},
+                            "elements": [],
+                            "widgetType": "baspar-header"
+                        }
+                    ],
+                    "isInner": false
+                }
+            ],
+            "isInner": false
+        },
+        {
+            "id": "ed969ca",
+            "elType": "section",
+            "settings": {},
+            "elements": [
+                {
+                    "id": "bf38fed",
+                    "elType": "column",
+                    "settings": {
+                        "_column_size": 100,
+                        "_inline_size": null
+                    },
+                    "elements": [
+                        {
+                            "id": "75227db",
+                            "elType": "widget",
+                            "settings": {
+                                "kicker": "BUY RAW MATERIALS",
+                                "title": "خرید مواد اولیه شیمیایی"
+                            },
+                            "elements": [],
+                            "widgetType": "baspar-breadcrumb"
+                        }
+                    ],
+                    "isInner": false
+                }
+            ],
+            "isInner": false
+        },
+        {
+            "id": "ad7efb5",
+            "elType": "section",
+            "settings": {
+                "padding": {
+                    "unit": "px",
+                    "top": "80",
+                    "right": "24",
+                    "bottom": "80",
+                    "left": "24",
+                    "isLinked": false
+                }
+            },
+            "elements": [
+                {
+                    "id": "f601758",
+                    "elType": "column",
+                    "settings": {
+                        "_column_size": 100,
+                        "_inline_size": null
+                    },
+                    "elements": [
+                        {
+                            "id": "f79a589",
+                            "elType": "widget",
+                            "settings": {},
+                            "elements": [],
+                            "widgetType": "baspar-trust"
+                        }
+                    ],
+                    "isInner": false
+                }
+            ],
+            "isInner": false
+        },
+        {
+            "id": "77bb2af",
+            "elType": "section",
+            "settings": {
+                "padding": {
+                    "unit": "px",
+                    "top": "80",
+                    "right": "24",
+                    "bottom": "80",
+                    "left": "24",
+                    "isLinked": false
+                }
+            },
+            "elements": [
+                {
+                    "id": "3c0ceea",
+                    "elType": "column",
+                    "settings": {
+                        "_column_size": 100,
+                        "_inline_size": null
+                    },
+                    "elements": [
+                        {
+                            "id": "ee3d076",
+                            "elType": "widget",
+                            "settings": {
+                                "kicker": "CATEGORIES",
+                                "title": "دسته‌بندی محصولات"
+                            },
+                            "elements": [],
+                            "widgetType": "baspar-section-heading"
+                        },
+                        {
+                            "id": "29d0bff",
+                            "elType": "widget",
+                            "settings": {
+                                "orderby": "date",
+                                "count": 8,
+                                "columns": "4"
+                            },
+                            "elements": [],
+                            "widgetType": "baspar-products"
+                        }
+                    ],
+                    "isInner": false
+                }
+            ],
+            "isInner": false
+        },
+        {
+            "id": "b3798ac",
+            "elType": "section",
+            "settings": {
+                "padding": {
+                    "unit": "px",
+                    "top": "80",
+                    "right": "24",
+                    "bottom": "80",
+                    "left": "24",
+                    "isLinked": false
+                }
+            },
+            "elements": [
+                {
+                    "id": "9f15b54",
+                    "elType": "column",
+                    "settings": {
+                        "_column_size": 100,
+                        "_inline_size": null
+                    },
+                    "elements": [
+                        {
+                            "id": "21e5bf2",
+                            "elType": "widget",
+                            "settings": {
+                                "align": "center",
+                                "kicker": "HOW TO BUY",
+                                "title": "مراحل خرید"
+                            },
+                            "elements": [],
+                            "widgetType": "baspar-section-heading"
+                        },
+                        {
+                            "id": "32d938f",
+                            "elType": "widget",
+                            "settings": {},
+                            "elements": [],
+                            "widgetType": "baspar-process"
+                        }
+                    ],
+                    "isInner": false
+                }
+            ],
+            "isInner": false
+        },
+        {
+            "id": "14cf9ab",
+            "elType": "section",
+            "settings": {
+                "padding": {
+                    "unit": "px",
+                    "top": "80",
+                    "right": "24",
+                    "bottom": "80",
+                    "left": "24",
+                    "isLinked": false
+                }
+            },
+            "elements": [
+                {
+                    "id": "98f90de",
+                    "elType": "column",
+                    "settings": {
+                        "_column_size": 100,
+                        "_inline_size": null
+                    },
+                    "elements": [
+                        {
+                            "id": "fda51de",
+                            "elType": "widget",
+                            "settings": {},
+                            "elements": [],
+                            "widgetType": "baspar-industries"
+                        }
+                    ],
+                    "isInner": false
+                }
+            ],
+            "isInner": false
+        },
+        {
+            "id": "20b2756",
+            "elType": "section",
+            "settings": {
+                "padding": {
+                    "unit": "px",
+                    "top": "80",
+                    "right": "24",
+                    "bottom": "80",
+                    "left": "24",
+                    "isLinked": false
+                }
+            },
+            "elements": [
+                {
+                    "id": "b88f069",
+                    "elType": "column",
+                    "settings": {
+                        "_column_size": 100,
+                        "_inline_size": null
+                    },
+                    "elements": [
+                        {
+                            "id": "9a99bf5",
+                            "elType": "widget",
+                            "settings": {
+                                "align": "center",
+                                "kicker": "WHY US",
+                                "title": "چرا بسپارمارکت؟"
+                            },
+                            "elements": [],
+                            "widgetType": "baspar-section-heading"
+                        },
+                        {
+                            "id": "8a8ad1d",
+                            "elType": "widget",
+                            "settings": {},
+                            "elements": [],
+                            "widgetType": "baspar-compare-table"
+                        }
+                    ],
+                    "isInner": false
+                }
+            ],
+            "isInner": false
+        },
+        {
+            "id": "679dbac",
+            "elType": "section",
+            "settings": {
+                "padding": {
+                    "unit": "px",
+                    "top": "80",
+                    "right": "24",
+                    "bottom": "80",
+                    "left": "24",
+                    "isLinked": false
+                }
+            },
+            "elements": [
+                {
+                    "id": "cbeeae3",
+                    "elType": "column",
+                    "settings": {
+                        "_column_size": 100,
+                        "_inline_size": null
+                    },
+                    "elements": [
+                        {
+                            "id": "f035729",
+                            "elType": "widget",
+                            "settings": {},
+                            "elements": [],
+                            "widgetType": "baspar-mid-cta"
+                        }
+                    ],
+                    "isInner": false
+                }
+            ],
+            "isInner": false
+        },
+        {
+            "id": "d2a7f70",
+            "elType": "section",
+            "settings": {
+                "padding": {
+                    "unit": "px",
+                    "top": "80",
+                    "right": "24",
+                    "bottom": "80",
+                    "left": "24",
+                    "isLinked": false
+                }
+            },
+            "elements": [
+                {
+                    "id": "1d9a004",
+                    "elType": "column",
+                    "settings": {
+                        "_column_size": 100,
+                        "_inline_size": null
+                    },
+                    "elements": [
+                        {
+                            "id": "0af0bfa",
+                            "elType": "widget",
+                            "settings": {},
+                            "elements": [],
+                            "widgetType": "baspar-cities"
+                        }
+                    ],
+                    "isInner": false
+                }
+            ],
+            "isInner": false
+        },
+        {
+            "id": "55c4e35",
+            "elType": "section",
+            "settings": {
+                "padding": {
+                    "unit": "px",
+                    "top": "80",
+                    "right": "24",
+                    "bottom": "80",
+                    "left": "24",
+                    "isLinked": false
+                }
+            },
+            "elements": [
+                {
+                    "id": "3e290a0",
+                    "elType": "column",
+                    "settings": {
+                        "_column_size": 100,
+                        "_inline_size": null
+                    },
+                    "elements": [
+                        {
+                            "id": "52cde85",
+                            "elType": "widget",
+                            "settings": {
+                                "align": "center",
+                                "kicker": "FAQ",
+                                "title": "سوالات متداول"
+                            },
+                            "elements": [],
+                            "widgetType": "baspar-section-heading"
+                        },
+                        {
+                            "id": "908f33a",
+                            "elType": "widget",
+                            "settings": {},
+                            "elements": [],
+                            "widgetType": "baspar-faq"
+                        }
+                    ],
+                    "isInner": false
+                }
+            ],
+            "isInner": false
+        },
+        {
+            "id": "fdc051c",
+            "elType": "section",
+            "settings": {},
+            "elements": [
+                {
+                    "id": "6690616",
+                    "elType": "column",
+                    "settings": {
+                        "_column_size": 100,
+                        "_inline_size": null
+                    },
+                    "elements": [
+                        {
+                            "id": "a5456cb",
+                            "elType": "widget",
+                            "settings": {},
+                            "elements": [],
+                            "widgetType": "baspar-final-cta"
+                        }
+                    ],
+                    "isInner": false
+                }
+            ],
+            "isInner": false
+        },
+        {
+            "id": "4f9acf5",
+            "elType": "section",
+            "settings": {},
+            "elements": [
+                {
+                    "id": "15a94f6",
+                    "elType": "column",
+                    "settings": {
+                        "_column_size": 100,
+                        "_inline_size": null
+                    },
+                    "elements": [
+                        {
+                            "id": "792328a",
+                            "elType": "widget",
+                            "settings": {},
+                            "elements": [],
+                            "widgetType": "baspar-footer"
+                        }
+                    ],
+                    "isInner": false
+                }
+            ],
+            "isInner": false
+        },
+        {
+            "id": "d1c8e7e",
+            "elType": "section",
+            "settings": {},
+            "elements": [
+                {
+                    "id": "9b8aa6e",
+                    "elType": "column",
+                    "settings": {
+                        "_column_size": 100,
+                        "_inline_size": null
+                    },
+                    "elements": [
+                        {
+                            "id": "4826564",
+                            "elType": "widget",
+                            "settings": {},
+                            "elements": [],
+                            "widgetType": "baspar-float-whatsapp"
+                        }
+                    ],
+                    "isInner": false
+                }
+            ],
+            "isInner": false
+        }
+    ],
+    "page_settings": {}
+}

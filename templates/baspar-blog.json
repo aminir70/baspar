@@ -1,0 +1,204 @@
+{
+    "version": "0.4",
+    "title": "Baspar — وبلاگ",
+    "type": "page",
+    "content": [
+        {
+            "id": "5df98e1",
+            "elType": "section",
+            "settings": {},
+            "elements": [
+                {
+                    "id": "0fd1360",
+                    "elType": "column",
+                    "settings": {
+                        "_column_size": 100,
+                        "_inline_size": null
+                    },
+                    "elements": [
+                        {
+                            "id": "e0f51ae",
+                            "elType": "widget",
+                            "settings": {},
+                            "elements": [],
+                            "widgetType": "baspar-topbar"
+                        }
+                    ],
+                    "isInner": false
+                }
+            ],
+            "isInner": false
+        },
+        {
+            "id": "5b3b461",
+            "elType": "section",
+            "settings": {},
+            "elements": [
+                {
+                    "id": "eeaffb4",
+                    "elType": "column",
+                    "settings": {
+                        "_column_size": 100,
+                        "_inline_size": null
+                    },
+                    "elements": [
+                        {
+                            "id": "8638b78",
+                            "elType": "widget",
+                            "settings": {},
+                            "elements": [],
+                            "widgetType": "baspar-header"
+                        }
+                    ],
+                    "isInner": false
+                }
+            ],
+            "isInner": false
+        },
+        {
+            "id": "0d68f58",
+            "elType": "section",
+            "settings": {},
+            "elements": [
+                {
+                    "id": "d4e1b70",
+                    "elType": "column",
+                    "settings": {
+                        "_column_size": 100,
+                        "_inline_size": null
+                    },
+                    "elements": [
+                        {
+                            "id": "8f316f9",
+                            "elType": "widget",
+                            "settings": {
+                                "kicker": "BLOG",
+                                "title": "وبلاگ بسپارمارکت",
+                                "path": [
+                                    {
+                                        "text": "صفحه اصلی",
+                                        "link": {
+                                            "url": "\/"
+                                        }
+                                    },
+                                    {
+                                        "text": "وبلاگ",
+                                        "link": {
+                                            "url": ""
+                                        }
+                                    }
+                                ]
+                            },
+                            "elements": [],
+                            "widgetType": "baspar-breadcrumb"
+                        }
+                    ],
+                    "isInner": false
+                }
+            ],
+            "isInner": false
+        },
+        {
+            "id": "d4ebce4",
+            "elType": "section",
+            "settings": {
+                "padding": {
+                    "unit": "px",
+                    "top": "80",
+                    "right": "24",
+                    "bottom": "80",
+                    "left": "24",
+                    "isLinked": false
+                }
+            },
+            "elements": [
+                {
+                    "id": "13fc789",
+                    "elType": "column",
+                    "settings": {
+                        "_column_size": 100,
+                        "_inline_size": null
+                    },
+                    "elements": [
+                        {
+                            "id": "63c349a",
+                            "elType": "widget",
+                            "settings": {
+                                "align": "center",
+                                "kicker": "LATEST ARTICLES",
+                                "title": "آخرین مقالات"
+                            },
+                            "elements": [],
+                            "widgetType": "baspar-section-heading"
+                        },
+                        {
+                            "id": "9eb65e1",
+                            "elType": "widget",
+                            "settings": {
+                                "count": 6,
+                                "columns": "3"
+                            },
+                            "elements": [],
+                            "widgetType": "baspar-blog-posts"
+                        }
+                    ],
+                    "isInner": false
+                }
+            ],
+            "isInner": false
+        },
+        {
+            "id": "230f09a",
+            "elType": "section",
+            "settings": {},
+            "elements": [
+                {
+                    "id": "ed91630",
+                    "elType": "column",
+                    "settings": {
+                        "_column_size": 100,
+                        "_inline_size": null
+                    },
+                    "elements": [
+                        {
+                            "id": "3e6b34b",
+                            "elType": "widget",
+                            "settings": {},
+                            "elements": [],
+                            "widgetType": "baspar-footer"
+                        }
+                    ],
+                    "isInner": false
+                }
+            ],
+            "isInner": false
+        },
+        {
+            "id": "1b378ea",
+            "elType": "section",
+            "settings": {},
+            "elements": [
+                {
+                    "id": "4800882",
+                    "elType": "column",
+                    "settings": {
+                        "_column_size": 100,
+                        "_inline_size": null
+                    },
+                    "elements": [
+                        {
+                            "id": "ab5a950",
+                            "elType": "widget",
+                            "settings": {},
+                            "elements": [],
+                            "widgetType": "baspar-float-whatsapp"
+                        }
+                    ],
+                    "isInner": false
+                }
+            ],
+            "isInner": false
+        }
+    ],
+    "page_settings": {}
+}

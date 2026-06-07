@@ -1,0 +1,339 @@
+{
+    "version": "0.4",
+    "title": "Baspar — درباره ما",
+    "type": "page",
+    "content": [
+        {
+            "id": "b68d3ad",
+            "elType": "section",
+            "settings": {},
+            "elements": [
+                {
+                    "id": "b3a3d3c",
+                    "elType": "column",
+                    "settings": {
+                        "_column_size": 100,
+                        "_inline_size": null
+                    },
+                    "elements": [
+                        {
+                            "id": "33e6d2c",
+                            "elType": "widget",
+                            "settings": {},
+                            "elements": [],
+                            "widgetType": "baspar-topbar"
+                        }
+                    ],
+                    "isInner": false
+                }
+            ],
+            "isInner": false
+        },
+        {
+            "id": "8820378",
+            "elType": "section",
+            "settings": {},
+            "elements": [
+                {
+                    "id": "84d0fc8",
+                    "elType": "column",
+                    "settings": {
+                        "_column_size": 100,
+                        "_inline_size": null
+                    },
+                    "elements": [
+                        {
+                            "id": "e75b2be",
+                            "elType": "widget",
+                            "settings": {},
+                            "elements": [],
+                            "widgetType": "baspar-header"
+                        }
+                    ],
+                    "isInner": false
+                }
+            ],
+            "isInner": false
+        },
+        {
+            "id": "37703fb",
+            "elType": "section",
+            "settings": {},
+            "elements": [
+                {
+                    "id": "0db922a",
+                    "elType": "column",
+                    "settings": {
+                        "_column_size": 100,
+                        "_inline_size": null
+                    },
+                    "elements": [
+                        {
+                            "id": "ff81acc",
+                            "elType": "widget",
+                            "settings": {
+                                "kicker": "ABOUT US",
+                                "title": "درباره ما"
+                            },
+                            "elements": [],
+                            "widgetType": "baspar-breadcrumb"
+                        }
+                    ],
+                    "isInner": false
+                }
+            ],
+            "isInner": false
+        },
+        {
+            "id": "eda62fd",
+            "elType": "section",
+            "settings": {
+                "padding": {
+                    "unit": "px",
+                    "top": "80",
+                    "right": "24",
+                    "bottom": "80",
+                    "left": "24",
+                    "isLinked": false
+                }
+            },
+            "elements": [
+                {
+                    "id": "6fe1229",
+                    "elType": "column",
+                    "settings": {
+                        "_column_size": 100,
+                        "_inline_size": null
+                    },
+                    "elements": [
+                        {
+                            "id": "16b4a6a",
+                            "elType": "widget",
+                            "settings": {
+                                "kicker": "WHO WE ARE",
+                                "title": "بسپارمارکت کیست؟"
+                            },
+                            "elements": [],
+                            "widgetType": "baspar-section-heading"
+                        },
+                        {
+                            "id": "37816e0",
+                            "elType": "widget",
+                            "settings": {},
+                            "elements": [],
+                            "widgetType": "baspar-mvv"
+                        }
+                    ],
+                    "isInner": false
+                }
+            ],
+            "isInner": false
+        },
+        {
+            "id": "a29023a",
+            "elType": "section",
+            "settings": {
+                "padding": {
+                    "unit": "px",
+                    "top": "80",
+                    "right": "24",
+                    "bottom": "80",
+                    "left": "24",
+                    "isLinked": false
+                }
+            },
+            "elements": [
+                {
+                    "id": "cae924f",
+                    "elType": "column",
+                    "settings": {
+                        "_column_size": 100,
+                        "_inline_size": null
+                    },
+                    "elements": [
+                        {
+                            "id": "86124cf",
+                            "elType": "widget",
+                            "settings": {},
+                            "elements": [],
+                            "widgetType": "baspar-stats"
+                        }
+                    ],
+                    "isInner": false
+                }
+            ],
+            "isInner": false
+        },
+        {
+            "id": "896bd62",
+            "elType": "section",
+            "settings": {
+                "padding": {
+                    "unit": "px",
+                    "top": "80",
+                    "right": "24",
+                    "bottom": "80",
+                    "left": "24",
+                    "isLinked": false
+                }
+            },
+            "elements": [
+                {
+                    "id": "dbf88bb",
+                    "elType": "column",
+                    "settings": {
+                        "_column_size": 100,
+                        "_inline_size": null
+                    },
+                    "elements": [
+                        {
+                            "id": "1429066",
+                            "elType": "widget",
+                            "settings": {
+                                "align": "center",
+                                "kicker": "OUR JOURNEY",
+                                "title": "مسیر ما"
+                            },
+                            "elements": [],
+                            "widgetType": "baspar-section-heading"
+                        },
+                        {
+                            "id": "08cae8b",
+                            "elType": "widget",
+                            "settings": {},
+                            "elements": [],
+                            "widgetType": "baspar-timeline"
+                        }
+                    ],
+                    "isInner": false
+                }
+            ],
+            "isInner": false
+        },
+        {
+            "id": "b4612ef",
+            "elType": "section",
+            "settings": {
+                "padding": {
+                    "unit": "px",
+                    "top": "80",
+                    "right": "24",
+                    "bottom": "80",
+                    "left": "24",
+                    "isLinked": false
+                }
+            },
+            "elements": [
+                {
+                    "id": "6f75fbb",
+                    "elType": "column",
+                    "settings": {
+                        "_column_size": 100,
+                        "_inline_size": null
+                    },
+                    "elements": [
+                        {
+                            "id": "9808b72",
+                            "elType": "widget",
+                            "settings": {
+                                "align": "center",
+                                "kicker": "OUR TEAM",
+                                "title": "تیم بسپارمارکت"
+                            },
+                            "elements": [],
+                            "widgetType": "baspar-section-heading"
+                        },
+                        {
+                            "id": "5f900e0",
+                            "elType": "widget",
+                            "settings": {},
+                            "elements": [],
+                            "widgetType": "baspar-team"
+                        }
+                    ],
+                    "isInner": false
+                }
+            ],
+            "isInner": false
+        },
+        {
+            "id": "ac94647",
+            "elType": "section",
+            "settings": {},
+            "elements": [
+                {
+                    "id": "48f7ffe",
+                    "elType": "column",
+                    "settings": {
+                        "_column_size": 100,
+                        "_inline_size": null
+                    },
+                    "elements": [
+                        {
+                            "id": "cd96637",
+                            "elType": "widget",
+                            "settings": {},
+                            "elements": [],
+                            "widgetType": "baspar-final-cta"
+                        }
+                    ],
+                    "isInner": false
+                }
+            ],
+            "isInner": false
+        },
+        {
+            "id": "b10bd22",
+            "elType": "section",
+            "settings": {},
+            "elements": [
+                {
+                    "id": "010c30b",
+                    "elType": "column",
+                    "settings": {
+                        "_column_size": 100,
+                        "_inline_size": null
+                    },
+                    "elements": [
+                        {
+                            "id": "03a8814",
+                            "elType": "widget",
+                            "settings": {},
+                            "elements": [],
+                            "widgetType": "baspar-footer"
+                        }
+                    ],
+                    "isInner": false
+                }
+            ],
+            "isInner": false
+        },
+        {
+            "id": "64e9cd7",
+            "elType": "section",
+            "settings": {},
+            "elements": [
+                {
+                    "id": "b56a015",
+                    "elType": "column",
+                    "settings": {
+                        "_column_size": 100,
+                        "_inline_size": null
+                    },
+                    "elements": [
+                        {
+                            "id": "8505bd1",
+                            "elType": "widget",
+                            "settings": {},
+                            "elements": [],
+                            "widgetType": "baspar-float-whatsapp"
+                        }
+                    ],
+                    "isInner": false
+                }
+            ],
+            "isInner": false
+        }
+    ],
+    "page_settings": {}
+}

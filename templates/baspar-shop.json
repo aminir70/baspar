@@ -1,0 +1,244 @@
+{
+    "version": "0.4",
+    "title": "Baspar — فروشگاه\/دسته محصولات",
+    "type": "page",
+    "content": [
+        {
+            "id": "8cc549d",
+            "elType": "section",
+            "settings": {},
+            "elements": [
+                {
+                    "id": "8224631",
+                    "elType": "column",
+                    "settings": {
+                        "_column_size": 100,
+                        "_inline_size": null
+                    },
+                    "elements": [
+                        {
+                            "id": "4c3ce20",
+                            "elType": "widget",
+                            "settings": {},
+                            "elements": [],
+                            "widgetType": "baspar-topbar"
+                        }
+                    ],
+                    "isInner": false
+                }
+            ],
+            "isInner": false
+        },
+        {
+            "id": "1fbb257",
+            "elType": "section",
+            "settings": {},
+            "elements": [
+                {
+                    "id": "90496d5",
+                    "elType": "column",
+                    "settings": {
+                        "_column_size": 100,
+                        "_inline_size": null
+                    },
+                    "elements": [
+                        {
+                            "id": "203fa98",
+                            "elType": "widget",
+                            "settings": {},
+                            "elements": [],
+                            "widgetType": "baspar-header"
+                        }
+                    ],
+                    "isInner": false
+                }
+            ],
+            "isInner": false
+        },
+        {
+            "id": "7a37870",
+            "elType": "section",
+            "settings": {},
+            "elements": [
+                {
+                    "id": "c6ecff5",
+                    "elType": "column",
+                    "settings": {
+                        "_column_size": 100,
+                        "_inline_size": null
+                    },
+                    "elements": [
+                        {
+                            "id": "a670a90",
+                            "elType": "widget",
+                            "settings": {
+                                "kicker": "SHOP",
+                                "title": "فروشگاه محصولات",
+                                "path": [
+                                    {
+                                        "text": "صفحه اصلی",
+                                        "link": {
+                                            "url": "\/"
+                                        }
+                                    },
+                                    {
+                                        "text": "فروشگاه",
+                                        "link": {
+                                            "url": ""
+                                        }
+                                    }
+                                ]
+                            },
+                            "elements": [],
+                            "widgetType": "baspar-breadcrumb"
+                        }
+                    ],
+                    "isInner": false
+                }
+            ],
+            "isInner": false
+        },
+        {
+            "id": "7249af9",
+            "elType": "section",
+            "settings": {
+                "padding": {
+                    "unit": "px",
+                    "top": "80",
+                    "right": "24",
+                    "bottom": "80",
+                    "left": "24",
+                    "isLinked": false
+                }
+            },
+            "elements": [
+                {
+                    "id": "3070bb5",
+                    "elType": "column",
+                    "settings": {
+                        "_column_size": 100,
+                        "_inline_size": null
+                    },
+                    "elements": [
+                        {
+                            "id": "645efb1",
+                            "elType": "widget",
+                            "settings": {
+                                "pull_up": "",
+                                "source": "woo",
+                                "woo_count": 7
+                            },
+                            "elements": [],
+                            "widgetType": "baspar-categories"
+                        }
+                    ],
+                    "isInner": false
+                }
+            ],
+            "isInner": false
+        },
+        {
+            "id": "4b993d7",
+            "elType": "section",
+            "settings": {
+                "padding": {
+                    "unit": "px",
+                    "top": "80",
+                    "right": "24",
+                    "bottom": "80",
+                    "left": "24",
+                    "isLinked": false
+                }
+            },
+            "elements": [
+                {
+                    "id": "8806ed4",
+                    "elType": "column",
+                    "settings": {
+                        "_column_size": 100,
+                        "_inline_size": null
+                    },
+                    "elements": [
+                        {
+                            "id": "172c6aa",
+                            "elType": "widget",
+                            "settings": {
+                                "align": "center",
+                                "kicker": "ALL PRODUCTS",
+                                "title": "همه محصولات"
+                            },
+                            "elements": [],
+                            "widgetType": "baspar-section-heading"
+                        },
+                        {
+                            "id": "25e8fa4",
+                            "elType": "widget",
+                            "settings": {
+                                "orderby": "date",
+                                "count": 12,
+                                "columns": "4"
+                            },
+                            "elements": [],
+                            "widgetType": "baspar-products"
+                        }
+                    ],
+                    "isInner": false
+                }
+            ],
+            "isInner": false
+        },
+        {
+            "id": "ffd1d5f",
+            "elType": "section",
+            "settings": {},
+            "elements": [
+                {
+                    "id": "16a5209",
+                    "elType": "column",
+                    "settings": {
+                        "_column_size": 100,
+                        "_inline_size": null
+                    },
+                    "elements": [
+                        {
+                            "id": "91317a9",
+                            "elType": "widget",
+                            "settings": {},
+                            "elements": [],
+                            "widgetType": "baspar-footer"
+                        }
+                    ],
+                    "isInner": false
+                }
+            ],
+            "isInner": false
+        },
+        {
+            "id": "5626f97",
+            "elType": "section",
+            "settings": {},
+            "elements": [
+                {
+                    "id": "8f9304e",
+                    "elType": "column",
+                    "settings": {
+                        "_column_size": 100,
+                        "_inline_size": null
+                    },
+                    "elements": [
+                        {
+                            "id": "b8bfbe9",
+                            "elType": "widget",
+                            "settings": {},
+                            "elements": [],
+                            "widgetType": "baspar-float-whatsapp"
+                        }
+                    ],
+                    "isInner": false
+                }
+            ],
+            "isInner": false
+        }
+    ],
+    "page_settings": {}
+}
