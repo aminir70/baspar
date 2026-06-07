@@ -101,8 +101,18 @@
 .baspar-scope .topbar-right{display:flex;align-items:center;gap:14px}
 .baspar-scope .tb-divider{width:1px;height:14px;background:rgba(255,255,255,.16)}
 .baspar-scope .tb-link{display:inline-flex;align-items:center;gap:8px;color:#fff;font-weight:500}
+.baspar-scope .tb-link .ltr{white-space:nowrap}
 .baspar-scope .tb-link:hover{color:#C4B0E8}
-@media(max-width:680px){.baspar-scope .topbar-left{display:none}.baspar-scope .topbar-inner{justify-content:flex-end}}
+@media(max-width:680px){
+  .baspar-scope .topbar-left{display:none}
+  .baspar-scope.bspr-topbar,.baspar-scope .topbar{font-size:12px}
+  .baspar-scope .topbar-inner{justify-content:center;flex-wrap:wrap;gap:8px 12px;padding:8px var(--gutter)}
+  .baspar-scope .topbar-right{flex-wrap:wrap;justify-content:center;gap:8px 12px}
+  .baspar-scope .tb-divider{display:none}
+}
+@media(max-width:380px){
+  .baspar-scope .tb-link .ltr{font-size:11.5px}
+}
 
 /* header */
 .baspar-scope .header{background:rgba(255,255,255,.92);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50;backdrop-filter:saturate(1.4) blur(10px)}
@@ -119,7 +129,7 @@
 .baspar-scope .nav > li > a::after{content:"";position:absolute;right:0;left:0;bottom:0;height:2px;background:var(--brand);transform:scaleX(0);transition:transform .2s ease}
 .baspar-scope .nav > li > a:hover::after{transform:scaleX(1)}
 .baspar-scope .nav .current-menu-item > a,.baspar-scope .nav .current_page_item > a{color:var(--brand);font-weight:700}
-.baspar-scope .header-cta{display:inline-flex;align-items:center;gap:8px;background:var(--brand);color:#fff;padding:11px 20px;border-radius:8px;font-weight:600;font-size:13.5px}
+.baspar-scope .header-cta{display:inline-flex;align-items:center;gap:8px;background:var(--brand);color:#fff;padding:11px 20px;border-radius:8px;font-weight:600;font-size:13.5px;white-space:nowrap;flex:0 0 auto;line-height:1.2}
 .baspar-scope .header-cta:hover{background:var(--brand-2)}
 /* sub menu */
 .baspar-scope .nav .sub-menu{position:absolute;top:100%;right:0;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:8px;min-width:240px;box-shadow:0 14px 40px -12px rgba(109,40,217,.25);opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .18s,transform .18s,visibility .18s;z-index:60;list-style:none;margin:0}
@@ -1077,6 +1087,17 @@
 .baspar-scope .nav .menu-item-has-children > a{display:inline-flex;align-items:center;gap:5px}
 .baspar-scope .nav .nav-caret{display:inline-flex;transition:transform .2s ease}
 .baspar-scope .nav > li:hover > a .nav-caret{transform:rotate(180deg)}
+/* nested level carets point to the side (RTL: leftwards) */
+.baspar-scope .nav .sub-menu .nav-caret{transform:rotate(90deg)}
+
+/* multi-level (nested) dropdowns — desktop flyout */
+.baspar-scope .nav .sub-menu li{position:relative}
+.baspar-scope .nav .sub-menu .sub-menu{
+  top:-9px;left:auto;right:100%;margin-right:6px;
+  transform:translateX(-8px);
+}
+.baspar-scope .nav .sub-menu li:hover > .sub-menu{opacity:1;visibility:visible;transform:translateX(0)}
+.baspar-scope .nav .sub-menu .menu-item-has-children > a{display:flex;align-items:center;justify-content:space-between;gap:8px}
 
 /* mobile menu panel */
 .baspar-scope .nav-mobile{
