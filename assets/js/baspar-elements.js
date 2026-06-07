@@ -115,20 +115,103 @@
 		} );
 	}
 
-	/* ---- Mobile nav toggle ---------------------------------------------- */
+	/* ---- Header navigation (mobile toggle + dropdowns) ------------------ */
+	var CARET_SVG = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>';
+
+	// Direct child <a> of a list item (avoids reaching into sub-menus).
+	function directLink( li ) {
+		for ( var i = 0; i < li.children.length; i++ ) {
+			if ( 'A' === li.children[ i ].tagName ) {
+				return li.children[ i ];
+			}
+		}
+		return null;
+	}
+
+	function closeNav( scope ) {
+		if ( ! scope ) {
+			return;
+		}
+		var menu = scope.querySelector( '.nav-mobile' );
+		var burger = scope.querySelector( '.hamburger' );
+		if ( menu ) {
+			menu.classList.remove( 'open' );
+		}
+		if ( burger ) {
+			burger.classList.remove( 'is-open' );
+			burger.setAttribute( 'aria-expanded', 'false' );
+		}
+		document.body.classList.remove( 'baspar-nav-lock' );
+	}
+
 	function initNav( root ) {
-		var burgers = ( root || document ).querySelectorAll( '.baspar-scope .hamburger' );
-		burgers.forEach( function ( b ) {
+		var ctx = root || document;
+
+		/* Hamburger opens / closes the mobile panel. */
+		ctx.querySelectorAll( '.baspar-scope .hamburger' ).forEach( function ( b ) {
 			if ( b.dataset.navInit ) {
 				return;
 			}
 			b.dataset.navInit = '1';
 			b.addEventListener( 'click', function () {
-				var header = b.closest( '.baspar-scope' );
-				var menu = header ? header.querySelector( '.nav-mobile' ) : null;
-				if ( menu ) {
-					menu.classList.toggle( 'open' );
+				var scope = b.closest( '.baspar-scope' );
+				var menu = scope ? scope.querySelector( '.nav-mobile' ) : null;
+				if ( ! menu ) {
+					return;
 				}
+				var open = menu.classList.toggle( 'open' );
+				b.classList.toggle( 'is-open', open );
+				b.setAttribute( 'aria-expanded', open ? 'true' : 'false' );
+				document.body.classList.toggle( 'baspar-nav-lock', open );
+			} );
+		} );
+
+		/* Desktop: add a caret to items that have a sub-menu. */
+		ctx.querySelectorAll( '.baspar-scope .nav .menu-item-has-children' ).forEach( function ( li ) {
+			if ( li.dataset.ddInit ) {
+				return;
+			}
+			li.dataset.ddInit = '1';
+			var link = directLink( li );
+			if ( link && ! link.querySelector( '.nav-caret' ) ) {
+				var caret = document.createElement( 'span' );
+				caret.className = 'nav-caret';
+				caret.innerHTML = CARET_SVG;
+				link.appendChild( caret );
+			}
+		} );
+
+		/* Mobile: turn parent items into tap-to-expand accordions. */
+		ctx.querySelectorAll( '.baspar-scope .nav-mobile .menu-item-has-children' ).forEach( function ( li ) {
+			if ( li.dataset.accInit ) {
+				return;
+			}
+			li.dataset.accInit = '1';
+			var link = directLink( li );
+			if ( ! link ) {
+				return;
+			}
+			var btn = document.createElement( 'button' );
+			btn.type = 'button';
+			btn.className = 'submenu-toggle';
+			btn.setAttribute( 'aria-label', 'زیرمنو' );
+			btn.innerHTML = CARET_SVG;
+			link.insertAdjacentElement( 'afterend', btn );
+			btn.addEventListener( 'click', function ( e ) {
+				e.preventDefault();
+				e.stopPropagation();
+				li.classList.toggle( 'is-open' );
+			} );
+		} );
+
+		/* Mobile: tapping an actual link closes the panel. */
+		ctx.querySelectorAll( '.baspar-scope .nav-mobile a' ).forEach( function ( a ) {
+			if ( a.dataset.closeInit ) {
+				return;
+			}
+			a.dataset.closeInit = '1';
+			a.addEventListener( 'click', function () {
+				closeNav( a.closest( '.baspar-scope' ) );
 			} );
 		} );
 	}

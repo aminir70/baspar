@@ -1064,20 +1064,56 @@
 
 .baspar-scope .hamburger{
   display:none;background:transparent;border:1px solid var(--line-2);
-  color:var(--ink);padding:8px;border-radius:8px;
+  color:var(--ink);padding:8px;border-radius:8px;cursor:pointer;
   align-items:center;justify-content:center;
 }
+.baspar-scope .hamburger .i-menu,
+.baspar-scope .hamburger .i-close{display:inline-flex;align-items:center}
+.baspar-scope .hamburger .i-close{display:none}
+.baspar-scope .hamburger.is-open .i-menu{display:none}
+.baspar-scope .hamburger.is-open .i-close{display:inline-flex}
+
+/* desktop dropdown indicator (caret) on items that have a sub-menu */
+.baspar-scope .nav .menu-item-has-children > a{display:inline-flex;align-items:center;gap:5px}
+.baspar-scope .nav .nav-caret{display:inline-flex;transition:transform .2s ease}
+.baspar-scope .nav > li:hover > a .nav-caret{transform:rotate(180deg)}
+
+/* mobile menu panel */
 .baspar-scope .nav-mobile{
-  display:flex;flex-direction:column;
-  padding:16px var(--gutter);background:#fff;
+  display:none;flex-direction:column;
+  padding:8px var(--gutter) 16px;background:#fff;
   border-top:1px solid var(--line);
+  max-height:calc(100vh - 64px);overflow-y:auto;-webkit-overflow-scrolling:touch;
 }
-.baspar-scope .nav-mobile a{padding:14px 8px;border-bottom:1px solid var(--line);font-size:15px;color:var(--ink-2);font-weight:500}
-.baspar-scope .nav-mobile a:last-child{border-bottom:0}
+.baspar-scope .nav-mobile.open{display:flex}
+.baspar-scope .nav-mobile ul{list-style:none;margin:0;padding:0}
+.baspar-scope .nav-mobile li{list-style:none}
+.baspar-scope .nav-mobile > .nav-mobile-list > .menu-item{border-bottom:1px solid var(--line)}
+.baspar-scope .nav-mobile > .nav-mobile-list > .menu-item:last-child{border-bottom:0}
+.baspar-scope .nav-mobile a{display:block;padding:14px 4px;border:0;font-size:15.5px;color:var(--ink-2);font-weight:500}
+.baspar-scope .nav-mobile a:hover,
+.baspar-scope .nav-mobile .current-menu-item > a{color:var(--brand)}
+
+/* mobile accordion: parent row + collapsible sub-menu */
+.baspar-scope .nav-mobile .menu-item-has-children{display:flex;flex-wrap:wrap;align-items:center}
+.baspar-scope .nav-mobile .menu-item-has-children > a{flex:1;min-width:0}
+.baspar-scope .nav-mobile .submenu-toggle{
+  background:transparent;border:0;color:var(--ink-3);cursor:pointer;
+  padding:10px;display:inline-flex;align-items:center;
+  transition:transform .2s ease;
+}
+.baspar-scope .nav-mobile .menu-item-has-children.is-open > .submenu-toggle{transform:rotate(180deg);color:var(--brand)}
+.baspar-scope .nav-mobile .sub-menu{flex-basis:100%;display:none;padding:0 14px 6px 0}
+.baspar-scope .nav-mobile .menu-item-has-children.is-open > .sub-menu{display:block}
+.baspar-scope .nav-mobile .sub-menu a{padding:11px 4px;font-size:14px;color:var(--ink-3);font-weight:500}
+
+body.baspar-nav-lock{overflow:hidden}
+
 @media(max-width:920px){
   .baspar-scope .hamburger{display:inline-flex}
   .baspar-scope .nav{display:none}
   .baspar-scope .header-cta{display:none}
+  .baspar-scope .header-inner{justify-content:space-between;gap:16px}
 }
 
 /* ─────── BREADCRUMB HERO ─────── */

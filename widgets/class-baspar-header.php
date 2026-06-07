@@ -216,7 +216,10 @@ class Baspar_Header extends Baspar_Widget_Base {
 						</a>
 					<?php endif; ?>
 
-					<button class="hamburger" aria-label="منو" type="button"><?php echo icon_svg( 'menu', 22 ); /* phpcs:ignore */ ?></button>
+					<button class="hamburger" aria-label="<?php esc_attr_e( 'باز/بستن منو', 'baspar-elements' ); ?>" aria-expanded="false" type="button">
+						<span class="i-menu"><?php echo icon_svg( 'menu', 22 ); /* phpcs:ignore */ ?></span>
+						<span class="i-close"><?php echo icon_svg( 'x', 22 ); /* phpcs:ignore */ ?></span>
+					</button>
 				</div>
 
 				<?php
