@@ -4,7 +4,7 @@ Tags: elementor, woocommerce, widgets, rtl, persian
 Requires at least: 5.8
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.0.5
+Stable tag: 1.1.8
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -35,6 +35,18 @@ Requires Elementor. WooCommerce is required only for the product/category widget
    Templates → Saved Templates → Import Templates.
 
 == Changelog ==
+
+= 1.1.8 =
+* Single product widgets are now fully dynamic. Product Gallery reads the
+  featured image + gallery, Product Info reads the title, SKU, brand,
+  categories, short description and attribute spec table, and Product
+  Reviews reads the rating summary and approved reviews — all from the
+  current WooCommerce product, with nothing entered by hand.
+* New "Product Description" widget that renders the product's long
+  description dynamically.
+* Header: fixed the always-open mobile menu, added a working mobile
+  accordion for sub-menus (any depth), desktop dropdown carets, and made
+  the CTA button customizable. TopBar is now mobile-friendly.
 
 = 1.0.4 =
 * Added the chemical-importer page: new "Importer Hero (supply network map)"

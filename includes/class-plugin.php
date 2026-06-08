@@ -89,6 +89,7 @@ final class Plugin {
 		// Product page (single product).
 		'product-gallery',
 		'product-info',
+		'product-description',
 		'product-reviews',
 		// Blog / single post.
 		'blog-sidebar',

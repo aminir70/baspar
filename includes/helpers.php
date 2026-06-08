@@ -136,3 +136,156 @@ function flag_options() {
 		'iran'    => __( 'ایران', 'baspar-elements' ),
 	);
 }
+
+/**
+ * Convert Latin digits in a string to Persian digits.
+ *
+ * @param string|int|float $value Value to convert.
+ * @return string
+ */
+function fa_num( $value ) {
+	$latin   = array( '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' );
+	$persian = array( '۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹' );
+	return str_replace( $latin, $persian, (string) $value );
+}
+
+/**
+ * Resolve the WooCommerce product for the current context.
+ *
+ * Order of resolution: the global $product (set on single product pages and in
+ * the Woo loop) → the queried post → in the Elementor editor (or any preview),
+ * the most recent published product so the widgets show real data while editing
+ * a Theme Builder template. Returns null when WooCommerce is inactive or no
+ * product can be resolved.
+ *
+ * @return \WC_Product|null
+ */
+function current_product() {
+	if ( ! function_exists( 'wc_get_product' ) ) {
+		return null;
+	}
+
+	global $product;
+	if ( $product instanceof \WC_Product ) {
+		return $product;
+	}
+
+	$id = get_the_ID();
+	if ( $id && 'product' === get_post_type( $id ) ) {
+		$resolved = wc_get_product( $id );
+		if ( $resolved instanceof \WC_Product ) {
+			return $resolved;
+		}
+	}
+
+	// Editor / preview fallback: pick the latest product so the design shows
+	// real data instead of an empty widget while building a template.
+	$is_preview = is_admin();
+	if ( ! $is_preview && isset( \Elementor\Plugin::$instance->editor ) ) {
+		$is_preview = \Elementor\Plugin::$instance->editor->is_edit_mode();
+	}
+	if ( ! $is_preview && function_exists( 'is_preview' ) ) {
+		$is_preview = is_preview();
+	}
+	if ( $is_preview ) {
+		$latest = get_posts(
+			array(
+				'post_type'      => 'product',
+				'posts_per_page' => 1,
+				'post_status'    => 'publish',
+				'orderby'        => 'date',
+				'order'          => 'DESC',
+				'fields'         => 'ids',
+			)
+		);
+		if ( ! empty( $latest ) ) {
+			$resolved = wc_get_product( $latest[0] );
+			if ( $resolved instanceof \WC_Product ) {
+				return $resolved;
+			}
+		}
+	}
+
+	return null;
+}
+
+/**
+ * Best-effort brand lookup for a product.
+ *
+ * WooCommerce has no single universal brand field, so we probe the common brand
+ * taxonomies (native WC 9.6+ `product_brand`, Perfect Brands `pwb-brand`, YITH,
+ * etc.) and fall back to a product attribute whose name looks like "brand".
+ *
+ * @param \WC_Product $product Product object.
+ * @return string Brand name(s), comma separated, or empty string.
+ */
+function product_brand( $product ) {
+	if ( ! ( $product instanceof \WC_Product ) ) {
+		return '';
+	}
+	$pid = $product->get_id();
+
+	// 1) Known brand taxonomies.
+	$taxonomies = array( 'product_brand', 'pwb-brand', 'yith_product_brand', 'pa_brand', 'berocket_brand_collection' );
+	foreach ( $taxonomies as $tax ) {
+		if ( ! taxonomy_exists( $tax ) ) {
+			continue;
+		}
+		$names = wp_get_post_terms( $pid, $tax, array( 'fields' => 'names' ) );
+		if ( ! is_wp_error( $names ) && ! empty( $names ) ) {
+			return implode( '، ', $names );
+		}
+	}
+
+	// 2) A product attribute that looks like a brand.
+	foreach ( $product->get_attributes() as $attribute ) {
+		$raw   = $attribute->get_name();
+		$label = wc_attribute_label( $raw );
+		$hay   = strtolower( $raw . ' ' . $label );
+		if ( false === strpos( $hay, 'brand' ) && false === strpos( $label, 'برند' ) ) {
+			continue;
+		}
+		if ( $attribute->is_taxonomy() ) {
+			$names = wc_get_product_terms( $pid, $raw, array( 'fields' => 'names' ) );
+			if ( ! empty( $names ) ) {
+				return implode( '، ', $names );
+			}
+		} else {
+			$options = $attribute->get_options();
+			if ( ! empty( $options ) ) {
+				return implode( '، ', $options );
+			}
+		}
+	}
+
+	return '';
+}
+
+/**
+ * Return a product's visible attributes as label => value(s) pairs.
+ *
+ * @param \WC_Product $product Product object.
+ * @return array<string,string>
+ */
+function product_specs( $product ) {
+	$rows = array();
+	if ( ! ( $product instanceof \WC_Product ) ) {
+		return $rows;
+	}
+	foreach ( $product->get_attributes() as $attribute ) {
+		if ( ! $attribute->get_visible() ) {
+			continue;
+		}
+		$label = wc_attribute_label( $attribute->get_name() );
+		if ( $attribute->is_taxonomy() ) {
+			$values = wc_get_product_terms( $product->get_id(), $attribute->get_name(), array( 'fields' => 'names' ) );
+			$value  = is_array( $values ) ? implode( '، ', $values ) : '';
+		} else {
+			$value = implode( '، ', $attribute->get_options() );
+		}
+		if ( '' !== $value ) {
+			$rows[ $label ] = $value;
+		}
+	}
+	return $rows;
+}

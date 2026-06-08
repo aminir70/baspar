@@ -1852,6 +1852,20 @@ body.baspar-nav-lock{overflow:hidden}
 }
 .baspar-scope .prod-meta-row .pm svg{color:var(--brand);flex-shrink:0}
 
+/* Product description (dynamic) */
+.baspar-scope .prod-desc{max-width:var(--container);margin:0 auto;padding:0 var(--gutter)}
+.baspar-scope .prod-desc-title{font-size:clamp(20px,2.4vw,26px);color:var(--brand-deep);margin:0 0 16px;position:relative;padding-right:14px}
+.baspar-scope .prod-desc-title::before{content:"";position:absolute;right:0;top:.15em;bottom:.15em;width:4px;border-radius:4px;background:var(--brand)}
+.baspar-scope .prod-desc-body{font-size:15px;line-height:1.95;color:var(--ink-2)}
+.baspar-scope .prod-desc-body p{margin:0 0 1em}
+.baspar-scope .prod-desc-body h2,.baspar-scope .prod-desc-body h3,.baspar-scope .prod-desc-body h4{color:var(--brand-deep);margin:1.4em 0 .6em}
+.baspar-scope .prod-desc-body ul,.baspar-scope .prod-desc-body ol{margin:0 1.2em 1em 0;padding:0 1.2em 0 0}
+.baspar-scope .prod-desc-body li{margin:.4em 0}
+.baspar-scope .prod-desc-body img{max-width:100%;height:auto;border-radius:var(--radius)}
+.baspar-scope .prod-desc-body a{color:var(--brand);text-decoration:underline}
+.baspar-scope .prod-desc-body table{width:100%;border-collapse:collapse;margin:1em 0}
+.baspar-scope .prod-desc-body th,.baspar-scope .prod-desc-body td{border:1px solid var(--line);padding:10px 14px;text-align:right}
+
 /* Tabs */
 .prod-tabs{max-width:var(--container);margin:0 auto;padding:0 var(--gutter) 80px}
 .baspar-scope .ptabs-bar{
