@@ -122,7 +122,8 @@
 .baspar-scope .brand-text{display:flex;flex-direction:column;line-height:1.15}
 .baspar-scope .brand-text strong{font-size:17px;font-weight:800;color:var(--brand-dk)}
 .baspar-scope .brand-text span{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--ink-3)}
-.baspar-scope .nav{display:flex;gap:28px;flex:1;justify-content:center;list-style:none;margin:0;padding:0}
+.baspar-scope .nav{display:flex;align-items:center;gap:28px;flex:1;justify-content:center;list-style:none;margin:0;padding:0}
+.baspar-scope .nav > li{display:flex;align-items:center}
 .baspar-scope .nav a{font-size:14.5px;color:var(--ink-2);font-weight:500;position:relative;padding:6px 0}
 .baspar-scope .nav a:hover{color:var(--brand)}
 .baspar-scope .nav > li{position:relative}
@@ -2737,11 +2738,7 @@ body.baspar-nav-lock{overflow:hidden}
 .baspar-scope .brand-text{display:flex;flex-direction:column;line-height:1.15}
 .baspar-scope .brand-text strong{font-size:17px;font-weight:800;color:var(--brand-dk)}
 .baspar-scope .brand-text span{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--ink-3)}
-.baspar-scope .nav{display:flex;gap:28px;flex:1;justify-content:center}
-.baspar-scope .nav a{font-size:14.5px;color:var(--ink-2);font-weight:500;position:relative;padding:6px 0}
-.baspar-scope .nav a:hover{color:var(--brand)}
-.baspar-scope .nav a::after{content:"";position:absolute;right:0;left:0;bottom:0;height:2px;background:var(--brand);transform:scaleX(0);transition:transform .2s ease}
-.baspar-scope .nav a:hover::after{transform:scaleX(1)}
+.baspar-scope .nav{display:flex;align-items:center;gap:28px;flex:1;justify-content:center}
 .baspar-scope .header-cta{
   display:inline-flex;align-items:center;gap:8px;
   background:var(--brand);color:#fff;padding:11px 20px;border-radius:8px;
