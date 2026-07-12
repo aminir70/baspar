@@ -117,6 +117,22 @@ class Baspar_Section_Heading extends Baspar_Widget_Base {
 			)
 		);
 		$this->add_control(
+			'heading_tag',
+			array(
+				'label'   => __( 'تگ عنوان', 'baspar-elements' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'h2',
+				'options' => array(
+					'h1' => 'H1',
+					'h2' => 'H2',
+					'h3' => 'H3',
+					'h4' => 'H4',
+					'h5' => 'H5',
+					'h6' => 'H6',
+				),
+			)
+		);
+		$this->add_control(
 			'dark',
 			array( 'label' => __( 'حالت تیره (روی پس‌زمینه تیره)', 'baspar-elements' ), 'type' => Controls_Manager::SWITCHER, 'return_value' => 'yes' )
 		);
@@ -126,8 +142,8 @@ class Baspar_Section_Heading extends Baspar_Widget_Base {
 		$this->start_controls_section( 'style', array( 'label' => __( 'استایل', 'baspar-elements' ), 'tab' => Controls_Manager::TAB_STYLE ) );
 		$this->add_color( 'accent', __( 'رنگ برچسب', 'baspar-elements' ), '.shead-kicker', 'color' );
 		$this->add_color( 'line', __( 'رنگ خط', 'baspar-elements' ), '.shead-line', 'background' );
-		$this->add_typography( 'title_typo', __( 'تایپوگرافی عنوان', 'baspar-elements' ), '.shead h2' );
-		$this->add_color( 'title_color', __( 'رنگ عنوان', 'baspar-elements' ), '.shead h2', 'color' );
+		$this->add_typography( 'title_typo', __( 'تایپوگرافی عنوان', 'baspar-elements' ), '.shead-title' );
+		$this->add_color( 'title_color', __( 'رنگ عنوان', 'baspar-elements' ), '.shead-title', 'color' );
 		$this->add_color( 'sub_color', __( 'رنگ توضیح', 'baspar-elements' ), '.shead p', 'color' );
 		$this->end_controls_section();
 	}
@@ -221,7 +237,10 @@ class Baspar_Section_Heading extends Baspar_Widget_Base {
 					</div>
 				<?php endif; ?>
 				<?php if ( $res['title'] ) : ?>
-					<h2><?php echo esc_html( $res['title'] ); ?></h2>
+					<?php
+					$tag = in_array( $s['heading_tag'] ?? 'h2', array( 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' ), true ) ? $s['heading_tag'] : 'h2';
+					echo '<' . $tag . ' class="shead-title">' . esc_html( $res['title'] ) . '</' . $tag . '>';
+					?>
 				<?php endif; ?>
 				<?php if ( $res['sub'] ) : ?>
 					<p><?php echo esc_html( $res['sub'] ); ?></p>
