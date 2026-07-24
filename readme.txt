@@ -4,7 +4,7 @@ Tags: elementor, woocommerce, widgets, rtl, persian
 Requires at least: 5.8
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.2.0
+Stable tag: 1.2.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -35,6 +35,11 @@ Requires Elementor. WooCommerce is required only for the product/category widget
    Templates → Saved Templates → Import Templates.
 
 == Changelog ==
+
+= 1.2.1 =
+* Brands Strip (marquee) widget: added typography and color controls for
+  the section title and the brand-name pills — the font was previously
+  fixed and not customizable.
 
 = 1.2.0 =
 * All widget description/subtitle fields under a title (hero subtitles, section
