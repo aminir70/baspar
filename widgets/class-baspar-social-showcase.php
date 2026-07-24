@@ -36,7 +36,7 @@ class Baspar_Social_Showcase extends Baspar_Widget_Base {
 		$this->start_controls_section( 'content', array( 'label' => __( 'محتوا', 'baspar-elements' ) ) );
 		$this->add_control( 'kicker', array( 'label' => __( 'برچسب', 'baspar-elements' ), 'type' => Controls_Manager::TEXT, 'default' => 'FOLLOW US' ) );
 		$this->add_control( 'title', array( 'label' => __( 'عنوان', 'baspar-elements' ), 'type' => Controls_Manager::TEXT, 'default' => 'ما را در شبکه‌های اجتماعی دنبال کنید' ) );
-		$this->add_control( 'sub', array( 'label' => __( 'توضیح', 'baspar-elements' ), 'type' => Controls_Manager::TEXTAREA, 'rows' => 2, 'default' => 'آخرین محصولات، تخفیف‌ها و مطالب فنی را در شبکه‌های اجتماعی ما ببینید.' ) );
+		$this->add_control( 'sub', array( 'label' => __( 'توضیح', 'baspar-elements' ), 'type' => Controls_Manager::WYSIWYG, 'default' => 'آخرین محصولات، تخفیف‌ها و مطالب فنی را در شبکه‌های اجتماعی ما ببینید.' ) );
 
 		$rep = new Repeater();
 		$rep->add_control(
@@ -82,7 +82,7 @@ class Baspar_Social_Showcase extends Baspar_Widget_Base {
 				<div class="social-showcase-head">
 					<?php if ( $s['kicker'] ) : ?><span class="mono"><?php echo esc_html( $s['kicker'] ); ?></span><?php endif; ?>
 					<h3><?php echo esc_html( $s['title'] ); ?></h3>
-					<?php if ( $s['sub'] ) : ?><p><?php echo esc_html( $s['sub'] ); ?></p><?php endif; ?>
+					<?php if ( $s['sub'] ) : ?><div class="rich-text"><?php echo wp_kses_post( $s['sub'] ); ?></div><?php endif; ?>
 				</div>
 				<div class="social-cards">
 					<?php foreach ( (array) $s['items'] as $it ) :

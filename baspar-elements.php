@@ -3,7 +3,7 @@
  * Plugin Name: Baspar Elements
  * Plugin URI:  https://github.com/shirazdm509-sys/basparweb
  * Description: مجموعه ویجت‌های اختصاصی المنتور برای سایت بسپارمارکت — هدر، هیرو، دسته‌بندی، محصولات (ووکامرس)، وبلاگ، فوتر و... . هر بخش یک ویجت جدا، کاملاً قابل تغییر (فونت، رنگ، لوگو، عکس) و با خواندن پویای منو/مقالات/محصولات از سایت.
- * Version:     1.1.9
+ * Version:     1.2.0
  * Author:      Baspar Market
  * Author URI:  https://basparmarket.com
  * Text Domain: baspar-elements
@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // No direct access.
 }
 
-define( 'BASPAR_ELEMENTS_VERSION', '1.1.9' );
+define( 'BASPAR_ELEMENTS_VERSION', '1.2.0' );
 define( 'BASPAR_ELEMENTS_FILE', __FILE__ );
 define( 'BASPAR_ELEMENTS_PATH', plugin_dir_path( __FILE__ ) );
 define( 'BASPAR_ELEMENTS_URL', plugin_dir_url( __FILE__ ) );

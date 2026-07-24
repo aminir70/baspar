@@ -87,8 +87,7 @@ class Baspar_Section_Heading extends Baspar_Widget_Base {
 			'sub',
 			array(
 				'label'   => __( 'توضیح', 'baspar-elements' ),
-				'type'    => Controls_Manager::TEXTAREA,
-				'rows'    => 3,
+				'type'    => Controls_Manager::WYSIWYG,
 				'default' => '',
 			)
 		);
@@ -144,7 +143,7 @@ class Baspar_Section_Heading extends Baspar_Widget_Base {
 		$this->add_color( 'line', __( 'رنگ خط', 'baspar-elements' ), '.shead-line', 'background' );
 		$this->add_typography( 'title_typo', __( 'تایپوگرافی عنوان', 'baspar-elements' ), '.shead-title' );
 		$this->add_color( 'title_color', __( 'رنگ عنوان', 'baspar-elements' ), '.shead-title', 'color' );
-		$this->add_color( 'sub_color', __( 'رنگ توضیح', 'baspar-elements' ), '.shead p', 'color' );
+		$this->add_color( 'sub_color', __( 'رنگ توضیح', 'baspar-elements' ), '.shead-sub', 'color' );
 		$this->end_controls_section();
 	}
 
@@ -243,7 +242,7 @@ class Baspar_Section_Heading extends Baspar_Widget_Base {
 					?>
 				<?php endif; ?>
 				<?php if ( $res['sub'] ) : ?>
-					<p><?php echo esc_html( $res['sub'] ); ?></p>
+					<div class="shead-sub rich-text"><?php echo wp_kses_post( $res['sub'] ); ?></div>
 				<?php endif; ?>
 			</div>
 		</div>

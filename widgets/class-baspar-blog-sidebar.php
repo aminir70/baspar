@@ -25,7 +25,7 @@ class Baspar_Blog_Sidebar extends Baspar_Widget_Base {
 		$this->add_control( 'show_newsletter', array( 'label' => __( 'خبرنامه', 'baspar-elements' ), 'type' => Controls_Manager::SWITCHER, 'return_value' => 'yes', 'default' => 'yes' ) );
 		$this->add_control( 'popular_count', array( 'label' => __( 'تعداد پربازدید', 'baspar-elements' ), 'type' => Controls_Manager::NUMBER, 'default' => 4 ) );
 		$this->add_control( 'newsletter_title', array( 'label' => __( 'عنوان خبرنامه', 'baspar-elements' ), 'type' => Controls_Manager::TEXT, 'default' => 'عضو خبرنامه شوید' ) );
-		$this->add_control( 'newsletter_desc', array( 'label' => __( 'متن خبرنامه', 'baspar-elements' ), 'type' => Controls_Manager::TEXTAREA, 'rows' => 2, 'default' => 'مقالات و تخفیف‌ها را در ایمیل دریافت کنید.' ) );
+		$this->add_control( 'newsletter_desc', array( 'label' => __( 'متن خبرنامه', 'baspar-elements' ), 'type' => Controls_Manager::WYSIWYG, 'default' => 'مقالات و تخفیف‌ها را در ایمیل دریافت کنید.' ) );
 		$this->end_controls_section();
 		$this->start_controls_section( 'style', array( 'label' => __( 'استایل', 'baspar-elements' ), 'tab' => Controls_Manager::TAB_STYLE ) );
 		$this->add_color( 'accent', __( 'رنگ اصلی', 'baspar-elements' ), '', '--brand' );
@@ -82,7 +82,7 @@ class Baspar_Blog_Sidebar extends Baspar_Widget_Base {
 				<?php if ( 'yes' === $s['show_newsletter'] ) : ?>
 					<div class="blog-side-box" style="background:linear-gradient(135deg,var(--brand) 0%,var(--brand-dk) 100%);color:#fff;border:0">
 						<strong style="font-size:16px;color:#fff;display:block;margin-bottom:8px"><?php echo esc_html( $s['newsletter_title'] ); ?></strong>
-						<p style="font-size:12.5px;color:#E5D4FF;line-height:1.7;margin:0 0 14px"><?php echo esc_html( $s['newsletter_desc'] ); ?></p>
+						<div class="rich-text" style="font-size:12.5px;color:#E5D4FF;line-height:1.7;margin:0 0 14px"><?php echo wp_kses_post( $s['newsletter_desc'] ); ?></div>
 						<input type="email" placeholder="email@example.com" style="width:100%;padding:11px 14px;border:0;border-radius:8px;font-family:inherit;font-size:13px;margin-bottom:8px" />
 						<button type="button" style="width:100%;padding:11px;background:#fff;color:var(--brand);border:0;border-radius:8px;font-weight:700;cursor:pointer">عضویت</button>
 					</div>

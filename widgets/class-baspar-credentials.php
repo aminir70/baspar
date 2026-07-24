@@ -36,7 +36,7 @@ class Baspar_Credentials extends Baspar_Widget_Base {
 				array( 'icon' => 'building', 'title' => 'پروفرما اینویس رسمی', 'desc' => 'PI با شناسه ملی' ),
 			),
 		) );
-		$this->add_control( 'note', array( 'label' => __( 'یادداشت پایانی (creds-note)', 'baspar-elements' ), 'type' => Controls_Manager::TEXTAREA, 'rows' => 3, 'default' => '<strong>توجه:</strong> پیش از هرگونه پرداخت، اصالت ما را با شناسه ملی و کارت بازرگانی استعلام کنید.' ) );
+		$this->add_control( 'note', array( 'label' => __( 'یادداشت پایانی (creds-note)', 'baspar-elements' ), 'type' => Controls_Manager::WYSIWYG, 'default' => '<strong>توجه:</strong> پیش از هرگونه پرداخت، اصالت ما را با شناسه ملی و کارت بازرگانی استعلام کنید.' ) );
 		$this->add_reveal_toggle();
 		$this->end_controls_section();
 		$this->start_controls_section( 'style', array( 'label' => __( 'استایل', 'baspar-elements' ), 'tab' => Controls_Manager::TAB_STYLE ) );
@@ -59,7 +59,7 @@ class Baspar_Credentials extends Baspar_Widget_Base {
 			<?php if ( $s['note'] ) : ?>
 				<div class="creds-note">
 					<?php echo icon_svg( 'info', 22 ); // phpcs:ignore ?>
-					<span><?php echo wp_kses_post( $s['note'] ); ?></span>
+					<div class="rich-text"><?php echo wp_kses_post( $s['note'] ); ?></div>
 				</div>
 			<?php endif; ?>
 		</div>

@@ -4,7 +4,7 @@ Tags: elementor, woocommerce, widgets, rtl, persian
 Requires at least: 5.8
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.1.9
+Stable tag: 1.2.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -35,6 +35,13 @@ Requires Elementor. WooCommerce is required only for the product/category widget
    Templates → Saved Templates → Import Templates.
 
 == Changelog ==
+
+= 1.2.0 =
+* All widget description/subtitle fields under a title (hero subtitles, section
+  descriptions, CTA text, footer about text, etc.) are now rich-text editors so
+  links (and bold/italic) can be inserted — previously plain text only.
+* Section Heading widget: the description text now spans the full width of the
+  section instead of being limited to roughly half.
 
 = 1.1.9 =
 * Section Heading widget: added heading tag selector (H1–H6, default H2).
