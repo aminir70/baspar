@@ -955,3 +955,95 @@
 }
 .baspar-scope .creds-note svg{color:var(--brand);flex-shrink:0;margin-top:2px}
 .baspar-scope .creds-note strong{color:var(--brand-deep)}
+
+/* ─────── INDUSTRIES B2B (8 cards — alt style: bordered + side accent) ─────── */
+.indb2b{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.baspar-scope .indb2b-card{
+  background:#fff;border:1px solid var(--line);
+  border-right:3px solid var(--brand);
+  border-radius:var(--radius);padding:20px 22px;
+  transition:all .2s;
+}
+.baspar-scope .indb2b-card:hover{transform:translateY(-3px);box-shadow:0 14px 30px -14px rgba(109,40,217,.16);border-right-color:var(--brand-2)}
+.baspar-scope .indb2b-card strong{
+  font-size:15px;color:var(--brand-deep);display:block;margin-bottom:6px;
+  letter-spacing:-0.01em;
+}
+.baspar-scope .indb2b-card p{font-size:13px;color:var(--ink-2);line-height:1.7;margin:0}
+@media(max-width:920px){.baspar-scope .indb2b{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.baspar-scope .indb2b{grid-template-columns:1fr}}
+
+/* ─────── COMPARISON TABLE ─────── */
+.cmp-wrap{
+  background:#fff;border:1px solid var(--line);
+  border-radius:calc(var(--radius) + 4px);overflow:hidden;
+  box-shadow:0 8px 32px -16px rgba(109,40,217,.12);
+}
+.baspar-scope .cmp{width:100%;border-collapse:collapse;font-size:14.5px}
+.baspar-scope .cmp thead th{
+  padding:18px 20px;background:var(--brand-deep);color:#fff;
+  font-weight:600;text-align:right;font-size:13.5px;
+  border-left:1px solid rgba(255,255,255,.08);
+}
+.baspar-scope .cmp thead th:last-child{border-left:0}
+.baspar-scope .cmp thead th.us{
+  background:var(--brand);
+  position:relative;
+}
+.baspar-scope .cmp thead th.us::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:3px;background:#FFB547;
+}
+.baspar-scope .cmp thead th.center{text-align:center}
+.baspar-scope .cmp tbody td{
+  padding:16px 20px;border-bottom:1px solid var(--line);
+  color:var(--ink-2);
+}
+.baspar-scope .cmp tbody tr:last-child td{border-bottom:0}
+.baspar-scope .cmp tbody tr:nth-child(even){background:var(--surface-2)}
+.baspar-scope .cmp tbody td.lbl{font-weight:600;color:var(--brand-deep)}
+.baspar-scope .cmp tbody td.us{
+  text-align:center;font-weight:700;color:var(--brand-deep);
+  background:rgba(109,40,217,.06);
+  border-left:1px solid var(--brand-100);
+  border-right:1px solid var(--brand-100);
+}
+.baspar-scope .cmp tbody tr:nth-child(even) td.us{background:rgba(109,40,217,.09)}
+.baspar-scope .cmp tbody td.cmp-cell{text-align:center;color:var(--ink-3);font-size:13.5px}
+.baspar-scope .cmp-tick{
+  display:inline-flex;align-items:center;gap:6px;
+  font-weight:700;
+}
+@media(max-width:760px){
+  .baspar-scope .cmp thead th, .baspar-scope .cmp tbody td{padding:12px 10px;font-size:12.5px}
+  .baspar-scope .cmp{font-size:12.5px}
+}
+
+/* ─────── MID CTA — alt style (no gradient bg) ─────── */
+.midcta-b{
+  background:var(--brand-deep);
+  color:#fff;
+  position:relative;overflow:hidden;
+  border-radius:calc(var(--radius) + 6px);
+  margin:0;
+}
+.baspar-scope .midcta-b::before{
+  content:"";position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.05) 1px,transparent 1px);
+  background-size:32px 32px;
+  mask-image:radial-gradient(ellipse 90% 100% at 80% 50%, black 0%, transparent 70%);
+}
+.baspar-scope .midcta-b-inner{
+  padding:54px 48px;position:relative;
+  display:grid;grid-template-columns:1.4fr 1fr;gap:40px;align-items:center;
+}
+.baspar-scope .midcta-b h2{font-size:30px;color:#fff;margin-bottom:12px;letter-spacing:-0.02em}
+.baspar-scope .midcta-b > .midcta-b-inner > div:first-child > p{
+  font-size:15.5px;line-height:1.85;color:#C6B9DC;
+}
+.baspar-scope .midcta-b-btns{display:flex;flex-direction:column;gap:12px}
+@media(max-width:760px){
+  .baspar-scope .midcta-b-inner{grid-template-columns:1fr;padding:40px 28px}
+  .baspar-scope .midcta-b h2{font-size:24px}
+}
