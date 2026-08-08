@@ -1,4 +1,4 @@
-&lt;?php
+<?php
 /**
  * Plugin Name: Baspar Elements
  * Plugin URI:  https://github.com/shirazdm509-sys/basparweb
@@ -64,7 +64,7 @@ function baspar_elements_load() {
 			'admin_notices',
 			function () use ( $e ) {
 				printf(
-					'&lt;div class="notice notice-error"&gt;&lt;p&gt;&lt;strong&gt;Baspar Elements:&lt;/strong&gt; %s&lt;/p&gt;&lt;/div&gt;',
+					'<div class="notice notice-error"><p><strong>Baspar Elements:</strong> %s</p></div>',
 					esc_html( $e->getMessage() . ' @ ' . $e->getFile() . ':' . $e->getLine() )
 				);
 			}
@@ -92,7 +92,7 @@ function baspar_elements_missing_elementor_notice() {
 		unset( $_GET['activate'] );
 	}
 	$message = esc_html__( 'افزونه «Baspar Elements» برای کار کردن به افزونه Elementor نیاز دارد. لطفاً ابتدا Elementor را نصب و فعال کنید.', 'baspar-elements' );
-	printf( '&lt;div class="notice notice-warning is-dismissible"&gt;&lt;p&gt;%s&lt;/p&gt;&lt;/div&gt;', $message ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	printf( '<div class="notice notice-warning is-dismissible"><p>%s</p></div>', $message ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 }
 
 /**
@@ -107,7 +107,7 @@ function baspar_elements_minimum_elementor_notice() {
 		esc_html__( 'افزونه «Baspar Elements» به Elementor نسخه %s یا بالاتر نیاز دارد.', 'baspar-elements' ),
 		BASPAR_ELEMENTS_MIN_ELEMENTOR
 	);
-	printf( '&lt;div class="notice notice-warning is-dismissible"&gt;&lt;p&gt;%s&lt;/p&gt;&lt;/div&gt;', $message ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	printf( '<div class="notice notice-warning is-dismissible"><p>%s</p></div>', $message ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 }
 
 /**
@@ -122,5 +122,5 @@ function baspar_elements_minimum_php_notice() {
 		esc_html__( 'افزونه «Baspar Elements» به PHP نسخه %s یا بالاتر نیاز دارد.', 'baspar-elements' ),
 		BASPAR_ELEMENTS_MIN_PHP
 	);
-	printf( '&lt;div class="notice notice-error is-dismissible"&gt;&lt;p&gt;%s&lt;/p&gt;&lt;/div&gt;', $message ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	printf( '<div class="notice notice-error is-dismissible"><p>%s</p></div>', $message ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 }
