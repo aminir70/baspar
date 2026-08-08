@@ -1047,3 +1047,54 @@
   .baspar-scope .midcta-b-inner{grid-template-columns:1fr;padding:40px 28px}
   .baspar-scope .midcta-b h2{font-size:24px}
 }
+
+/* ============================================================
+   APPENDED — pages.css (scoped)
+   ============================================================ */
+/* ════════════════════════════════════════════
+   Page-specific & shared additions
+   sits on top of assets/baspar.css
+   ════════════════════════════════════════════ */
+
+/* ─────── HEADER additions ─────── */
+.nav-dd{position:relative;padding:6px 0}
+.baspar-scope .nav-dd > a{display:inline-flex;align-items:center;gap:4px}
+.baspar-scope .nav-dd-menu{
+  position:absolute;top:100%;right:0;
+  background:#fff;border:1px solid var(--line);
+  border-radius:var(--radius);padding:8px;
+  min-width:240px;
+  box-shadow:0 14px 40px -12px rgba(109,40,217,.25);
+  opacity:0;visibility:hidden;transform:translateY(8px);
+  transition:opacity .18s, transform .18s, visibility .18s;
+  z-index:60;
+}
+.baspar-scope .nav-dd:hover .nav-dd-menu{opacity:1;visibility:visible;transform:translateY(0)}
+.baspar-scope .nav-dd-menu a{
+  display:block;padding:9px 12px;border-radius:6px;
+  font-size:13.5px;color:var(--ink-2);
+}
+.baspar-scope .nav-dd-menu a:hover{background:var(--brand-tint);color:var(--brand)}
+.baspar-scope .nav-dd-menu a::after{display:none}
+.baspar-scope .nav .is-active{color:var(--brand);font-weight:700}
+.baspar-scope .nav .is-active::after{transform:scaleX(1)}
+
+.baspar-scope .hamburger{
+  display:none;background:transparent;border:1px solid var(--line-2);
+  color:var(--ink);padding:8px;border-radius:8px;cursor:pointer;
+  align-items:center;justify-content:center;
+}
+.baspar-scope .hamburger .i-menu,
+.baspar-scope .hamburger .i-close{display:inline-flex;align-items:center}
+.baspar-scope .hamburger .i-close{display:none}
+.baspar-scope .hamburger.is-open .i-menu{display:none}
+.baspar-scope .hamburger.is-open .i-close{display:inline-flex}
+
+/* desktop dropdown indicator (caret) on items that have a sub-menu */
+.baspar-scope .nav .menu-item-has-children > a{display:inline-flex;align-items:center;gap:5px}
+.baspar-scope .nav .nav-caret{display:inline-flex;transition:transform .2s ease}
+.baspar-scope .nav > li:hover > a .nav-caret{transform:rotate(180deg)}
+/* nested level carets point to the side (RTL: leftwards) */
+.baspar-scope .nav .sub-menu .nav-caret{transform:rotate(90deg)}
+
+/* multi-level (nested) dropdowns — desktop flyout */
