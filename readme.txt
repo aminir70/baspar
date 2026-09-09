@@ -4,7 +4,7 @@ Tags: elementor, woocommerce, widgets, rtl, persian
 Requires at least: 5.8
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.2.2
+Stable tag: 1.3.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,11 +18,13 @@ fully customizable from Elementor (typography, colors, logo, images, spacing), a
 dynamic data (menu, posts, WooCommerce products & categories) is read live from
 WordPress.
 
-Includes 29 widgets (header/menu, footer, hero, categories, trust, products,
+Includes 65 widgets (header/menu, footer, hero, categories, trust, products,
 product tabs, promo, brands, about, blog, breadcrumb, stats, mission/vision/values,
 timeline, team, process, industries, FAQ, cities, mid/final CTA, compare table,
-contact methods, social showcase, contact map) plus 4 importable page templates
-(home, about, contact, pillar).
+contact methods, social showcase, contact map, city quick-facts, shipment route,
+city zones, city industries, and more) plus 13 importable page templates (home,
+about, contact, pillar, importer, product, shop, blog, and one per city: Shiraz,
+Isfahan, Mashhad, Tabriz, Tehran).
 
 Requires Elementor. WooCommerce is required only for the product/category widgets.
 
@@ -35,6 +37,17 @@ Requires Elementor. WooCommerce is required only for the product/category widget
    Templates → Saved Templates → Import Templates.
 
 == Changelog ==
+
+= 1.3.0 =
+* Added 5 city landing pages (buy-chemical-raw-materials-{city}) with 5 new
+  widgets — city quick-facts, prose, shipment route, city zones, city
+  industries — plus importable templates for Shiraz, Isfahan, Mashhad,
+  Tabriz and Tehran. The bestsellers section on each page uses a live
+  WooCommerce products query.
+* Added 7 icons (food, pill, chip, leather, textile, steel, car) used by
+  the new city-industries widget.
+* Fixed the main stylesheet (assets/css/baspar-elements.css), which had
+  been left truncated by an interrupted push.
 
 = 1.2.2 =
 * Category page layout: on mobile, the products grid now shows before the
