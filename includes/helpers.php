@@ -64,6 +64,10 @@ function icon_svg( $name, $size = 24 ) {
 		'food'      => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="%1$d" height="%1$d"><path d="M3 11h18v2a8 8 0 0 1-16 0v-2z"/><path d="M3 18h18"/><path d="M9 8c0-2 2-2 2-4M14 8c0-2 1-2 1-4"/></svg>',
 		'pill'      => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="%1$d" height="%1$d"><rect x="2" y="9" width="20" height="6" rx="3" transform="rotate(-30 12 12)"/><path d="M9 7.5l5.5 9.5"/></svg>',
 		'chip'      => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="%1$d" height="%1$d"><rect x="7" y="7" width="10" height="10" rx="1"/><path d="M10 3v2M14 3v2M10 19v2M14 19v2M3 10h2M3 14h2M19 10h2M19 14h2"/></svg>',
+		'leather'   => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="%1$d" height="%1$d"><path d="M3 17c0-3 1-5 3-5 1.5 0 2 1 3.5 1 1.5 0 2-2 4-2 3 0 8 2 8 6v1H3v-1z"/><path d="M6 12V8l4-3 3 3"/></svg>',
+		'textile'   => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="%1$d" height="%1$d"><path d="M4 4h16v6l-4 2v8H8v-8l-4-2z"/><path d="M9 4l3 3 3-3"/></svg>',
+		'steel'     => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="%1$d" height="%1$d"><path d="M3 8l4-4 4 4-4 4-4-4z"/><path d="M13 12l4-4 4 4-4 4-4-4z"/><path d="M8 16l4-4 4 4-4 4-4-4z"/></svg>',
+		'car'       => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="%1$d" height="%1$d"><path d="M3 13l2-6h14l2 6"/><path d="M3 13v5h2v-2h14v2h2v-5H3z"/><circle cx="7" cy="16" r="1"/><circle cx="17" cy="16" r="1"/></svg>',
 	);
 
 	$key = isset( $icons[ $name ] ) ? $name : 'package';
@@ -110,6 +114,10 @@ function icon_options() {
 		'food'      => __( 'غذایی', 'baspar-elements' ),
 		'pill'      => __( 'دارویی', 'baspar-elements' ),
 		'chip'      => __( 'الکترونیک', 'baspar-elements' ),
+		'leather'   => __( 'چرم و کفش', 'baspar-elements' ),
+		'textile'   => __( 'نساجی', 'baspar-elements' ),
+		'steel'     => __( 'فلز و فولاد', 'baspar-elements' ),
+		'car'       => __( 'خودرو', 'baspar-elements' ),
 	);
 }
 
