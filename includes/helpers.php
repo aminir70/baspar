@@ -61,6 +61,9 @@ function icon_svg( $name, $size = 24 ) {
 		'search'    => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="%1$d" height="%1$d"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>',
 		'menu'      => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="%1$d" height="%1$d"><path d="M3 6h18M3 12h18M3 18h18"/></svg>',
 		'x'         => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="%1$d" height="%1$d"><path d="M18 6L6 18M6 6l12 12"/></svg>',
+		'food'      => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="%1$d" height="%1$d"><path d="M3 11h18v2a8 8 0 0 1-16 0v-2z"/><path d="M3 18h18"/><path d="M9 8c0-2 2-2 2-4M14 8c0-2 1-2 1-4"/></svg>',
+		'pill'      => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="%1$d" height="%1$d"><rect x="2" y="9" width="20" height="6" rx="3" transform="rotate(-30 12 12)"/><path d="M9 7.5l5.5 9.5"/></svg>',
+		'chip'      => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="%1$d" height="%1$d"><rect x="7" y="7" width="10" height="10" rx="1"/><path d="M10 3v2M14 3v2M10 19v2M14 19v2M3 10h2M3 14h2M19 10h2M19 14h2"/></svg>',
 	);
 
 	$key = isset( $icons[ $name ] ) ? $name : 'package';
@@ -104,6 +107,9 @@ function icon_options() {
 		'instagram' => __( 'اینستاگرام', 'baspar-elements' ),
 		'cart'      => __( 'سبد خرید', 'baspar-elements' ),
 		'star'      => __( 'ستاره', 'baspar-elements' ),
+		'food'      => __( 'غذایی', 'baspar-elements' ),
+		'pill'      => __( 'دارویی', 'baspar-elements' ),
+		'chip'      => __( 'الکترونیک', 'baspar-elements' ),
 	);
 }
 
