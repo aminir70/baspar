@@ -36,7 +36,7 @@ class Baspar_Mid_Cta extends Baspar_Widget_Base {
 		$this->start_controls_section( 'content', array( 'label' => __( 'محتوا', 'baspar-elements' ) ) );
 		$this->add_control( 'kicker', array( 'label' => __( 'برچسب', 'baspar-elements' ), 'type' => Controls_Manager::TEXT, 'default' => 'NEED A QUOTE?' ) );
 		$this->add_control( 'title', array( 'label' => __( 'عنوان', 'baspar-elements' ), 'type' => Controls_Manager::TEXT, 'default' => 'برای دریافت قیمت و موجودی همین حالا تماس بگیرید' ) );
-		$this->add_control( 'text', array( 'label' => __( 'توضیح', 'baspar-elements' ), 'type' => Controls_Manager::TEXTAREA, 'rows' => 3, 'default' => 'کارشناسان ما آماده پاسخگویی و ارائه مشاوره فنی رایگان هستند.' ) );
+		$this->add_control( 'text', array( 'label' => __( 'توضیح', 'baspar-elements' ), 'type' => Controls_Manager::WYSIWYG, 'default' => 'کارشناسان ما آماده پاسخگویی و ارائه مشاوره فنی رایگان هستند.' ) );
 
 		$rep = new Repeater();
 		$rep->add_control( 'text', array( 'label' => __( 'متن دکمه', 'baspar-elements' ), 'type' => Controls_Manager::TEXT ) );
@@ -74,7 +74,7 @@ class Baspar_Mid_Cta extends Baspar_Widget_Base {
 					<div class="midcta-text">
 						<?php if ( $s['kicker'] ) : ?><span class="kicker-light mono"><?php echo esc_html( $s['kicker'] ); ?></span><?php endif; ?>
 						<h2><?php echo esc_html( $s['title'] ); ?></h2>
-						<p><?php echo esc_html( $s['text'] ); ?></p>
+						<div class="rich-text"><?php echo wp_kses_post( $s['text'] ); ?></div>
 					</div>
 					<div class="midcta-buttons">
 						<?php foreach ( (array) $s['buttons'] as $b ) :

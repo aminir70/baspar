@@ -21,7 +21,7 @@ class Baspar_Contact_Form extends Baspar_Widget_Base {
 	protected function register_controls() {
 		$this->start_controls_section( 'content', array( 'label' => __( 'محتوا', 'baspar-elements' ) ) );
 		$this->add_control( 'title', array( 'label' => __( 'عنوان', 'baspar-elements' ), 'type' => Controls_Manager::TEXT, 'default' => 'ارسال پیام' ) );
-		$this->add_control( 'subtitle', array( 'label' => __( 'توضیح', 'baspar-elements' ), 'type' => Controls_Manager::TEXTAREA, 'rows' => 2, 'default' => 'برای استعلام قیمت یا مشاوره فنی، اطلاعات زیر را تکمیل کنید.' ) );
+		$this->add_control( 'subtitle', array( 'label' => __( 'توضیح', 'baspar-elements' ), 'type' => Controls_Manager::WYSIWYG, 'default' => 'برای استعلام قیمت یا مشاوره فنی، اطلاعات زیر را تکمیل کنید.' ) );
 		$this->add_control( 'submit_text', array( 'label' => __( 'متن دکمه', 'baspar-elements' ), 'type' => Controls_Manager::TEXT, 'default' => 'ارسال درخواست' ) );
 		$this->add_control( 'email_to', array( 'label' => __( 'ایمیل گیرنده', 'baspar-elements' ), 'type' => Controls_Manager::TEXT, 'default' => 'info@basparmarket.com' ) );
 		$this->add_reveal_toggle();
@@ -37,7 +37,7 @@ class Baspar_Contact_Form extends Baspar_Widget_Base {
 		<div class="baspar-scope">
 			<form class="contact-form <?php echo esc_attr( $this->reveal_class( $s ) ); ?>" method="post" action="<?php echo esc_attr( $action ); ?>" enctype="text/plain">
 				<h3><?php echo esc_html( $s['title'] ); ?></h3>
-				<p><?php echo esc_html( $s['subtitle'] ); ?></p>
+				<div class="rich-text"><?php echo wp_kses_post( $s['subtitle'] ); ?></div>
 				<div class="form-row">
 					<div class="field"><label>نام و نام خانوادگی *</label><input type="text" name="name" required></div>
 					<div class="field"><label>شماره تماس *</label><input type="tel" name="phone" required></div>

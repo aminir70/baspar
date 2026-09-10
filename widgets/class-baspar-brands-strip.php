@@ -37,6 +37,10 @@ class Baspar_Brands_Strip extends Baspar_Widget_Base {
 		$this->end_controls_section();
 		$this->start_controls_section( 'style', array( 'label' => __( 'استایل', 'baspar-elements' ), 'tab' => Controls_Manager::TAB_STYLE ) );
 		$this->add_color( 'accent', __( 'رنگ اصلی', 'baspar-elements' ), '', '--brand' );
+		$this->add_typography( 'title_typo', __( 'تایپوگرافی عنوان', 'baspar-elements' ), '.brands-head h4' );
+		$this->add_color( 'title_color', __( 'رنگ عنوان', 'baspar-elements' ), '.brands-head h4', 'color' );
+		$this->add_typography( 'brand_typo', __( 'تایپوگرافی نام برندها', 'baspar-elements' ), '.brand-logo' );
+		$this->add_color( 'brand_color', __( 'رنگ نام برندها', 'baspar-elements' ), '.brand-logo', 'color' );
 		$this->end_controls_section();
 	}
 	protected function render() {

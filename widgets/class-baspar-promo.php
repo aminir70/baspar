@@ -34,7 +34,7 @@ class Baspar_Promo extends Baspar_Widget_Base {
 	protected function register_controls() {
 		$this->start_controls_section( 'content', array( 'label' => __( 'محتوا', 'baspar-elements' ) ) );
 		$this->add_control( 'title', array( 'label' => __( 'عنوان', 'baspar-elements' ), 'type' => Controls_Manager::TEXT, 'default' => 'نیک بیاندیش، نیک بیاموز، نیک برگزین.' ) );
-		$this->add_control( 'text', array( 'label' => __( 'توضیح', 'baspar-elements' ), 'type' => Controls_Manager::TEXTAREA, 'rows' => 2, 'default' => 'راهنمای رایگان انتخاب گرید مناسب برای فرمولاسیون شما — تماس با کارشناس فنی.' ) );
+		$this->add_control( 'text', array( 'label' => __( 'توضیح', 'baspar-elements' ), 'type' => Controls_Manager::WYSIWYG, 'default' => 'راهنمای رایگان انتخاب گرید مناسب برای فرمولاسیون شما — تماس با کارشناس فنی.' ) );
 		$this->add_control( 'btn_text', array( 'label' => __( 'متن دکمه', 'baspar-elements' ), 'type' => Controls_Manager::TEXT, 'default' => 'دریافت مشاوره' ) );
 		$this->add_control( 'btn_link', array( 'label' => __( 'لینک دکمه', 'baspar-elements' ), 'type' => Controls_Manager::URL, 'default' => array( 'url' => 'https://wa.me/989120997651' ) ) );
 		$this->add_control( 'btn_icon', array( 'label' => __( 'آیکون واتس‌اپ', 'baspar-elements' ), 'type' => Controls_Manager::SWITCHER, 'return_value' => 'yes', 'default' => 'yes' ) );
@@ -55,7 +55,7 @@ class Baspar_Promo extends Baspar_Widget_Base {
 			<div class="promo-banner <?php echo esc_attr( $this->reveal_class( $s ) ); ?>">
 				<div>
 					<h3><?php echo esc_html( $s['title'] ); ?></h3>
-					<p><?php echo esc_html( $s['text'] ); ?></p>
+					<div class="rich-text"><?php echo wp_kses_post( $s['text'] ); ?></div>
 				</div>
 				<?php if ( $s['btn_text'] ) : ?>
 					<a href="<?php echo esc_url( $s['btn_link']['url'] ?? '#' ); ?>" class="promo-btn">
