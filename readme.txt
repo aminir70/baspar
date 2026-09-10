@@ -4,7 +4,7 @@ Tags: elementor, woocommerce, widgets, rtl, persian
 Requires at least: 5.8
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.3.0
+Stable tag: 1.3.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,6 +37,17 @@ Requires Elementor. WooCommerce is required only for the product/category widget
    Templates → Saved Templates → Import Templates.
 
 == Changelog ==
+
+= 1.3.1 =
+* City page CSS fixes: the intro text under "Local Supply" now spans the
+  full section width (removed a leftover max-width), the Categories tab
+  panel now has proper spacing between its title/description and the
+  "View all" button, and the 4-step process grid uses a 2-column layout on
+  tablet widths instead of an uneven 3+1 wrap.
+* Version bump only, to force the browser/host cache to fetch the updated
+  stylesheet (the 1.3.0 CSS fixes were shipped under the same version
+  number as an earlier commit, so cached copies of the file could still be
+  served under that version string).
 
 = 1.3.0 =
 * Added 5 city landing pages (buy-chemical-raw-materials-{city}) with 5 new
