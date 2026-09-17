@@ -4,7 +4,7 @@ Tags: elementor, woocommerce, widgets, rtl, persian
 Requires at least: 5.8
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.3.4
+Stable tag: 1.3.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,6 +37,14 @@ Requires Elementor. WooCommerce is required only for the product/category widget
    Templates → Saved Templates → Import Templates.
 
 == Changelog ==
+
+= 1.3.5 =
+* Fixed the footer logo: `.footer-brand img` had no explicit size, so the
+  logo (a 2000x2000 source file) rendered at whatever width its flex
+  container allowed (~300px+), stretching the brand column's row height
+  and pushing the "بسپارمارکت / BASPARMARKET.COM" text out of its own
+  column into the neighboring "لینک‌های مهم" column — on both desktop and
+  mobile. Constrained it to 48x48px, matching the header logo's sizing.
 
 = 1.3.4 =
 * Fixed the Float WhatsApp widget: its render() output was never wrapped in
