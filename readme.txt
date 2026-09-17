@@ -4,7 +4,7 @@ Tags: elementor, woocommerce, widgets, rtl, persian
 Requires at least: 5.8
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.3.3
+Stable tag: 1.3.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,6 +37,17 @@ Requires Elementor. WooCommerce is required only for the product/category widget
    Templates → Saved Templates → Import Templates.
 
 == Changelog ==
+
+= 1.3.4 =
+* Fixed the Float WhatsApp widget: its render() output was never wrapped in
+  the shared `.baspar-scope` div that every other widget uses, so none of
+  its CSS (fixed position, 60px circle, brand color, pulse animation)
+  ever matched — it rendered as a plain unstyled inline link sitting
+  wherever it was placed in the page instead of a floating button pinned
+  to the corner. This also explains the odd oversized box it showed as in
+  the Elementor editor canvas. Verified the fix renders the button
+  correctly (position:fixed, circular, green) against the plugin's own
+  stylesheet.
 
 = 1.3.3 =
 * Fixed three more mobile bugs on the homepage/header, found and confirmed
