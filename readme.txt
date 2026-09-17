@@ -4,7 +4,7 @@ Tags: elementor, woocommerce, widgets, rtl, persian
 Requires at least: 5.8
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.3.2
+Stable tag: 1.3.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,6 +37,22 @@ Requires Elementor. WooCommerce is required only for the product/category widget
    Templates → Saved Templates → Import Templates.
 
 == Changelog ==
+
+= 1.3.3 =
+* Fixed three more mobile bugs on the homepage/header, found and confirmed
+  the same way (headless mobile rendering of the live site):
+  - Header: on mobile, with the nav and CTA hidden, the logo and hamburger
+    button had no space between them, leaving the hamburger stranded next
+    to the logo instead of anchored to the edge of the screen. Added
+    `justify-content:space-between` on mobile.
+  - Mobile menu: items were missing `display:block` on the link, so a
+    plain link's row height (~28px) didn't match a dropdown item's row
+    height (~54px) — menu rows looked uneven when opened.
+  - Home hero "live console" mockup (product rows): the row's grid could
+    not shrink below its text's natural minimum width, forcing the whole
+    hero to overflow horizontally on phones. Restructured the row to a
+    2-column layout on narrow screens (icon beside code+name, stock badge
+    and arrow hidden) instead of stretching off-screen.
 
 = 1.3.2 =
 * Fixed two real mobile layout bugs, confirmed by rendering the live site in
