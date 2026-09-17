@@ -24,7 +24,7 @@ class Baspar_Hero_Pillar extends Baspar_Widget_Base {
 		$this->add_control( 'eyebrow_mono', array( 'label' => __( 'برچسب لاتین', 'baspar-elements' ), 'type' => Controls_Manager::TEXT, 'default' => 'EST. 2020 · CHEMICAL TRADE' ) );
 		$this->add_control( 'eyebrow_fa', array( 'label' => __( 'برچسب فارسی', 'baspar-elements' ), 'type' => Controls_Manager::TEXT, 'default' => 'کیهان بسپار نیک اندیشان' ) );
 		$this->add_control( 'title', array( 'label' => __( 'عنوان (<em> هایلایت)', 'baspar-elements' ), 'type' => Controls_Manager::WYSIWYG, 'default' => 'خرید مستقیم <em>مواد اولیه شیمیایی</em><br>از مرجع تخصصی صنایع' ) );
-		$this->add_control( 'subtitle', array( 'label' => __( 'زیرعنوان', 'baspar-elements' ), 'type' => Controls_Manager::TEXTAREA, 'rows' => 4, 'default' => 'تأمین و توزیع تخصصی مواد اولیه پلیمر، رنگ، رزین و شیمیایی برای کارخانه‌ها و واحدهای تولیدی در سراسر ایران.' ) );
+		$this->add_control( 'subtitle', array( 'label' => __( 'زیرعنوان', 'baspar-elements' ), 'type' => Controls_Manager::WYSIWYG, 'default' => 'تأمین و توزیع تخصصی مواد اولیه پلیمر، رنگ، رزین و شیمیایی برای کارخانه‌ها و واحدهای تولیدی در سراسر ایران.' ) );
 		$this->add_control( 'btn1_text', array( 'label' => __( 'دکمه ۱', 'baspar-elements' ), 'type' => Controls_Manager::TEXT, 'default' => 'استعلام در واتس‌اپ' ) );
 		$this->add_control( 'btn1_link', array( 'label' => __( 'لینک ۱', 'baspar-elements' ), 'type' => Controls_Manager::URL, 'default' => array( 'url' => 'https://wa.me/989120997651' ) ) );
 		$this->add_control( 'btn2_text', array( 'label' => __( 'دکمه ۲', 'baspar-elements' ), 'type' => Controls_Manager::TEXT, 'default' => 'تماس تلفنی' ) );
@@ -81,7 +81,7 @@ class Baspar_Hero_Pillar extends Baspar_Widget_Base {
 					<div class="<?php echo esc_attr( $rev ); ?>">
 						<div class="hero-eyebrow"><span class="mono"><?php echo esc_html( $s['eyebrow_mono'] ); ?></span><span class="eyebrow-line"></span><span><?php echo esc_html( $s['eyebrow_fa'] ); ?></span></div>
 						<h1 class="hero-h1"><?php echo wp_kses_post( $s['title'] ); ?></h1>
-						<p class="hero-sub"><?php echo esc_html( $s['subtitle'] ); ?></p>
+						<div class="hero-sub rich-text"><?php echo wp_kses_post( $s['subtitle'] ); ?></div>
 						<div class="hero-ctas">
 							<?php if ( $s['btn1_text'] ) : ?><a href="<?php echo esc_url( $s['btn1_link']['url'] ?? '#' ); ?>" class="btn btn-whatsapp"><?php echo icon_svg( 'whatsapp', 18 ); // phpcs:ignore ?><?php echo esc_html( $s['btn1_text'] ); ?></a><?php endif; ?>
 							<?php if ( $s['btn2_text'] ) : ?><a href="<?php echo esc_url( $s['btn2_link']['url'] ?? '#' ); ?>" class="btn btn-ghost"><?php echo icon_svg( 'phone', 18 ); // phpcs:ignore ?><?php echo esc_html( $s['btn2_text'] ); ?></a><?php endif; ?>

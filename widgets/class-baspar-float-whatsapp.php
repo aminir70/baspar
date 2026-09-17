@@ -67,10 +67,12 @@ class Baspar_Float_Whatsapp extends Baspar_Widget_Base {
 		$s   = $this->get_settings_for_display();
 		$url = ! empty( $s['link']['url'] ) ? $s['link']['url'] : '#';
 		?>
-		<a href="<?php echo esc_url( $url ); ?>" class="bspr-fwa" data-threshold="<?php echo esc_attr( $s['threshold'] ); ?>" aria-label="استعلام در واتس‌اپ" target="_blank" rel="noopener">
-			<?php echo icon_svg( 'whatsapp', 28 ); /* phpcs:ignore */ ?>
-			<span class="fwa-pulse"></span>
-		</a>
+		<div class="baspar-scope">
+			<a href="<?php echo esc_url( $url ); ?>" class="bspr-fwa" data-threshold="<?php echo esc_attr( $s['threshold'] ); ?>" aria-label="استعلام در واتس‌اپ" target="_blank" rel="noopener">
+				<?php echo icon_svg( 'whatsapp', 28 ); /* phpcs:ignore */ ?>
+				<span class="fwa-pulse"></span>
+			</a>
+		</div>
 		<?php
 	}
 }

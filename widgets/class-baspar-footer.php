@@ -59,8 +59,7 @@ class Baspar_Footer extends Baspar_Widget_Base {
 			'about',
 			array(
 				'label'   => __( 'متن معرفی', 'baspar-elements' ),
-				'type'    => Controls_Manager::TEXTAREA,
-				'rows'    => 4,
+				'type'    => Controls_Manager::WYSIWYG,
 				'default' => 'شرکت بازرگانی کیهان بسپار نیک اندیشان با نام تجاری بسپارمارکت، در زمینه واردات، تأمین و توزیع مواد اولیه صنایع پلیمری، شیمیایی، رنگ، رزین، شوینده و غذایی فعالیت می‌کند.',
 			)
 		);
@@ -199,7 +198,7 @@ class Baspar_Footer extends Baspar_Widget_Base {
 								<span class="mono"><?php echo esc_html( $s['brand_sub'] ); ?></span>
 							</span>
 						</a>
-						<p><?php echo esc_html( $s['about'] ); ?></p>
+						<div class="rich-text"><?php echo wp_kses_post( $s['about'] ); ?></div>
 						<div class="footer-socials">
 							<?php if ( ! empty( $s['wa']['url'] ) ) : ?><a href="<?php echo esc_url( $s['wa']['url'] ); ?>" aria-label="واتس‌اپ"><?php echo icon_svg( 'whatsapp', 18 ); /* phpcs:ignore */ ?></a><?php endif; ?>
 							<?php if ( ! empty( $s['tg']['url'] ) ) : ?><a href="<?php echo esc_url( $s['tg']['url'] ); ?>" aria-label="تلگرام"><?php echo icon_svg( 'telegram', 18 ); /* phpcs:ignore */ ?></a><?php endif; ?>

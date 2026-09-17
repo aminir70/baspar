@@ -129,8 +129,7 @@ class Baspar_Term_Description extends Baspar_Widget_Base {
 			'fallback_text',
 			array(
 				'label'       => __( 'متن پیش‌فرض (اگر توضیح دسته خالی بود)', 'baspar-elements' ),
-				'type'        => Controls_Manager::TEXTAREA,
-				'rows'        => 3,
+				'type'        => Controls_Manager::WYSIWYG,
 				'default'     => 'این دسته به‌زودی با توضیحات کامل به‌روزرسانی می‌شود. در صورت نیاز به مشاوره، با کارشناس ما در واتس‌اپ تماس بگیرید.',
 				'description' => __( 'اگر دسته توضیح ندارد، این متن نمایش داده می‌شود.', 'baspar-elements' ),
 				'condition'   => array( 'source!' => 'custom' ),
@@ -284,7 +283,7 @@ class Baspar_Term_Description extends Baspar_Widget_Base {
 
 		// Apply fallback text if description is still empty.
 		if ( '' === trim( wp_strip_all_tags( $out['desc'] ) ) && ! empty( $s['fallback_text'] ) ) {
-			$out['desc'] = wpautop( $s['fallback_text'] );
+			$out['desc'] = $s['fallback_text'];
 		}
 
 		return $out;
@@ -340,7 +339,7 @@ class Baspar_Term_Description extends Baspar_Widget_Base {
 						</h3>
 					<?php endif; ?>
 					<?php if ( $has_desc ) : ?>
-						<div class="desc" style="font-size:14.5px;color:var(--ink-2);line-height:1.85"><?php echo wp_kses_post( $res['desc'] ); ?></div>
+						<div class="desc rich-text" style="font-size:14.5px;color:var(--ink-2);line-height:1.85"><?php echo wp_kses_post( $res['desc'] ); ?></div>
 					<?php endif; ?>
 				</div>
 			</div>

@@ -89,6 +89,7 @@ final class Plugin {
 		// Product page (single product).
 		'product-gallery',
 		'product-info',
+		'product-description',
 		'product-reviews',
 		// Blog / single post.
 		'blog-sidebar',
@@ -99,6 +100,12 @@ final class Plugin {
 		'shop-sidebar',
 		'shop-toolbar',
 		'term-description',
+		// City landing pages (buy-chemical-raw-materials-{city}).
+		'city-facts',
+		'prose',
+		'shipment-route',
+		'city-zones',
+		'city-industries',
 	);
 
 	/**

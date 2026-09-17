@@ -35,7 +35,7 @@ class Baspar_Final_Cta extends Baspar_Widget_Base {
 	protected function register_controls() {
 		$this->start_controls_section( 'content', array( 'label' => __( 'محتوا', 'baspar-elements' ) ) );
 		$this->add_control( 'title', array( 'label' => __( 'عنوان', 'baspar-elements' ), 'type' => Controls_Manager::TEXT, 'default' => 'آماده‌اید تأمین مواد اولیه‌تان را به ما بسپارید؟' ) );
-		$this->add_control( 'sub', array( 'label' => __( 'توضیح', 'baspar-elements' ), 'type' => Controls_Manager::TEXTAREA, 'rows' => 3, 'default' => 'همین حالا استعلام بگیرید و از مشاوره فنی رایگان کارشناسان ما بهره‌مند شوید.' ) );
+		$this->add_control( 'sub', array( 'label' => __( 'توضیح', 'baspar-elements' ), 'type' => Controls_Manager::WYSIWYG, 'default' => 'همین حالا استعلام بگیرید و از مشاوره فنی رایگان کارشناسان ما بهره‌مند شوید.' ) );
 
 		$rep = new Repeater();
 		$rep->add_control( 'text', array( 'label' => __( 'متن دکمه', 'baspar-elements' ), 'type' => Controls_Manager::TEXT ) );
@@ -71,7 +71,7 @@ class Baspar_Final_Cta extends Baspar_Widget_Base {
 				<div class="finalcta-grid-bg" aria-hidden="true"></div>
 				<div class="finalcta-inner">
 					<h2><?php echo esc_html( $s['title'] ); ?></h2>
-					<?php if ( $s['sub'] ) : ?><p><?php echo esc_html( $s['sub'] ); ?></p><?php endif; ?>
+					<?php if ( $s['sub'] ) : ?><div class="rich-text"><?php echo wp_kses_post( $s['sub'] ); ?></div><?php endif; ?>
 					<div class="finalcta-buttons">
 						<?php foreach ( (array) $s['buttons'] as $b ) :
 							$cls = ( 'yes' === $b['white'] ) ? 'btn btn-white btn-lg' : 'btn btn-ghost btn-lg';

@@ -51,8 +51,7 @@ class Baspar_Hero extends Baspar_Widget_Base {
 			'subtitle',
 			array(
 				'label'   => __( 'زیرعنوان', 'baspar-elements' ),
-				'type'    => Controls_Manager::TEXTAREA,
-				'rows'    => 4,
+				'type'    => Controls_Manager::WYSIWYG,
 				'default' => 'بسپارمارکت با تجربه‌ای بیش از ۵ سال در واردات و توزیع، تأمین‌کننده‌ی بیش از ۱۰۰ ماده اولیه‌ی شیمیایی برای کارخانه‌ها و واحدهای تولیدی در سراسر ایران است.',
 			)
 		);
@@ -144,7 +143,7 @@ class Baspar_Hero extends Baspar_Widget_Base {
 							<span><?php echo esc_html( $s['eyebrow_fa'] ); ?></span>
 						</div>
 						<h1><?php echo wp_kses_post( $s['title'] ); ?></h1>
-						<p class="home-hero-sub"><?php echo esc_html( $s['subtitle'] ); ?></p>
+						<div class="home-hero-sub rich-text"><?php echo wp_kses_post( $s['subtitle'] ); ?></div>
 						<div class="home-hero-ctas">
 							<?php if ( $s['btn1_text'] ) : ?>
 								<a href="<?php echo esc_url( $s['btn1_link']['url'] ?? '#' ); ?>" class="btn btn-primary"><?php echo icon_svg( 'cart', 18 ); /* phpcs:ignore */ ?><?php echo esc_html( $s['btn1_text'] ); ?></a>

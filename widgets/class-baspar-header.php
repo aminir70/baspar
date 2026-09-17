@@ -166,6 +166,10 @@ class Baspar_Header extends Baspar_Widget_Base {
 		$this->add_color( 'nav_color', __( 'رنگ منو', 'baspar-elements' ), '.nav a', 'color' );
 		$this->add_color( 'accent', __( 'رنگ اصلی (هاور/خط)', 'baspar-elements' ), '', '--brand' );
 		$this->add_color( 'cta_bg', __( 'پس‌زمینه دکمه', 'baspar-elements' ), '.header-cta', 'background' );
+		$this->add_color( 'cta_color', __( 'رنگ متن دکمه', 'baspar-elements' ), '.header-cta', 'color' );
+		$this->add_typography( 'cta_typo', __( 'تایپوگرافی دکمه', 'baspar-elements' ), '.header-cta' );
+		$this->add_padding( 'cta_padding', __( 'فاصله داخلی دکمه', 'baspar-elements' ), '.header-cta' );
+		$this->add_radius( 'cta_radius', __( 'گردی گوشه دکمه', 'baspar-elements' ), '.header-cta' );
 		$this->end_controls_section();
 	}
 
@@ -201,7 +205,7 @@ class Baspar_Header extends Baspar_Widget_Base {
 								'container'   => false,
 								'menu_class'  => 'nav',
 								'fallback_cb' => false,
-								'depth'       => 2,
+								'depth'       => 0,
 							)
 						);
 					} else {
@@ -216,7 +220,10 @@ class Baspar_Header extends Baspar_Widget_Base {
 						</a>
 					<?php endif; ?>
 
-					<button class="hamburger" aria-label="منو" type="button"><?php echo icon_svg( 'menu', 22 ); /* phpcs:ignore */ ?></button>
+					<button class="hamburger" aria-label="<?php esc_attr_e( 'باز/بستن منو', 'baspar-elements' ); ?>" aria-expanded="false" type="button">
+						<span class="i-menu"><?php echo icon_svg( 'menu', 22 ); /* phpcs:ignore */ ?></span>
+						<span class="i-close"><?php echo icon_svg( 'x', 22 ); /* phpcs:ignore */ ?></span>
+					</button>
 				</div>
 
 				<?php
@@ -228,7 +235,7 @@ class Baspar_Header extends Baspar_Widget_Base {
 							'container'   => false,
 							'menu_class'  => 'nav-mobile-list',
 							'fallback_cb' => false,
-							'depth'       => 2,
+							'depth'       => 0,
 						)
 					);
 					echo '</div>';

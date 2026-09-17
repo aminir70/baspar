@@ -224,7 +224,7 @@ class Baspar_Shop_Sidebar extends Baspar_Widget_Base {
 		$this->start_controls_section( 'cta', array( 'label' => __( 'باکس CTA', 'baspar-elements' ) ) );
 		$this->add_control( 'show_cta', array( 'label' => __( 'نمایش', 'baspar-elements' ), 'type' => Controls_Manager::SWITCHER, 'return_value' => 'yes', 'default' => 'yes' ) );
 		$this->add_control( 'cta_title', array( 'label' => __( 'عنوان', 'baspar-elements' ), 'type' => Controls_Manager::TEXT, 'default' => 'نیاز به مشاوره دارید؟' ) );
-		$this->add_control( 'cta_desc', array( 'label' => __( 'توضیح', 'baspar-elements' ), 'type' => Controls_Manager::TEXTAREA, 'rows' => 2, 'default' => 'کارشناس فنی ما در واتس‌اپ پاسخگوست.' ) );
+		$this->add_control( 'cta_desc', array( 'label' => __( 'توضیح', 'baspar-elements' ), 'type' => Controls_Manager::WYSIWYG, 'default' => 'کارشناس فنی ما در واتس‌اپ پاسخگوست.' ) );
 		$this->add_control( 'cta_btn', array( 'label' => __( 'متن دکمه', 'baspar-elements' ), 'type' => Controls_Manager::TEXT, 'default' => 'استعلام در واتس‌اپ' ) );
 		$this->add_control( 'cta_link', array( 'label' => __( 'لینک دکمه', 'baspar-elements' ), 'type' => Controls_Manager::URL, 'default' => array( 'url' => 'https://wa.me/989120997651' ) ) );
 		$this->end_controls_section();
@@ -404,7 +404,7 @@ class Baspar_Shop_Sidebar extends Baspar_Widget_Base {
 				<?php if ( 'yes' === $s['show_cta'] ) : ?>
 					<div class="cat-side-box bspr-cta-box" style="background:linear-gradient(135deg,var(--brand) 0%,var(--brand-dk) 100%);color:#fff;border:0">
 						<strong style="display:block;font-size:15px;color:#fff;margin-bottom:8px"><?php echo esc_html( $s['cta_title'] ); ?></strong>
-						<p style="font-size:12.5px;color:#E5D4FF;line-height:1.7;margin:0 0 14px"><?php echo esc_html( $s['cta_desc'] ); ?></p>
+						<div class="rich-text" style="font-size:12.5px;color:#E5D4FF;line-height:1.7;margin:0 0 14px"><?php echo wp_kses_post( $s['cta_desc'] ); ?></div>
 						<a href="<?php echo esc_url( $s['cta_link']['url'] ?? '#' ); ?>" class="btn btn-white btn-sm" style="width:100%;justify-content:center"><?php echo icon_svg( 'whatsapp', 14 ); // phpcs:ignore ?><?php echo esc_html( $s['cta_btn'] ); ?></a>
 					</div>
 				<?php endif; ?>

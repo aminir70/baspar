@@ -40,7 +40,7 @@ class Baspar_Importer_Hero extends Baspar_Widget_Base {
 		$this->start_controls_section( 'text', array( 'label' => __( 'متن', 'baspar-elements' ) ) );
 		$this->add_control( 'eyebrow', array( 'label' => __( 'برچسب لاتین', 'baspar-elements' ), 'type' => Controls_Manager::TEXT, 'default' => 'DIRECT IMPORT · B2B' ) );
 		$this->add_control( 'title', array( 'label' => __( 'عنوان (<em> برای هایلایت)', 'baspar-elements' ), 'type' => Controls_Manager::WYSIWYG, 'default' => 'واردات مستقیم <em>مواد اولیه شیمیایی</em> از مبدأ' ) );
-		$this->add_control( 'subtitle', array( 'label' => __( 'زیرعنوان', 'baspar-elements' ), 'type' => Controls_Manager::TEXTAREA, 'rows' => 4, 'default' => 'تأمین و واردات مستقیم از کارخانه‌های معتبر چین، آلمان و ترکیه؛ با پروفرما اینویس رسمی، COA و پشتیبانی فنی کامل.' ) );
+		$this->add_control( 'subtitle', array( 'label' => __( 'زیرعنوان', 'baspar-elements' ), 'type' => Controls_Manager::WYSIWYG, 'default' => 'تأمین و واردات مستقیم از کارخانه‌های معتبر چین، آلمان و ترکیه؛ با پروفرما اینویس رسمی، COA و پشتیبانی فنی کامل.' ) );
 		$this->add_control( 'btn1_text', array( 'label' => __( 'دکمه اول', 'baspar-elements' ), 'type' => Controls_Manager::TEXT, 'default' => 'درخواست استعلام (RFQ)' ) );
 		$this->add_control( 'btn1_link', array( 'label' => __( 'لینک دکمه اول', 'baspar-elements' ), 'type' => Controls_Manager::URL, 'default' => array( 'url' => 'https://wa.me/989120997651' ) ) );
 		$this->add_control( 'btn2_text', array( 'label' => __( 'دکمه دوم', 'baspar-elements' ), 'type' => Controls_Manager::TEXT, 'default' => 'کاتالوگ محصولات' ) );
@@ -130,7 +130,7 @@ class Baspar_Importer_Hero extends Baspar_Widget_Base {
 					<div class="<?php echo esc_attr( $rev ); ?>">
 						<div class="hero-eyebrow"><span class="mono"><?php echo esc_html( $s['eyebrow'] ); ?></span></div>
 						<h1><?php echo wp_kses_post( $s['title'] ); ?></h1>
-						<p class="home-hero-sub"><?php echo esc_html( $s['subtitle'] ); ?></p>
+						<div class="home-hero-sub rich-text"><?php echo wp_kses_post( $s['subtitle'] ); ?></div>
 						<div class="home-hero-ctas">
 							<?php if ( $s['btn1_text'] ) : ?><a href="<?php echo esc_url( $s['btn1_link']['url'] ?? '#' ); ?>" class="btn btn-primary"><?php echo icon_svg( 'whatsapp', 18 ); // phpcs:ignore ?><?php echo esc_html( $s['btn1_text'] ); ?></a><?php endif; ?>
 							<?php if ( $s['btn2_text'] ) : ?><a href="<?php echo esc_url( $s['btn2_link']['url'] ?? '#' ); ?>" class="btn btn-ghost"><?php echo icon_svg( 'package', 18 ); // phpcs:ignore ?><?php echo esc_html( $s['btn2_text'] ); ?></a><?php endif; ?>
