@@ -136,6 +136,7 @@ body.baspar-nav-lock{overflow:hidden}
 .baspar-scope .footer-inner{max-width:var(--container);margin:0 auto;padding:0 var(--gutter)}
 .baspar-scope .footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.3fr;gap:48px;padding:64px 0 48px}
 .baspar-scope .footer-brand{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.baspar-scope .footer-brand img{width:48px;height:48px;object-fit:contain;flex-shrink:0}
 .baspar-scope .footer-brand strong{font-size:18px;color:#fff}
 .baspar-scope .footer-brand-col .rich-text{font-size:13.5px;color:#A89BC2;margin:0 0 22px}
 .baspar-scope .footer-socials{display:flex;gap:10px}
