@@ -131,6 +131,11 @@ body.baspar-nav-lock{overflow:hidden}
 .baspar-scope .aboutbox-body{padding:48px 40px}
 .baspar-scope .aboutbox-body h3{font-size:28px;color:#fff;margin:0 0 14px}
 .baspar-scope .aboutbox-body .rich-text{font-size:15px;color:#E5D4FF;margin:0 0 24px}
+.baspar-scope .aboutbox-stats{display:flex;align-items:center;gap:28px;margin-bottom:28px}
+.baspar-scope .aboutbox-stats .sep{width:1px;align-self:stretch;background:rgba(255,255,255,.18)}
+.baspar-scope .aboutbox-stats .num{font-size:30px;font-family:var(--mono);font-weight:800;color:#fff;margin-bottom:4px}
+.baspar-scope .aboutbox-stats .t{font-size:14px;font-weight:700;color:#fff;margin-bottom:2px}
+.baspar-scope .aboutbox-stats .s{font-size:12.5px;color:#C6B9DC}
 @media(max-width:760px){.baspar-scope .aboutbox-inner{grid-template-columns:1fr}.baspar-scope .aboutbox-logo{display:none}}
 .baspar-scope.bspr-footer,.baspar-scope .footer-big{background:var(--brand-deep);color:#B9A8D6;margin-top:80px}
 .baspar-scope .footer-inner{max-width:var(--container);margin:0 auto;padding:0 var(--gutter)}
