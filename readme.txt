@@ -4,7 +4,7 @@ Tags: elementor, woocommerce, widgets, rtl, persian
 Requires at least: 5.8
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.3.1
+Stable tag: 1.3.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,6 +37,18 @@ Requires Elementor. WooCommerce is required only for the product/category widget
    Templates → Saved Templates → Import Templates.
 
 == Changelog ==
+
+= 1.3.2 =
+* Fixed two real mobile layout bugs, confirmed by rendering the live site in
+  a headless mobile browser:
+  - Topbar: the phone number and email could break mid-character onto
+    3+ lines on narrow screens because the links had no `white-space:nowrap`
+    and the row had no `flex-wrap`. Now each link wraps as a whole unit.
+  - Chemical Importer page hero ("imp-hero-inner"): this two-column grid
+    was missing a mobile breakpoint entirely (unlike every sibling hero
+    layout), so on phones it stayed at a squeezed ~90px column, causing the
+    supply-network visual to overlap the heading text. Added the same
+    920px stacking rule used by the other hero widgets.
 
 = 1.3.1 =
 * City page CSS fixes: the intro text under "Local Supply" now spans the
