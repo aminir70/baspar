@@ -4,7 +4,7 @@ Tags: elementor, woocommerce, widgets, rtl, persian
 Requires at least: 5.8
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.3.5
+Stable tag: 1.3.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,6 +37,13 @@ Requires Elementor. WooCommerce is required only for the product/category widget
    Templates → Saved Templates → Import Templates.
 
 == Changelog ==
+
+= 1.3.6 =
+* Fixed the About Box widget's counter/stats block (`.aboutbox-stats`):
+  it had zero CSS, so the two counters (number, title, subtitle) just
+  stacked as plain unstyled text instead of showing side-by-side with a
+  separator. Added a flex layout matching the widget's existing design
+  language.
 
 = 1.3.5 =
 * Fixed the footer logo: `.footer-brand img` had no explicit size, so the
