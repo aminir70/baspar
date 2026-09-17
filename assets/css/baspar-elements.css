@@ -6,7 +6,7 @@
 .baspar-scope h1,.baspar-scope h2,.baspar-scope h3,.baspar-scope h4{margin:0;color:var(--ink);font-weight:800;line-height:1.3;letter-spacing:-0.01em}
 .baspar-scope p{margin:0}
 .baspar-scope .mono{font-family:var(--mono);font-feature-settings:"tnum";letter-spacing:.02em}
-.baspar-scope .ltr{direction:ltr;unicode-bidi:isolate;display:inline-block}
+.baspar-scope .ltr{direction:ltr;unicode-bidi:isolate;display:inline-block;white-space:nowrap}
 .baspar-scope .dim{color:var(--ink-3)}
 .baspar-scope .small{font-size:.78em}
 .baspar-scope .section{padding:calc(96px * var(--density)) var(--gutter);max-width:var(--container);margin:0 auto}
@@ -44,9 +44,9 @@
 .baspar-scope .dot{width:7px;height:7px;border-radius:50%;background:#4ade80}
 .baspar-scope .topbar-right{display:flex;align-items:center;gap:14px}
 .baspar-scope .tb-divider{width:1px;height:14px;background:rgba(255,255,255,.16)}
-.baspar-scope .tb-link{display:inline-flex;align-items:center;gap:8px;color:#fff;font-weight:500}
+.baspar-scope .tb-link{display:inline-flex;align-items:center;gap:8px;color:#fff;font-weight:500;white-space:nowrap}
 .baspar-scope .tb-tag{font-family:var(--mono);font-size:10.5px;padding:3px 9px;border:1px solid rgba(255,255,255,.16);border-radius:4px;color:#C4B0E8}
-@media(max-width:680px){.baspar-scope .topbar-left{display:none}.baspar-scope .topbar-inner{justify-content:center;flex-wrap:wrap}.baspar-scope .tb-divider{display:none}}
+@media(max-width:680px){.baspar-scope .topbar-left{display:none}.baspar-scope .topbar-inner{justify-content:center;flex-wrap:wrap}.baspar-scope .tb-divider{display:none}.baspar-scope .topbar-right{flex-wrap:wrap;justify-content:center;row-gap:6px}}
 .baspar-scope .header{background:rgba(255,255,255,.92);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50}
 .baspar-scope .header-inner{max-width:var(--container);margin:0 auto;padding:14px var(--gutter);display:flex;align-items:center;gap:32px}
 .baspar-scope .brand{display:flex;align-items:center;gap:12px}
@@ -383,6 +383,7 @@ body.baspar-nav-lock{overflow:hidden}
 .baspar-scope .snm-tr{bottom:20%;left:50%;transform:translateX(-50%)}
 .baspar-scope .imp-hero{position:relative;overflow:hidden;background:linear-gradient(180deg,var(--surface) 0%,var(--brand-tint) 100%)}
 .baspar-scope .imp-hero-inner{max-width:var(--container);margin:0 auto;padding:80px var(--gutter) 100px;display:grid;grid-template-columns:.95fr 1.05fr;gap:60px;align-items:center}
+@media(max-width:920px){.baspar-scope .imp-hero-inner{grid-template-columns:1fr;gap:50px}}
 .baspar-scope .origin-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .baspar-scope .origin-card{background:#fff;border:1px solid var(--line);border-radius:calc(var(--radius) + 4px);overflow:hidden}
 .baspar-scope .origin-top{display:flex;align-items:center;gap:14px;padding:22px 24px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,var(--brand-tint),#fff)}
