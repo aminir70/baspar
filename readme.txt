@@ -4,7 +4,7 @@ Tags: elementor, woocommerce, widgets, rtl, persian
 Requires at least: 5.8
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.3.6
+Stable tag: 1.3.7
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,7 +18,7 @@ fully customizable from Elementor (typography, colors, logo, images, spacing), a
 dynamic data (menu, posts, WooCommerce products & categories) is read live from
 WordPress.
 
-Includes 65 widgets (header/menu, footer, hero, categories, trust, products,
+Includes 66 widgets (header/menu, footer, hero, categories, trust, products,
 product tabs, promo, brands, about, blog, breadcrumb, stats, mission/vision/values,
 timeline, team, process, industries, FAQ, cities, mid/final CTA, compare table,
 contact methods, social showcase, contact map, city quick-facts, shipment route,
@@ -37,6 +37,32 @@ Requires Elementor. WooCommerce is required only for the product/category widget
    Templates → Saved Templates → Import Templates.
 
 == Changelog ==
+
+= 1.3.7 =
+* Pillar page (buy-chemical-raw-materials) update:
+  - New widget: Seller Compare (مقایسه انواع فروشنده) — header + real
+    `<table>` with `<thead>`/`<th>`, rows from a repeater, horizontal scroll
+    on small screens, optional highlighted row and closing paragraph.
+  - Hero Pillar: the title is now sanitized on output (h1–h6/p/span wrappers
+    and inline styles are stripped) and the H1 is printed only when it has
+    text — fixes the empty `<h1>` + second H1 caused by a heading pasted
+    inside the title field. New default title/subtitle.
+  - Products: the card label now shows the primary category *name*
+    (Rank Math primary category first) instead of the raw upper-cased slug.
+  - Trust cards: new optional per-card number and link (+ link label) fields.
+  - Brands Strip: new switcher to hide the label + title above the strip.
+  - Mid CTA: new "title tag" select (h2/h3/div/p), default h2.
+  - Process: new optional per-step check-list (one item per line).
+  - Cities: cards without a link are now a plain `<span>` (no `href="#"`,
+    no arrow); optional link per city; default links for 4 cities.
+  - FAQ: answers may contain links/bold (kses-filtered); new default Q&A list.
+  - Final CTA: new default texts, shop button links to `/shop/`; removed the
+    inline style on ghost buttons (moved to CSS).
+  - Buying Guide: new default 5 questions.
+  - Internal links produced by these widgets now always end with `/`
+    (new `slash_url()` / `slash_links()` helpers).
+  - CSS: restored rules for the cities, process steps, FAQ list and CTA
+    button groups that had been dropped by an earlier stylesheet rewrite.
 
 = 1.3.6 =
 * Fixed the About Box widget's counter/stats block (`.aboutbox-stats`):

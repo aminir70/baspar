@@ -11,6 +11,7 @@ namespace BasparElements\Widgets;
 
 use Elementor\Controls_Manager;
 use function BasparElements\icon_svg;
+use function BasparElements\primary_cat_name;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -298,11 +299,7 @@ class Baspar_Products extends Baspar_Widget_Base {
 						continue;
 					}
 					$cats     = wc_get_product_category_list( get_the_ID() );
-					$cat_name = '';
-					$terms    = get_the_terms( get_the_ID(), 'product_cat' );
-					if ( $terms && ! is_wp_error( $terms ) ) {
-						$cat_name = strtoupper( $terms[0]->slug );
-					}
+					$cat_name = primary_cat_name( get_the_ID() );
 					$sku   = $product->get_sku();
 					$thumb = get_the_post_thumbnail( get_the_ID(), 'medium', array( 'loading' => 'lazy' ) );
 					?>

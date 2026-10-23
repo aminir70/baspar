@@ -36,6 +36,7 @@ class Baspar_Process extends Baspar_Widget_Base {
 		$rep = new Repeater();
 		$rep->add_control( 'title', array( 'label' => __( 'عنوان', 'baspar-elements' ), 'type' => Controls_Manager::TEXT ) );
 		$rep->add_control( 'desc', array( 'label' => __( 'توضیح', 'baspar-elements' ), 'type' => Controls_Manager::TEXTAREA, 'rows' => 3 ) );
+		$rep->add_control( 'lines', array( 'label' => __( 'موارد تیک‌دار (اختیاری، هر خط یک مورد)', 'baspar-elements' ), 'type' => Controls_Manager::TEXTAREA, 'rows' => 3 ) );
 		$this->add_control(
 			'items',
 			array(
@@ -45,7 +46,7 @@ class Baspar_Process extends Baspar_Widget_Base {
 				'title_field' => '{{{ title }}}',
 				'default'     => array(
 					array( 'title' => 'انتخاب محصول', 'desc' => 'گرید مورد نظر را از فروشگاه یا با مشاوره کارشناس انتخاب کنید.' ),
-					array( 'title' => 'استعلام و ثبت سفارش', 'desc' => 'قیمت و موجودی را در واتس‌اپ استعلام و سفارش را ثبت کنید.' ),
+					array( 'title' => 'استعلام و ثبت سفارش', 'desc' => 'قیمت و موجودی را در واتس‌اپ استعلام و سفارش را ثبت کنید.', 'lines' => "پاسخگویی در ساعات کاری در کمتر از ۱۵ دقیقه\nارائه پروفرما اینویس رسمی برای سفارش‌های B2B" ),
 					array( 'title' => 'پرداخت و صدور فاکتور', 'desc' => 'فاکتور رسمی صادر و پس از تأیید پرداخت، آماده‌سازی انجام می‌شود.' ),
 					array( 'title' => 'ارسال سریع', 'desc' => 'ارسال ۲۴ ساعته به همراه COA و دیتاشیت به سراسر ایران.' ),
 				),
@@ -74,6 +75,16 @@ class Baspar_Process extends Baspar_Widget_Base {
 						<div class="ps-body">
 							<h4><?php echo esc_html( $it['title'] ); ?></h4>
 							<p><?php echo esc_html( $it['desc'] ); ?></p>
+							<?php
+							$lines = array_filter( array_map( 'trim', preg_split( '/\R/u', (string) ( $it['lines'] ?? '' ) ) ) );
+							if ( $lines ) :
+								?>
+								<ul class="ps-lines">
+									<?php foreach ( $lines as $line ) : ?>
+										<li><?php echo esc_html( $line ); ?></li>
+									<?php endforeach; ?>
+								</ul>
+							<?php endif; ?>
 						</div>
 					</div>
 					<?php

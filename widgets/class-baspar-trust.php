@@ -10,6 +10,7 @@ namespace BasparElements\Widgets;
 use Elementor\Controls_Manager;
 use Elementor\Repeater;
 use function BasparElements\icon_svg;
+use function BasparElements\slash_url;
 use function BasparElements\icon_options;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -40,6 +41,9 @@ class Baspar_Trust extends Baspar_Widget_Base {
 		$rep->add_control( 'tag', array( 'label' => __( 'برچسب لاتین', 'baspar-elements' ), 'type' => Controls_Manager::TEXT ) );
 		$rep->add_control( 'title', array( 'label' => __( 'عنوان', 'baspar-elements' ), 'type' => Controls_Manager::TEXT ) );
 		$rep->add_control( 'desc', array( 'label' => __( 'توضیح', 'baspar-elements' ), 'type' => Controls_Manager::TEXTAREA, 'rows' => 2 ) );
+		$rep->add_control( 'number', array( 'label' => __( 'شماره (اختیاری)', 'baspar-elements' ), 'type' => Controls_Manager::TEXT, 'description' => __( 'مثلاً شماره کارت بازرگانی، شناسه ملی یا کد اقتصادی. خالی = نمایش داده نمی‌شود.', 'baspar-elements' ) ) );
+		$rep->add_control( 'link', array( 'label' => __( 'لینک (اختیاری)', 'baspar-elements' ), 'type' => Controls_Manager::URL, 'placeholder' => 'https://', 'description' => __( 'مثلاً صفحه ساماندهی یا اینماد. خالی = نمایش داده نمی‌شود.', 'baspar-elements' ) ) );
+		$rep->add_control( 'link_label', array( 'label' => __( 'متن لینک (اختیاری)', 'baspar-elements' ), 'type' => Controls_Manager::TEXT, 'description' => __( 'اگر خالی باشد و شماره پر باشد، خود شماره لینک می‌شود.', 'baspar-elements' ) ) );
 		$this->add_control(
 			'items',
 			array(
@@ -80,6 +84,21 @@ class Baspar_Trust extends Baspar_Widget_Base {
 						<?php if ( $it['tag'] ) : ?><div class="trust-tag mono"><?php echo esc_html( $it['tag'] ); ?></div><?php endif; ?>
 						<h3><?php echo esc_html( $it['title'] ); ?></h3>
 						<p><?php echo esc_html( $it['desc'] ); ?></p>
+						<?php
+						$num   = trim( (string) ( $it['number'] ?? '' ) );
+						$href  = trim( (string) ( $it['link']['url'] ?? '' ) );
+						$label = trim( (string) ( $it['link_label'] ?? '' ) );
+						if ( '' !== $href ) :
+							$label = '' !== $label ? $label : $num;
+							if ( '' !== $label ) :
+								?>
+								<a class="trust-num mono" href="<?php echo esc_url( slash_url( $href ) ); ?>"<?php echo ! empty( $it['link']['is_external'] ) ? ' target="_blank"' : ''; ?><?php echo ! empty( $it['link']['nofollow'] ) ? ' rel="nofollow noopener"' : ( ! empty( $it['link']['is_external'] ) ? ' rel="noopener"' : '' ); ?>><?php echo esc_html( $label ); ?></a>
+								<?php
+							endif;
+						elseif ( '' !== $num ) :
+							?>
+							<div class="trust-num mono"><?php echo esc_html( $num ); ?></div>
+						<?php endif; ?>
 					</div>
 					<?php
 					++$i;

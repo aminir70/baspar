@@ -11,6 +11,7 @@ namespace BasparElements\Widgets;
 use Elementor\Controls_Manager;
 use Elementor\Repeater;
 use function BasparElements\icon_svg;
+use function BasparElements\slash_url;
 use function BasparElements\icon_options;
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
@@ -55,7 +56,7 @@ class Baspar_Product_Cats_Codes extends Baspar_Widget_Base {
 		<div class="baspar-scope">
 			<div class="pcats">
 				<?php $i = 0; foreach ( (array) $s['items'] as $it ) : ++$i; ?>
-					<a href="<?php echo esc_url( $it['link']['url'] ?? '#' ); ?>" class="pcat <?php echo esc_attr( $this->reveal_class( $s ) ); ?>" data-reveal-delay="<?php echo esc_attr( $i * 40 ); ?>">
+					<a href="<?php echo esc_url( slash_url( $it['link']['url'] ?? '#' ) ); ?>" class="pcat <?php echo esc_attr( $this->reveal_class( $s ) ); ?>" data-reveal-delay="<?php echo esc_attr( $i * 40 ); ?>">
 						<div class="pcat-top">
 							<div class="pcat-ic"><?php echo icon_svg( $it['icon'] ? $it['icon'] : 'layers', 22 ); // phpcs:ignore ?></div>
 							<h3><?php echo esc_html( $it['title'] ); ?></h3>

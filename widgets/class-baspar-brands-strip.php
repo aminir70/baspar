@@ -21,6 +21,7 @@ class Baspar_Brands_Strip extends Baspar_Widget_Base {
 		$this->start_controls_section( 'content', array( 'label' => __( 'محتوا', 'baspar-elements' ) ) );
 		$this->add_control( 'kicker', array( 'label' => __( 'برچسب', 'baspar-elements' ), 'type' => Controls_Manager::TEXT, 'default' => 'TRUSTED PARTNERS · BRANDS' ) );
 		$this->add_control( 'title', array( 'label' => __( 'عنوان', 'baspar-elements' ), 'type' => Controls_Manager::TEXT, 'default' => 'برندهایی که با آن‌ها کار می‌کنیم' ) );
+		$this->add_control( 'show_head', array( 'label' => __( 'نمایش برچسب و عنوان بالای نوار', 'baspar-elements' ), 'type' => Controls_Manager::SWITCHER, 'return_value' => 'yes', 'default' => 'yes' ) );
 		$rep = new Repeater();
 		$rep->add_control( 'name', array( 'label' => __( 'نام برند', 'baspar-elements' ), 'type' => Controls_Manager::TEXT ) );
 		$this->add_control( 'items', array(
@@ -50,10 +51,12 @@ class Baspar_Brands_Strip extends Baspar_Widget_Base {
 		?>
 		<div class="baspar-scope">
 			<section class="brands">
-				<div class="brands-head">
-					<span class="mono"><?php echo esc_html( $s['kicker'] ); ?></span>
-					<h4><?php echo esc_html( $s['title'] ); ?></h4>
-				</div>
+				<?php if ( 'no' !== ( $s['show_head'] ?? 'yes' ) && ( $s['kicker'] || $s['title'] ) ) : ?>
+					<div class="brands-head">
+						<span class="mono"><?php echo esc_html( $s['kicker'] ); ?></span>
+						<h4><?php echo esc_html( $s['title'] ); ?></h4>
+					</div>
+				<?php endif; ?>
 				<div class="brands-strip">
 					<div class="brands-track">
 						<?php foreach ( $double as $b ) : ?>

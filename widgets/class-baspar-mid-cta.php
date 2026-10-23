@@ -10,6 +10,7 @@ namespace BasparElements\Widgets;
 use Elementor\Controls_Manager;
 use Elementor\Repeater;
 use function BasparElements\icon_svg;
+use function BasparElements\slash_url;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -36,6 +37,7 @@ class Baspar_Mid_Cta extends Baspar_Widget_Base {
 		$this->start_controls_section( 'content', array( 'label' => __( 'محتوا', 'baspar-elements' ) ) );
 		$this->add_control( 'kicker', array( 'label' => __( 'برچسب', 'baspar-elements' ), 'type' => Controls_Manager::TEXT, 'default' => 'NEED A QUOTE?' ) );
 		$this->add_control( 'title', array( 'label' => __( 'عنوان', 'baspar-elements' ), 'type' => Controls_Manager::TEXT, 'default' => 'برای دریافت قیمت و موجودی همین حالا تماس بگیرید' ) );
+		$this->add_control( 'title_tag', array( 'label' => __( 'تگ عنوان', 'baspar-elements' ), 'type' => Controls_Manager::SELECT, 'default' => 'h2', 'options' => array( 'h2' => 'H2', 'h3' => 'H3', 'div' => 'div', 'p' => 'p' ), 'description' => __( 'برای صفحه‌ای که قبلاً H2 کافی دارد، div یا p انتخاب کنید تا ساختار عنوان‌ها خراب نشود.', 'baspar-elements' ) ) );
 		$this->add_control( 'text', array( 'label' => __( 'توضیح', 'baspar-elements' ), 'type' => Controls_Manager::WYSIWYG, 'default' => 'کارشناسان ما آماده پاسخگویی و ارائه مشاوره فنی رایگان هستند.' ) );
 
 		$rep = new Repeater();
@@ -61,26 +63,27 @@ class Baspar_Mid_Cta extends Baspar_Widget_Base {
 
 		$this->start_controls_section( 'style', array( 'label' => __( 'استایل', 'baspar-elements' ), 'tab' => Controls_Manager::TAB_STYLE ) );
 		$this->add_background( 'bg', '.midcta' );
-		$this->add_typography( 'title_typo', __( 'تایپوگرافی عنوان', 'baspar-elements' ), '.midcta-text h2' );
+		$this->add_typography( 'title_typo', __( 'تایپوگرافی عنوان', 'baspar-elements' ), '.midcta-text .midcta-title' );
 		$this->end_controls_section();
 	}
 
 	protected function render() {
-		$s = $this->get_settings_for_display();
+		$s   = $this->get_settings_for_display();
+		$tag = in_array( $s['title_tag'] ?? 'h2', array( 'h2', 'h3', 'div', 'p' ), true ) ? $s['title_tag'] : 'h2';
 		?>
 		<div class="baspar-scope">
 			<div class="midcta">
 				<div class="midcta-inner">
 					<div class="midcta-text">
 						<?php if ( $s['kicker'] ) : ?><span class="kicker-light mono"><?php echo esc_html( $s['kicker'] ); ?></span><?php endif; ?>
-						<h2><?php echo esc_html( $s['title'] ); ?></h2>
+						<<?php echo $tag; // phpcs:ignore ?> class="midcta-title"><?php echo esc_html( $s['title'] ); ?></<?php echo $tag; // phpcs:ignore ?>>
 						<div class="rich-text"><?php echo wp_kses_post( $s['text'] ); ?></div>
 					</div>
 					<div class="midcta-buttons">
 						<?php foreach ( (array) $s['buttons'] as $b ) :
 							$cls = ( 'yes' === $b['white'] ) ? 'btn btn-white' : 'btn btn-ghost';
 							?>
-							<a href="<?php echo esc_url( $b['link']['url'] ?? '#' ); ?>" class="<?php echo esc_attr( $cls ); ?>">
+							<a href="<?php echo esc_url( slash_url( $b['link']['url'] ?? '#' ) ); ?>" class="<?php echo esc_attr( $cls ); ?>">
 								<?php echo icon_svg( $b['icon'], 18 ); // phpcs:ignore ?>
 								<?php echo esc_html( $b['text'] ); ?>
 								<?php if ( $b['sub'] ) : ?><span class="small"><?php echo esc_html( $b['sub'] ); ?></span><?php endif; ?>

@@ -62,6 +62,7 @@ final class Plugin {
 		'import-process',
 		'credentials',
 		'industries-text',
+		'seller-compare',
 		// Inner-page sections (about / contact / pillar).
 		'breadcrumb',
 		'section-heading',

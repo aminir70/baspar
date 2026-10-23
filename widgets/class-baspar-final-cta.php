@@ -10,6 +10,7 @@ namespace BasparElements\Widgets;
 use Elementor\Controls_Manager;
 use Elementor\Repeater;
 use function BasparElements\icon_svg;
+use function BasparElements\slash_url;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -34,8 +35,8 @@ class Baspar_Final_Cta extends Baspar_Widget_Base {
 
 	protected function register_controls() {
 		$this->start_controls_section( 'content', array( 'label' => __( 'محتوا', 'baspar-elements' ) ) );
-		$this->add_control( 'title', array( 'label' => __( 'عنوان', 'baspar-elements' ), 'type' => Controls_Manager::TEXT, 'default' => 'آماده‌اید تأمین مواد اولیه‌تان را به ما بسپارید؟' ) );
-		$this->add_control( 'sub', array( 'label' => __( 'توضیح', 'baspar-elements' ), 'type' => Controls_Manager::WYSIWYG, 'default' => 'همین حالا استعلام بگیرید و از مشاوره فنی رایگان کارشناسان ما بهره‌مند شوید.' ) );
+		$this->add_control( 'title', array( 'label' => __( 'عنوان', 'baspar-elements' ), 'type' => Controls_Manager::TEXT, 'default' => 'آماده خرید مواد اولیه شیمیایی هستید؟' ) );
+		$this->add_control( 'sub', array( 'label' => __( 'توضیح', 'baspar-elements' ), 'type' => Controls_Manager::WYSIWYG, 'default' => 'نام محصول، گرید و مقدار را در واتس‌اپ بفرستید؛ پیش‌فاکتور با قیمت روز و موجودی انبار برایتان می‌آید. استعلام هزینه و تعهدی ندارد.' ) );
 
 		$rep = new Repeater();
 		$rep->add_control( 'text', array( 'label' => __( 'متن دکمه', 'baspar-elements' ), 'type' => Controls_Manager::TEXT ) );
@@ -51,7 +52,7 @@ class Baspar_Final_Cta extends Baspar_Widget_Base {
 				'title_field' => '{{{ text }}}',
 				'default' => array(
 					array( 'text' => 'استعلام در واتس‌اپ', 'icon' => 'whatsapp', 'white' => 'yes', 'link' => array( 'url' => 'https://wa.me/989120997651' ) ),
-					array( 'text' => 'ورود به فروشگاه', 'icon' => 'cart', 'white' => '', 'link' => array( 'url' => '#' ) ),
+					array( 'text' => 'ورود به فروشگاه', 'icon' => 'cart', 'white' => '', 'link' => array( 'url' => '/shop/' ) ),
 				),
 			)
 		);
@@ -76,7 +77,7 @@ class Baspar_Final_Cta extends Baspar_Widget_Base {
 						<?php foreach ( (array) $s['buttons'] as $b ) :
 							$cls = ( 'yes' === $b['white'] ) ? 'btn btn-white btn-lg' : 'btn btn-ghost btn-lg';
 							?>
-							<a href="<?php echo esc_url( $b['link']['url'] ?? '#' ); ?>" class="<?php echo esc_attr( $cls ); ?>" style="<?php echo ( 'yes' !== $b['white'] ) ? 'color:#fff;border-color:rgba(255,255,255,.3)' : ''; ?>">
+							<a href="<?php echo esc_url( slash_url( $b['link']['url'] ?? '#' ) ); ?>" class="<?php echo esc_attr( $cls ); ?>">
 								<?php echo icon_svg( $b['icon'], 18 ); // phpcs:ignore ?>
 								<?php echo esc_html( $b['text'] ); ?>
 							</a>

@@ -303,3 +303,113 @@ function product_specs( $product ) {
 	}
 	return $rows;
 }
+
+/**
+ * Make sure an internal link ends with a trailing slash.
+ *
+ * Only site-relative paths and same-host absolute URLs are touched; external
+ * URLs, anchors, tel:/mailto: links, query strings and file URLs (with an
+ * extension) are returned as they are.
+ *
+ * @param string $url URL as typed in the control.
+ * @return string
+ */
+function slash_url( $url ) {
+	$url = trim( (string) $url );
+	if ( '' === $url || '#' === $url[0] || preg_match( '#^(tel:|mailto:|sms:|javascript:)#i', $url ) ) {
+		return $url;
+	}
+	if ( preg_match( '#^(https?:)?//#i', $url ) ) {
+		$host = wp_parse_url( home_url(), PHP_URL_HOST );
+		$to   = wp_parse_url( $url, PHP_URL_HOST );
+		if ( ! $host || ! $to || strtolower( $host ) !== strtolower( $to ) ) {
+			return $url;
+		}
+	} elseif ( '/' !== $url[0] ) {
+		return $url;
+	}
+	if ( false !== strpos( $url, '?' ) || false !== strpos( $url, '#' ) ) {
+		return $url;
+	}
+	if ( '/' === substr( $url, -1 ) || preg_match( '#\.[a-z0-9]{2,5}$#i', $url ) ) {
+		return $url;
+	}
+	return $url . '/';
+}
+
+/**
+ * Allowed inline HTML for short rich-text fields (FAQ answers, etc.).
+ *
+ * @return array
+ */
+function inline_kses() {
+	return array(
+		'a'      => array( 'href' => true, 'target' => true, 'rel' => true, 'title' => true ),
+		'strong' => array(),
+		'b'      => array(),
+		'em'     => array(),
+		'i'      => array(),
+		'br'     => array(),
+	);
+}
+
+/**
+ * Add the trailing slash to same-site links inside an HTML string.
+ *
+ * @param string $html HTML (already sanitized).
+ * @return string
+ */
+function slash_links( $html ) {
+	return preg_replace_callback(
+		'#(<a\s[^>]*?href=")([^"]*)(")#i',
+		static function ( $m ) {
+			return $m[1] . esc_attr( slash_url( html_entity_decode( $m[2] ) ) ) . $m[3];
+		},
+		(string) $html
+	);
+}
+
+/**
+ * Display name of a product's primary category.
+ *
+ * Uses the Rank Math primary category when set, otherwise the first assigned
+ * category other than the default "uncategorized" one. Always the term *name*
+ * (never the slug); percent-encoded leftovers are decoded.
+ *
+ * @param int $post_id Product ID.
+ * @return string
+ */
+function primary_cat_name( $post_id ) {
+	$terms = get_the_terms( $post_id, 'product_cat' );
+	if ( ! is_array( $terms ) || ! $terms ) {
+		return '';
+	}
+	$term       = null;
+	$primary_id = (int) get_post_meta( $post_id, 'rank_math_primary_product_cat', true );
+	if ( $primary_id ) {
+		foreach ( $terms as $t ) {
+			if ( (int) $t->term_id === $primary_id ) {
+				$term = $t;
+				break;
+			}
+		}
+	}
+	if ( ! $term ) {
+		$default = (int) get_option( 'default_product_cat' );
+		foreach ( $terms as $t ) {
+			if ( (int) $t->term_id !== $default && 'uncategorized' !== $t->slug ) {
+				$term = $t;
+				break;
+			}
+		}
+		$term = $term ? $term : reset( $terms );
+	}
+	$name = trim( (string) $term->name );
+	if ( '' === $name ) {
+		$name = (string) $term->slug;
+	}
+	if ( false !== strpos( $name, '%' ) ) {
+		$name = rawurldecode( $name );
+	}
+	return $name;
+}
