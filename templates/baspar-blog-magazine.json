@@ -1,0 +1,254 @@
+{
+ "version": "0.4",
+ "title": "Baspar — صفحه وبلاگ (مجله)",
+ "type": "page",
+ "page_settings": {
+  "template": "elementor_header_footer"
+ },
+ "content": [
+  {
+   "id": "140c369",
+   "elType": "section",
+   "settings": {
+    "padding": {
+     "unit": "px",
+     "top": "24",
+     "right": "0",
+     "bottom": "24",
+     "left": "0",
+     "isLinked": false
+    },
+    "content_width": {
+     "unit": "px",
+     "size": 1280
+    }
+   },
+   "elements": [
+    {
+     "id": "a18d1e6",
+     "elType": "column",
+     "settings": {
+      "_column_size": 100,
+      "_inline_size": null
+     },
+     "elements": [
+      {
+       "id": "1ea8c55",
+       "elType": "widget",
+       "settings": {},
+       "elements": [],
+       "widgetType": "baspar-blog-hero"
+      }
+     ],
+     "isInner": false
+    }
+   ],
+   "isInner": false
+  },
+  {
+   "id": "7fad558",
+   "elType": "section",
+   "settings": {
+    "padding": {
+     "unit": "px",
+     "top": "48",
+     "right": "0",
+     "bottom": "48",
+     "left": "0",
+     "isLinked": false
+    },
+    "content_width": {
+     "unit": "px",
+     "size": 1280
+    }
+   },
+   "elements": [
+    {
+     "id": "9717900",
+     "elType": "column",
+     "settings": {
+      "_column_size": 100,
+      "_inline_size": null
+     },
+     "elements": [
+      {
+       "id": "f0fd503",
+       "elType": "widget",
+       "settings": {
+        "kicker": "EDITOR’S PICK",
+        "title": "مقالات مهم و برگزیده",
+        "sub": "<p>راهنماهایی که بیشترین کمک را به مدیران خرید و کارشناسان تولید کرده‌اند.</p>"
+       },
+       "elements": [],
+       "widgetType": "baspar-section-heading"
+      },
+      {
+       "id": "940727f",
+       "elType": "widget",
+       "settings": {
+        "source": "sticky",
+        "count": 4
+       },
+       "elements": [],
+       "widgetType": "baspar-post-featured"
+      }
+     ],
+     "isInner": false
+    }
+   ],
+   "isInner": false
+  },
+  {
+   "id": "b71c6aa",
+   "elType": "section",
+   "settings": {
+    "padding": {
+     "unit": "px",
+     "top": "64",
+     "right": "0",
+     "bottom": "64",
+     "left": "0",
+     "isLinked": false
+    },
+    "content_width": {
+     "unit": "px",
+     "size": 1280
+    },
+    "background_background": "classic",
+    "background_color": "#FFFFFF"
+   },
+   "elements": [
+    {
+     "id": "fdd334d",
+     "elType": "column",
+     "settings": {
+      "_column_size": 100,
+      "_inline_size": null
+     },
+     "elements": [
+      {
+       "id": "0ad39d4",
+       "elType": "widget",
+       "settings": {
+        "kicker": "BROWSE BY TOPIC",
+        "title": "موضوعات پرطرفدار",
+        "sub": "<p>روی هر موضوع بزنید تا مقاله‌های همان حوزه پایین همین صفحه فیلتر شوند.</p>"
+       },
+       "elements": [],
+       "widgetType": "baspar-section-heading"
+      },
+      {
+       "id": "5cc5b13",
+       "elType": "widget",
+       "settings": {},
+       "elements": [],
+       "widgetType": "baspar-blog-topics"
+      }
+     ],
+     "isInner": false
+    }
+   ],
+   "isInner": false
+  },
+  {
+   "id": "619c692",
+   "elType": "section",
+   "settings": {
+    "padding": {
+     "unit": "px",
+     "top": "64",
+     "right": "0",
+     "bottom": "48",
+     "left": "0",
+     "isLinked": false
+    },
+    "content_width": {
+     "unit": "px",
+     "size": 1280
+    }
+   },
+   "elements": [
+    {
+     "id": "5753910",
+     "elType": "column",
+     "settings": {
+      "_column_size": 100,
+      "_inline_size": null
+     },
+     "elements": [
+      {
+       "id": "ab61cd7",
+       "elType": "widget",
+       "settings": {
+        "kicker": "LATEST ARTICLES",
+        "title": "آخرین مقالات",
+        "sub": ""
+       },
+       "elements": [],
+       "widgetType": "baspar-section-heading"
+      },
+      {
+       "id": "26c0334",
+       "elType": "widget",
+       "settings": {
+        "source": "latest",
+        "count": 9,
+        "columns": "3",
+        "follow_url": "yes",
+        "pagination": "yes",
+        "anchor": "articles",
+        "exclude_shown": "yes"
+       },
+       "elements": [],
+       "widgetType": "baspar-post-grid"
+      }
+     ],
+     "isInner": false
+    }
+   ],
+   "isInner": false
+  },
+  {
+   "id": "8503f34",
+   "elType": "section",
+   "settings": {
+    "padding": {
+     "unit": "px",
+     "top": "24",
+     "right": "0",
+     "bottom": "64",
+     "left": "0",
+     "isLinked": false
+    },
+    "content_width": {
+     "unit": "px",
+     "size": 1280
+    }
+   },
+   "elements": [
+    {
+     "id": "c67cef6",
+     "elType": "column",
+     "settings": {
+      "_column_size": 100,
+      "_inline_size": null
+     },
+     "elements": [
+      {
+       "id": "22236bb",
+       "elType": "widget",
+       "settings": {
+        "title": "سوال فنی دارید یا قیمت روز می‌خواهید؟",
+        "sub": "<p>نام ماده، گرید و مقدار را در واتس‌اپ بفرستید؛ کارشناس ما راهنمایی می‌کند و پیش‌فاکتور با قیمت روز می‌فرستد.</p>"
+       },
+       "elements": [],
+       "widgetType": "baspar-final-cta"
+      }
+     ],
+     "isInner": false
+    }
+   ],
+   "isInner": false
+  }
+ ]
+}

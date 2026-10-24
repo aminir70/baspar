@@ -24,6 +24,8 @@ class Baspar_Author_Box extends Baspar_Widget_Base {
 			'type' => Controls_Manager::SELECT, 'default' => 'auto',
 			'options' => array( 'auto' => 'نویسنده پست فعلی', 'manual' => 'دستی' ),
 		) );
+		$this->add_control( 'auto_role', array( 'label' => __( 'عنوان زیر نام', 'baspar-elements' ), 'type' => Controls_Manager::TEXT, 'default' => 'تیم محتوای فنی بسپارمارکت', 'condition' => array( 'source' => 'auto' ) ) );
+		$this->add_control( 'auto_bio', array( 'label' => __( 'معرفی (اگر نویسنده «اطلاعات زندگی‌نامه» نداشته باشد)', 'baspar-elements' ), 'type' => Controls_Manager::TEXTAREA, 'rows' => 3, 'default' => 'مقالات بسپارمارکت را کارشناسان فروش و فنی ما بر اساس تجربه واقعی تأمین مواد اولیه برای کارخانه‌ها می‌نویسند.', 'condition' => array( 'source' => 'auto' ) ) );
 		$this->add_control( 'm_avatar', array( 'label' => __( 'تصویر', 'baspar-elements' ), 'type' => Controls_Manager::MEDIA, 'condition' => array( 'source' => 'manual' ) ) );
 		$this->add_control( 'm_name', array( 'label' => __( 'نام', 'baspar-elements' ), 'type' => Controls_Manager::TEXT, 'condition' => array( 'source' => 'manual' ) ) );
 		$this->add_control( 'm_role', array( 'label' => __( 'سمت', 'baspar-elements' ), 'type' => Controls_Manager::TEXT, 'condition' => array( 'source' => 'manual' ) ) );
@@ -33,10 +35,13 @@ class Baspar_Author_Box extends Baspar_Widget_Base {
 	protected function render() {
 		$s = $this->get_settings_for_display();
 		if ( 'auto' === $s['source'] && get_post() ) {
-			$name = get_the_author();
-			$role = get_the_author_meta( 'user_login' );
-			$bio = get_the_author_meta( 'description' );
-			$avatar = '';
+			// Never print the login name (it was shown here before 1.5.0).
+			$aid    = (int) get_post_field( 'post_author', get_post() );
+			$name   = get_the_author_meta( 'display_name', $aid );
+			$role   = $s['auto_role'] ?? '';
+			$bio    = get_the_author_meta( 'description', $aid );
+			$bio    = $bio ? $bio : ( $s['auto_bio'] ?? '' );
+			$avatar = get_avatar_url( $aid, array( 'size' => 128 ) );
 		} else {
 			$name = $s['m_name'] ? $s['m_name'] : 'نویسنده';
 			$role = $s['m_role'];
@@ -48,7 +53,7 @@ class Baspar_Author_Box extends Baspar_Widget_Base {
 		<div class="baspar-scope">
 			<div class="post-author">
 				<?php if ( $avatar ) : ?>
-					<img src="<?php echo esc_url( $avatar ); ?>" alt="<?php echo esc_attr( $name ); ?>" class="av" style="object-fit:cover" />
+					<img src="<?php echo esc_url( $avatar ); ?>" alt="<?php echo esc_attr( $name ); ?>" class="av" />
 				<?php else : ?>
 					<div class="av"><?php echo esc_html( $initial ); ?></div>
 				<?php endif; ?>

@@ -42,6 +42,54 @@
 		els.forEach( function ( el ) { io.observe( el ); } );
 	}
 
+	/* ---- Article: reading progress + table-of-contents highlight -------- */
+	function initArticle( root ) {
+		var scope = root || document;
+		var bar = scope.querySelector( '.bspr-progress span' );
+		var article = document.querySelector( '[data-article]' );
+		var tocs = scope.querySelectorAll( '[data-toc]' );
+		if ( ( ! bar && ! tocs.length ) || ! article || article.getAttribute( 'data-article-init' ) ) {
+			return;
+		}
+		article.setAttribute( 'data-article-init', '1' );
+		var links = [];
+		document.querySelectorAll( '[data-toc] a[href^="#"]' ).forEach( function ( a ) {
+			var el = document.getElementById( decodeURIComponent( a.getAttribute( 'href' ).slice( 1 ) ) );
+			if ( el ) {
+				links.push( { a: a, el: el } );
+			}
+		} );
+		var ticking = false;
+		function update() {
+			ticking = false;
+			var r = article.getBoundingClientRect();
+			var vh = window.innerHeight || document.documentElement.clientHeight;
+			if ( bar ) {
+				var total = r.height - vh * 0.6;
+				var p = total > 0 ? Math.min( 1, Math.max( 0, -r.top / total ) ) : 1;
+				bar.style.transform = 'scaleX(' + p.toFixed( 4 ) + ')';
+			}
+			var current = null;
+			links.forEach( function ( l ) {
+				if ( l.el.getBoundingClientRect().top < vh * 0.3 ) {
+					current = l;
+				}
+			} );
+			links.forEach( function ( l ) {
+				l.a.classList.toggle( 'is-active', l === current );
+			} );
+		}
+		function onScroll() {
+			if ( ! ticking ) {
+				ticking = true;
+				window.requestAnimationFrame( update );
+			}
+		}
+		window.addEventListener( 'scroll', onScroll, { passive: true } );
+		window.addEventListener( 'resize', onScroll );
+		update();
+	}
+
 	/* ---- Animated counters ---------------------------------------------- */
 	function animateCounter( el ) {
 		if ( el.dataset.counted ) {
@@ -251,6 +299,7 @@
 		initTabs( root );
 		initFaq( root );
 		initNav( root );
+		initArticle( root );
 		initFloatWa();
 	}
 

@@ -101,6 +101,17 @@ final class Plugin {
 		'shop-sidebar',
 		'shop-toolbar',
 		'term-description',
+		// Blog landing page + single post (1.5.0).
+		'blog-hero',
+		'post-featured',
+		'post-grid',
+		'blog-topics',
+		'post-hero',
+		'post-content',
+		'post-toc',
+		'related-posts',
+		'post-comments',
+		'side-cta',
 		// City landing pages (buy-chemical-raw-materials-{city}).
 		'city-facts',
 		'prose',
@@ -146,6 +157,7 @@ final class Plugin {
 
 		// Helpers shared by widgets.
 		require_once BASPAR_ELEMENTS_PATH . 'includes/helpers.php';
+		require_once BASPAR_ELEMENTS_PATH . 'includes/blog.php';
 	}
 
 	/**

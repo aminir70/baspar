@@ -4,7 +4,7 @@ Tags: elementor, woocommerce, widgets, rtl, persian
 Requires at least: 5.8
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.4.4
+Stable tag: 1.5.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,11 +18,11 @@ fully customizable from Elementor (typography, colors, logo, images, spacing), a
 dynamic data (menu, posts, WooCommerce products & categories) is read live from
 WordPress.
 
-Includes 66 widgets (header/menu, footer, hero, categories, trust, products,
+Includes 76 widgets (header/menu, footer, hero, categories, trust, products,
 product tabs, promo, brands, about, blog, breadcrumb, stats, mission/vision/values,
 timeline, team, process, industries, FAQ, cities, mid/final CTA, compare table,
 contact methods, social showcase, contact map, city quick-facts, shipment route,
-city zones, city industries, and more) plus 13 importable page templates (home,
+city zones, city industries, and more) plus 15 importable templates (home, blog magazine, single post,
 about, contact, pillar, importer, product, shop, blog, and one per city: Shiraz,
 Isfahan, Mashhad, Tabriz, Tehran).
 
@@ -37,6 +37,29 @@ Requires Elementor. WooCommerce is required only for the product/category widget
    Templates → Saved Templates → Import Templates.
 
 == Changelog ==
+
+= 1.5.0 =
+* New blog design (magazine landing + single post), built from 10 new widgets:
+  - Blog Hero (H1, article search, topic chips, live article/category counts)
+  - Featured Articles (magazine layout; sticky posts → "important", falls back
+    to most discussed; or latest / category / hand-picked IDs)
+  - Article List (grid or row cards, numbered pagination, follows the hero
+    search ?bq= and ?bcat= so the page filters in place, skips posts already
+    shown above)
+  - Blog Topics (tiles with live article counts that filter the list)
+  - Post Hero (breadcrumb, category, H1, lead, author/date/updated/reading
+    time/comments, featured image)
+  - Post Content (reading typography, styled tables with horizontal scroll,
+    quotes, images; optional clean-up of pasted inline colours/sizes and empty
+    paragraphs; reading-progress bar; hides the duplicate LuckyWP/Easy TOC box)
+  - Table of Contents (from the article's H2/H3, sticky, highlights the
+    section being read, collapsible on phones)
+  - Related Articles (title keyword + category, filled with latest)
+  - Comments, Sidebar CTA card
+* Templates: templates/baspar-blog-magazine.json (page) and
+  templates/baspar-single-post.json (Elementor Pro theme builder, Single Post).
+* Author Box no longer prints the author's WordPress login name as the role;
+  shows a configurable role label, real avatar and a fallback bio.
 
 = 1.4.4 =
 * Contact Map: the embed field now accepts the full <iframe> code copied
