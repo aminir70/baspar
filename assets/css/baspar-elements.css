@@ -3307,3 +3307,37 @@ html.baspar-js .baspar-scope .baspar-reveal{transition:opacity .7s cubic-bezier(
   .baspar-scope .cat-tools .bspr-sort-form{flex:1;min-width:0}
   .baspar-scope .cat-tools .cat-sort{width:100%;min-width:0}
 }
+
+/* ============================================================
+   Contact map — real map card (1.4.4)
+   ============================================================ */
+.baspar-scope .cmap-card{position:relative;height:var(--cmap-h,360px);border-radius:18px;padding:6px;background:linear-gradient(135deg,var(--brand-100),#fff 40%,var(--brand-50));box-shadow:0 24px 50px -24px rgba(109,40,217,.35),0 2px 6px rgba(27,5,55,.05);animation:bspr-cmapIn .8s cubic-bezier(.2,.7,.2,1) both}
+.baspar-scope .cmap-frame{position:relative;height:100%;border-radius:13px;overflow:hidden;background:var(--brand-tint);isolation:isolate}
+.baspar-scope .cmap-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block;filter:saturate(.75) contrast(1.02);transition:filter .5s ease;animation:bspr-fadeIn .9s ease .35s both}
+.baspar-scope .cmap-card:hover .cmap-frame iframe{filter:none}
+.baspar-scope .cmap-frame::after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:13px;box-shadow:inset 0 0 0 1px rgba(109,40,217,.12);z-index:2}
+/* loading skeleton under the iframe */
+.baspar-scope .cmap-skeleton{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--brand);background-image:linear-gradient(rgba(109,40,217,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(109,40,217,.07) 1px,transparent 1px);background-size:32px 32px}
+.baspar-scope .cmap-skeleton svg{animation:bspr-cmapBob 1.6s ease-in-out infinite}
+/* floating info card */
+.baspar-scope .cmap-info{position:absolute;right:22px;bottom:34px;left:auto;z-index:3;display:flex;align-items:center;gap:14px;max-width:calc(100% - 44px);padding:12px 12px 12px 16px;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:14px;box-shadow:0 18px 40px -16px rgba(27,5,55,.35);animation:bspr-cmapUp .7s cubic-bezier(.2,.7,.2,1) .6s both}
+.baspar-scope .cmap-info-ic{position:relative;width:44px;height:44px;flex:0 0 44px;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--brand-dk));color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px -6px rgba(109,40,217,.6)}
+.baspar-scope .cmap-info-ring{position:absolute;inset:0;border-radius:50%;border:2px solid var(--brand);animation:bspr-cmapRing 2.2s ease-out infinite}
+.baspar-scope .cmap-info-ic svg{position:relative;width:20px;height:20px}
+.baspar-scope .cmap-info-body{display:flex;flex-direction:column;gap:2px;min-width:0}
+.baspar-scope .cmap-info-body strong{font-size:14.5px;font-weight:800;color:var(--brand-deep);line-height:1.4}
+.baspar-scope .cmap-info-body span{font-size:12.5px;color:var(--ink-3);line-height:1.6}
+.baspar-scope .cmap-route{display:inline-flex;align-items:center;gap:6px;flex-shrink:0;margin-right:6px;padding:9px 14px;border-radius:10px;background:var(--brand);color:#fff!important;font-size:13px;font-weight:700;text-decoration:none;white-space:nowrap;transition:background .15s,transform .15s}
+.baspar-scope .cmap-route:hover{background:var(--brand-2);transform:translateY(-1px)}
+.baspar-scope .cmap-route svg{width:14px;height:14px}
+@keyframes bspr-cmapIn{from{opacity:0;transform:translateY(16px) scale(.985)}to{opacity:1;transform:none}}
+@keyframes bspr-fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes bspr-cmapUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes bspr-cmapRing{0%{transform:scale(1);opacity:.55}100%{transform:scale(1.9);opacity:0}}
+@keyframes bspr-cmapBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@media(max-width:600px){
+  .baspar-scope .cmap-info{right:12px;left:12px;bottom:30px;max-width:none;flex-wrap:wrap;padding:12px}
+  .baspar-scope .cmap-info-body{flex:1}
+  .baspar-scope .cmap-route{width:100%;justify-content:center;margin:2px 0 0}
+}
+@media(prefers-reduced-motion:reduce){.baspar-scope .cmap-card,.baspar-scope .cmap-frame iframe,.baspar-scope .cmap-info{animation:none}.baspar-scope .cmap-info-ring,.baspar-scope .cmap-skeleton svg{animation:none}}

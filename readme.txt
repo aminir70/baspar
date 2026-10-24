@@ -4,7 +4,7 @@ Tags: elementor, woocommerce, widgets, rtl, persian
 Requires at least: 5.8
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.4.3
+Stable tag: 1.4.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,6 +37,15 @@ Requires Elementor. WooCommerce is required only for the product/category widget
    Templates → Saved Templates → Import Templates.
 
 == Changelog ==
+
+= 1.4.4 =
+* Contact Map: the embed field now accepts the full <iframe> code copied
+  from Google Maps / Neshan (previously only the bare src URL worked, so a
+  pasted iframe showed an empty box). The real map is shown in a framed,
+  animated card: loading skeleton, fade-in, soft colour until hover, and a
+  floating info card (title, optional address, pulsing pin) with a
+  "مسیریابی" button whose directions link is built from the map's
+  coordinates (or set manually). Respects reduced-motion.
 
 = 1.4.3 =
 * Shop toolbar redesigned: search, sort and view toggle share one 42px
