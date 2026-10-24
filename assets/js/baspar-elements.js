@@ -8,6 +8,9 @@
 	'use strict';
 
 	/* ---- Scroll reveal -------------------------------------------------- */
+	// Content stays visible until this script runs (it may be delayed by a
+	// cache plugin). Elements already on screen are marked shown before the
+	// `baspar-js` class enables the hidden start state, so nothing flickers.
 	function initReveal( root ) {
 		var els = ( root || document ).querySelectorAll( '.baspar-reveal:not(.in)' );
 		if ( ! els.length ) {
@@ -17,6 +20,16 @@
 			els.forEach( function ( el ) { el.classList.add( 'in' ); } );
 			return;
 		}
+		var vh = window.innerHeight || document.documentElement.clientHeight;
+		els = Array.prototype.filter.call( els, function ( el ) {
+			var r = el.getBoundingClientRect();
+			if ( r.top < vh && r.bottom > 0 ) {
+				el.classList.add( 'in' );
+				return false;
+			}
+			return true;
+		} );
+		document.documentElement.classList.add( 'baspar-js' );
 		var io = new IntersectionObserver( function ( entries ) {
 			entries.forEach( function ( e ) {
 				if ( e.isIntersecting ) {
@@ -241,7 +254,11 @@
 		initFloatWa();
 	}
 
-	document.addEventListener( 'DOMContentLoaded', function () { boot( document ); } );
+	if ( 'loading' === document.readyState ) {
+		document.addEventListener( 'DOMContentLoaded', function () { boot( document ); } );
+	} else {
+		boot( document );
+	}
 
 	// Elementor editor / frontend hooks.
 	if ( window.jQuery ) {

@@ -4,7 +4,7 @@ Tags: elementor, woocommerce, widgets, rtl, persian
 Requires at least: 5.8
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.3.7
+Stable tag: 1.4.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,6 +37,33 @@ Requires Elementor. WooCommerce is required only for the product/category widget
    Templates → Saved Templates → Import Templates.
 
 == Changelog ==
+
+= 1.4.0 =
+* Restored the complete design stylesheet. An earlier series of interrupted
+  pushes (1.2.2) had replaced the 188 KB design system with a partial
+  58 KB file, so many sections lost their styling (home hero console and
+  floating cards, process steps, cities, FAQ list, CTA button groups,
+  product-card labels, pagination, and more). The full file is back, with
+  every selector now scoped to `.baspar-scope` (some prototype rules such as
+  `.btn`, `.header`, `.section` used to leak into the theme) and duplicate
+  prototype rules removed so the refined/mobile rules win. All 1.3.x fixes
+  are re-applied on top.
+* Persian text no longer renders in the letter-spaced monospace label font
+  (it broke the letter joins, e.g. «گ ر ی د»): widget output marks
+  Persian-text elements with `is-fa`, which resets font and tracking.
+* Scroll-reveal animation can no longer hide content: elements stay visible
+  until the script runs (safe with WP Rocket "delay JS"), and anything
+  already on screen is shown without animating.
+* Products pagination: the "next" arrow was rendered as a dead button with an
+  empty icon (the SVG's `currentColor` was mistaken for the current page);
+  now real prev/next links with proper icons, styles moved to CSS.
+* Shop toolbar: real grid/list icons (both showed a box icon); toolbar wraps
+  cleanly on phones.
+* Team / Principles widgets: column count no longer set inline, so the grid
+  collapses properly on tablet/phone; team photos use a 4:5 frame.
+* Home and pillar hero floating cards no longer cover the console/product
+  details; hidden on small phones. Header CTA hidden on mobile again.
+* Focus outlines, selection colour and link styling in rich text.
 
 = 1.3.7 =
 * Pillar page (buy-chemical-raw-materials) update:

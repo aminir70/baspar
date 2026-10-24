@@ -341,34 +341,44 @@ class Baspar_Products extends Baspar_Widget_Base {
 						'current'   => $current,
 						'total'     => $q->max_num_pages,
 						'type'      => 'array',
-						'prev_text' => icon_svg( 'arrow-down', 14 ),
+						'prev_text' => icon_svg( 'arrow-right', 14 ),
 						'next_text' => icon_svg( 'arrow', 14 ),
 						'mid_size'  => 1,
 						'end_size'  => 1,
 					)
 				);
 				if ( $links ) {
-					echo '<div class="pagination" style="margin-top:32px">';
+					echo '<nav class="pagination" aria-label="' . esc_attr__( 'صفحه‌بندی محصولات', 'baspar-elements' ) . '">';
 					foreach ( $links as $link ) {
-						// convert WP's <a> / <span class="current"> into our styled buttons.
-						$is_current = false !== strpos( $link, 'current' );
-						$is_dots    = false !== strpos( $link, 'dots' );
+						// Convert WP's <a> / <span class="current"> into our styled items.
+						// (Match the class names, not the bare word "current": the arrow
+						// SVGs contain stroke="currentColor".)
+						$is_current = (bool) preg_match( '#class=["\'][^"\']*\bcurrent\b#', $link );
+						$is_dots    = (bool) preg_match( '#class=["\'][^"\']*\bdots\b#', $link );
 						if ( $is_dots ) {
 							echo '<span class="ellipsis">…</span>';
 							continue;
 						}
-						// strip outer tag and reuse text/href
-						if ( $is_current ) {
-							if ( preg_match( '#>(.+?)<#s', $link, $m ) ) {
-								echo '<button class="is-on" type="button">' . wp_kses_post( $m[1] ) . '</button>';
-							}
+						if ( preg_match( '#^<(?:a|span)\b[^>]*>(.*)</(?:a|span)>$#s', trim( $link ), $inner ) ) {
+							$label = $inner[1];
 						} else {
-							if ( preg_match( '#href=[\'\"]([^\'\"]+)[\'\"][^>]*>(.+?)</a>#s', $link, $m ) ) {
-								echo '<a href="' . esc_url( $m[1] ) . '" style="display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:8px;background:#fff;border:1px solid var(--line);font-size:13.5px;font-weight:600;color:var(--ink-2);text-decoration:none">' . wp_kses_post( $m[2] ) . '</a>';
+							continue;
+						}
+						$is_arrow = false !== strpos( $label, '<svg' );
+						$label    = $is_arrow ? $label : esc_html( wp_strip_all_tags( $label ) );
+						if ( $is_current ) {
+							echo '<span class="is-on" aria-current="page">' . $label . '</span>'; // phpcs:ignore
+						} elseif ( preg_match( '#href=[\'"]([^\'"]+)[\'"]#', $link, $h ) ) {
+							$rel = '';
+							if ( false !== strpos( $link, 'next' ) ) {
+								$rel = ' rel="next" aria-label="' . esc_attr__( 'صفحه بعد', 'baspar-elements' ) . '"';
+							} elseif ( false !== strpos( $link, 'prev' ) ) {
+								$rel = ' rel="prev" aria-label="' . esc_attr__( 'صفحه قبل', 'baspar-elements' ) . '"';
 							}
+							echo '<a href="' . esc_url( html_entity_decode( $h[1] ) ) . '"' . $rel . '>' . $label . '</a>'; // phpcs:ignore
 						}
 					}
-					echo '</div>';
+					echo '</nav>';
 				}
 			}
 			?>
