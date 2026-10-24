@@ -14,6 +14,7 @@ namespace BasparElements\Widgets;
 use Elementor\Controls_Manager;
 use Elementor\Repeater;
 use function BasparElements\icon_svg;
+use function BasparElements\fa_num;
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
@@ -38,13 +39,14 @@ class Baspar_Shop_Sidebar extends Baspar_Widget_Base {
 		$has_active = $is_current ? true : $this->branch_contains( $term->term_id, $current_id, $by_parent );
 		$open       = $auto_open || $has_active;
 		$cls        = 'bspr-cat-node' . ( $has_kids ? ' has-children' : '' ) . ( $open ? ' is-open' : '' ) . ( $is_current ? ' is-current' : '' );
-		$prefix     = ( $depth > 0 ) ? str_repeat( '· ', $depth ) : '';
 		?>
 		<li class="<?php echo esc_attr( $cls ); ?>" data-depth="<?php echo esc_attr( $depth ); ?>">
 			<div class="bspr-cat-row">
-				<a href="<?php echo esc_url( get_term_link( $term ) ); ?>" class="bspr-cat-link"><span><?php echo esc_html( $prefix . $term->name ); ?></span><span class="count"><?php echo esc_html( $term->count ); ?></span></a>
+				<a href="<?php echo esc_url( get_term_link( $term ) ); ?>" class="bspr-cat-link"<?php echo $is_current ? ' aria-current="page"' : ''; ?>><span class="bspr-cat-name"><?php echo esc_html( $term->name ); ?></span><span class="count"><?php echo esc_html( fa_num( $term->count ) ); ?></span></a>
 				<?php if ( $has_kids ) : ?>
-					<button type="button" class="bspr-cat-toggle" aria-label="<?php esc_attr_e( 'باز/بسته کردن زیر دسته‌ها', 'baspar-elements' ); ?>"><?php echo icon_svg( 'arrow-down', 14 ); // phpcs:ignore ?></button>
+					<button type="button" class="bspr-cat-toggle" aria-expanded="<?php echo $open ? 'true' : 'false'; ?>" aria-label="<?php esc_attr_e( 'باز/بسته کردن زیر دسته‌ها', 'baspar-elements' ); ?>"><?php echo icon_svg( 'arrow-down', 14 ); // phpcs:ignore ?></button>
+				<?php elseif ( 0 === $depth ) : ?>
+					<span class="bspr-cat-toggle-sp" aria-hidden="true"></span>
 				<?php endif; ?>
 			</div>
 			<?php if ( $has_kids ) : ?>
@@ -64,13 +66,14 @@ class Baspar_Shop_Sidebar extends Baspar_Widget_Base {
 	private function render_filter_branch( $term, $by_parent, $depth = 0 ) {
 		$kids     = isset( $by_parent[ $term->term_id ] ) ? $by_parent[ $term->term_id ] : array();
 		$has_kids = ! empty( $kids );
-		$prefix   = ( $depth > 0 ) ? str_repeat( '· ', $depth ) : '';
 		?>
 		<li class="bspr-cat-node<?php echo $has_kids ? ' has-children is-open' : ''; ?>" data-depth="<?php echo esc_attr( $depth ); ?>">
 			<div class="bspr-cat-row">
-				<label class="bspr-cat-link"><input type="checkbox" name="product_cat[]" value="<?php echo esc_attr( $term->slug ); ?>"> <span><?php echo esc_html( $prefix . $term->name ); ?></span><span class="count"><?php echo esc_html( $term->count ); ?></span></label>
+				<label class="bspr-cat-link"><input type="checkbox" name="product_cat[]" value="<?php echo esc_attr( $term->slug ); ?>"> <span class="bspr-cat-name"><?php echo esc_html( $term->name ); ?></span><span class="count"><?php echo esc_html( fa_num( $term->count ) ); ?></span></label>
 				<?php if ( $has_kids ) : ?>
-					<button type="button" class="bspr-cat-toggle"><?php echo icon_svg( 'arrow-down', 14 ); // phpcs:ignore ?></button>
+					<button type="button" class="bspr-cat-toggle" aria-expanded="true" aria-label="<?php esc_attr_e( 'باز/بسته کردن زیر دسته‌ها', 'baspar-elements' ); ?>"><?php echo icon_svg( 'arrow-down', 14 ); // phpcs:ignore ?></button>
+				<?php elseif ( 0 === $depth ) : ?>
+					<span class="bspr-cat-toggle-sp" aria-hidden="true"></span>
 				<?php endif; ?>
 			</div>
 			<?php if ( $has_kids ) : ?>
@@ -362,7 +365,7 @@ class Baspar_Shop_Sidebar extends Baspar_Widget_Base {
 								} else {
 									foreach ( $top_level as $t ) {
 										$is_current = ( $current_id === (int) $t->term_id ) ? ' is-current' : '';
-										echo '<li class="bspr-cat-leaf' . esc_attr( $is_current ) . '"><a href="' . esc_url( get_term_link( $t ) ) . '" style="display:flex;align-items:center;justify-content:space-between;width:100%;color:var(--ink-2)"><span>' . esc_html( $t->name ) . '</span><span class="count">' . esc_html( $t->count ) . '</span></a></li>';
+										echo '<li class="bspr-cat-leaf' . esc_attr( $is_current ) . '"><a href="' . esc_url( get_term_link( $t ) ) . '" class="bspr-cat-link"' . ( $is_current ? ' aria-current="page"' : '' ) . '><span class="bspr-cat-name">' . esc_html( $t->name ) . '</span><span class="count">' . esc_html( fa_num( $t->count ) ) . '</span></a></li>';
 									}
 								}
 								?>
@@ -411,29 +414,6 @@ class Baspar_Shop_Sidebar extends Baspar_Widget_Base {
 			</aside>
 		</div>
 
-		<style>
-		.baspar-scope #<?php echo esc_js( $uid ); ?> .bspr-cat-tree,
-		.baspar-scope #<?php echo esc_js( $uid ); ?> .bspr-cat-children{list-style:none;padding:0;margin:0}
-		.baspar-scope #<?php echo esc_js( $uid ); ?> .bspr-cat-node{display:block;padding:0;border-bottom:0;margin-bottom:2px}
-		.baspar-scope #<?php echo esc_js( $uid ); ?> .bspr-cat-row{display:flex;align-items:center;gap:6px;width:100%}
-		.baspar-scope #<?php echo esc_js( $uid ); ?> .bspr-cat-link{display:flex;align-items:center;justify-content:space-between;flex:1;padding:7px 4px;border-radius:6px;color:var(--ink-2);font-size:13.5px;font-weight:500;text-decoration:none;min-width:0}
-		.baspar-scope #<?php echo esc_js( $uid ); ?> .bspr-cat-link:hover{background:var(--brand-tint);color:var(--brand)}
-		.baspar-scope #<?php echo esc_js( $uid ); ?> .bspr-cat-node.is-current > .bspr-cat-row > .bspr-cat-link{color:var(--brand);font-weight:700}
-		.baspar-scope #<?php echo esc_js( $uid ); ?> .bspr-cat-tree > .bspr-cat-node > .bspr-cat-row > .bspr-cat-link > span:first-child{font-weight:700;color:var(--brand-deep)}
-		/* Toggle button — explicit svg sizing to defeat themes that set svg{width:100%} */
-		.baspar-scope #<?php echo esc_js( $uid ); ?> .bspr-cat-toggle{width:28px;height:28px;background:transparent;border:1px solid var(--line);border-radius:5px;color:var(--ink-3);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;transition:transform .2s,background .15s,color .15s;flex-shrink:0;padding:0;line-height:0}
-		.baspar-scope #<?php echo esc_js( $uid ); ?> .bspr-cat-toggle svg{width:14px!important;height:14px!important;max-width:14px;max-height:14px;display:block;flex-shrink:0}
-		.baspar-scope #<?php echo esc_js( $uid ); ?> .bspr-cat-toggle:hover{background:var(--brand-50);color:var(--brand);border-color:var(--brand-100)}
-		.baspar-scope #<?php echo esc_js( $uid ); ?> .bspr-cat-node.is-open > .bspr-cat-row > .bspr-cat-toggle{transform:rotate(180deg);background:var(--brand-50);color:var(--brand)}
-		/* Children indent + dashed guide line */
-		.baspar-scope #<?php echo esc_js( $uid ); ?> .bspr-cat-children{padding:4px 18px 6px 0;border-right:1px dashed var(--line);margin-right:12px;display:none}
-		.baspar-scope #<?php echo esc_js( $uid ); ?> .bspr-cat-node.is-open > .bspr-cat-children{display:block}
-		.baspar-scope #<?php echo esc_js( $uid ); ?> .bspr-cat-children .bspr-cat-link{font-size:13px;font-weight:400;padding:5px 8px}
-		.baspar-scope #<?php echo esc_js( $uid ); ?> .bspr-cat-children .bspr-cat-link > span:first-child{color:var(--ink-2);font-weight:500}
-		.baspar-scope #<?php echo esc_js( $uid ); ?> .bspr-cat-children .bspr-cat-node.is-current > .bspr-cat-row > .bspr-cat-link > span:first-child{color:var(--brand);font-weight:700}
-		.baspar-scope #<?php echo esc_js( $uid ); ?> .count{font-family:var(--mono);font-size:11px;color:var(--ink-3);flex-shrink:0;margin-right:6px}
-		</style>
-
 		<script>
 		(function(){
 			var root = document.getElementById('<?php echo esc_js( $uid ); ?>');
@@ -442,7 +422,7 @@ class Baspar_Shop_Sidebar extends Baspar_Widget_Base {
 				btn.addEventListener('click', function(e){
 					e.preventDefault();
 					var node = btn.closest('.bspr-cat-node');
-					if (node) node.classList.toggle('is-open');
+					if (node) btn.setAttribute('aria-expanded', node.classList.toggle('is-open') ? 'true' : 'false');
 				});
 			});
 		})();

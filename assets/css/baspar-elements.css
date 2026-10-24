@@ -3222,3 +3222,51 @@ html.baspar-js .baspar-scope .baspar-reveal{transition:opacity .7s cubic-bezier(
 /* Header menu: the theme adds `margin-bottom:10px` to list items except the
    last one, which pushed the last menu item ~5px lower than the others. */
 .baspar-scope .nav li,.baspar-scope .nav-mobile li,.baspar-scope .sub-menu li{margin:0}
+
+/* ============================================================
+   Shop sidebar — category tree (1.4.2 redesign)
+   ============================================================ */
+.baspar-scope .cat-side-box{border-radius:14px;padding:18px;box-shadow:0 1px 2px rgba(27,5,55,.04)}
+.baspar-scope .cat-side-box h4{font-size:14.5px;margin:0 0 12px;padding:0 4px 14px}
+.baspar-scope .cat-side-box h4 svg{width:18px;height:18px;padding:6px;box-sizing:content-box;border-radius:8px;background:var(--brand-50)}
+.baspar-scope .cat-side-list .count{font-family:var(--font);font-size:11.5px;font-weight:600;line-height:1;color:var(--ink-3);background:var(--surface-2);border:1px solid var(--line);border-radius:999px;padding:4px 8px;min-width:28px;text-align:center;flex-shrink:0}
+
+.baspar-scope .bspr-cat-tree,.baspar-scope .bspr-cat-children{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+.baspar-scope .bspr-cat-tree li{display:block;margin:0;padding:0;border:0}
+.baspar-scope .bspr-cat-row{display:flex;align-items:center;gap:4px;border-radius:10px;transition:background .15s}
+.baspar-scope .bspr-cat-link{flex:1;min-width:0;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 10px;border-radius:10px;color:var(--ink-2);font-size:14px;font-weight:600;text-decoration:none;transition:color .15s}
+.baspar-scope .bspr-cat-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.baspar-scope .bspr-cat-tree > li > .bspr-cat-row > .bspr-cat-link{color:var(--brand-deep)}
+.baspar-scope .bspr-cat-row:hover{background:var(--brand-tint)}
+.baspar-scope .bspr-cat-row:hover .bspr-cat-link{color:var(--brand)}
+.baspar-scope .bspr-cat-row:hover .count{border-color:var(--brand-100);color:var(--brand)}
+
+/* Open branch: tinted row. Current category: brand pill + accent bar. */
+.baspar-scope .bspr-cat-tree > .bspr-cat-node.is-open > .bspr-cat-row{background:var(--brand-tint)}
+.baspar-scope .bspr-cat-node.is-current > .bspr-cat-row{background:var(--brand-50);box-shadow:inset -3px 0 0 var(--brand)}
+.baspar-scope .bspr-cat-node.is-current > .bspr-cat-row .bspr-cat-link{color:var(--brand);font-weight:700}
+.baspar-scope .bspr-cat-node.is-current > .bspr-cat-row .count{background:var(--brand);border-color:var(--brand);color:#fff}
+
+/* Toggle: small round ghost button (hardened against theme button styles). */
+.baspar-scope .bspr-cat-tree .bspr-cat-toggle,.baspar-scope .bspr-cat-tree .bspr-cat-toggle-sp{width:30px;height:30px;min-width:30px;min-height:0;flex:0 0 30px;margin:0 0 0 4px}
+.baspar-scope .bspr-cat-tree .bspr-cat-toggle{display:inline-flex;align-items:center;justify-content:center;padding:0;border:0;border-radius:50%;background:transparent;box-shadow:none;color:var(--ink-3);line-height:0;font-size:0;text-transform:none;cursor:pointer;transition:transform .25s ease,background .15s,color .15s}
+.baspar-scope .bspr-cat-tree .bspr-cat-toggle svg{width:14px!important;height:14px!important;display:block}
+.baspar-scope .bspr-cat-tree .bspr-cat-toggle:hover{background:#fff;color:var(--brand)}
+.baspar-scope .bspr-cat-tree .bspr-cat-node.is-open > .bspr-cat-row > .bspr-cat-toggle{transform:rotate(180deg);color:var(--brand)}
+
+/* Children: indented with a soft guide line. */
+.baspar-scope .bspr-cat-children{display:none;margin:4px 16px 8px 0;padding:0 12px 0 0;border-right:2px solid var(--line)}
+.baspar-scope .bspr-cat-node.is-open > .bspr-cat-children{display:flex}
+.baspar-scope .bspr-cat-children .bspr-cat-link{padding:7px 10px;font-size:13.5px;font-weight:500;color:var(--ink-2)}
+.baspar-scope .bspr-cat-children .bspr-cat-toggle{width:26px;height:26px;min-width:26px;flex-basis:26px}
+.baspar-scope .bspr-cat-children .count{font-size:11px;padding:3px 7px;min-width:24px}
+.baspar-scope .bspr-cat-children .bspr-cat-node.is-current > .bspr-cat-row{box-shadow:none}
+
+/* Filter mode (checkboxes) */
+.baspar-scope .bspr-cat-tree label.bspr-cat-link{cursor:pointer;justify-content:flex-start}
+.baspar-scope .bspr-cat-tree label.bspr-cat-link .bspr-cat-name{flex:1}
+.baspar-scope .bspr-cat-tree label.bspr-cat-link input{accent-color:var(--brand);width:15px;height:15px;margin:0}
+/* Other sidebar lists (origin, quick links): hover feedback like the tree. */
+.baspar-scope .cat-side-list:not(.bspr-cat-tree){gap:2px}
+.baspar-scope .cat-side-list:not(.bspr-cat-tree) > li > a{display:flex;align-items:center;justify-content:space-between;width:100%;padding:8px 10px;border-radius:10px;font-size:14px;transition:background .15s,color .15s}
+.baspar-scope .cat-side-list:not(.bspr-cat-tree) > li > a:hover{background:var(--brand-tint);color:var(--brand)!important}

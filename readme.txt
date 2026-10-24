@@ -4,7 +4,7 @@ Tags: elementor, woocommerce, widgets, rtl, persian
 Requires at least: 5.8
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.4.1
+Stable tag: 1.4.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,6 +37,14 @@ Requires Elementor. WooCommerce is required only for the product/category widget
    Templates → Saved Templates → Import Templates.
 
 == Changelog ==
+
+= 1.4.2 =
+* Shop sidebar category tree redesigned: rows with hover/open tint, counts
+  as Persian-digit pills, small round expand/collapse button (no more tall
+  theme-styled boxes), aligned columns for rows without children, indented
+  sub-categories with a soft guide line instead of "·" prefixes, and the
+  current category highlighted. Styles moved from an inline <style> block
+  into the stylesheet; toggle buttons expose aria-expanded.
 
 = 1.4.1 =
 * Header menu: items are aligned on one line again. The theme gives every
