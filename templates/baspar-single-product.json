@@ -1,0 +1,306 @@
+{
+ "version": "0.4",
+ "title": "Baspar — صفحه محصول (Theme Builder)",
+ "type": "product",
+ "page_settings": {},
+ "content": [
+  {
+   "id": "89b45ed",
+   "elType": "section",
+   "settings": {
+    "padding": {
+     "unit": "px",
+     "top": "24",
+     "right": "0",
+     "bottom": "32",
+     "left": "0",
+     "isLinked": false
+    },
+    "content_width": {
+     "unit": "px",
+     "size": 1320
+    }
+   },
+   "elements": [
+    {
+     "id": "5a4b5a1",
+     "elType": "column",
+     "settings": {
+      "_column_size": 100,
+      "_inline_size": null
+     },
+     "elements": [
+      {
+       "id": "03a445f",
+       "elType": "widget",
+       "settings": {},
+       "elements": [],
+       "widgetType": "baspar-pd-hero"
+      }
+     ],
+     "isInner": false
+    }
+   ],
+   "isInner": false
+  },
+  {
+   "id": "6633f0b",
+   "elType": "section",
+   "settings": {
+    "padding": {
+     "unit": "px",
+     "top": "8",
+     "right": "0",
+     "bottom": "32",
+     "left": "0",
+     "isLinked": false
+    },
+    "content_width": {
+     "unit": "px",
+     "size": 1320
+    }
+   },
+   "elements": [
+    {
+     "id": "bae0103",
+     "elType": "column",
+     "settings": {
+      "_column_size": 100,
+      "_inline_size": null
+     },
+     "elements": [
+      {
+       "id": "23ad52e",
+       "elType": "widget",
+       "settings": {},
+       "elements": [],
+       "widgetType": "baspar-pd-features"
+      }
+     ],
+     "isInner": false
+    }
+   ],
+   "isInner": false
+  },
+  {
+   "id": "3241b94",
+   "elType": "section",
+   "settings": {
+    "padding": {
+     "unit": "px",
+     "top": "24",
+     "right": "0",
+     "bottom": "48",
+     "left": "0",
+     "isLinked": false
+    },
+    "content_width": {
+     "unit": "px",
+     "size": 1320
+    },
+    "gap": "extended"
+   },
+   "elements": [
+    {
+     "id": "d32f225",
+     "elType": "column",
+     "settings": {
+      "_column_size": 67,
+      "_inline_size": null,
+      "_inline_size_tablet": 100
+     },
+     "elements": [
+      {
+       "id": "bf976f4",
+       "elType": "widget",
+       "settings": {
+        "_margin": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "24",
+         "left": "0",
+         "isLinked": false
+        }
+       },
+       "elements": [],
+       "widgetType": "baspar-pd-anchors"
+      },
+      {
+       "id": "b9d557e",
+       "elType": "widget",
+       "settings": {
+        "_margin": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "36",
+         "left": "0",
+         "isLinked": false
+        }
+       },
+       "elements": [],
+       "widgetType": "baspar-pd-specs"
+      },
+      {
+       "id": "8c62f51",
+       "elType": "widget",
+       "settings": {
+        "_margin": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "36",
+         "left": "0",
+         "isLinked": false
+        }
+       },
+       "elements": [],
+       "widgetType": "baspar-pd-description"
+      },
+      {
+       "id": "c758e01",
+       "elType": "widget",
+       "settings": {},
+       "elements": [],
+       "widgetType": "baspar-pd-reviews"
+      }
+     ],
+     "isInner": false
+    },
+    {
+     "id": "681a082",
+     "elType": "column",
+     "settings": {
+      "_column_size": 33,
+      "_inline_size": null,
+      "_inline_size_tablet": 100
+     },
+     "elements": [
+      {
+       "id": "fb78b59",
+       "elType": "widget",
+       "settings": {
+        "_margin": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "20",
+         "left": "0",
+         "isLinked": false
+        }
+       },
+       "elements": [],
+       "widgetType": "baspar-pd-contact"
+      },
+      {
+       "id": "6cabdb0",
+       "elType": "widget",
+       "settings": {
+        "_margin": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "20",
+         "left": "0",
+         "isLinked": false
+        }
+       },
+       "elements": [],
+       "widgetType": "baspar-side-cats"
+      },
+      {
+       "id": "c49c0f1",
+       "elType": "widget",
+       "settings": {},
+       "elements": [],
+       "widgetType": "baspar-side-links"
+      }
+     ],
+     "isInner": false
+    }
+   ],
+   "isInner": false
+  },
+  {
+   "id": "97c2d14",
+   "elType": "section",
+   "settings": {
+    "padding": {
+     "unit": "px",
+     "top": "48",
+     "right": "0",
+     "bottom": "48",
+     "left": "0",
+     "isLinked": false
+    },
+    "content_width": {
+     "unit": "px",
+     "size": 1320
+    },
+    "background_background": "classic",
+    "background_color": "#F7F4FB"
+   },
+   "elements": [
+    {
+     "id": "0a5ec63",
+     "elType": "column",
+     "settings": {
+      "_column_size": 100,
+      "_inline_size": null
+     },
+     "elements": [
+      {
+       "id": "1bcd537",
+       "elType": "widget",
+       "settings": {},
+       "elements": [],
+       "widgetType": "baspar-pd-related"
+      }
+     ],
+     "isInner": false
+    }
+   ],
+   "isInner": false
+  },
+  {
+   "id": "4d010c9",
+   "elType": "section",
+   "settings": {
+    "padding": {
+     "unit": "px",
+     "top": "40",
+     "right": "0",
+     "bottom": "64",
+     "left": "0",
+     "isLinked": false
+    },
+    "content_width": {
+     "unit": "px",
+     "size": 1320
+    }
+   },
+   "elements": [
+    {
+     "id": "469db4a",
+     "elType": "column",
+     "settings": {
+      "_column_size": 100,
+      "_inline_size": null
+     },
+     "elements": [
+      {
+       "id": "7e7747a",
+       "elType": "widget",
+       "settings": {},
+       "elements": [],
+       "widgetType": "baspar-pd-bottom-text"
+      }
+     ],
+     "isInner": false
+    }
+   ],
+   "isInner": false
+  }
+ ]
+}

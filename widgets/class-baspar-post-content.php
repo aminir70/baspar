@@ -13,6 +13,8 @@ use Elementor\Controls_Manager;
 use function BasparElements\current_blog_post;
 use function BasparElements\rendered_post_content;
 use function BasparElements\content_with_heading_ids;
+use function BasparElements\normalize_content_html;
+use function BasparElements\wrap_content_tables;
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
@@ -34,39 +36,6 @@ class Baspar_Post_Content extends Baspar_Widget_Base {
 		$this->end_controls_section();
 	}
 
-	/**
-	 * Drop pasted inline presentation (colour, size, background, borders) from
-	 * text-level elements and remove empty paragraphs. Images, iframes and
-	 * embeds keep their attributes.
-	 *
-	 * @param string $html Content HTML.
-	 * @return string
-	 */
-	private function normalize( $html ) {
-		$html = preg_replace_callback(
-			'#<(span|a|p|h[1-6]|strong|b|em|i|u|li|ul|ol|table|thead|tbody|tr|td|th|blockquote|div)(\s[^>]*)>#i',
-			static function ( $m ) {
-				$drop  = preg_match( '#^(table|thead|tbody|tr|td|th)$#i', $m[1] ) ? 'style|border|bgcolor|cellpadding|cellspacing|width|height' : 'style';
-				$attrs = preg_replace( '#\s(?:' . $drop . ')=(?:"[^"]*"|\'[^\']*\'|[^\s>]+)#i', '', $m[2] );
-				return '<' . $m[1] . $attrs . '>';
-			},
-			$html
-		);
-		$html = preg_replace( '#<font\b[^>]*>|</font>#i', '', $html );
-		$html = preg_replace( '#<p[^>]*>(?:\s|&nbsp;|&\#160;|\x{00A0}|<br\s*/?>)*</p>#iu', '', $html );
-		return $html;
-	}
-
-	/**
-	 * Wrap tables so wide ones scroll horizontally on phones.
-	 *
-	 * @param string $html Content HTML.
-	 * @return string
-	 */
-	private function wrap_tables( $html ) {
-		return preg_replace( '#(<table\b.*?</table>)#is', '<div class="bspr-table">$1</div>', $html );
-	}
-
 	protected function render() {
 		$s    = $this->get_settings_for_display();
 		$post = current_blog_post();
@@ -75,9 +44,9 @@ class Baspar_Post_Content extends Baspar_Widget_Base {
 		}
 		list( $html ) = content_with_heading_ids( $post->ID, rendered_post_content( $post ) );
 		if ( 'yes' === ( $s['normalize'] ?? 'yes' ) ) {
-			$html = $this->normalize( $html );
+			$html = normalize_content_html( $html );
 		}
-		$html = $this->wrap_tables( $html );
+		$html = wrap_content_tables( $html );
 		$cls = 'bspr-article' . ( 'yes' === $s['hide_plugin_toc'] ? ' hide-plugin-toc' : '' );
 		?>
 		<div class="baspar-scope">

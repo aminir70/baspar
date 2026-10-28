@@ -51,7 +51,7 @@
 		if ( initStickySidebar.done ) {
 			return;
 		}
-		var marks = document.querySelectorAll( '.scta, .sln, .sbx, .sbn, .bspr-side-col' );
+		var marks = document.querySelectorAll( '.scta, .sln, .sbx, .sbn, .pdq-side, .bspr-side-col' );
 		if ( ! marks.length ) {
 			return;
 		}
@@ -413,4 +413,52 @@
 			}
 		} );
 	}
+
+	/* ---- Product page: gallery, lightbox, copy link ----------------------
+	   Delegated on document so it works for markup rendered later (Elementor
+	   editor) and when this file is loaded late by a cache plugin. Without
+	   JS the main image is a plain link to the full-size file. */
+	document.addEventListener( 'click', function ( e ) {
+		var th = e.target.closest && e.target.closest( '[data-pdg-th]' );
+		if ( th ) {
+			var g = th.closest( '[data-pdg]' );
+			var img = g && g.querySelector( '[data-pdg-img]' );
+			var main = g && g.querySelector( '[data-pdg-main]' );
+			if ( img && main ) {
+				img.removeAttribute( 'srcset' );
+				img.removeAttribute( 'sizes' );
+				img.src = th.getAttribute( 'data-large' );
+				main.href = th.getAttribute( 'data-full' );
+				g.querySelectorAll( '[data-pdg-th]' ).forEach( function ( b ) { b.classList.toggle( 'is-on', b === th ); } );
+			}
+			return;
+		}
+		var mainLink = e.target.closest && e.target.closest( '[data-pdg-main]' );
+		if ( mainLink && ! e.ctrlKey && ! e.metaKey ) {
+			e.preventDefault();
+			var box = document.createElement( 'div' );
+			box.className = 'baspar-lightbox';
+			box.setAttribute( 'role', 'dialog' );
+			box.setAttribute( 'aria-modal', 'true' );
+			box.innerHTML = '<button type="button" aria-label="بستن">×</button><img alt="">';
+			box.querySelector( 'img' ).src = mainLink.href;
+			document.body.appendChild( box );
+			var close = function () { box.remove(); document.removeEventListener( 'keydown', esc ); };
+			var esc = function ( k ) { if ( 'Escape' === k.key ) { close(); } };
+			box.addEventListener( 'click', close );
+			document.addEventListener( 'keydown', esc );
+			box.querySelector( 'button' ).focus();
+			return;
+		}
+		var cp = e.target.closest && e.target.closest( '[data-copy]' );
+		if ( cp ) {
+			var url = cp.getAttribute( 'data-copy' );
+			var done = function () { cp.classList.add( 'is-copied' ); setTimeout( function () { cp.classList.remove( 'is-copied' ); }, 1600 ); };
+			if ( navigator.clipboard && navigator.clipboard.writeText ) {
+				navigator.clipboard.writeText( url ).then( done, function () { window.prompt( 'لینک', url ); } );
+			} else {
+				window.prompt( 'لینک', url );
+			}
+		}
+	} );
 } )();

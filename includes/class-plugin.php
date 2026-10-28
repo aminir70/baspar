@@ -117,6 +117,16 @@ final class Plugin {
 		'side-products',
 		'side-banner',
 		'side-links',
+		// Product page (1.6.0).
+		'pd-hero',
+		'pd-anchors',
+		'pd-features',
+		'pd-specs',
+		'pd-description',
+		'pd-reviews',
+		'pd-related',
+		'pd-contact',
+		'pd-bottom-text',
 		// City landing pages (buy-chemical-raw-materials-{city}).
 		'city-facts',
 		'prose',
@@ -163,6 +173,7 @@ final class Plugin {
 		// Helpers shared by widgets.
 		require_once BASPAR_ELEMENTS_PATH . 'includes/helpers.php';
 		require_once BASPAR_ELEMENTS_PATH . 'includes/blog.php';
+		require_once BASPAR_ELEMENTS_PATH . 'includes/product.php';
 	}
 
 	/**

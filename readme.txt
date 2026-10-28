@@ -4,7 +4,7 @@ Tags: elementor, woocommerce, widgets, rtl, persian
 Requires at least: 5.8
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.5.5
+Stable tag: 1.6.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,7 +18,7 @@ fully customizable from Elementor (typography, colors, logo, images, spacing), a
 dynamic data (menu, posts, WooCommerce products & categories) is read live from
 WordPress.
 
-Includes 81 widgets (header/menu, footer, hero, categories, trust, products,
+Includes 90 widgets (header/menu, footer, hero, categories, trust, products,
 product tabs, promo, brands, about, blog, breadcrumb, stats, mission/vision/values,
 timeline, team, process, industries, FAQ, cities, mid/final CTA, compare table,
 contact methods, social showcase, contact map, city quick-facts, shipment route,
@@ -37,6 +37,29 @@ Requires Elementor. WooCommerce is required only for the product/category widget
    Templates → Saved Templates → Import Templates.
 
 == Changelog ==
+
+= 1.6.0 =
+* New product page (no online purchase — price on request), 9 widgets:
+  - Product Hero: gallery with thumbnails + lightbox, category and brand
+    chips (with brand logo), H1, SKU, short description, key specs from the
+    product attributes, highlights, share buttons, stock status, "price on
+    request" box and the category's sales experts (WhatsApp / Bale / call),
+    plus a fixed contact bar on mobile.
+  - Section nav (sticky), trust strip, full specifications table (product
+    attributes + category, brand, SKU, weight/dimensions), full description
+    with table of contents and cleaned-up pasted styling, reviews with rating
+    summary/distribution and a no-JS star rating form, related products,
+    sidebar contact card, and a per-product bottom text.
+* Sales experts: wp-admin › بسپار › کارشناسان فروش. Each expert has name,
+  role, photo, WhatsApp, Bale and phone and a list of product categories
+  (many-to-many; sub-categories inherit from their parents; "default" experts
+  for categories without anyone). Editable prefilled WhatsApp message and
+  working hours. A summary table shows who answers each category.
+* Per-product bottom text: meta box "بسپار — متن پایین صفحه محصول" on the
+  product edit screen.
+* Templates: templates/baspar-single-product.json (Theme Builder, Single
+  Product) and templates/baspar-single-product-section.json (page type, for
+  a Woodmart single-product layout).
 
 = 1.5.5 =
 * Author Box: the "ادامه معرفی" button did not react (it depended on the

@@ -20,11 +20,11 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @return \WP_Post|null
  */
 function current_blog_post() {
-	if ( is_singular( 'post' ) ) {
+	if ( is_singular( array( 'post', 'product' ) ) ) {
 		return get_post();
 	}
 	$post = get_post();
-	if ( $post instanceof \WP_Post && 'post' === $post->post_type ) {
+	if ( $post instanceof \WP_Post && in_array( $post->post_type, array( 'post', 'product' ), true ) ) {
 		return $post;
 	}
 	$latest = get_posts( array( 'numberposts' => 1, 'post_status' => 'publish' ) );
@@ -343,4 +343,37 @@ function render_side_head( $icon, $title, $more_url = '', $more_text = '' ) {
 		echo '<a class="sbx-more" href="' . esc_url( slash_url( $more_url ) ) . '">' . esc_html( $more_text ) . '</a>';
 	}
 	echo '</div>';
+}
+
+/**
+ * Drop pasted inline presentation (colour, size, background, borders) from
+ * text-level elements and remove empty paragraphs. Images, iframes and
+ * embeds keep their attributes.
+ *
+ * @param string $html Content HTML.
+ * @return string
+ */
+function normalize_content_html( $html ) {
+	$html = preg_replace_callback(
+		'#<(span|a|p|h[1-6]|strong|b|em|i|u|li|ul|ol|table|thead|tbody|tr|td|th|blockquote|div)(\s[^>]*)>#i',
+		static function ( $m ) {
+			$drop  = preg_match( '#^(table|thead|tbody|tr|td|th)$#i', $m[1] ) ? 'style|border|bgcolor|cellpadding|cellspacing|width|height' : 'style';
+			$attrs = preg_replace( '#\s(?:' . $drop . ')=(?:"[^"]*"|\'[^\']*\'|[^\s>]+)#i', '', $m[2] );
+			return '<' . $m[1] . $attrs . '>';
+		},
+		(string) $html
+	);
+	$html = preg_replace( '#<font\b[^>]*>|</font>#i', '', $html );
+	$html = preg_replace( '#<p[^>]*>(?:\s|&nbsp;|&\#160;|\x{00A0}|<br\s*/?>)*</p>#iu', '', $html );
+	return $html;
+}
+
+/**
+ * Wrap tables so wide ones scroll horizontally on phones.
+ *
+ * @param string $html Content HTML.
+ * @return string
+ */
+function wrap_content_tables( $html ) {
+	return preg_replace( '#(<table\b.*?</table>)#is', '<div class="bspr-table">$1</div>', (string) $html );
 }
