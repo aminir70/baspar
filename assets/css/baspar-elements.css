@@ -3697,3 +3697,13 @@ a.sbn:hover{transform:translateY(-3px)}
 .baspar-scope .au-more[aria-expanded="true"] [data-more]{display:none}
 .baspar-scope .au-more:not([aria-expanded="true"]) [data-less]{display:none}
 .baspar-scope .au-bio .au-tick{margin-left:8px}
+
+/* Author bio expand/collapse without JavaScript (checkbox + label), so it
+   also works inside the Elementor editor and with delayed/cached scripts. */
+.baspar-scope .au-toggle{position:absolute;opacity:0;pointer-events:none;width:1px;height:1px}
+.baspar-scope .au-toggle:checked ~ .au-bio.is-clamped{max-height:none;-webkit-mask-image:none;mask-image:none}
+.baspar-scope .au-toggle:checked ~ .au-more [data-more]{display:none}
+.baspar-scope .au-toggle:checked ~ .au-more [data-less]{display:inline}
+.baspar-scope .au-toggle:focus-visible ~ .au-more{outline:2px solid var(--brand);outline-offset:2px}
+.baspar-scope label.au-more{user-select:none}
+.baspar-scope .post-author .info{position:relative}

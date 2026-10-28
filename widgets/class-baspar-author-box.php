@@ -63,9 +63,12 @@ class Baspar_Author_Box extends Baspar_Widget_Base {
 				<div class="info">
 					<strong><?php echo esc_html( $name ); ?></strong>
 					<?php if ( $role ) : ?><span class="au-role"><?php echo esc_html( $role ); ?></span><?php endif; ?>
-					<?php if ( $bio_html ) : ?>
-						<div class="au-bio<?php echo $long ? ' is-clamped' : ''; ?>" data-au-bio><?php echo $bio_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- sanitized in clean_bio(). ?></div>
-						<?php if ( $long ) : ?><button type="button" class="au-more" data-au-more aria-expanded="false"><span data-more><?php esc_html_e( 'ادامه معرفی', 'baspar-elements' ); ?></span><span data-less><?php esc_html_e( 'کمتر', 'baspar-elements' ); ?></span></button><?php endif; ?>
+					<?php if ( $bio_html ) :
+						$tid = 'au-' . $this->get_id();
+						?>
+						<?php if ( $long ) : ?><input type="checkbox" class="au-toggle" id="<?php echo esc_attr( $tid ); ?>"><?php endif; ?>
+						<div class="au-bio<?php echo $long ? ' is-clamped' : ''; ?>"><?php echo $bio_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- sanitized in clean_bio(). ?></div>
+						<?php if ( $long ) : ?><label class="au-more" for="<?php echo esc_attr( $tid ); ?>" role="button"><span data-more><?php esc_html_e( 'ادامه معرفی', 'baspar-elements' ); ?></span><span data-less><?php esc_html_e( 'کمتر', 'baspar-elements' ); ?></span></label><?php endif; ?>
 					<?php endif; ?>
 					<?php if ( $archive ) : ?><a class="au-posts" href="<?php echo esc_url( $archive ); ?>"><?php esc_html_e( 'مقالات این نویسنده', 'baspar-elements' ); ?></a><?php endif; ?>
 				</div>

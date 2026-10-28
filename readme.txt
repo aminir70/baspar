@@ -4,7 +4,7 @@ Tags: elementor, woocommerce, widgets, rtl, persian
 Requires at least: 5.8
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.5.4
+Stable tag: 1.5.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,6 +37,12 @@ Requires Elementor. WooCommerce is required only for the product/category widget
    Templates → Saved Templates → Import Templates.
 
 == Changelog ==
+
+= 1.5.5 =
+* Author Box: the "ادامه معرفی" button did not react (it depended on the
+  plugin script binding at the right moment, which fails inside the Elementor
+  editor and with delayed/cached scripts). It is now a pure-CSS toggle
+  (checkbox + label), so it works everywhere without JavaScript.
 
 = 1.5.4 =
 * Author Box redesigned and fixed: a biography containing HTML (<strong>) and
