@@ -4,7 +4,7 @@ Tags: elementor, woocommerce, widgets, rtl, persian
 Requires at least: 5.8
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.6.0
+Stable tag: 1.6.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,6 +37,13 @@ Requires Elementor. WooCommerce is required only for the product/category widget
    Templates → Saved Templates → Import Templates.
 
 == Changelog ==
+
+= 1.6.1 =
+* Bale messenger: new "بله شرکت" field on the experts page; experts without
+  their own Bale ID use the company account, so the Bale button shows for
+  everyone once it is set. Bale button added to the mobile contact bar.
+  Bale links are built only from a username or a ble.ir link (phone-number
+  links are not supported by Bale).
 
 = 1.6.0 =
 * New product page (no online purchase — price on request), 9 widgets:

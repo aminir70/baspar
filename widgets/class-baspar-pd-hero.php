@@ -20,6 +20,7 @@ use function BasparElements\experts_for_product;
 use function BasparElements\whatsapp_link;
 use function BasparElements\expert_message;
 use function BasparElements\tel_link;
+use function BasparElements\expert_bale_link;
 use function BasparElements\fa_num;
 use function BasparElements\fa_num_smart;
 use function BasparElements\icon_svg;
@@ -197,10 +198,12 @@ class Baspar_Pd_Hero extends Baspar_Widget_Base {
 				<?php if ( 'yes' === $s['mobile_bar'] && $first ) :
 					$wa  = ! empty( $first['whatsapp'] ) ? whatsapp_link( $first['whatsapp'], expert_message( $product, $first ) ) : '';
 					$tel = ! empty( $first['phone'] ) ? tel_link( $first['phone'] ) : '';
+					$ble = 'yes' === $s['show_bale'] ? expert_bale_link( $first ) : '';
 					?>
 					<div class="pd-mbar" role="region" aria-label="<?php esc_attr_e( 'استعلام قیمت', 'baspar-elements' ); ?>">
 						<a class="pd-mbar-main" href="#pd-contact"><?php echo icon_svg( 'tag', 18 ); // phpcs:ignore ?><span><?php esc_html_e( 'دریافت قیمت', 'baspar-elements' ); ?></span></a>
 						<?php if ( $wa ) : ?><a class="pd-mbar-wa" href="<?php echo esc_url( $wa ); ?>" target="_blank" rel="noopener nofollow" aria-label="<?php esc_attr_e( 'واتس‌اپ', 'baspar-elements' ); ?>"><?php echo icon_svg( 'whatsapp', 22 ); // phpcs:ignore ?></a><?php endif; ?>
+						<?php if ( $ble ) : ?><a class="pd-mbar-bale" href="<?php echo esc_url( $ble ); ?>" target="_blank" rel="noopener nofollow" aria-label="<?php esc_attr_e( 'بله', 'baspar-elements' ); ?>"><?php echo icon_svg( 'bale', 22 ); // phpcs:ignore ?></a><?php endif; ?>
 						<?php if ( $tel ) : ?><a class="pd-mbar-tel" href="<?php echo esc_url( $tel ); ?>" aria-label="<?php esc_attr_e( 'تماس', 'baspar-elements' ); ?>"><?php echo icon_svg( 'phone', 20 ); // phpcs:ignore ?></a><?php endif; ?>
 					</div>
 				<?php endif; ?>

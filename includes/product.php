@@ -43,6 +43,7 @@ function experts_settings() {
 			'experts' => array(),
 			'message' => "سلام، وقت بخیر.\nبرای استعلام قیمت «{product}» پیام می‌دهم.\n{url}",
 			'hours'   => 'شنبه تا چهارشنبه ۹ تا ۱۸ · پنجشنبه ۹ تا ۱۳',
+			'bale'    => '',
 		)
 	);
 }
@@ -108,10 +109,22 @@ function bale_link( $v ) {
 		return $v;
 	}
 	$v = ltrim( $v, '@' );
-	if ( preg_match( '/^[0-9۰-۹+\s-]{10,}$/u', $v ) ) {
-		return 'https://ble.ir/' . intl_number( $v );
-	}
 	return 'https://ble.ir/' . rawurlencode( $v );
+}
+
+/**
+ * Bale link for an expert: the expert's own Bale, else the company Bale set
+ * on the experts page ('' when neither is set).
+ *
+ * @param array $e Expert.
+ * @return string
+ */
+function expert_bale_link( $e ) {
+	$v = trim( (string) ( $e['bale'] ?? '' ) );
+	if ( '' === $v ) {
+		$v = trim( (string) experts_settings()['bale'] );
+	}
+	return bale_link( $v );
 }
 
 /**
@@ -135,7 +148,7 @@ function tel_link( $num ) {
  */
 function experts_for_product( $product_id ) {
 	$all = array_values( array_filter( (array) experts_settings()['experts'], static function ( $e ) {
-		return ! empty( $e['active'] ) && ( ! empty( $e['whatsapp'] ) || ! empty( $e['bale'] ) || ! empty( $e['phone'] ) );
+		return ! empty( $e['active'] ) && ( ! empty( $e['whatsapp'] ) || ! empty( $e['bale'] ) || ! empty( $e['phone'] ) || '' !== trim( (string) experts_settings()['bale'] ) );
 	} ) );
 	if ( ! $all ) {
 		return array();
@@ -288,7 +301,7 @@ function render_expert_list( $product, $o = array() ) {
 	foreach ( $experts as $e ) {
 		$photo = expert_photo( $e );
 		$wa    = ! empty( $e['whatsapp'] ) ? whatsapp_link( $e['whatsapp'], expert_message( $product, $e ) ) : '';
-		$bale  = ( $o['show_bale'] && ! empty( $e['bale'] ) ) ? bale_link( $e['bale'] ) : '';
+		$bale  = $o['show_bale'] ? expert_bale_link( $e ) : '';
 		$tel   = ( $o['show_phone'] && ! empty( $e['phone'] ) ) ? tel_link( $e['phone'] ) : '';
 		echo '<li class="pdx">';
 		echo '<span class="pdx-av">' . ( $photo ? '<img src="' . esc_url( $photo ) . '" alt="" loading="lazy">' : esc_html( mb_substr( preg_replace( '/^(خانم|آقای|آقا)\s+/u', '', (string) $e['name'] ), 0, 1, 'UTF-8' ) ) ) . '<i class="pdx-dot" aria-hidden="true"></i></span>';
@@ -330,6 +343,7 @@ function sanitize_experts( $in ) {
 		'experts' => array(),
 		'message' => isset( $in['message'] ) ? sanitize_textarea_field( wp_unslash( $in['message'] ) ) : '',
 		'hours'   => isset( $in['hours'] ) ? sanitize_text_field( wp_unslash( $in['hours'] ) ) : '',
+		'bale'    => isset( $in['bale'] ) ? sanitize_text_field( wp_unslash( $in['bale'] ) ) : '',
 	);
 	foreach ( (array) ( $in['experts'] ?? array() ) as $e ) {
 		if ( ! is_array( $e ) ) {
@@ -430,7 +444,7 @@ function render_expert_admin_card( $i, $e, $tree ) {
 				<label><?php esc_html_e( 'نام', 'baspar-elements' ); ?><input type="text" name="<?php echo esc_attr( $n ); ?>[name]" value="<?php echo esc_attr( $e['name'] ?? '' ); ?>" placeholder="خانم عزیزی"></label>
 				<label><?php esc_html_e( 'سمت', 'baspar-elements' ); ?><input type="text" name="<?php echo esc_attr( $n ); ?>[role]" value="<?php echo esc_attr( $e['role'] ?? '' ); ?>" placeholder="کارشناس فروش پلیمر"></label>
 				<label><?php esc_html_e( 'شماره واتس‌اپ', 'baspar-elements' ); ?><input type="text" dir="ltr" name="<?php echo esc_attr( $n ); ?>[whatsapp]" value="<?php echo esc_attr( $e['whatsapp'] ?? '' ); ?>" placeholder="09120000000"></label>
-				<label><?php esc_html_e( 'بله (نام کاربری، لینک یا شماره)', 'baspar-elements' ); ?><input type="text" dir="ltr" name="<?php echo esc_attr( $n ); ?>[bale]" value="<?php echo esc_attr( $e['bale'] ?? '' ); ?>" placeholder="username یا https://ble.ir/..."></label>
+				<label><?php esc_html_e( 'بله (نام کاربری یا لینک ble.ir)', 'baspar-elements' ); ?><input type="text" dir="ltr" name="<?php echo esc_attr( $n ); ?>[bale]" value="<?php echo esc_attr( $e['bale'] ?? '' ); ?>" placeholder="username یا https://ble.ir/..."></label>
 				<label><?php esc_html_e( 'شماره تماس', 'baspar-elements' ); ?><input type="text" dir="ltr" name="<?php echo esc_attr( $n ); ?>[phone]" value="<?php echo esc_attr( $e['phone'] ?? '' ); ?>" placeholder="09120000000"></label>
 				<div class="bx-flags">
 					<label class="bx-check"><input type="checkbox" name="<?php echo esc_attr( $n ); ?>[active]" value="1" <?php checked( ! empty( $e['active'] ) || ! isset( $e['active'] ) ); ?>> <?php esc_html_e( 'فعال', 'baspar-elements' ); ?></label>
@@ -481,6 +495,10 @@ function render_experts_page() {
 			<h2><?php esc_html_e( 'پیام آماده واتس‌اپ', 'baspar-elements' ); ?></h2>
 			<p class="description"><?php esc_html_e( 'وقتی مشتری روی دکمه واتس‌اپ می‌زند، این متن در پیام آماده می‌شود. {product} = نام محصول، {sku} = کد محصول، {url} = لینک صفحه، {expert} = نام کارشناس.', 'baspar-elements' ); ?></p>
 			<textarea name="<?php echo esc_attr( EXPERTS_OPTION ); ?>[message]" rows="4" class="large-text"><?php echo esc_textarea( $set['message'] ); ?></textarea>
+
+			<h2><?php esc_html_e( 'بله شرکت', 'baspar-elements' ); ?></h2>
+			<p class="description"><?php esc_html_e( 'نام کاربری یا لینک بله شرکت (مثلاً basparmarket یا https://ble.ir/basparmarket). برای کارشناسانی که بله شخصی وارد نکرده‌اند، دکمه بله به این حساب می‌رود.', 'baspar-elements' ); ?></p>
+			<input type="text" dir="ltr" class="regular-text" name="<?php echo esc_attr( EXPERTS_OPTION ); ?>[bale]" value="<?php echo esc_attr( $set['bale'] ); ?>" placeholder="basparmarket">
 
 			<h2><?php esc_html_e( 'ساعات پاسخگویی', 'baspar-elements' ); ?></h2>
 			<input type="text" class="regular-text" name="<?php echo esc_attr( EXPERTS_OPTION ); ?>[hours]" value="<?php echo esc_attr( $set['hours'] ); ?>">

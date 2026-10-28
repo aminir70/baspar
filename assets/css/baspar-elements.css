@@ -3820,6 +3820,7 @@ a.sbn:hover{transform:translateY(-3px)}
   .baspar-scope .pd-mbar-main{flex:1;gap:8px;background:linear-gradient(135deg,var(--brand-2),var(--brand));color:#fff;font-size:15px}
   .baspar-scope .pd-mbar-wa{flex:0 0 48px;background:#25D366;color:#fff}
   .baspar-scope .pd-mbar-tel{flex:0 0 48px;background:var(--brand-50);color:var(--brand)}
+  .baspar-scope .pd-mbar-bale{flex:0 0 48px;background:linear-gradient(135deg,#2FC5B3,#0E9F8F);color:#fff}
   body:has(.pd-mbar){padding-bottom:76px}
   body:has(.pd-mbar) .bspr-fwa{display:none}
 }
