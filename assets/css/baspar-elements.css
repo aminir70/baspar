@@ -2539,9 +2539,9 @@ body.baspar-nav-lock{overflow:hidden}
   color:#fff;font-size:24px;font-weight:800;
   display:flex;align-items:center;justify-content:center;flex-shrink:0;
 }
-.baspar-scope .post-author .info strong{display:block;font-size:16px;color:var(--brand-deep);margin-bottom:4px}
-.baspar-scope .post-author .info span{display:block;font-size:12px;color:var(--ink-3);font-family:var(--mono);letter-spacing:.04em;margin-bottom:6px}
-.baspar-scope .post-author .info p{font-size:13.5px;color:var(--ink-2);line-height:1.7;margin:0}
+.baspar-scope .post-author .info > strong{display:block;font-size:16px;color:var(--brand-deep);margin-bottom:4px}
+.baspar-scope .post-author .info > span.mono{display:block;font-size:12px;color:var(--ink-3);font-family:var(--mono);letter-spacing:.04em;margin-bottom:6px}
+.baspar-scope .post-author .info > p{font-size:13.5px;color:var(--ink-2);line-height:1.7;margin:0}
 
 /* Hero override for chemical-importer page (kill the old RFQ panel) */
 .baspar-scope .hero-b2b-visual{position:relative;min-height:520px}
@@ -3670,3 +3670,30 @@ a.sbn:hover{transform:translateY(-3px)}
 .elementor-column.bspr-sticky-col,.e-con.bspr-sticky-col{position:sticky;top:var(--bspr-sticky-top,100px);align-self:flex-start;z-index:2}
 .elementor-column.bspr-sticky-col > .elementor-widget-wrap{height:auto}
 .baspar-scope .spr-list li.spr-extra{display:none}
+
+/* author box (1.5.4) */
+.baspar-scope .post-author{display:flex;align-items:flex-start;gap:20px;padding:24px;background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:0 18px 40px -32px rgba(27,5,55,.35)}
+.baspar-scope .post-author .av{flex:0 0 84px;width:84px;height:84px;min-width:84px;border-radius:50%;object-fit:cover;object-position:center top;border:3px solid var(--brand-50);box-shadow:0 8px 20px -8px rgba(109,40,217,.45);display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--brand),var(--brand-dk));color:#fff;font-size:30px;font-weight:800}
+.baspar-scope .post-author .info{flex:1;min-width:0}
+.baspar-scope .post-author .info > strong{display:block;font-size:18px;font-weight:900;color:var(--brand-deep);margin:0 0 2px}
+.baspar-scope .post-author .au-role{display:block;font-family:var(--font);font-size:13px;letter-spacing:0;color:var(--brand);font-weight:600;margin-bottom:10px}
+.baspar-scope .au-bio{font-size:14px;line-height:2;color:var(--ink-2);overflow-wrap:anywhere}
+.baspar-scope .au-bio strong,.baspar-scope .au-bio b{color:var(--brand-deep);font-weight:800}
+.baspar-scope .au-bio a{color:var(--brand);text-decoration:underline;text-underline-offset:4px}
+.baspar-scope .au-tick{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;margin-left:6px;border-radius:50%;background:var(--brand-50);color:var(--brand);font-size:11px;font-weight:800;vertical-align:middle}
+.baspar-scope .au-bio.is-clamped{max-height:6em;overflow:hidden;position:relative;-webkit-mask-image:linear-gradient(180deg,#000 55%,transparent);mask-image:linear-gradient(180deg,#000 55%,transparent)}
+.baspar-scope .au-bio.is-clamped.is-open{max-height:none;-webkit-mask-image:none;mask-image:none}
+.baspar-scope .au-more{margin:6px 0 0;padding:6px 14px;min-height:0;border:1px solid var(--brand-100);border-radius:999px;background:var(--brand-50);color:var(--brand);font-family:var(--font);font-size:12.5px;font-weight:700;text-transform:none;cursor:pointer;transition:background .15s,color .15s}
+.baspar-scope .au-more:hover{background:var(--brand);color:#fff}
+.baspar-scope .au-more [data-less],.baspar-scope .au-more[aria-expanded="true"] [data-more]{display:none}
+.baspar-scope .au-more[aria-expanded="true"] [data-less]{display:inline}
+.baspar-scope .au-posts{display:inline-block;margin:10px 0 0 12px;font-size:13px;font-weight:700;color:var(--brand);text-decoration:none}
+.baspar-scope .au-posts:hover{text-decoration:underline}
+@media(max-width:560px){.baspar-scope .post-author{flex-direction:column;align-items:center;text-align:center;padding:20px}.baspar-scope .au-bio{text-align:right}}
+.baspar-scope .au-bio strong,.baspar-scope .au-bio b{display:inline;font-size:inherit}
+.baspar-scope .au-bio .au-tick{display:inline-flex}
+.baspar-scope .au-more{display:inline-flex;align-items:center;line-height:1.6}
+.baspar-scope .au-more span{display:inline;font-size:inherit;color:inherit;font-family:inherit;letter-spacing:0;margin:0}
+.baspar-scope .au-more[aria-expanded="true"] [data-more]{display:none}
+.baspar-scope .au-more:not([aria-expanded="true"]) [data-less]{display:none}
+.baspar-scope .au-bio .au-tick{margin-left:8px}

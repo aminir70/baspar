@@ -4,7 +4,7 @@ Tags: elementor, woocommerce, widgets, rtl, persian
 Requires at least: 5.8
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.5.3
+Stable tag: 1.5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,6 +37,14 @@ Requires Elementor. WooCommerce is required only for the product/category widget
    Templates → Saved Templates → Import Templates.
 
 == Changelog ==
+
+= 1.5.4 =
+* Author Box redesigned and fixed: a biography containing HTML (<strong>) and
+  ✓ marks was printed as raw tags; it is now decoded and sanitized (bold, line
+  breaks, links; every ✓ becomes its own checklist line, bold labels like
+  "سابقه کار:" start a new line). The avatar no longer collapses to a sliver
+  (fixed 84px circle), long biographies are collapsed behind an
+  "ادامه معرفی" button, and there is a link to the author's articles.
 
 = 1.5.3 =
 * Sidebar "latest products": default is now 10 products in random order

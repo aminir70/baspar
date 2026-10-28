@@ -118,6 +118,21 @@
 		} );
 	}
 
+	/* ---- Author box: expand / collapse the biography --------------------- */
+	function initAuthorBio( root ) {
+		( root || document ).querySelectorAll( '[data-au-more]' ).forEach( function ( btn ) {
+			if ( btn.getAttribute( 'data-bound' ) ) {
+				return;
+			}
+			btn.setAttribute( 'data-bound', '1' );
+			btn.addEventListener( 'click', function () {
+				var bio = btn.parentNode.querySelector( '[data-au-bio]' );
+				var open = bio.classList.toggle( 'is-open' );
+				btn.setAttribute( 'aria-expanded', open ? 'true' : 'false' );
+			} );
+		} );
+	}
+
 	/* ---- Article: reading progress + table-of-contents highlight -------- */
 	function initArticle( root ) {
 		var scope = root || document;
@@ -376,6 +391,7 @@
 		initFaq( root );
 		initNav( root );
 		initArticle( root );
+		initAuthorBio( root );
 		initRandomLists( root );
 		initStickySidebar();
 		initFloatWa();
