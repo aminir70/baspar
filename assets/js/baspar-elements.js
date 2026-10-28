@@ -42,6 +42,60 @@
 		els.forEach( function ( el ) { io.observe( el ); } );
 	}
 
+	/* ---- Sticky sidebar (single post) ------------------------------------
+	   The column that holds the sidebar widgets sticks while the article is
+	   read. When the sidebar is taller than the screen, `top` becomes
+	   negative so it scrolls until its bottom edge is visible and then stays
+	   there until the end of the article (no scroll listeners: CSS sticky). */
+	function initStickySidebar() {
+		if ( initStickySidebar.done ) {
+			return;
+		}
+		var marks = document.querySelectorAll( '.scta, .sln, .sbx, .sbn, .bspr-side-col' );
+		if ( ! marks.length ) {
+			return;
+		}
+		var cols = [];
+		marks.forEach( function ( m ) {
+			var col = m.closest( '.elementor-column, .e-con' );
+			if ( ! col || cols.indexOf( col ) > -1 || col.classList.contains( 'bspr-no-sticky' ) ) {
+				return;
+			}
+			// Only a side column: the row must also hold the article.
+			var row = col.parentElement;
+			if ( ! row || ! row.querySelector( '.bspr-article, .ph-title' ) || col.querySelector( '.bspr-article' ) ) {
+				return;
+			}
+			cols.push( col );
+		} );
+		if ( ! cols.length ) {
+			return;
+		}
+		initStickySidebar.done = true;
+		var offset = 100;
+		function fit() {
+			var vh = window.innerHeight || document.documentElement.clientHeight;
+			cols.forEach( function ( col ) {
+				var on = window.innerWidth > 1024;
+				col.classList.toggle( 'bspr-sticky-col', on );
+				if ( ! on ) {
+					col.style.removeProperty( '--bspr-sticky-top' );
+					return;
+				}
+				var h = col.offsetHeight;
+				var top = h + offset + 24 > vh ? vh - h - 24 : offset;
+				col.style.setProperty( '--bspr-sticky-top', Math.round( top ) + 'px' );
+			} );
+		}
+		fit();
+		window.addEventListener( 'resize', fit );
+		if ( 'ResizeObserver' in window ) {
+			var ro = new ResizeObserver( fit );
+			cols.forEach( function ( c ) { ro.observe( c ); } );
+		}
+		window.addEventListener( 'load', fit );
+	}
+
 	/* ---- Article: reading progress + table-of-contents highlight -------- */
 	function initArticle( root ) {
 		var scope = root || document;
@@ -300,6 +354,7 @@
 		initFaq( root );
 		initNav( root );
 		initArticle( root );
+		initStickySidebar();
 		initFloatWa();
 	}
 

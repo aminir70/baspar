@@ -3665,3 +3665,7 @@ a.sbn:hover{transform:translateY(-3px)}
 .baspar-scope .sln-body span{font-size:12.5px;color:var(--ink-3);line-height:1.7}
 .baspar-scope .sln-go{display:flex;color:var(--ink-3);transition:transform .2s,color .2s}
 .baspar-scope .sln-item:hover .sln-go{color:var(--brand);transform:translateX(-4px)}
+
+/* Sticky sidebar column (class added by baspar-elements.js on > 1024px) */
+.elementor-column.bspr-sticky-col,.e-con.bspr-sticky-col{position:sticky;top:var(--bspr-sticky-top,100px);align-self:flex-start;z-index:2}
+.elementor-column.bspr-sticky-col > .elementor-widget-wrap{height:auto}

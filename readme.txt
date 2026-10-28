@@ -4,7 +4,7 @@ Tags: elementor, woocommerce, widgets, rtl, persian
 Requires at least: 5.8
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.5.1
+Stable tag: 1.5.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,6 +37,14 @@ Requires Elementor. WooCommerce is required only for the product/category widget
    Templates → Saved Templates → Import Templates.
 
 == Changelog ==
+
+= 1.5.2 =
+* Single post: the sidebar column is now sticky for the whole article. When
+  the sidebar is taller than the screen it scrolls until its bottom edge is
+  visible and then stays pinned until the article ends (pure CSS sticky with a
+  computed negative `top`; desktop > 1024px only). Applied automatically to the
+  column that holds the sidebar widgets next to the article; add the CSS class
+  `bspr-no-sticky` to the column to turn it off.
 
 = 1.5.1 =
 * Single-post sidebar: five new widgets — Latest Posts, Main Product
