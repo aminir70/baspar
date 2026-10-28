@@ -325,3 +325,22 @@ function blog_shown_ids( $add = array() ) {
 	}
 	return $ids;
 }
+
+/**
+ * Header row of a sidebar box (icon chip, title, optional "all" link).
+ *
+ * @param string $icon      Icon key (icon_svg).
+ * @param string $title     Box title.
+ * @param string $more_url  Optional "view all" URL.
+ * @param string $more_text Optional "view all" label.
+ */
+function render_side_head( $icon, $title, $more_url = '', $more_text = '' ) {
+	if ( '' === (string) $title ) {
+		return;
+	}
+	echo '<div class="sbx-h"><span class="sbx-ic" aria-hidden="true">' . icon_svg( $icon ? $icon : 'layers', 18 ) . '</span><h3 class="sbx-t">' . esc_html( $title ) . '</h3>'; // phpcs:ignore
+	if ( $more_url && $more_text ) {
+		echo '<a class="sbx-more" href="' . esc_url( slash_url( $more_url ) ) . '">' . esc_html( $more_text ) . '</a>';
+	}
+	echo '</div>';
+}

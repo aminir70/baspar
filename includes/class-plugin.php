@@ -112,6 +112,11 @@ final class Plugin {
 		'related-posts',
 		'post-comments',
 		'side-cta',
+		'side-posts',
+		'side-cats',
+		'side-products',
+		'side-banner',
+		'side-links',
 		// City landing pages (buy-chemical-raw-materials-{city}).
 		'city-facts',
 		'prose',

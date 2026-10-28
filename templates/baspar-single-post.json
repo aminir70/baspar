@@ -77,14 +77,12 @@
      },
      "elements": [
       {
-       "id": "bcf99e0",
+       "id": "660366c",
        "elType": "widget",
        "settings": {
         "title": "فهرست مطالب",
         "collapsed": "yes",
         "sticky": "",
-        "hide_desktop": "hidden-desktop",
-        "hide_tablet": "hidden-tablet",
         "_margin": {
          "unit": "px",
          "top": "0",
@@ -149,7 +147,7 @@
      },
      "elements": [
       {
-       "id": "138a125",
+       "id": "78884bb",
        "elType": "widget",
        "settings": {
         "_margin": {
@@ -165,16 +163,107 @@
        "widgetType": "baspar-side-cta"
       },
       {
-       "id": "3cbd2e7",
+       "id": "6325aba",
        "elType": "widget",
        "settings": {
-        "title": "فهرست مطالب",
-        "sticky": "yes",
-        "offset": 100,
-        "hide_mobile": "hidden-mobile"
+        "_margin": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "20",
+         "left": "0",
+         "isLinked": false
+        }
        },
        "elements": [],
-       "widgetType": "baspar-post-toc"
+       "widgetType": "baspar-side-links"
+      },
+      {
+       "id": "94fc12e",
+       "elType": "widget",
+       "settings": {
+        "link": {
+         "url": "/shop/"
+        },
+        "eyebrow": "SHOP",
+        "title": "فروشگاه مواد اولیه شیمیایی",
+        "text": "بیش از ۱۰۰ گرید موجود در انبار تهران؛ قیمت روز با استعلام.",
+        "btn": "مشاهده محصولات",
+        "tone": "purple",
+        "_margin": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "20",
+         "left": "0",
+         "isLinked": false
+        }
+       },
+       "elements": [],
+       "widgetType": "baspar-side-banner"
+      },
+      {
+       "id": "af40e4c",
+       "elType": "widget",
+       "settings": {
+        "_margin": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "20",
+         "left": "0",
+         "isLinked": false
+        }
+       },
+       "elements": [],
+       "widgetType": "baspar-side-posts"
+      },
+      {
+       "id": "4d55fbb",
+       "elType": "widget",
+       "settings": {
+        "_margin": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "20",
+         "left": "0",
+         "isLinked": false
+        }
+       },
+       "elements": [],
+       "widgetType": "baspar-side-cats"
+      },
+      {
+       "id": "2251aba",
+       "elType": "widget",
+       "settings": {
+        "link": {
+         "url": "/chemical-importer/"
+        },
+        "eyebrow": "DIRECT IMPORT",
+        "title": "واردات اختصاصی و سفارشی",
+        "text": "گرید خاص دارید؟ از کارخانه سازنده برایتان وارد می‌کنیم.",
+        "btn": "اطلاعات بیشتر",
+        "tone": "dark",
+        "_margin": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "20",
+         "left": "0",
+         "isLinked": false
+        }
+       },
+       "elements": [],
+       "widgetType": "baspar-side-banner"
+      },
+      {
+       "id": "db5c641",
+       "elType": "widget",
+       "settings": {},
+       "elements": [],
+       "widgetType": "baspar-side-products"
       }
      ],
      "isInner": false

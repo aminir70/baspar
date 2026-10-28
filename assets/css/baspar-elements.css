@@ -3590,3 +3590,78 @@ body.admin-bar .baspar-scope .bspr-progress{top:32px}
 }
 .baspar-scope .post-author img.av{object-fit:cover}
 .baspar-scope .bspr-article [id]{scroll-margin-top:110px}
+
+/* ============================================================
+   Sidebar boxes (1.5.1): latest posts, product categories,
+   latest products, banners, link cards
+   ============================================================ */
+.baspar-scope .sbx{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 1px 2px rgba(27,5,55,.04)}
+.baspar-scope .sbx-h{display:flex;align-items:center;gap:10px;margin-bottom:12px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+.baspar-scope .sbx-ic{flex:0 0 34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:var(--brand-50);color:var(--brand)}
+.baspar-scope .sbx-t{flex:1;margin:0;font-size:15px;font-weight:800;color:var(--brand-deep);line-height:1.5}
+.baspar-scope .sbx-more{font-size:12px;font-weight:700;color:var(--brand);text-decoration:none;padding:5px 11px;border-radius:999px;background:var(--brand-50);white-space:nowrap;transition:background .15s,color .15s}
+.baspar-scope .sbx-more:hover{background:var(--brand);color:#fff}
+.baspar-scope .sp-list,.baspar-scope .sc-list,.baspar-scope .spr-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
+.baspar-scope .sp-list li,.baspar-scope .sc-list li,.baspar-scope .spr-list li{margin:0;padding:0}
+
+/* latest posts */
+.baspar-scope .sp-item{display:flex;gap:12px;align-items:center;padding:8px;border-radius:12px;transition:background .15s}
+.baspar-scope .sp-item:hover{background:var(--brand-tint)}
+.baspar-scope .sp-thumb{flex:0 0 68px;width:68px;height:68px;border-radius:12px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:var(--brand-50);color:var(--brand)}
+.baspar-scope .sp-thumb img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
+.baspar-scope .sp-body{display:flex;flex-direction:column;gap:5px;min-width:0}
+.baspar-scope .sp-title{font-size:13.5px;font-weight:700;line-height:1.7;color:var(--brand-deep);text-decoration:none;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;transition:color .15s}
+.baspar-scope .sp-item:hover .sp-title{color:var(--brand)}
+.baspar-scope .sp-meta{display:flex;align-items:center;gap:8px;font-size:11.5px;color:var(--ink-3)}
+.baspar-scope .sp-meta i{width:3px;height:3px;border-radius:50%;background:var(--line-2)}
+
+/* product categories */
+.baspar-scope .sc-item{display:flex;align-items:center;gap:12px;padding:8px 10px;border-radius:12px;text-decoration:none;color:var(--brand-deep);transition:background .15s}
+.baspar-scope .sc-item:hover{background:var(--brand-tint)}
+.baspar-scope .sc-ic{flex:0 0 38px;height:38px;border-radius:50%;overflow:hidden;display:flex;align-items:center;justify-content:center;background:var(--brand-50);color:var(--brand);border:1px solid var(--brand-100)}
+.baspar-scope .sc-ic img{width:100%;height:100%;object-fit:cover;display:block}
+.baspar-scope .sc-name{flex:1;min-width:0;font-size:14px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.baspar-scope .sc-count{font-size:11.5px;font-weight:700;line-height:1;color:var(--ink-3);background:var(--surface-2);border:1px solid var(--line);border-radius:999px;padding:4px 8px;min-width:26px;text-align:center}
+.baspar-scope .sc-go{display:flex;color:var(--ink-3);transition:transform .2s,color .2s}
+.baspar-scope .sc-item:hover .sc-go{color:var(--brand);transform:translateX(-3px)}
+.baspar-scope .sc-item:hover .sc-count{border-color:var(--brand-100);color:var(--brand)}
+
+/* latest products */
+.baspar-scope .spr-item{display:flex;align-items:center;gap:12px;padding:8px;border-radius:12px;text-decoration:none;transition:background .15s}
+.baspar-scope .spr-item:hover{background:var(--brand-tint)}
+.baspar-scope .spr-thumb{flex:0 0 58px;width:58px;height:58px;border-radius:12px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#fff;border:1px solid var(--line);color:var(--brand)}
+.baspar-scope .spr-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.baspar-scope .spr-body{display:flex;flex-direction:column;gap:3px;flex:1;min-width:0}
+.baspar-scope .spr-title{font-size:13.5px;font-weight:700;line-height:1.6;color:var(--brand-deep);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.baspar-scope .spr-cat{font-size:11.5px;color:var(--brand);font-weight:600}
+.baspar-scope .spr-go{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;font-weight:700;color:var(--ink-3);white-space:nowrap;transition:color .15s}
+.baspar-scope .spr-item:hover .spr-go,.baspar-scope .spr-item:hover .spr-title{color:var(--brand)}
+
+/* banners */
+.baspar-scope .sbn{position:relative;display:flex;flex-direction:column;gap:8px;overflow:hidden;border-radius:18px;text-decoration:none;color:#fff;padding:24px 22px;isolation:isolate;transition:transform .25s,box-shadow .25s}
+a.sbn:hover{transform:translateY(-3px)}
+.baspar-scope .sbn-img{padding:0;display:block;background:var(--brand-50);box-shadow:0 18px 40px -26px rgba(27,5,55,.5)}
+.baspar-scope .sbn-img img{display:block;width:100%;height:auto;transition:transform .6s ease}
+.baspar-scope a.sbn-img:hover img{transform:scale(1.03)}
+.baspar-scope .sbn-purple{background:linear-gradient(150deg,var(--brand-2),var(--brand) 50%,var(--brand-dk));box-shadow:0 22px 44px -24px rgba(109,40,217,.7)}
+.baspar-scope .sbn-dark{background:linear-gradient(150deg,#2B0E52,var(--brand-deep) 60%,#12031F);box-shadow:0 22px 44px -24px rgba(27,5,55,.8)}
+.baspar-scope .sbn-amber{background:linear-gradient(150deg,#FBBF24,#F59E0B 55%,#EA580C);color:#2A1300;box-shadow:0 22px 44px -24px rgba(234,88,12,.6)}
+.baspar-scope .sbn-deco{position:absolute;inset:auto auto -70px -50px;width:210px;height:210px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.28),transparent 70%);z-index:-1}
+.baspar-scope .sbn-deco::after{content:"";position:absolute;inset:-80px -160px auto auto;width:140px;height:140px;border-radius:50%;border:1px solid rgba(255,255,255,.25)}
+.baspar-scope .sbn-eyebrow{font-size:10.5px;letter-spacing:.16em;opacity:.8}
+.baspar-scope .sbn-title{font-size:19px;font-weight:900;line-height:1.55}
+.baspar-scope .sbn-text{font-size:13.5px;line-height:1.9;opacity:.92}
+.baspar-scope .sbn-btn{align-self:flex-start;margin-top:6px;display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border-radius:999px;background:#fff;color:var(--brand-deep);font-size:13px;font-weight:800;transition:gap .2s}
+.baspar-scope a.sbn:hover .sbn-btn{gap:10px}
+
+/* link cards */
+.baspar-scope .sln{display:flex;flex-direction:column;gap:10px}
+.baspar-scope .sln-item{display:flex;align-items:center;gap:14px;padding:16px;background:#fff;border:1px solid var(--line);border-radius:16px;text-decoration:none;transition:transform .2s,border-color .2s,box-shadow .2s}
+.baspar-scope .sln-item:hover{transform:translateY(-2px);border-color:var(--brand-100);box-shadow:0 16px 34px -22px rgba(109,40,217,.45)}
+.baspar-scope .sln-ic{flex:0 0 46px;height:46px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:var(--brand-50);color:var(--brand);transition:background .2s,color .2s}
+.baspar-scope .sln-item:hover .sln-ic{background:var(--brand);color:#fff}
+.baspar-scope .sln-body{display:flex;flex-direction:column;gap:3px;flex:1;min-width:0}
+.baspar-scope .sln-body strong{font-size:14.5px;font-weight:800;color:var(--brand-deep);line-height:1.6}
+.baspar-scope .sln-body span{font-size:12.5px;color:var(--ink-3);line-height:1.7}
+.baspar-scope .sln-go{display:flex;color:var(--ink-3);transition:transform .2s,color .2s}
+.baspar-scope .sln-item:hover .sln-go{color:var(--brand);transform:translateX(-4px)}

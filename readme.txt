@@ -4,7 +4,7 @@ Tags: elementor, woocommerce, widgets, rtl, persian
 Requires at least: 5.8
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.5.0
+Stable tag: 1.5.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,7 +18,7 @@ fully customizable from Elementor (typography, colors, logo, images, spacing), a
 dynamic data (menu, posts, WooCommerce products & categories) is read live from
 WordPress.
 
-Includes 76 widgets (header/menu, footer, hero, categories, trust, products,
+Includes 81 widgets (header/menu, footer, hero, categories, trust, products,
 product tabs, promo, brands, about, blog, breadcrumb, stats, mission/vision/values,
 timeline, team, process, industries, FAQ, cities, mid/final CTA, compare table,
 contact methods, social showcase, contact map, city quick-facts, shipment route,
@@ -37,6 +37,18 @@ Requires Elementor. WooCommerce is required only for the product/category widget
    Templates → Saved Templates → Import Templates.
 
 == Changelog ==
+
+= 1.5.1 =
+* Single-post sidebar: five new widgets — Latest Posts, Main Product
+  Categories (top-level, with category image/icon and live counts), Latest
+  Products, Banner (uploaded image + link, or a designed gradient banner)
+  and Link Cards (default: "خرید مواد اولیه شیمیایی" and
+  "وارد کننده مواد اولیه شیمیایی").
+* templates/baspar-single-post.json updated: sidebar = CTA → link cards →
+  banner → latest posts → product categories → banner → latest products.
+  The table of contents moved to a collapsed bar at the top of the article
+  (a sticky TOC cannot share a column with a tall stack of widgets without
+  overlapping them).
 
 = 1.5.0 =
 * New blog design (magazine landing + single post), built from 10 new widgets:
