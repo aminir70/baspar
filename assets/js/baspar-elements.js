@@ -96,6 +96,28 @@
 		window.addEventListener( 'load', fit );
 	}
 
+	/* ---- Random lists: show N random items out of a rendered pool -------- */
+	function initRandomLists( root ) {
+		( root || document ).querySelectorAll( '[data-random][data-show]' ).forEach( function ( ul ) {
+			if ( ul.getAttribute( 'data-shuffled' ) ) {
+				return;
+			}
+			ul.setAttribute( 'data-shuffled', '1' );
+			var items = Array.prototype.slice.call( ul.children );
+			var n = parseInt( ul.getAttribute( 'data-show' ), 10 ) || items.length;
+			for ( var i = items.length - 1; i > 0; i-- ) {
+				var j = Math.floor( Math.random() * ( i + 1 ) );
+				var t = items[ i ];
+				items[ i ] = items[ j ];
+				items[ j ] = t;
+			}
+			items.forEach( function ( li, k ) {
+				li.classList.toggle( 'spr-extra', k >= n );
+				ul.appendChild( li );
+			} );
+		} );
+	}
+
 	/* ---- Article: reading progress + table-of-contents highlight -------- */
 	function initArticle( root ) {
 		var scope = root || document;
@@ -354,6 +376,7 @@
 		initFaq( root );
 		initNav( root );
 		initArticle( root );
+		initRandomLists( root );
 		initStickySidebar();
 		initFloatWa();
 	}

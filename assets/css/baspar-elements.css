@@ -3669,3 +3669,4 @@ a.sbn:hover{transform:translateY(-3px)}
 /* Sticky sidebar column (class added by baspar-elements.js on > 1024px) */
 .elementor-column.bspr-sticky-col,.e-con.bspr-sticky-col{position:sticky;top:var(--bspr-sticky-top,100px);align-self:flex-start;z-index:2}
 .elementor-column.bspr-sticky-col > .elementor-widget-wrap{height:auto}
+.baspar-scope .spr-list li.spr-extra{display:none}

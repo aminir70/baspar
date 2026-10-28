@@ -22,7 +22,8 @@ class Baspar_Side_Products extends Baspar_Widget_Base {
 	protected function register_controls() {
 		$this->start_controls_section( 'content', array( 'label' => __( 'محتوا', 'baspar-elements' ) ) );
 		$this->add_control( 'title', array( 'label' => __( 'عنوان', 'baspar-elements' ), 'type' => Controls_Manager::TEXT, 'default' => 'آخرین محصولات' ) );
-		$this->add_control( 'count', array( 'label' => __( 'تعداد', 'baspar-elements' ), 'type' => Controls_Manager::NUMBER, 'default' => 5, 'min' => 1, 'max' => 12 ) );
+		$this->add_control( 'count', array( 'label' => __( 'تعداد', 'baspar-elements' ), 'type' => Controls_Manager::NUMBER, 'default' => 10, 'min' => 1, 'max' => 20 ) );
+		$this->add_control( 'orderby', array( 'label' => __( 'ترتیب', 'baspar-elements' ), 'type' => Controls_Manager::SELECT, 'default' => 'rand', 'options' => array( 'rand' => __( 'تصادفی (در هر بار باز شدن صفحه عوض می‌شود)', 'baspar-elements' ), 'date' => __( 'جدیدترین', 'baspar-elements' ) ), 'description' => __( 'در حالت تصادفی، حتی وقتی صفحه کش شده باشد (WP Rocket)، با هر بار باز شدن صفحه محصولات جابه‌جا می‌شوند.', 'baspar-elements' ) ) );
 		$this->add_control( 'cta_text', array( 'label' => __( 'متن کنار هر محصول', 'baspar-elements' ), 'type' => Controls_Manager::TEXT, 'default' => 'استعلام قیمت' ) );
 		$this->add_control( 'more_text', array( 'label' => __( 'متن «همه»', 'baspar-elements' ), 'type' => Controls_Manager::TEXT, 'default' => 'همه محصولات' ) );
 		$this->add_control( 'more_link', array( 'label' => __( 'لینک «همه»', 'baspar-elements' ), 'type' => Controls_Manager::URL, 'default' => array( 'url' => '/shop/' ) ) );
@@ -37,7 +38,11 @@ class Baspar_Side_Products extends Baspar_Widget_Base {
 			return;
 		}
 		$s     = $this->get_settings_for_display();
-		$posts = get_posts( array( 'post_type' => 'product', 'post_status' => 'publish', 'numberposts' => max( 1, (int) $s['count'] ), 'orderby' => 'date', 'order' => 'DESC', 'no_found_rows' => true ) );
+		$count  = max( 1, (int) $s['count'] );
+		$random = 'date' !== ( $s['orderby'] ?? 'rand' );
+		// Random mode renders a larger pool; the script shows `count` random
+		// ones on every page view, so a cached page still changes each time.
+		$posts = get_posts( array( 'post_type' => 'product', 'post_status' => 'publish', 'numberposts' => $random ? min( 40, $count * 3 ) : $count, 'orderby' => $random ? 'rand' : 'date', 'order' => 'DESC', 'no_found_rows' => true ) );
 		if ( ! $posts ) {
 			return;
 		}
@@ -45,12 +50,12 @@ class Baspar_Side_Products extends Baspar_Widget_Base {
 		<div class="baspar-scope">
 			<section class="sbx">
 				<?php render_side_head( 'package', $s['title'], $s['more_link']['url'] ?? '', $s['more_text'] ); ?>
-				<ul class="spr-list">
-					<?php foreach ( $posts as $p ) :
+				<ul class="spr-list"<?php echo $random ? ' data-random="1" data-show="' . esc_attr( $count ) . '"' : ''; ?>>
+					<?php $i = 0; foreach ( $posts as $p ) :
 						$thumb = get_the_post_thumbnail( $p->ID, 'woocommerce_thumbnail', array( 'loading' => 'lazy', 'alt' => '' ) );
 						$cat   = primary_cat_name( $p->ID );
 						?>
-						<li>
+						<li<?php echo $i >= $count ? ' class="spr-extra"' : ''; ?>>
 							<a class="spr-item" href="<?php echo esc_url( get_permalink( $p ) ); ?>">
 								<span class="spr-thumb"><?php echo $thumb ? $thumb : icon_svg( 'package', 22 ); // phpcs:ignore ?></span>
 								<span class="spr-body">
@@ -60,7 +65,7 @@ class Baspar_Side_Products extends Baspar_Widget_Base {
 								<?php if ( $s['cta_text'] ) : ?><span class="spr-go"><?php echo esc_html( $s['cta_text'] ); ?><?php echo icon_svg( 'arrow', 12 ); // phpcs:ignore ?></span><?php endif; ?>
 							</a>
 						</li>
-					<?php endforeach; ?>
+					<?php ++$i; endforeach; ?>
 				</ul>
 			</section>
 		</div>
