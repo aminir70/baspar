@@ -107,6 +107,9 @@ class Baspar_Pd_Reviews extends Baspar_Widget_Base {
 									array(
 										'title_reply'          => esc_html__( 'نظر خود را بنویسید', 'baspar-elements' ),
 										'title_reply_to'       => esc_html__( 'پاسخ به %s', 'baspar-elements' ),
+										'cancel_reply_before'  => '',
+										'cancel_reply_after'   => '',
+										'cancel_reply_link'    => '',
 										'title_reply_before'   => '<h3 class="pdr-form-title">',
 										'title_reply_after'    => '</h3>',
 										'comment_notes_before' => '<p class="pdr-note">' . esc_html__( 'نشانی ایمیل شما منتشر نمی‌شود.', 'baspar-elements' ) . '</p>',

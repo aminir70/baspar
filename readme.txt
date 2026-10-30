@@ -4,7 +4,7 @@ Tags: elementor, woocommerce, widgets, rtl, persian
 Requires at least: 5.8
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.6.2
+Stable tag: 1.6.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,6 +37,20 @@ Requires Elementor. WooCommerce is required only for the product/category widget
    Templates → Saved Templates → Import Templates.
 
 == Changelog ==
+
+= 1.6.3 =
+* SEO / markup audit of the new product page:
+  - Structured data: on single products the Rank Math graph is completed with
+    a BreadcrumbList (linked from the page node), the Product's brand (name +
+    logo) and SKU — values come from the product, nothing is invented; nodes
+    Rank Math already emitted are untouched.
+  - Headings: the description widget's title is no longer a generic H2 before
+    the article's own H2s (new tag control, default div); sidebar box titles
+    are no longer H3s (they used to appear inside the reviews outline); the
+    comment form title no longer contains the "cancel reply" link text;
+    footer column titles are H3 (were H5 straight after H2).
+  - Header and footer logos have width/height (layout shift); footer and
+    top-bar social links are upgraded from http:// to https://.
 
 = 1.6.2 =
 * Bale: the button now uses Bale's real logo (speech bubble with a check mark,

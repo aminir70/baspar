@@ -11,6 +11,7 @@ namespace BasparElements\Widgets;
 use Elementor\Controls_Manager;
 use Elementor\Repeater;
 use function BasparElements\icon_svg;
+use function BasparElements\force_https;
 use function BasparElements\icon_options;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -147,7 +148,7 @@ class Baspar_Footer extends Baspar_Widget_Base {
 		$this->start_controls_section( 'style', array( 'label' => __( 'استایل', 'baspar-elements' ), 'tab' => Controls_Manager::TAB_STYLE ) );
 		$this->add_color( 'bg', __( 'پس‌زمینه', 'baspar-elements' ), '', 'background' );
 		$this->add_color( 'accent', __( 'رنگ اصلی', 'baspar-elements' ), '', '--brand' );
-		$this->add_color( 'head_color', __( 'رنگ عناوین ستون', 'baspar-elements' ), '.footer-col h5', 'color' );
+		$this->add_color( 'head_color', __( 'رنگ عناوین ستون', 'baspar-elements' ), '.footer-col .fch', 'color' );
 		$this->add_typography( 'typo', __( 'تایپوگرافی', 'baspar-elements' ), '.footer-col li a' );
 		$this->end_controls_section();
 	}
@@ -159,7 +160,7 @@ class Baspar_Footer extends Baspar_Widget_Base {
 	 * @param int    $n Column number.
 	 */
 	private function render_links_col( $s, $n ) {
-		echo '<div class="footer-col"><h5>' . esc_html( $s[ 'links_title_' . $n ] ) . '</h5>';
+		echo '<div class="footer-col"><h3 class="fch">' . esc_html( $s[ 'links_title_' . $n ] ) . '</h3>';
 		$menu_id = $s[ 'links_menu_' . $n ];
 		if ( ! empty( $menu_id ) && '0' !== $menu_id ) {
 			wp_nav_menu(
@@ -191,7 +192,7 @@ class Baspar_Footer extends Baspar_Widget_Base {
 					<div class="footer-col footer-brand-col">
 						<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="footer-brand">
 							<?php if ( ! empty( $s['logo']['url'] ) ) : ?>
-								<img src="<?php echo esc_url( $s['logo']['url'] ); ?>" alt="<?php echo esc_attr( $s['brand_title'] ); ?>" />
+								<img src="<?php echo esc_url( $s['logo']['url'] ); ?>" alt="<?php echo esc_attr( $s['brand_title'] ); ?>" width="48" height="48" loading="lazy" />
 							<?php endif; ?>
 							<span>
 								<strong><?php echo esc_html( $s['brand_title'] ); ?></strong>
@@ -200,9 +201,9 @@ class Baspar_Footer extends Baspar_Widget_Base {
 						</a>
 						<div class="rich-text"><?php echo wp_kses_post( $s['about'] ); ?></div>
 						<div class="footer-socials">
-							<?php if ( ! empty( $s['wa']['url'] ) ) : ?><a href="<?php echo esc_url( $s['wa']['url'] ); ?>" aria-label="واتس‌اپ"><?php echo icon_svg( 'whatsapp', 18 ); /* phpcs:ignore */ ?></a><?php endif; ?>
-							<?php if ( ! empty( $s['tg']['url'] ) ) : ?><a href="<?php echo esc_url( $s['tg']['url'] ); ?>" aria-label="تلگرام"><?php echo icon_svg( 'telegram', 18 ); /* phpcs:ignore */ ?></a><?php endif; ?>
-							<?php if ( ! empty( $s['ig']['url'] ) ) : ?><a href="<?php echo esc_url( $s['ig']['url'] ); ?>" aria-label="اینستاگرام"><?php echo icon_svg( 'instagram', 18 ); /* phpcs:ignore */ ?></a><?php endif; ?>
+							<?php if ( ! empty( $s['wa']['url'] ) ) : ?><a href="<?php echo esc_url( force_https( $s['wa']['url'] ) ); ?>" aria-label="واتس‌اپ"><?php echo icon_svg( 'whatsapp', 18 ); /* phpcs:ignore */ ?></a><?php endif; ?>
+							<?php if ( ! empty( $s['tg']['url'] ) ) : ?><a href="<?php echo esc_url( force_https( $s['tg']['url'] ) ); ?>" aria-label="تلگرام"><?php echo icon_svg( 'telegram', 18 ); /* phpcs:ignore */ ?></a><?php endif; ?>
+							<?php if ( ! empty( $s['ig']['url'] ) ) : ?><a href="<?php echo esc_url( force_https( $s['ig']['url'] ) ); ?>" aria-label="اینستاگرام"><?php echo icon_svg( 'instagram', 18 ); /* phpcs:ignore */ ?></a><?php endif; ?>
 						</div>
 					</div>
 					<?php
@@ -210,7 +211,7 @@ class Baspar_Footer extends Baspar_Widget_Base {
 					$this->render_links_col( $s, 2 );
 					?>
 					<div class="footer-col">
-						<h5><?php echo esc_html( $s['contact_title'] ); ?></h5>
+						<h3 class="fch"><?php echo esc_html( $s['contact_title'] ); ?></h3>
 						<ul class="footer-contact">
 							<?php foreach ( (array) $s['contact_items'] as $it ) : ?>
 								<li><?php echo icon_svg( $it['icon'] ? $it['icon'] : 'info', 16 ); /* phpcs:ignore */ ?><span class="<?php echo ( 'yes' === $it['ltr'] ) ? 'ltr' : ''; ?>"><?php echo esc_html( $it['text'] ); ?></span></li>

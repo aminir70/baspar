@@ -434,3 +434,15 @@ function fa_num_smart( $value ) {
 	$value = (string) $value;
 	return preg_match( '/[A-Za-z]/', $value ) ? $value : fa_num( $value );
 }
+
+/**
+ * Upgrade http:// to https:// for URLs typed into widget controls (social
+ * profiles etc.); everything else is returned unchanged.
+ *
+ * @param string $url URL.
+ * @return string
+ */
+function force_https( $url ) {
+	$url = (string) $url;
+	return preg_match( '#^http://(www\.)?(t\.me|telegram\.me|instagram\.com|wa\.me|ble\.ir|eitaa\.com|linkedin\.com|aparat\.com|youtube\.com|basparmarket\.com)#i', $url ) ? 'https://' . substr( $url, 7 ) : $url;
+}

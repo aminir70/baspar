@@ -10,6 +10,7 @@ namespace BasparElements\Widgets;
 use Elementor\Controls_Manager;
 use Elementor\Repeater;
 use function BasparElements\icon_svg;
+use function BasparElements\force_https;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -115,10 +116,10 @@ class Baspar_Topbar extends Baspar_Widget_Base {
 				</div>
 				<div class="topbar-right">
 					<?php if ( ! empty( $s['telegram']['url'] ) ) : ?>
-						<a href="<?php echo esc_url( $s['telegram']['url'] ); ?>" class="tb-link" aria-label="تلگرام"><?php echo icon_svg( 'telegram', 14 ); /* phpcs:ignore */ ?></a>
+						<a href="<?php echo esc_url( force_https( $s['telegram']['url'] ) ); ?>" class="tb-link" aria-label="تلگرام"><?php echo icon_svg( 'telegram', 14 ); /* phpcs:ignore */ ?></a>
 					<?php endif; ?>
 					<?php if ( ! empty( $s['instagram']['url'] ) ) : ?>
-						<a href="<?php echo esc_url( $s['instagram']['url'] ); ?>" class="tb-link" aria-label="اینستاگرام"><?php echo icon_svg( 'instagram', 14 ); /* phpcs:ignore */ ?></a>
+						<a href="<?php echo esc_url( force_https( $s['instagram']['url'] ) ); ?>" class="tb-link" aria-label="اینستاگرام"><?php echo icon_svg( 'instagram', 14 ); /* phpcs:ignore */ ?></a>
 					<?php endif; ?>
 					<span class="tb-divider"></span>
 					<?php if ( $s['email'] ) : ?>

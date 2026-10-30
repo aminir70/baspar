@@ -653,3 +653,72 @@ add_action(
 		}
 	}
 );
+
+/* --------------------------------------------------------------------------
+ * SEO: complete the Rank Math graph on single product pages
+ * ------------------------------------------------------------------------ */
+
+/**
+ * Add what Rank Math's Product node lacks for a catalogue without prices:
+ * brand, SKU and a BreadcrumbList (also referenced from the page node).
+ * Nothing is invented: every value comes from the product itself, and a node
+ * Rank Math already emitted is never overwritten.
+ *
+ * @param array $data   Rank Math graph (@id => node).
+ * @param mixed $jsonld Rank Math JsonLD instance.
+ * @return array
+ */
+function enrich_product_graph( $data, $jsonld = null ) {
+	if ( ! is_array( $data ) || ! function_exists( 'is_singular' ) || ! is_singular( 'product' ) ) {
+		return $data;
+	}
+	$pid = get_queried_object_id();
+	if ( ! $pid ) {
+		return $data;
+	}
+	$has_crumb = false;
+	foreach ( $data as $node ) {
+		$t = isset( $node['@type'] ) ? (array) $node['@type'] : array();
+		if ( in_array( 'BreadcrumbList', $t, true ) ) {
+			$has_crumb = true;
+		}
+	}
+	$brands = product_brand_terms( $pid );
+	$sku    = function_exists( 'wc_get_product' ) && wc_get_product( $pid ) ? (string) wc_get_product( $pid )->get_sku() : '';
+	foreach ( $data as $k => $node ) {
+		$t = isset( $node['@type'] ) ? (array) $node['@type'] : array();
+		if ( ! in_array( 'Product', $t, true ) ) {
+			continue;
+		}
+		if ( empty( $node['brand'] ) && $brands ) {
+			$data[ $k ]['brand'] = array( '@type' => 'Brand', 'name' => $brands[0]['name'] );
+			if ( $brands[0]['logo'] ) {
+				$data[ $k ]['brand']['logo'] = $brands[0]['logo'];
+			}
+		}
+		if ( empty( $node['sku'] ) && '' !== $sku ) {
+			$data[ $k ]['sku'] = $sku;
+		}
+	}
+	if ( ! $has_crumb ) {
+		$url   = get_permalink( $pid );
+		$items = array( array( '@type' => 'ListItem', 'position' => 1, 'name' => get_bloginfo( 'name' ), 'item' => home_url( '/' ) ) );
+		foreach ( product_cat_trail( $pid ) as $t ) {
+			$link = get_term_link( $t );
+			if ( is_wp_error( $link ) ) {
+				continue;
+			}
+			$items[] = array( '@type' => 'ListItem', 'position' => count( $items ) + 1, 'name' => $t->name, 'item' => $link );
+		}
+		$items[] = array( '@type' => 'ListItem', 'position' => count( $items ) + 1, 'name' => wp_strip_all_tags( get_the_title( $pid ) ) );
+		$data['baspar_breadcrumb'] = array( '@type' => 'BreadcrumbList', '@id' => $url . '#breadcrumb', 'itemListElement' => $items );
+		foreach ( $data as $k => $node ) {
+			$t = isset( $node['@type'] ) ? (array) $node['@type'] : array();
+			if ( ( in_array( 'ItemPage', $t, true ) || in_array( 'WebPage', $t, true ) ) && empty( $node['breadcrumb'] ) ) {
+				$data[ $k ]['breadcrumb'] = array( '@id' => $url . '#breadcrumb' );
+			}
+		}
+	}
+	return $data;
+}
+add_filter( 'rank_math/json_ld', __NAMESPACE__ . '\\enrich_product_graph', 99, 2 );

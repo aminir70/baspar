@@ -330,8 +330,8 @@
 .baspar-scope .footer-socials{display:flex;gap:10px}
 .baspar-scope .footer-socials a{width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,.08);color:#fff;display:inline-flex;align-items:center;justify-content:center;transition:background .15s,color .15s}
 .baspar-scope .footer-socials a:hover{background:var(--brand);color:#fff}
-.baspar-scope .footer-col h5{font-size:15px;color:#fff;font-weight:700;margin:0 0 18px;position:relative;padding-bottom:10px}
-.baspar-scope .footer-col h5::after{content:"";position:absolute;right:0;bottom:0;width:24px;height:2px;background:var(--brand)}
+.baspar-scope .footer-col .fch{font-size:15px;color:#fff;font-weight:700;margin:0 0 18px;position:relative;padding-bottom:10px}
+.baspar-scope .footer-col .fch::after{content:"";position:absolute;right:0;bottom:0;width:24px;height:2px;background:var(--brand)}
 .baspar-scope .footer-col ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px}
 .baspar-scope .footer-col li a{font-size:13.5px;color:#A89BC2;transition:color .15s;display:inline-flex;align-items:center;gap:6px}
 .baspar-scope .footer-col li a:hover{color:#fff}
@@ -1216,11 +1216,11 @@ body.baspar-nav-lock{overflow:hidden}
   transition:background .15s, color .15s;
 }
 .baspar-scope .footer-socials a:hover{background:var(--brand);color:#fff}
-.baspar-scope .footer-col h5{
+.baspar-scope .footer-col .fch{
   font-size:15px;color:#fff;font-weight:700;margin:0 0 18px;
   position:relative;padding-bottom:10px;
 }
-.baspar-scope .footer-col h5::after{
+.baspar-scope .footer-col .fch::after{
   content:"";position:absolute;right:0;bottom:0;
   width:24px;height:2px;background:var(--brand);
 }
@@ -3946,3 +3946,5 @@ a.sbn:hover{transform:translateY(-3px)}
 .elementor-widget-baspar-pd-anchors{position:sticky;top:12px;z-index:40}
 body.admin-bar .elementor-widget-baspar-pd-anchors{top:44px}
 @media(max-width:640px){.baspar-scope .pdf li:last-child:nth-child(odd){grid-column:1 / -1;flex-direction:row;align-items:center}}
+
+.baspar-scope .footer-col .fch{line-height:1.5;letter-spacing:0}

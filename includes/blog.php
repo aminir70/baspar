@@ -338,7 +338,7 @@ function render_side_head( $icon, $title, $more_url = '', $more_text = '' ) {
 	if ( '' === (string) $title ) {
 		return;
 	}
-	echo '<div class="sbx-h"><span class="sbx-ic" aria-hidden="true">' . icon_svg( $icon ? $icon : 'layers', 18 ) . '</span><h3 class="sbx-t">' . esc_html( $title ) . '</h3>'; // phpcs:ignore
+	echo '<div class="sbx-h"><span class="sbx-ic" aria-hidden="true">' . icon_svg( $icon ? $icon : 'layers', 18 ) . '</span><div class="sbx-t">' . esc_html( $title ) . '</div>'; // phpcs:ignore
 	if ( $more_url && $more_text ) {
 		echo '<a class="sbx-more" href="' . esc_url( slash_url( $more_url ) ) . '">' . esc_html( $more_text ) . '</a>';
 	}

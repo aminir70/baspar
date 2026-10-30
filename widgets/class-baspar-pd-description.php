@@ -28,6 +28,7 @@ class Baspar_Pd_Description extends Baspar_Widget_Base {
 	protected function register_controls() {
 		$this->start_controls_section( 'content', array( 'label' => __( 'تنظیمات', 'baspar-elements' ) ) );
 		$this->add_control( 'title', array( 'label' => __( 'عنوان بخش', 'baspar-elements' ), 'type' => Controls_Manager::TEXT, 'default' => 'معرفی و توضیحات محصول' ) );
+		$this->add_control( 'title_tag', array( 'label' => __( 'تگ عنوان بخش', 'baspar-elements' ), 'type' => Controls_Manager::SELECT, 'default' => 'div', 'options' => array( 'div' => 'div', 'h2' => 'H2', 'h3' => 'H3' ), 'description' => __( 'متن محصول خودش H2 دارد؛ برای سئو بهتر است این عنوان تکراری H2 نباشد.', 'baspar-elements' ) ) );
 		$this->add_control( 'anchor', array( 'label' => __( 'شناسه بخش', 'baspar-elements' ), 'type' => Controls_Manager::TEXT, 'default' => 'pd-desc' ) );
 		$this->add_control( 'toc', array( 'label' => __( 'فهرست مطالب بالای متن', 'baspar-elements' ), 'type' => Controls_Manager::SWITCHER, 'return_value' => 'yes', 'default' => 'yes' ) );
 		$this->add_control( 'normalize', array( 'label' => __( 'یکدست کردن ظاهر متن', 'baspar-elements' ), 'type' => Controls_Manager::SWITCHER, 'return_value' => 'yes', 'default' => 'yes', 'description' => __( 'رنگ‌ها و پس‌زمینه‌های درون‌خطی کپی‌شده حذف می‌شوند؛ چیزی در خود محصول تغییر نمی‌کند.', 'baspar-elements' ) ) );
@@ -62,7 +63,7 @@ class Baspar_Pd_Description extends Baspar_Widget_Base {
 		?>
 		<div class="baspar-scope"<?php echo $anchor ? ' id="' . esc_attr( $anchor ) . '"' : ''; ?>>
 			<section class="pdd">
-				<?php if ( $s['title'] ) : ?><h2 class="pd-h"><span class="pd-h-ic"><?php echo icon_svg( 'doc', 18 ); // phpcs:ignore ?></span><?php echo esc_html( $s['title'] ); ?></h2><?php endif; ?>
+				<?php if ( $s['title'] ) : $tt = in_array( $s['title_tag'] ?? 'div', array( 'div', 'h2', 'h3' ), true ) ? $s['title_tag'] : 'div'; ?><<?php echo $tt; // phpcs:ignore ?> class="pd-h"><span class="pd-h-ic"><?php echo icon_svg( 'doc', 18 ); // phpcs:ignore ?></span><?php echo esc_html( $s['title'] ); ?></<?php echo $tt; // phpcs:ignore ?>><?php endif; ?>
 				<?php if ( 'yes' === $s['toc'] && count( $h2 ) > 2 ) : ?>
 					<details class="bspr-toc pdd-toc" data-toc>
 						<summary><span class="bspr-toc-ic"><?php echo icon_svg( 'menu', 16 ); // phpcs:ignore ?></span><span class="bspr-toc-title"><?php esc_html_e( 'فهرست مطالب', 'baspar-elements' ); ?></span><span class="bspr-toc-count"><?php echo esc_html( fa_num( count( $h2 ) ) ); ?></span><span class="bspr-toc-caret"><?php echo icon_svg( 'arrow-down', 14 ); // phpcs:ignore ?></span></summary>

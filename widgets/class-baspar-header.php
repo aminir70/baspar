@@ -180,7 +180,7 @@ class Baspar_Header extends Baspar_Widget_Base {
 		if ( ! empty( $s['logo']['id'] ) ) {
 			$logo_html = Group_Control_Image_Size::get_attachment_image_html( $s, 'logo_size', 'logo' );
 		} elseif ( ! empty( $s['logo']['url'] ) ) {
-			$logo_html = '<img src="' . esc_url( $s['logo']['url'] ) . '" alt="' . esc_attr( $s['brand_title'] ) . '" />';
+			$logo_html = '<img src="' . esc_url( $s['logo']['url'] ) . '" alt="' . esc_attr( $s['brand_title'] ) . '" width="48" height="48" />';
 		}
 
 		$logo_url   = ! empty( $s['logo_link']['url'] ) ? $s['logo_link']['url'] : home_url( '/' );
