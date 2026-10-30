@@ -4,7 +4,7 @@ Tags: elementor, woocommerce, widgets, rtl, persian
 Requires at least: 5.8
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.6.5
+Stable tag: 1.7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,6 +37,22 @@ Requires Elementor. WooCommerce is required only for the product/category widget
    Templates → Saved Templates → Import Templates.
 
 == Changelog ==
+
+= 1.7.0 =
+* Header: new mega menu (default "نوع منو: مگا منو"; "کشویی ساده" keeps the
+  old menu). Built from the same WordPress menu:
+  - Desktop: items whose sub-menu has two levels (e.g. محصولات) open a full
+    panel — category tabs with images and product counts, the active
+    category's sub-categories as columns (or image cards when there is one
+    level), its newest products (cached 6h), a "view all" link and a promo
+    card (title, text, WhatsApp button, second link). Other items open a
+    styled dropdown. Opens on hover with a small delay and on keyboard focus;
+    Escape closes; menu items with "#" become buttons (no href="#").
+  - Mobile: a drawer from the right with product search, drill-down views
+    (back button, "view all" link, category tiles with images), WhatsApp and
+    call buttons and working hours. Moved to <body> so the sticky header
+    cannot clip it; Escape / overlay / link tap closes it.
+  - CSS classes "mega" / "no-mega" on a menu item force the panel on or off.
 
 = 1.6.5 =
 * Product hero for products with little data (none of the 163 products has a

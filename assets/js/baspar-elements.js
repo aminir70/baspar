@@ -133,6 +133,164 @@
 		} );
 	}
 
+
+	/* ---- Mega menu (desktop) + drawer (mobile) ---------------------------
+	   Desktop panels open on hover/focus with CSS alone; the script switches
+	   the category tabs and closes panels with Escape. The mobile drawer is
+	   moved to <body> so the sticky, blurred header cannot clip it. */
+	function initMega( root ) {
+		var ctx = root || document;
+		ctx.querySelectorAll( '[data-mm-panel]' ).forEach( function ( panel ) {
+			if ( panel.dataset.mmInit ) {
+				return;
+			}
+			panel.dataset.mmInit = '1';
+			var tabs = panel.querySelectorAll( '[data-mm-tab]' );
+			var panes = panel.querySelectorAll( '[data-mm-pane]' );
+			var timer = null;
+			function show( i ) {
+				tabs.forEach( function ( t ) { t.classList.toggle( 'is-on', t.getAttribute( 'data-mm-tab' ) === i ); } );
+				panes.forEach( function ( p ) { p.classList.toggle( 'is-on', p.getAttribute( 'data-mm-pane' ) === i ); } );
+			}
+			tabs.forEach( function ( t ) {
+				t.addEventListener( 'mouseenter', function () {
+					clearTimeout( timer );
+					timer = setTimeout( function () { show( t.getAttribute( 'data-mm-tab' ) ); }, 70 );
+				} );
+				t.addEventListener( 'mouseleave', function () { clearTimeout( timer ); } );
+				t.addEventListener( 'focus', function () { show( t.getAttribute( 'data-mm-tab' ) ); } );
+			} );
+		} );
+		if ( ! initMega.esc ) {
+			initMega.esc = true;
+			document.addEventListener( 'keydown', function ( e ) {
+				if ( 'Escape' !== e.key ) {
+					return;
+				}
+				var open = document.querySelector( '.mmd-root.is-open' );
+				if ( open ) {
+					closeDrawer( open );
+					return;
+				}
+				var item = document.activeElement && document.activeElement.closest && document.activeElement.closest( '.mm-item' );
+				if ( item ) {
+					var top = item.querySelector( '.mm-top' );
+					item.classList.add( 'is-closed' );
+					if ( top ) {
+						top.focus();
+					}
+				}
+			} );
+			document.addEventListener( 'mouseover', function ( e ) {
+				var item = e.target.closest && e.target.closest( '.mm-item.is-closed' );
+				if ( item ) {
+					item.classList.remove( 'is-closed' );
+				}
+			} );
+		}
+
+		/* Drawer: portal to <body> (replace a stale copy after an editor re-render). */
+		ctx.querySelectorAll( '.baspar-scope [data-mmd]' ).forEach( function ( d ) {
+			if ( d.parentNode === document.body ) {
+				return;
+			}
+			var old = document.body.querySelector( ':scope > #' + d.id );
+			if ( old && old !== d ) {
+				old.remove();
+			}
+			document.body.appendChild( d );
+			bindDrawer( d );
+		} );
+		ctx.querySelectorAll( '[data-mmd-open]' ).forEach( function ( b ) {
+			if ( b.dataset.mmdInit ) {
+				return;
+			}
+			b.dataset.mmdInit = '1';
+			b.addEventListener( 'click', function ( e ) {
+				var d = document.getElementById( b.getAttribute( 'data-mmd-open' ) );
+				if ( ! d ) {
+					return;
+				}
+				e.preventDefault();
+				e.stopImmediatePropagation();
+				openDrawer( d, b );
+			} );
+		} );
+	}
+
+	function openDrawer( d, opener ) {
+		d.classList.add( 'is-open' );
+		d.setAttribute( 'aria-hidden', 'false' );
+		d._opener = opener || null;
+		if ( opener ) {
+			opener.setAttribute( 'aria-expanded', 'true' );
+		}
+		document.body.classList.add( 'baspar-nav-lock' );
+		var x = d.querySelector( '.mmd-x' );
+		if ( x ) {
+			setTimeout( function () { x.focus(); }, 60 );
+		}
+	}
+
+	function closeDrawer( d ) {
+		d.classList.remove( 'is-open' );
+		d.setAttribute( 'aria-hidden', 'true' );
+		document.body.classList.remove( 'baspar-nav-lock' );
+		if ( d._opener ) {
+			d._opener.setAttribute( 'aria-expanded', 'false' );
+			d._opener.focus();
+		}
+	}
+
+	function bindDrawer( d ) {
+		if ( d.dataset.mmdBound ) {
+			return;
+		}
+		d.dataset.mmdBound = '1';
+		var stack = [];
+		function go( id, back ) {
+			var next = document.getElementById( id );
+			var cur = d.querySelector( '[data-mmd-view].is-on' );
+			if ( ! next || next === cur ) {
+				return;
+			}
+			next.hidden = false;
+			next.classList.remove( 'from-back', 'from-next' );
+			next.classList.add( back ? 'from-back' : 'from-next' );
+			void next.offsetWidth;
+			if ( cur ) {
+				cur.classList.remove( 'is-on' );
+				cur.hidden = true;
+			}
+			next.classList.add( 'is-on' );
+			next.scrollTop = 0;
+			var f = next.querySelector( '.mmd-back, .mmd-item' );
+			if ( f ) {
+				f.focus( { preventScroll: true } );
+			}
+		}
+		d.addEventListener( 'click', function ( e ) {
+			var t = e.target;
+			if ( t.closest( '[data-mmd-close]' ) ) {
+				closeDrawer( d );
+				return;
+			}
+			var g = t.closest( '[data-mmd-go]' );
+			if ( g ) {
+				stack.push( d.querySelector( '[data-mmd-view].is-on' ).id );
+				go( g.getAttribute( 'data-mmd-go' ), false );
+				return;
+			}
+			var b = t.closest( '[data-mmd-back]' );
+			if ( b ) {
+				go( stack.pop() || b.getAttribute( 'data-mmd-back' ), true );
+				return;
+			}
+			if ( t.closest( 'a[href]' ) ) {
+				closeDrawer( d );
+			}
+		} );
+	}
 	/* ---- Article: reading progress + table-of-contents highlight -------- */
 	function initArticle( root ) {
 		var scope = root || document;
@@ -391,6 +549,7 @@
 		initFaq( root );
 		initNav( root );
 		initArticle( root );
+		initMega( root );
 		initAuthorBio( root );
 		initRandomLists( root );
 		initStickySidebar();
