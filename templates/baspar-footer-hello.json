@@ -1,0 +1,116 @@
+{
+ "version": "0.4",
+ "title": "بسپار — فوتر سایت (هلو)",
+ "type": "footer",
+ "page_settings": {},
+ "content": [
+  {
+   "id": "abb41ef",
+   "elType": "section",
+   "settings": {
+    "layout": "full_width",
+    "gap": "no",
+    "padding": {
+     "unit": "px",
+     "top": "0",
+     "right": "0",
+     "bottom": "0",
+     "left": "0",
+     "isLinked": true
+    },
+    "margin": {
+     "unit": "px",
+     "top": "0",
+     "right": 0,
+     "bottom": "0",
+     "left": 0,
+     "isLinked": true
+    }
+   },
+   "elements": [
+    {
+     "id": "2676aba",
+     "elType": "column",
+     "settings": {
+      "_column_size": 100,
+      "_inline_size": null,
+      "padding": {
+       "unit": "px",
+       "top": "0",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": true
+      }
+     },
+     "elements": [
+      {
+       "id": "9d1a3fc",
+       "elType": "widget",
+       "settings": {
+        "bleed": "yes"
+       },
+       "elements": [],
+       "widgetType": "baspar-footer"
+      }
+     ],
+     "isInner": false
+    }
+   ],
+   "isInner": false
+  },
+  {
+   "id": "b56c65f",
+   "elType": "section",
+   "settings": {
+    "layout": "full_width",
+    "gap": "no",
+    "padding": {
+     "unit": "px",
+     "top": "0",
+     "right": "0",
+     "bottom": "0",
+     "left": "0",
+     "isLinked": true
+    },
+    "margin": {
+     "unit": "px",
+     "top": "0",
+     "right": 0,
+     "bottom": "0",
+     "left": 0,
+     "isLinked": true
+    }
+   },
+   "elements": [
+    {
+     "id": "fbf1936",
+     "elType": "column",
+     "settings": {
+      "_column_size": 100,
+      "_inline_size": null,
+      "padding": {
+       "unit": "px",
+       "top": "0",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": true
+      }
+     },
+     "elements": [
+      {
+       "id": "3710d80",
+       "elType": "widget",
+       "settings": {},
+       "elements": [],
+       "widgetType": "baspar-float-whatsapp"
+      }
+     ],
+     "isInner": false
+    }
+   ],
+   "isInner": false
+  }
+ ]
+}

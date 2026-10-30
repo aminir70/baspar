@@ -102,13 +102,14 @@ class Baspar_Topbar extends Baspar_Widget_Base {
 		$this->add_color( 'bg', __( 'رنگ پس‌زمینه', 'baspar-elements' ), '', 'background' );
 		$this->add_color( 'txt', __( 'رنگ متن', 'baspar-elements' ), '.topbar-inner', 'color' );
 		$this->add_typography( 'typo', __( 'تایپوگرافی', 'baspar-elements' ), '.topbar-inner' );
+		$this->add_bleed_control();
 		$this->end_controls_section();
 	}
 
 	protected function render() {
 		$s = $this->get_settings_for_display();
 		?>
-		<div class="baspar-scope bspr-topbar topbar">
+		<div class="baspar-scope bspr-topbar topbar<?php echo esc_attr( $this->bleed_class( $s ) ); ?>">
 			<div class="topbar-inner">
 				<div class="topbar-left">
 					<span class="dot"></span>

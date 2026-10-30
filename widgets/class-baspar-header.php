@@ -192,8 +192,10 @@ class Baspar_Header extends Baspar_Widget_Base {
 				'type'         => Controls_Manager::SWITCHER,
 				'return_value' => 'yes',
 				'default'      => 'yes',
+				'description'  => __( 'در قالب هلو کل ناحیه هدر (بدون نوار بالایی) بالای صفحه می‌چسبد؛ نیازی به تنظیم چسبان المنتور پرو نیست.', 'baspar-elements' ),
 			)
 		);
+		$this->add_bleed_control();
 		$this->end_controls_section();
 
 		/* ---- Style ---- */
@@ -572,7 +574,7 @@ class Baspar_Header extends Baspar_Widget_Base {
 		$logo_url   = ! empty( $s['logo_link']['url'] ) ? $s['logo_link']['url'] : home_url( '/' );
 		$header_cls = 'header' . ( 'yes' === $s['sticky'] ? '' : ' not-sticky' );
 		?>
-		<div class="baspar-scope">
+		<div class="baspar-scope bspr-header-root<?php echo esc_attr( $this->bleed_class( $s ) ); ?>"<?php echo 'yes' === $s['sticky'] ? ' data-sticky-header' : ''; ?>>
 			<header class="<?php echo esc_attr( $header_cls ); ?>"<?php echo ( 'yes' !== $s['sticky'] ) ? ' style="position:relative"' : ''; ?>>
 				<div class="header-inner">
 					<a href="<?php echo esc_url( $logo_url ); ?>" class="brand">

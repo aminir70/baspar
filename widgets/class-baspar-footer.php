@@ -67,6 +67,7 @@ class Baspar_Footer extends Baspar_Widget_Base {
 		$this->add_control( 'wa', array( 'label' => __( 'واتس‌اپ', 'baspar-elements' ), 'type' => Controls_Manager::URL, 'default' => array( 'url' => 'https://wa.me/989120997651' ) ) );
 		$this->add_control( 'tg', array( 'label' => __( 'تلگرام', 'baspar-elements' ), 'type' => Controls_Manager::URL, 'default' => array( 'url' => 'https://t.me/basparmarket' ) ) );
 		$this->add_control( 'ig', array( 'label' => __( 'اینستاگرام', 'baspar-elements' ), 'type' => Controls_Manager::URL, 'default' => array( 'url' => 'https://instagram.com/basparmarket' ) ) );
+		$this->add_bleed_control();
 		$this->end_controls_section();
 
 		/* ---- Two link columns ---- */
@@ -186,7 +187,7 @@ class Baspar_Footer extends Baspar_Widget_Base {
 	protected function render() {
 		$s = $this->get_settings_for_display();
 		?>
-		<div class="baspar-scope bspr-footer footer-big">
+		<div class="baspar-scope bspr-footer footer-big<?php echo esc_attr( $this->bleed_class( $s ) ); ?>">
 			<div class="footer-inner">
 				<div class="footer-grid">
 					<div class="footer-col footer-brand-col">

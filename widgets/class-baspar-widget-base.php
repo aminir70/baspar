@@ -330,4 +330,32 @@ abstract class Baspar_Widget_Base extends Widget_Base {
 	protected function reveal_class( $settings ) {
 		return ( isset( $settings['enable_reveal'] ) && 'yes' === $settings['enable_reveal'] ) ? 'baspar-reveal' : '';
 	}
+
+	/**
+	 * "Full width" switch for site chrome (topbar / header / footer). Makes the
+	 * widget span the whole window even inside a boxed section — needed with
+	 * Hello Elementor, which (unlike Woodmart) doesn't stretch those areas.
+	 */
+	protected function add_bleed_control() {
+		$this->add_control(
+			'bleed',
+			array(
+				'label'        => __( 'تمام عرض صفحه (حتی داخل سکشن جعبه‌ای)', 'baspar-elements' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'return_value' => 'yes',
+				'default'      => 'yes',
+				'description'  => __( 'برای قالب هلو: پس‌زمینه این بخش از لبه تا لبه صفحه کشیده می‌شود و محتوا وسط می‌ماند.', 'baspar-elements' ),
+			)
+		);
+	}
+
+	/**
+	 * Class for the bleed switch.
+	 *
+	 * @param array $settings Widget settings.
+	 * @return string
+	 */
+	protected function bleed_class( $settings ) {
+		return ( ! isset( $settings['bleed'] ) || 'yes' === $settings['bleed'] ) ? ' bspr-bleed' : '';
+	}
 }

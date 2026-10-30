@@ -127,6 +127,14 @@ final class Plugin {
 		'pd-related',
 		'pd-contact',
 		'pd-bottom-text',
+		// Home page v2 (1.8.0) — Hello Elementor ready, motion-rich.
+		'hero-v2',
+		'cat-tiles',
+		'image-banners',
+		'cta-strip',
+		'product-rail',
+		'about-v2',
+		'home-blog',
 		// City landing pages (buy-chemical-raw-materials-{city}).
 		'city-facts',
 		'prose',
@@ -174,6 +182,7 @@ final class Plugin {
 		require_once BASPAR_ELEMENTS_PATH . 'includes/helpers.php';
 		require_once BASPAR_ELEMENTS_PATH . 'includes/blog.php';
 		require_once BASPAR_ELEMENTS_PATH . 'includes/product.php';
+		require_once BASPAR_ELEMENTS_PATH . 'includes/home.php';
 	}
 
 	/**

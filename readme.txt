@@ -4,7 +4,7 @@ Tags: elementor, woocommerce, widgets, rtl, persian
 Requires at least: 5.8
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.7.0
+Stable tag: 1.8.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,7 +18,7 @@ fully customizable from Elementor (typography, colors, logo, images, spacing), a
 dynamic data (menu, posts, WooCommerce products & categories) is read live from
 WordPress.
 
-Includes 90 widgets (header/menu, footer, hero, categories, trust, products,
+Includes 97 widgets (header/menu, footer, hero, categories, trust, products,
 product tabs, promo, brands, about, blog, breadcrumb, stats, mission/vision/values,
 timeline, team, process, industries, FAQ, cities, mid/final CTA, compare table,
 contact methods, social showcase, contact map, city quick-facts, shipment route,
@@ -37,6 +37,25 @@ Requires Elementor. WooCommerce is required only for the product/category widget
    Templates → Saved Templates → Import Templates.
 
 == Changelog ==
+
+= 1.8.0 =
+* Hello Elementor support. The theme can be switched from Woodmart to Hello:
+  - Topbar, header and footer get "تمام عرض صفحه" (on by default): they
+    span the whole window even inside a boxed section.
+  - Sticky header without Elementor Pro's sticky: the header area sticks to
+    the top, the topbar scrolls away, a soft shadow appears once scrolled.
+  - Hardening against Hello's reset (pink button borders/hover, table zebra
+    rows and padding, list/heading margins) inside every Baspar widget.
+* New home page (7 widgets, all with dynamic, reduced-motion aware motion):
+  hero-v2 (aurora background, drifting molecules, rotating industry word,
+  animated counters, live catalogue card), cat-tiles (bento categories with
+  live counts and cursor spotlight), image-banners (3D tilt + light sweep),
+  cta-strip (moving gradient promo), product-rail (tabbed or category
+  showcase slider, autoplay, arrows, progress), about-v2 (orbiting icons,
+  counters), home-blog (bento of latest posts). Every current home section
+  is kept, Woodmart elements replaced.
+* Templates: baspar-home-v2.json (page), baspar-header-hello.json (header),
+  baspar-footer-hello.json (footer).
 
 = 1.7.0 =
 * Header: new mega menu (default "نوع منو: مگا منو"; "کشویی ساده" keeps the

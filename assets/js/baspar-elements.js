@@ -541,8 +541,298 @@
 		onScroll();
 	}
 
+	/* ---- Home v2 motion (1.8.0) -----------------------------------------
+	   [data-anim] elements start hidden only after this runs (html class
+	   baspar-motion); anything already on screen is shown first, so a late
+	   script never hides visible content. Groups ([data-anim-group]) reveal
+	   all their children together with a CSS stagger (--i). */
+	var reduceMotion = window.matchMedia && window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches;
+
+	function initMotion( root ) {
+		var ctx = root || document;
+		var targets = [];
+		ctx.querySelectorAll( '.baspar-scope [data-anim-group]:not(.is-in)' ).forEach( function ( g ) { targets.push( g ); } );
+		ctx.querySelectorAll( '.baspar-scope [data-anim]:not(.is-in)' ).forEach( function ( el ) {
+			if ( ! el.closest( '[data-anim-group]' ) ) { targets.push( el ); }
+		} );
+		if ( ! targets.length ) {
+			return;
+		}
+		if ( reduceMotion || ! ( 'IntersectionObserver' in window ) ) {
+			targets.forEach( function ( t ) { t.classList.add( 'is-in' ); } );
+			return;
+		}
+		var vh = window.innerHeight || document.documentElement.clientHeight;
+		targets = targets.filter( function ( t ) {
+			var r = t.getBoundingClientRect();
+			if ( r.top < vh * 0.92 && r.bottom > 0 ) {
+				t.classList.add( 'is-in' );
+				return false;
+			}
+			return true;
+		} );
+		document.documentElement.classList.add( 'baspar-motion' );
+		var io = new IntersectionObserver( function ( entries ) {
+			entries.forEach( function ( e ) {
+				if ( e.isIntersecting ) {
+					e.target.classList.add( 'is-in' );
+					io.unobserve( e.target );
+				}
+			} );
+		}, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 } );
+		targets.forEach( function ( t ) { io.observe( t ); } );
+	}
+
+	// Cursor spotlight (--mx / --my) and 3D tilt (--rx / --ry), pointer only.
+	function initPointerFx( root ) {
+		if ( reduceMotion || ! window.matchMedia || ! window.matchMedia( '(hover: hover)' ).matches ) {
+			return;
+		}
+		( root || document ).querySelectorAll( '.baspar-scope [data-spot], .baspar-scope [data-tilt]' ).forEach( function ( el ) {
+			if ( el.dataset.fxInit ) {
+				return;
+			}
+			el.dataset.fxInit = '1';
+			var tilt = el.hasAttribute( 'data-tilt' );
+			var raf = 0;
+			el.addEventListener( 'pointermove', function ( e ) {
+				var r = el.getBoundingClientRect();
+				var x = ( e.clientX - r.left ) / r.width;
+				var y = ( e.clientY - r.top ) / r.height;
+				cancelAnimationFrame( raf );
+				raf = requestAnimationFrame( function () {
+					el.style.setProperty( '--mx', ( x * 100 ).toFixed( 1 ) + '%' );
+					el.style.setProperty( '--my', ( y * 100 ).toFixed( 1 ) + '%' );
+					if ( tilt ) {
+						el.style.setProperty( '--ry', ( ( x - 0.5 ) * 10 ).toFixed( 2 ) + 'deg' );
+						el.style.setProperty( '--rx', ( ( 0.5 - y ) * 8 ).toFixed( 2 ) + 'deg' );
+					}
+				} );
+			} );
+			el.addEventListener( 'pointerleave', function () {
+				cancelAnimationFrame( raf );
+				el.style.removeProperty( '--rx' );
+				el.style.removeProperty( '--ry' );
+			} );
+		} );
+	}
+
+	// Hero rotating word: steps a column of words; the last item repeats the
+	// first, so the loop snaps back invisibly.
+	function initRotator( root ) {
+		( root || document ).querySelectorAll( '.baspar-scope .h2v-rot-in' ).forEach( function ( col ) {
+			if ( col.dataset.rotInit || reduceMotion ) {
+				return;
+			}
+			col.dataset.rotInit = '1';
+			var n = col.children.length - 1;
+			if ( n < 2 ) {
+				return;
+			}
+			var k = 0;
+			setInterval( function () {
+				if ( document.hidden ) {
+					return;
+				}
+				k++;
+				col.style.transition = '';
+				col.style.setProperty( '--k', k );
+				if ( k === n ) {
+					setTimeout( function () {
+						col.style.transition = 'none';
+						k = 0;
+						col.style.setProperty( '--k', 0 );
+					}, 750 );
+				}
+			}, 2600 );
+		} );
+	}
+
+	// Product rails: arrows, progress bar, gentle autoplay (paused on hover,
+	// focus, touch and when off screen). RTL aware.
+	function initRails( root ) {
+		( root || document ).querySelectorAll( '.baspar-scope [data-rail]' ).forEach( function ( rail ) {
+			if ( rail.dataset.railInit ) {
+				return;
+			}
+			rail.dataset.railInit = '1';
+			var track = rail.querySelector( '[data-rail-track]' );
+			var bar = rail.querySelector( '[data-rail-bar]' );
+			var prev = rail.querySelector( '[data-rail-prev]' );
+			var next = rail.querySelector( '[data-rail-next]' );
+			if ( ! track ) {
+				return;
+			}
+			var rtl = 'rtl' === getComputedStyle( track ).direction;
+			function max() { return Math.max( 0, track.scrollWidth - track.clientWidth ); }
+			function pos() { return Math.abs( track.scrollLeft ); }
+			function step() {
+				var item = track.querySelector( '.prl-item' );
+				return item ? item.getBoundingClientRect().width + 16 : track.clientWidth * 0.8;
+			}
+			function go( dir ) {
+				var m = max();
+				var target = pos() + dir * step();
+				if ( target > m + 4 ) { target = 0; }
+				if ( target < -4 ) { target = m; }
+				track.scrollTo( { left: rtl ? -target : target, behavior: reduceMotion ? 'auto' : 'smooth' } );
+			}
+			function update() {
+				var m = max();
+				var p = m ? pos() / m : 0;
+				if ( bar ) {
+					var vis = track.scrollWidth ? track.clientWidth / track.scrollWidth : 1;
+					bar.style.width = Math.max( 12, vis * 100 ) + '%';
+					bar.style.transform = 'translateX(' + ( rtl ? -1 : 1 ) * p * ( ( 1 / Math.max( vis, 0.0001 ) ) - 1 ) * 100 + '%)';
+				}
+				rail.classList.toggle( 'is-static', m < 4 );
+				rail.classList.toggle( 'at-start', pos() < 4 );
+				rail.classList.toggle( 'at-end', pos() > m - 4 );
+			}
+			if ( prev ) { prev.addEventListener( 'click', function () { go( -1 ); } ); }
+			if ( next ) { next.addEventListener( 'click', function () { go( 1 ); } ); }
+			track.addEventListener( 'scroll', function () { requestAnimationFrame( update ); }, { passive: true } );
+			window.addEventListener( 'resize', update );
+			track.addEventListener( 'keydown', function ( e ) {
+				if ( 'ArrowLeft' === e.key ) { e.preventDefault(); go( rtl ? 1 : -1 ); }
+				if ( 'ArrowRight' === e.key ) { e.preventDefault(); go( rtl ? -1 : 1 ); }
+			} );
+			rail._update = update;
+			update();
+			if ( rail.hasAttribute( 'data-rail-auto' ) && ! reduceMotion ) {
+				var hold = false;
+				var seen = true;
+				[ 'pointerenter', 'focusin', 'touchstart' ].forEach( function ( ev ) { rail.addEventListener( ev, function () { hold = true; }, { passive: true } ); } );
+				[ 'pointerleave', 'focusout' ].forEach( function ( ev ) { rail.addEventListener( ev, function () { hold = false; } ); } );
+				if ( 'IntersectionObserver' in window ) {
+					new IntersectionObserver( function ( en ) { seen = en[ 0 ].isIntersecting; } ).observe( rail );
+				}
+				setInterval( function () {
+					if ( ! hold && seen && ! document.hidden && rail.offsetParent ) {
+						go( 1 );
+					}
+				}, 4200 );
+			}
+		} );
+	}
+
+	// Product rail tabs with a sliding indicator.
+	function initRailTabs( root ) {
+		( root || document ).querySelectorAll( '.baspar-scope [data-prl]' ).forEach( function ( box ) {
+			if ( box.dataset.prlInit ) {
+				return;
+			}
+			box.dataset.prlInit = '1';
+			var tabs = box.querySelectorAll( '[data-prl-tab]' );
+			var panes = box.querySelectorAll( '[data-prl-pane]' );
+			var wrap = box.querySelector( '[data-prl-tabs]' );
+			var ind = wrap && wrap.querySelector( '.prl-ind' );
+			function place() {
+				var on = wrap && wrap.querySelector( '.prl-tab.is-on' );
+				if ( ! ind || ! on ) {
+					return;
+				}
+				ind.style.width = on.offsetWidth + 'px';
+				ind.style.transform = 'translateX(' + on.offsetLeft + 'px)';
+				ind.style.opacity = '1';
+				if ( ! wrap.classList.contains( 'is-ready' ) ) {
+					requestAnimationFrame( function () { wrap.classList.add( 'is-ready' ); } );
+				}
+			}
+			tabs.forEach( function ( t, idx ) {
+				t.addEventListener( 'click', function () {
+					var i = t.getAttribute( 'data-prl-tab' );
+					tabs.forEach( function ( x ) {
+						var on = x === t;
+						x.classList.toggle( 'is-on', on );
+						x.setAttribute( 'aria-selected', on ? 'true' : 'false' );
+					} );
+					panes.forEach( function ( p ) {
+						var on = p.getAttribute( 'data-prl-pane' ) === i;
+						p.classList.toggle( 'is-on', on );
+						if ( on ) {
+							p.removeAttribute( 'hidden' );
+							p.classList.remove( 'is-enter' );
+							void p.offsetWidth;
+							p.classList.add( 'is-enter' );
+							var r = p.querySelector( '[data-rail]' );
+							if ( r && r._update ) { r._update(); }
+						} else {
+							p.setAttribute( 'hidden', '' );
+						}
+					} );
+					place();
+					if ( t.scrollIntoView && wrap.scrollWidth > wrap.clientWidth ) {
+						t.scrollIntoView( { block: 'nearest', inline: 'center', behavior: 'smooth' } );
+					}
+				} );
+				t.addEventListener( 'keydown', function ( e ) {
+					var d = 'ArrowLeft' === e.key ? 1 : ( 'ArrowRight' === e.key ? -1 : 0 );
+					if ( d ) {
+						e.preventDefault();
+						var n = tabs[ ( idx + d + tabs.length ) % tabs.length ];
+						n.focus();
+						n.click();
+					}
+				} );
+			} );
+			place();
+			window.addEventListener( 'resize', place );
+			if ( document.fonts && document.fonts.ready ) { document.fonts.ready.then( place ); }
+		} );
+	}
+
+	// Sticky header for Hello Elementor: the widget's own `position:sticky`
+	// can't work inside a short Elementor section, so the whole header area
+	// (theme-builder header, or the top-level section on a page) becomes the
+	// sticky element. Anything above the header widget inside that area (the
+	// topbar) scrolls away. Skipped when Elementor Pro's sticky is in use.
+	function initStickyHeader() {
+		var w = document.querySelector( '.baspar-scope[data-sticky-header]' );
+		if ( ! w || w.dataset.stInit || document.body.classList.contains( 'elementor-editor-active' ) ) {
+			return;
+		}
+		w.dataset.stInit = '1';
+		if ( w.closest( '.elementor-sticky, [data-settings*="\\"sticky\\""]' ) ) {
+			return;
+		}
+		var host = w.closest( '.elementor-location-header, [data-elementor-type="header"]' );
+		if ( ! host ) {
+			var doc = w.closest( '.elementor' );
+			if ( ! doc ) {
+				return;
+			}
+			host = w;
+			while ( host.parentElement && host.parentElement !== doc ) {
+				host = host.parentElement;
+			}
+		}
+		host.classList.add( 'bspr-sticky-host' );
+		var above = 0;
+		function measure() {
+			var bar = document.getElementById( 'wpadminbar' );
+			var barH = bar && 'fixed' === getComputedStyle( bar ).position ? bar.offsetHeight : 0;
+			above = Math.max( 0, w.getBoundingClientRect().top - host.getBoundingClientRect().top );
+			host.style.setProperty( '--bspr-sticky-top', ( barH - above ) + 'px' );
+			onScroll();
+		}
+		function onScroll() {
+			w.classList.toggle( 'is-stuck', window.scrollY > above + 4 );
+		}
+		measure();
+		window.addEventListener( 'resize', measure );
+		window.addEventListener( 'load', measure );
+		window.addEventListener( 'scroll', onScroll, { passive: true } );
+	}
+
 	/* ---- Boot ----------------------------------------------------------- */
 	function boot( root ) {
+		initStickyHeader();
+		initMotion( root );
+		initPointerFx( root );
+		initRotator( root );
+		initRails( root );
+		initRailTabs( root );
 		initReveal( root );
 		initCounters( root );
 		initTabs( root );
