@@ -3806,7 +3806,7 @@ a.sbn:hover{transform:translateY(-3px)}
 .baspar-scope .pdx-btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;height:42px;padding:0 10px;border-radius:12px;font-size:13.5px;font-weight:800;text-decoration:none;transition:transform .15s,filter .15s,box-shadow .15s;white-space:nowrap}
 .baspar-scope .pdx-btn:hover{transform:translateY(-1px);filter:brightness(1.05)}
 .baspar-scope .pdx-wa{background:#25D366;color:#fff;box-shadow:0 8px 18px -10px rgba(37,211,102,.9)}
-.baspar-scope .pdx-bale{background:linear-gradient(135deg,#2FC5B3,#0E9F8F);color:#fff;box-shadow:0 8px 18px -10px rgba(14,159,143,.9)}
+.baspar-scope .pdx-bale{background:#0DCA9B;color:#fff;box-shadow:0 8px 18px -10px rgba(13,202,155,.95)}
 .baspar-scope .pdx-tel{background:var(--brand-50);color:var(--brand);border:1px solid var(--brand-100)}
 .baspar-scope .pdx-compact .pdx{padding:10px}
 .baspar-scope .pdx-compact .pdx-btn{height:38px;font-size:12.5px}
@@ -3820,7 +3820,7 @@ a.sbn:hover{transform:translateY(-3px)}
   .baspar-scope .pd-mbar-main{flex:1;gap:8px;background:linear-gradient(135deg,var(--brand-2),var(--brand));color:#fff;font-size:15px}
   .baspar-scope .pd-mbar-wa{flex:0 0 48px;background:#25D366;color:#fff}
   .baspar-scope .pd-mbar-tel{flex:0 0 48px;background:var(--brand-50);color:var(--brand)}
-  .baspar-scope .pd-mbar-bale{flex:0 0 48px;background:linear-gradient(135deg,#2FC5B3,#0E9F8F);color:#fff}
+  .baspar-scope .pd-mbar-bale{flex:0 0 48px;background:#0DCA9B;color:#fff}
   body:has(.pd-mbar){padding-bottom:76px}
   body:has(.pd-mbar) .bspr-fwa{display:none}
 }
