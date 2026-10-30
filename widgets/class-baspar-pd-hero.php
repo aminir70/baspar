@@ -36,6 +36,10 @@ class Baspar_Pd_Hero extends Baspar_Widget_Base {
 		$this->start_controls_section( 'content', array( 'label' => __( 'اطلاعات محصول', 'baspar-elements' ) ) );
 		$this->add_control( 'show_crumbs', array( 'label' => __( 'مسیر صفحه (breadcrumb)', 'baspar-elements' ), 'type' => Controls_Manager::SWITCHER, 'return_value' => 'yes', 'default' => 'yes' ) );
 		$this->add_control( 'specs_count', array( 'label' => __( 'تعداد مشخصات کلیدی کنار عنوان', 'baspar-elements' ), 'type' => Controls_Manager::NUMBER, 'default' => 4, 'min' => 0, 'max' => 8, 'description' => __( 'از «ویژگی‌های» محصول در ووکامرس خوانده می‌شود.', 'baspar-elements' ) ) );
+		$this->add_control( 'auto_summary', array( 'label' => __( 'خلاصه خودکار وقتی «توضیح کوتاه» محصول خالی است', 'baspar-elements' ), 'type' => Controls_Manager::SWITCHER, 'return_value' => 'yes', 'default' => 'yes', 'description' => __( 'به ترتیب: توضیح متای Rank Math، چکیده محصول، اولین پاراگراف توضیحات.', 'baspar-elements' ) ) );
+		$this->add_control( 'steps_title', array( 'label' => __( 'عنوان مراحل خرید', 'baspar-elements' ), 'type' => Controls_Manager::TEXT, 'default' => 'خرید در ۳ مرحله' ) );
+		$this->add_control( 'steps', array( 'label' => __( 'مراحل خرید (هر خط یک مرحله؛ خالی = نمایش داده نشود)', 'baspar-elements' ), 'type' => Controls_Manager::TEXTAREA, 'rows' => 3, 'default' => "نام محصول، گرید و مقدار مورد نیاز را برای کارشناس بفرستید\nپیش‌فاکتور با قیمت روز و موجودی انبار را دریافت کنید\nبعد از پرداخت، بار همراه برگه آنالیز (COA) ارسال می‌شود" ) );
+		$this->add_control( 'steps_when', array( 'label' => __( 'نمایش مراحل خرید', 'baspar-elements' ), 'type' => Controls_Manager::SELECT, 'default' => 'auto', 'options' => array( 'auto' => __( 'فقط وقتی محصول مشخصات (ویژگی) ندارد', 'baspar-elements' ), 'always' => __( 'همیشه', 'baspar-elements' ) ), 'description' => __( 'حالت خودکار جای خالی ستون وسط را در محصولات کم‌اطلاعات پر می‌کند و صفحه‌های پرمشخصات را بلند نمی‌کند.', 'baspar-elements' ) ) );
 		$this->add_control( 'highlights', array( 'label' => __( 'نکات کوتاه (هر خط یک مورد)', 'baspar-elements' ), 'type' => Controls_Manager::TEXTAREA, 'rows' => 4, 'default' => "برگه آنالیز (COA) همراه محموله\nفروش عمده و بسته‌ای\nارسال به سراسر ایران" ) );
 		$this->add_control( 'price_title', array( 'label' => __( 'عنوان قیمت', 'baspar-elements' ), 'type' => Controls_Manager::TEXT, 'default' => 'قیمت: استعلامی' ) );
 		$this->add_control( 'price_text', array( 'label' => __( 'توضیح قیمت', 'baspar-elements' ), 'type' => Controls_Manager::TEXT, 'default' => 'قیمت با نرخ روز ارز تغییر می‌کند؛ از کارشناس این دسته بپرسید.' ) );
@@ -87,6 +91,27 @@ class Baspar_Pd_Hero extends Baspar_Widget_Base {
 		$specs  = product_specs( $product );
 		$sku    = $product->get_sku();
 		$short  = $product->get_short_description();
+		$summary = '';
+		if ( '' === trim( wp_strip_all_tags( (string) $short ) ) && 'yes' === ( $s['auto_summary'] ?? 'yes' ) ) {
+			$summary = (string) get_post_meta( $pid, 'rank_math_description', true );
+			if ( '' === trim( $summary ) ) {
+				$summary = (string) get_post_field( 'post_excerpt', $pid );
+			}
+			if ( '' === trim( $summary ) && preg_match_all( '#<p[^>]*>(.*?)</p>#is', (string) get_post_field( 'post_content', $pid ), $pm ) ) {
+				foreach ( $pm[1] as $para ) {
+					$t = trim( wp_strip_all_tags( $para ) );
+					if ( mb_strlen( $t, 'UTF-8' ) > 60 ) {
+						$summary = $t;
+						break;
+					}
+				}
+			}
+			$summary = wp_trim_words( wp_strip_all_tags( $summary ), 40, '…' );
+		}
+		$steps = array_filter( array_map( 'trim', preg_split( '/\R/u', (string) ( $s['steps'] ?? '' ) ) ) );
+		if ( 'always' !== ( $s['steps_when'] ?? 'auto' ) && $specs && (int) $s['specs_count'] > 0 ) {
+			$steps = array();
+		}
 		$lines  = array_filter( array_map( 'trim', preg_split( '/\R/u', (string) $s['highlights'] ) ) );
 		$status = $product->get_stock_status();
 		$status_txt = array( 'instock' => __( 'موجود در انبار', 'baspar-elements' ), 'outofstock' => __( 'فعلاً ناموجود — قابل سفارش', 'baspar-elements' ), 'onbackorder' => __( 'سفارشی — با زمان تحویل', 'baspar-elements' ) );
@@ -162,7 +187,7 @@ class Baspar_Pd_Hero extends Baspar_Widget_Base {
 						<h1 class="pdh-title"><?php echo esc_html( $title ); ?></h1>
 						<?php if ( $sku ) : ?><div class="pdh-sku"><?php esc_html_e( 'کد محصول:', 'baspar-elements' ); ?> <span dir="ltr"><?php echo esc_html( $sku ); ?></span></div><?php endif; ?>
 
-						<?php if ( $short ) : ?><div class="pdh-short rich-text"><?php echo wp_kses_post( wpautop( $short ) ); ?></div><?php endif; ?>
+						<?php if ( $short ) : ?><div class="pdh-short rich-text"><?php echo wp_kses_post( wpautop( $short ) ); ?></div><?php elseif ( $summary ) : ?><p class="pdh-short"><?php echo esc_html( $summary ); ?></p><?php endif; ?>
 
 						<?php if ( $specs && (int) $s['specs_count'] > 0 ) : ?>
 							<dl class="pdh-specs">
@@ -174,7 +199,14 @@ class Baspar_Pd_Hero extends Baspar_Widget_Base {
 						<?php endif; ?>
 
 
-					      <?php if ( $lines ) : ?>
+						<?php if ( $steps ) : ?>
+							<div class="pdh-steps">
+								<?php if ( ! empty( $s['steps_title'] ) ) : ?><div class="pdh-steps-t"><?php echo esc_html( $s['steps_title'] ); ?></div><?php endif; ?>
+								<ol><?php $k = 0; foreach ( $steps as $st ) : ++$k; ?><li><span class="n"><?php echo esc_html( fa_num( $k ) ); ?></span><span><?php echo esc_html( $st ); ?></span></li><?php endforeach; ?></ol>
+							</div>
+						<?php endif; ?>
+
+						<?php if ( $lines ) : ?>
 							<ul class="pdh-lines"><?php foreach ( $lines as $l ) : ?><li><?php echo icon_svg( 'check', 14 ); // phpcs:ignore ?><?php echo esc_html( $l ); ?></li><?php endforeach; ?></ul>
 						<?php endif; ?>
 					</div>

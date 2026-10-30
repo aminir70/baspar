@@ -4,7 +4,7 @@ Tags: elementor, woocommerce, widgets, rtl, persian
 Requires at least: 5.8
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.6.4
+Stable tag: 1.6.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,6 +37,16 @@ Requires Elementor. WooCommerce is required only for the product/category widget
    Templates → Saved Templates → Import Templates.
 
 == Changelog ==
+
+= 1.6.5 =
+* Product hero for products with little data (none of the 163 products has a
+  short description or SKU; 68 have no attributes), e.g. MEKO, where the
+  middle column was just the title:
+  - Automatic summary when the short description is empty: Rank Math meta
+    description, else the excerpt, else the first real paragraph of the
+    description (40 words).
+  - "Buy in 3 steps" block (editable lines); by default shown only when the
+    product has no attributes, so spec-rich pages do not get longer.
 
 = 1.6.4 =
 * Product hero: removed the empty block under the product photo. The three
