@@ -4,7 +4,7 @@ Tags: elementor, woocommerce, widgets, rtl, persian
 Requires at least: 5.8
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.6.3
+Stable tag: 1.6.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,6 +37,14 @@ Requires Elementor. WooCommerce is required only for the product/category widget
    Templates → Saved Templates → Import Templates.
 
 == Changelog ==
+
+= 1.6.4 =
+* Product hero: removed the empty block under the product photo. The three
+  columns now end at (almost) the same height: wider photo column, share
+  buttons under the photo, highlights at the bottom of the info column, the
+  gallery is no longer sticky, and the expert cards are more compact (role
+  text limited to two lines, smaller paddings) so the quote card is not much
+  taller than the photo.
 
 = 1.6.3 =
 * SEO / markup audit of the new product page:

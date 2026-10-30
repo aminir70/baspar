@@ -3948,3 +3948,33 @@ body.admin-bar .elementor-widget-baspar-pd-anchors{top:44px}
 @media(max-width:640px){.baspar-scope .pdf li:last-child:nth-child(odd){grid-column:1 / -1;flex-direction:row;align-items:center}}
 
 .baspar-scope .footer-col .fch{line-height:1.5;letter-spacing:0}
+
+/* Hero columns share one height (1.6.4): no empty block under the photo.
+   Highlights + share live under the gallery; the image block is no longer
+   sticky; the expert cards are more compact so the quote card is not much
+   taller than the photo. */
+.baspar-scope .pdh-grid{align-items:stretch}
+.baspar-scope .pdh-gallery{display:flex;flex-direction:column;gap:18px;min-width:0}
+.baspar-scope .pdh-gallery .pdg{position:static}
+.baspar-scope .pdh-extra{display:flex;flex-direction:column;gap:14px;margin-top:auto}
+.baspar-scope .pdh-extra .pdh-lines{padding:16px 18px;background:#fff;border:1px solid var(--line);border-radius:18px}
+.baspar-scope .pdh-extra .pdh-share{padding-top:0;border-top:0}
+.baspar-scope .pdh-info{align-self:start}
+.baspar-scope .pdh-buy{align-self:start}
+.baspar-scope .pdx-who small{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.7}
+.baspar-scope .pdq-price{padding:16px 18px}
+.baspar-scope .pdq-head{padding:14px 18px 4px}
+.baspar-scope .pdx-list{padding:8px 18px 12px;gap:10px}
+.baspar-scope .pdx{padding:10px;gap:8px 10px}
+.baspar-scope .pdx-av{width:42px;height:42px;font-size:17px}
+.baspar-scope .pdx-btn{height:38px;font-size:13px}
+.baspar-scope .pdq-hours{margin:0 18px 14px}
+@media(max-width:1200px){.baspar-scope .pdh-buy,.baspar-scope .pdh-info{align-self:stretch}}
+
+/* 1.6.4: wider photo column, highlights at the bottom of the info column. */
+.baspar-scope .pdh-grid{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr) minmax(310px,.9fr)}
+.baspar-scope .pdh-info{align-self:stretch}
+.baspar-scope .pdh-info .pdh-lines{margin-top:auto;padding:16px 18px;background:#fff;border:1px solid var(--line);border-radius:18px}
+.baspar-scope .pdh-extra{margin-top:0}
+@media(max-width:1200px){.baspar-scope .pdh-grid{grid-template-columns:minmax(0,1fr) minmax(0,1.1fr)}}
+@media(max-width:820px){.baspar-scope .pdh-grid{grid-template-columns:minmax(0,1fr)}.baspar-scope .pdh-info .pdh-lines{margin-top:0}}

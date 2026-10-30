@@ -128,6 +128,20 @@ class Baspar_Pd_Hero extends Baspar_Widget_Base {
 						<?php else : ?>
 							<div class="pdg pdg-empty"><?php echo icon_svg( 'package', 64 ); // phpcs:ignore ?></div>
 						<?php endif; ?>
+						<div class="pdh-extra">
+						<?php if ( 'yes' === $s['show_share'] ) :
+							$enc = rawurlencode( $url );
+							$t   = rawurlencode( wp_strip_all_tags( $title ) );
+							?>
+							<div class="pdh-share">
+								<span><?php echo icon_svg( 'share', 15 ); // phpcs:ignore ?><?php esc_html_e( 'اشتراک‌گذاری:', 'baspar-elements' ); ?></span>
+								<a href="https://wa.me/?text=<?php echo $t . '%20' . $enc; // phpcs:ignore ?>" target="_blank" rel="noopener nofollow" aria-label="WhatsApp"><?php echo icon_svg( 'whatsapp', 16 ); // phpcs:ignore ?></a>
+								<a href="https://t.me/share/url?url=<?php echo $enc; // phpcs:ignore ?>&amp;text=<?php echo $t; // phpcs:ignore ?>" target="_blank" rel="noopener nofollow" aria-label="Telegram"><?php echo icon_svg( 'telegram', 16 ); // phpcs:ignore ?></a>
+								<a href="mailto:?subject=<?php echo $t; // phpcs:ignore ?>&amp;body=<?php echo $enc; // phpcs:ignore ?>" aria-label="Email"><?php echo icon_svg( 'mail', 16 ); // phpcs:ignore ?></a>
+								<button type="button" data-copy="<?php echo esc_url( $url ); ?>" aria-label="<?php esc_attr_e( 'کپی لینک', 'baspar-elements' ); ?>"><?php echo icon_svg( 'link', 16 ); // phpcs:ignore ?></button>
+							</div>
+						<?php endif; ?>
+						</div>
 					</div>
 
 					<div class="pdh-info">
@@ -159,21 +173,9 @@ class Baspar_Pd_Hero extends Baspar_Widget_Base {
 							<?php if ( count( $specs ) > (int) $s['specs_count'] ) : ?><a class="pdh-more" href="#pd-specs"><?php esc_html_e( 'همه مشخصات فنی', 'baspar-elements' ); ?><?php echo icon_svg( 'arrow-down', 14 ); // phpcs:ignore ?></a><?php endif; ?>
 						<?php endif; ?>
 
-						<?php if ( $lines ) : ?>
-							<ul class="pdh-lines"><?php foreach ( $lines as $l ) : ?><li><?php echo icon_svg( 'check', 14 ); // phpcs:ignore ?><?php echo esc_html( $l ); ?></li><?php endforeach; ?></ul>
-						<?php endif; ?>
 
-						<?php if ( 'yes' === $s['show_share'] ) :
-							$enc = rawurlencode( $url );
-							$t   = rawurlencode( wp_strip_all_tags( $title ) );
-							?>
-							<div class="pdh-share">
-								<span><?php echo icon_svg( 'share', 15 ); // phpcs:ignore ?><?php esc_html_e( 'اشتراک‌گذاری:', 'baspar-elements' ); ?></span>
-								<a href="https://wa.me/?text=<?php echo $t . '%20' . $enc; // phpcs:ignore ?>" target="_blank" rel="noopener nofollow" aria-label="WhatsApp"><?php echo icon_svg( 'whatsapp', 16 ); // phpcs:ignore ?></a>
-								<a href="https://t.me/share/url?url=<?php echo $enc; // phpcs:ignore ?>&amp;text=<?php echo $t; // phpcs:ignore ?>" target="_blank" rel="noopener nofollow" aria-label="Telegram"><?php echo icon_svg( 'telegram', 16 ); // phpcs:ignore ?></a>
-								<a href="mailto:?subject=<?php echo $t; // phpcs:ignore ?>&amp;body=<?php echo $enc; // phpcs:ignore ?>" aria-label="Email"><?php echo icon_svg( 'mail', 16 ); // phpcs:ignore ?></a>
-								<button type="button" data-copy="<?php echo esc_url( $url ); ?>" aria-label="<?php esc_attr_e( 'کپی لینک', 'baspar-elements' ); ?>"><?php echo icon_svg( 'link', 16 ); // phpcs:ignore ?></button>
-							</div>
+					      <?php if ( $lines ) : ?>
+							<ul class="pdh-lines"><?php foreach ( $lines as $l ) : ?><li><?php echo icon_svg( 'check', 14 ); // phpcs:ignore ?><?php echo esc_html( $l ); ?></li><?php endforeach; ?></ul>
 						<?php endif; ?>
 					</div>
 
