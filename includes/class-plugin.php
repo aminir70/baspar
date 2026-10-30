@@ -178,11 +178,45 @@ final class Plugin {
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_fonts' ) );
 		add_action( 'elementor/editor/after_enqueue_styles', array( $this, 'enqueue_fonts' ) );
 
+		// WP Rocket: keep our CSS/JS out of minify/combine and "delay JS".
+		// Rocket's minified copies are only rebuilt when its cache is cleared,
+		// so after a plugin update the site kept serving the old script (the
+		// mega menu and mobile drawer had no JavaScript). Unminified, the
+		// files load with ?ver=<plugin version> and refresh on every update;
+		// not delayed, the menu works on the first tap.
+		add_filter( 'rocket_exclude_js', array( $this, 'rocket_exclude_assets' ) );
+		add_filter( 'rocket_exclude_css', array( $this, 'rocket_exclude_assets' ) );
+		add_filter( 'rocket_delay_js_exclusions', array( $this, 'rocket_exclude_delay' ) );
+
 		// Helpers shared by widgets.
 		require_once BASPAR_ELEMENTS_PATH . 'includes/helpers.php';
 		require_once BASPAR_ELEMENTS_PATH . 'includes/blog.php';
 		require_once BASPAR_ELEMENTS_PATH . 'includes/product.php';
 		require_once BASPAR_ELEMENTS_PATH . 'includes/home.php';
+	}
+
+	/**
+	 * WP Rocket minify/combine exclusions (path patterns).
+	 *
+	 * @param array $list Patterns.
+	 * @return array
+	 */
+	public function rocket_exclude_assets( $list ) {
+		$list   = (array) $list;
+		$list[] = '/wp-content/plugins/baspar-elements/assets/(.*)';
+		return $list;
+	}
+
+	/**
+	 * WP Rocket delay-JS exclusions.
+	 *
+	 * @param array $list Patterns.
+	 * @return array
+	 */
+	public function rocket_exclude_delay( $list ) {
+		$list   = (array) $list;
+		$list[] = 'baspar-elements/assets/js/baspar-elements.js';
+		return $list;
 	}
 
 	/**

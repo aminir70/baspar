@@ -4,7 +4,7 @@ Tags: elementor, woocommerce, widgets, rtl, persian
 Requires at least: 5.8
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.8.0
+Stable tag: 1.8.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,6 +37,13 @@ Requires Elementor. WooCommerce is required only for the product/category widget
    Templates → Saved Templates → Import Templates.
 
 == Changelog ==
+
+= 1.8.1 =
+* Fix: mega menu category hover and the mobile menu drawer did nothing on the
+  live site. WP Rocket kept serving an old minified copy of the plugin script
+  (made before the mega menu existed). The plugin's CSS/JS are now excluded
+  from WP Rocket minify/combine and "delay JavaScript", so they always load
+  the version that is installed.
 
 = 1.8.0 =
 * Hello Elementor support. The theme can be switched from Woodmart to Hello:
