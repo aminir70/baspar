@@ -118,7 +118,9 @@ abstract class Baspar_Widget_Base extends Widget_Base {
 	 * @return string[]
 	 */
 	public function get_style_depends() {
-		return array( 'baspar-elements', 'baspar-elements-fonts' );
+		// Only this widget's CSS bundle (the page head usually has it already;
+		// this is the safety net for places the page scan can't see).
+		return \BasparElements\widget_style_handles( preg_replace( '/^baspar-/', '', $this->get_name() ) );
 	}
 
 	/**

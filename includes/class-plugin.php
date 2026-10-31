@@ -168,15 +168,25 @@ final class Plugin {
 		// Register widgets.
 		add_action( 'elementor/widgets/register', array( $this, 'register_widgets' ) );
 
-		// Frontend + editor assets.
-		add_action( 'elementor/frontend/after_enqueue_styles', array( $this, 'enqueue_styles' ) );
-		add_action( 'elementor/frontend/after_register_scripts', array( $this, 'register_scripts' ) );
-		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
-		add_action( 'elementor/editor/after_enqueue_styles', array( $this, 'enqueue_styles' ) );
+		// Helpers shared by widgets.
+		require_once BASPAR_ELEMENTS_PATH . 'includes/helpers.php';
+		require_once BASPAR_ELEMENTS_PATH . 'includes/blog.php';
+		require_once BASPAR_ELEMENTS_PATH . 'includes/product.php';
+		require_once BASPAR_ELEMENTS_PATH . 'includes/home.php';
+		require_once BASPAR_ELEMENTS_PATH . 'includes/assets.php';
+		require_once BASPAR_ELEMENTS_PATH . 'includes/images.php';
 
-		// Load Google Fonts (Vazirmatn + JetBrains Mono).
-		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_fonts' ) );
-		add_action( 'elementor/editor/after_enqueue_styles', array( $this, 'enqueue_fonts' ) );
+		// Assets (1.9.0): only the CSS bundles / script / webfont a page uses
+		// (see includes/assets.php). Handles are registered early so widget
+		// dependencies always resolve.
+		add_action( 'init', '\BasparElements\register_assets', 20 );
+		add_action( 'wp_enqueue_scripts', '\BasparElements\enqueue_page_assets', 20 );
+		add_action( 'wp_head', '\BasparElements\preload_product_image', 2 );
+		add_action( 'elementor/editor/after_enqueue_styles', array( $this, 'enqueue_editor_styles' ) );
+
+		// Responsive WebP copies of product images.
+		add_action( 'save_post_product', '\BasparElements\webp_on_product_save', 30 );
+		add_action( 'delete_attachment', '\BasparElements\webp_on_delete' );
 
 		// WP Rocket: keep our CSS/JS out of minify/combine and "delay JS".
 		// Rocket's minified copies are only rebuilt when its cache is cleared,
@@ -187,12 +197,8 @@ final class Plugin {
 		add_filter( 'rocket_exclude_js', array( $this, 'rocket_exclude_assets' ) );
 		add_filter( 'rocket_exclude_css', array( $this, 'rocket_exclude_assets' ) );
 		add_filter( 'rocket_delay_js_exclusions', array( $this, 'rocket_exclude_delay' ) );
-
-		// Helpers shared by widgets.
-		require_once BASPAR_ELEMENTS_PATH . 'includes/helpers.php';
-		require_once BASPAR_ELEMENTS_PATH . 'includes/blog.php';
-		require_once BASPAR_ELEMENTS_PATH . 'includes/product.php';
-		require_once BASPAR_ELEMENTS_PATH . 'includes/home.php';
+		// WP Rocket "Remove unused CSS": keep the script-driven states.
+		add_filter( 'rocket_rucss_safelist', '\BasparElements\rocket_rucss_safelist' );
 	}
 
 	/**
@@ -215,7 +221,7 @@ final class Plugin {
 	 */
 	public function rocket_exclude_delay( $list ) {
 		$list   = (array) $list;
-		$list[] = 'baspar-elements/assets/js/baspar-elements.js';
+		$list[] = 'baspar-elements/assets/js/';
 		return $list;
 	}
 
@@ -284,46 +290,11 @@ final class Plugin {
 	}
 
 	/**
-	 * Enqueue the design stylesheet.
+	 * Elementor editor panel: the full stylesheet and webfonts.
 	 */
-	public function enqueue_styles() {
-		wp_enqueue_style(
-			'baspar-elements',
-			BASPAR_ELEMENTS_ASSETS . 'css/baspar-elements.css',
-			array(),
-			BASPAR_ELEMENTS_VERSION
-		);
-	}
-
-	/**
-	 * Register the interaction script (reveal, tabs, faq, counters, float wa).
-	 */
-	public function register_scripts() {
-		wp_register_script(
-			'baspar-elements',
-			BASPAR_ELEMENTS_ASSETS . 'js/baspar-elements.js',
-			array(),
-			BASPAR_ELEMENTS_VERSION,
-			true
-		);
-	}
-
-	/**
-	 * Enqueue interaction script on the frontend.
-	 */
-	public function enqueue_scripts() {
-		wp_enqueue_script( 'baspar-elements' );
-	}
-
-	/**
-	 * Enqueue the webfonts used by the design.
-	 */
-	public function enqueue_fonts() {
-		wp_enqueue_style(
-			'baspar-elements-fonts',
-			'https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap',
-			array(),
-			BASPAR_ELEMENTS_VERSION
-		);
+	public function enqueue_editor_styles() {
+		\BasparElements\register_assets();
+		wp_enqueue_style( 'baspar-elements' );
+		wp_enqueue_style( 'baspar-elements-fonts' );
 	}
 }

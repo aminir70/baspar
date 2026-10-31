@@ -4,7 +4,7 @@ Tags: elementor, woocommerce, widgets, rtl, persian
 Requires at least: 5.8
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.8.1
+Stable tag: 1.9.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,6 +37,26 @@ Requires Elementor. WooCommerce is required only for the product/category widget
    Templates → Saved Templates → Import Templates.
 
 == Changelog ==
+
+= 1.9.0 =
+* Speed (mobile LCP / CLS). Details and test notes: docs/perf-1.9.0.md.
+  - CSS is loaded only where needed: the stylesheet is split into bundles
+    (core, home, product, blog, side, shop, pages); each page gets one
+    minified file with just its bundles, in the original rule order
+    (built once into uploads/baspar-elements/). Pages with no Baspar widget
+    load no Baspar CSS, script or webfont. Product page: 55 KB -> 15 KB gzip.
+  - Critical CSS inline on product pages (header, gallery, title): no layout
+    shift even when CSS is loaded asynchronously.
+  - Product gallery: first image as WebP 360/480/600 (made once, quality 75)
+    with a sizes matching the column, preloaded; the PNG is no longer in
+    srcset. Falls back to the old markup when WebP can't be written.
+  - Removed 269 overridden duplicate rules, 142 rules of unused prototype
+    classes and 5 unused @keyframes.
+  - Script: minified, deferred, only on pages with Baspar widgets; no
+    forced layout on load (measurements wait for the first paint /
+    ResizeObserver / IntersectionObserver, reads before writes).
+  - WP Rocket: script-driven classes added to the Remove Unused CSS safelist.
+  - Kill switch: define( 'BASPAR_ELEMENTS_CSS_ALL', true ) in wp-config.php.
 
 = 1.8.1 =
 * Fix: mega menu category hover and the mobile menu drawer did nothing on the

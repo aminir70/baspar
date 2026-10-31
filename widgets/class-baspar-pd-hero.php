@@ -24,6 +24,9 @@ use function BasparElements\expert_bale_link;
 use function BasparElements\fa_num;
 use function BasparElements\fa_num_smart;
 use function BasparElements\icon_svg;
+use function BasparElements\gallery_main_image;
+use function BasparElements\gallery_sizes;
+use function BasparElements\webp_image_set;
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
@@ -137,13 +140,18 @@ class Baspar_Pd_Hero extends Baspar_Widget_Base {
 							?>
 							<div class="pdg" data-pdg>
 								<a class="pdg-main" href="<?php echo esc_url( wp_get_attachment_image_url( $main, 'full' ) ); ?>" target="_blank" rel="noopener" data-pdg-main aria-label="<?php esc_attr_e( 'نمایش تصویر بزرگ', 'baspar-elements' ); ?>">
-									<?php echo wp_get_attachment_image( $main, 'woocommerce_single', false, array( 'class' => 'pdg-img', 'alt' => $title, 'fetchpriority' => 'high', 'loading' => 'eager', 'data-pdg-img' => '1' ) ); // phpcs:ignore ?>
+									<?php
+									// LCP image: WebP 360/480/600 with a sizes that matches the column;
+									// falls back to the WordPress markup when WebP can't be made.
+									$main_img = gallery_main_image( $main, $title );
+									echo $main_img ? $main_img : wp_get_attachment_image( $main, 'woocommerce_single', false, array( 'class' => 'pdg-img', 'alt' => $title, 'fetchpriority' => 'high', 'loading' => 'eager', 'decoding' => 'async', 'sizes' => gallery_sizes(), 'data-pdg-img' => '1' ) ); // phpcs:ignore
+									?>
 									<span class="pdg-zoom" aria-hidden="true"><?php echo icon_svg( 'zoom', 18 ); // phpcs:ignore ?></span>
 								</a>
 								<?php if ( count( $imgs ) > 1 ) : ?>
 									<div class="pdg-thumbs">
 										<?php foreach ( $imgs as $k => $iid ) : ?>
-											<button type="button" class="pdg-th<?php echo 0 === $k ? ' is-on' : ''; ?>" data-pdg-th data-large="<?php echo esc_url( wp_get_attachment_image_url( $iid, 'woocommerce_single' ) ); ?>" data-full="<?php echo esc_url( wp_get_attachment_image_url( $iid, 'full' ) ); ?>" aria-label="<?php echo esc_attr( sprintf( 'تصویر %s', fa_num( $k + 1 ) ) ); ?>">
+											<button type="button" class="pdg-th<?php echo 0 === $k ? ' is-on' : ''; ?>" data-pdg-th data-large="<?php $th_set = webp_image_set( $iid, false ); echo esc_url( $th_set ? $th_set['src'] : wp_get_attachment_image_url( $iid, 'woocommerce_single' ) ); ?>" data-full="<?php echo esc_url( wp_get_attachment_image_url( $iid, 'full' ) ); ?>" aria-label="<?php echo esc_attr( sprintf( 'تصویر %s', fa_num( $k + 1 ) ) ); ?>">
 												<?php echo wp_get_attachment_image( $iid, 'thumbnail', false, array( 'alt' => '', 'loading' => 'lazy' ) ); // phpcs:ignore ?>
 											</button>
 										<?php endforeach; ?>

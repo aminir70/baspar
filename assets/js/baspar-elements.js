@@ -7,6 +7,40 @@
 ( function () {
 	'use strict';
 
+	/* ---- Layout-safe scheduling -------------------------------------------
+	   Measuring (getBoundingClientRect, offsetWidth, scrollY…) right after the
+	   page changes forces the browser to lay the page out early ("forced
+	   reflow"). Start-up measurements wait until the first frame is painted,
+	   when layout is already up to date, and read everything before writing. */
+	function afterPaint( fn ) {
+		if ( window.requestAnimationFrame ) {
+			window.requestAnimationFrame( function () { setTimeout( fn, 0 ); } );
+		} else {
+			setTimeout( fn, 0 );
+		}
+	}
+
+	// Show elements that are on screen and hide the rest until they scroll in,
+	// using IntersectionObserver's first report (no measuring of our own).
+	// `htmlClass` turns the hidden start state on only after that first report,
+	// so content already visible never flickers.
+	function observeReveal( els, opts, htmlClass, show ) {
+		var first = true;
+		var io = new IntersectionObserver( function ( entries ) {
+			entries.forEach( function ( e ) {
+				if ( e.isIntersecting && ( first || ! opts.threshold || e.intersectionRatio >= opts.threshold ) ) {
+					show( e.target, first );
+					io.unobserve( e.target );
+				}
+			} );
+			if ( first ) {
+				first = false;
+				document.documentElement.classList.add( htmlClass );
+			}
+		}, opts );
+		els.forEach( function ( el ) { io.observe( el ); } );
+	}
+
 	/* ---- Scroll reveal -------------------------------------------------- */
 	// Content stays visible until this script runs (it may be delayed by a
 	// cache plugin). Elements already on screen are marked shown before the
@@ -20,26 +54,14 @@
 			els.forEach( function ( el ) { el.classList.add( 'in' ); } );
 			return;
 		}
-		var vh = window.innerHeight || document.documentElement.clientHeight;
-		els = Array.prototype.filter.call( els, function ( el ) {
-			var r = el.getBoundingClientRect();
-			if ( r.top < vh && r.bottom > 0 ) {
+		observeReveal( Array.prototype.slice.call( els ), { threshold: 0.15 }, 'baspar-js', function ( el, initial ) {
+			var d = initial ? 0 : parseInt( el.getAttribute( 'data-reveal-delay' ) || 0, 10 );
+			if ( d ) {
+				setTimeout( function () { el.classList.add( 'in' ); }, d );
+			} else {
 				el.classList.add( 'in' );
-				return false;
 			}
-			return true;
 		} );
-		document.documentElement.classList.add( 'baspar-js' );
-		var io = new IntersectionObserver( function ( entries ) {
-			entries.forEach( function ( e ) {
-				if ( e.isIntersecting ) {
-					var d = e.target.getAttribute( 'data-reveal-delay' ) || 0;
-					setTimeout( function () { e.target.classList.add( 'in' ); }, parseInt( d, 10 ) );
-					io.unobserve( e.target );
-				}
-			} );
-		}, { threshold: 0.15 } );
-		els.forEach( function ( el ) { io.observe( el ); } );
 	}
 
 	/* ---- Sticky sidebar (single post) ------------------------------------
@@ -74,24 +96,28 @@
 		initStickySidebar.done = true;
 		var offset = 100;
 		function fit() {
+			// Read everything first, then write.
 			var vh = window.innerHeight || document.documentElement.clientHeight;
-			cols.forEach( function ( col ) {
-				var on = window.innerWidth > 1024;
+			var on = window.innerWidth > 1024;
+			var heights = cols.map( function ( col ) { return on ? col.offsetHeight : 0; } );
+			cols.forEach( function ( col, i ) {
 				col.classList.toggle( 'bspr-sticky-col', on );
 				if ( ! on ) {
 					col.style.removeProperty( '--bspr-sticky-top' );
 					return;
 				}
-				var h = col.offsetHeight;
+				var h = heights[ i ];
 				var top = h + offset + 24 > vh ? vh - h - 24 : offset;
 				col.style.setProperty( '--bspr-sticky-top', Math.round( top ) + 'px' );
 			} );
 		}
-		fit();
 		window.addEventListener( 'resize', fit );
 		if ( 'ResizeObserver' in window ) {
-			var ro = new ResizeObserver( fit );
+			// Fires once after the first layout, then on every size change.
+			var ro = new ResizeObserver( function () { window.requestAnimationFrame( fit ); } );
 			cols.forEach( function ( c ) { ro.observe( c ); } );
+		} else {
+			afterPaint( fit );
 		}
 		window.addEventListener( 'load', fit );
 	}
@@ -336,7 +362,7 @@
 		}
 		window.addEventListener( 'scroll', onScroll, { passive: true } );
 		window.addEventListener( 'resize', onScroll );
-		update();
+		afterPaint( update );
 	}
 
 	/* ---- Animated counters ---------------------------------------------- */
@@ -538,7 +564,7 @@
 			fwa.classList.toggle( 'in', window.scrollY > threshold );
 		}
 		window.addEventListener( 'scroll', onScroll, { passive: true } );
-		onScroll();
+		afterPaint( onScroll );
 	}
 
 	/* ---- Home v2 motion (1.8.0) -----------------------------------------
@@ -562,25 +588,9 @@
 			targets.forEach( function ( t ) { t.classList.add( 'is-in' ); } );
 			return;
 		}
-		var vh = window.innerHeight || document.documentElement.clientHeight;
-		targets = targets.filter( function ( t ) {
-			var r = t.getBoundingClientRect();
-			if ( r.top < vh * 0.92 && r.bottom > 0 ) {
-				t.classList.add( 'is-in' );
-				return false;
-			}
-			return true;
+		observeReveal( targets, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 }, 'baspar-motion', function ( t ) {
+			t.classList.add( 'is-in' );
 		} );
-		document.documentElement.classList.add( 'baspar-motion' );
-		var io = new IntersectionObserver( function ( entries ) {
-			entries.forEach( function ( e ) {
-				if ( e.isIntersecting ) {
-					e.target.classList.add( 'is-in' );
-					io.unobserve( e.target );
-				}
-			} );
-		}, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 } );
-		targets.forEach( function ( t ) { io.observe( t ); } );
 	}
 
 	// Cursor spotlight (--mx / --my) and 3D tilt (--rx / --ry), pointer only.
@@ -663,7 +673,11 @@
 			if ( ! track ) {
 				return;
 			}
-			var rtl = 'rtl' === getComputedStyle( track ).direction;
+			var rtl = null; // read lazily, after the first paint
+			function isRtl() {
+				if ( null === rtl ) { rtl = 'rtl' === getComputedStyle( track ).direction; }
+				return rtl;
+			}
 			function max() { return Math.max( 0, track.scrollWidth - track.clientWidth ); }
 			function pos() { return Math.abs( track.scrollLeft ); }
 			function step() {
@@ -675,30 +689,40 @@
 				var target = pos() + dir * step();
 				if ( target > m + 4 ) { target = 0; }
 				if ( target < -4 ) { target = m; }
-				track.scrollTo( { left: rtl ? -target : target, behavior: reduceMotion ? 'auto' : 'smooth' } );
+				track.scrollTo( { left: isRtl() ? -target : target, behavior: reduceMotion ? 'auto' : 'smooth' } );
 			}
 			function update() {
-				var m = max();
-				var p = m ? pos() / m : 0;
+				// Reads first …
+				var sw = track.scrollWidth;
+				var cw = track.clientWidth;
+				var m = Math.max( 0, sw - cw );
+				var x = pos();
+				var p = m ? x / m : 0;
+				var dir = isRtl() ? -1 : 1;
+				// … then writes.
 				if ( bar ) {
-					var vis = track.scrollWidth ? track.clientWidth / track.scrollWidth : 1;
+					var vis = sw ? cw / sw : 1;
 					bar.style.width = Math.max( 12, vis * 100 ) + '%';
-					bar.style.transform = 'translateX(' + ( rtl ? -1 : 1 ) * p * ( ( 1 / Math.max( vis, 0.0001 ) ) - 1 ) * 100 + '%)';
+					bar.style.transform = 'translateX(' + dir * p * ( ( 1 / Math.max( vis, 0.0001 ) ) - 1 ) * 100 + '%)';
 				}
 				rail.classList.toggle( 'is-static', m < 4 );
-				rail.classList.toggle( 'at-start', pos() < 4 );
-				rail.classList.toggle( 'at-end', pos() > m - 4 );
+				rail.classList.toggle( 'at-start', x < 4 );
+				rail.classList.toggle( 'at-end', x > m - 4 );
 			}
 			if ( prev ) { prev.addEventListener( 'click', function () { go( -1 ); } ); }
 			if ( next ) { next.addEventListener( 'click', function () { go( 1 ); } ); }
 			track.addEventListener( 'scroll', function () { requestAnimationFrame( update ); }, { passive: true } );
 			window.addEventListener( 'resize', update );
 			track.addEventListener( 'keydown', function ( e ) {
-				if ( 'ArrowLeft' === e.key ) { e.preventDefault(); go( rtl ? 1 : -1 ); }
-				if ( 'ArrowRight' === e.key ) { e.preventDefault(); go( rtl ? -1 : 1 ); }
+				if ( 'ArrowLeft' === e.key ) { e.preventDefault(); go( isRtl() ? 1 : -1 ); }
+				if ( 'ArrowRight' === e.key ) { e.preventDefault(); go( isRtl() ? -1 : 1 ); }
 			} );
 			rail._update = update;
-			update();
+			if ( 'ResizeObserver' in window ) {
+				new ResizeObserver( function () { window.requestAnimationFrame( update ); } ).observe( track );
+			} else {
+				afterPaint( update );
+			}
 			if ( rail.hasAttribute( 'data-rail-auto' ) && ! reduceMotion ) {
 				var hold = false;
 				var seen = true;
@@ -776,9 +800,14 @@
 					}
 				} );
 			} );
-			place();
-			window.addEventListener( 'resize', place );
-			if ( document.fonts && document.fonts.ready ) { document.fonts.ready.then( place ); }
+			if ( wrap && 'ResizeObserver' in window ) {
+				// First report comes after layout: no forced reflow on load.
+				new ResizeObserver( function () { window.requestAnimationFrame( place ); } ).observe( wrap );
+			} else {
+				afterPaint( place );
+				window.addEventListener( 'resize', place );
+			}
+			if ( document.fonts && document.fonts.ready ) { document.fonts.ready.then( function () { window.requestAnimationFrame( place ); } ); }
 		} );
 	}
 
@@ -810,16 +839,18 @@
 		host.classList.add( 'bspr-sticky-host' );
 		var above = 0;
 		function measure() {
+			// Reads first, then writes.
 			var bar = document.getElementById( 'wpadminbar' );
 			var barH = bar && 'fixed' === getComputedStyle( bar ).position ? bar.offsetHeight : 0;
 			above = Math.max( 0, w.getBoundingClientRect().top - host.getBoundingClientRect().top );
+			var stuck = window.scrollY > above + 4;
 			host.style.setProperty( '--bspr-sticky-top', ( barH - above ) + 'px' );
-			onScroll();
+			w.classList.toggle( 'is-stuck', stuck );
 		}
 		function onScroll() {
 			w.classList.toggle( 'is-stuck', window.scrollY > above + 4 );
 		}
-		measure();
+		afterPaint( measure );
 		window.addEventListener( 'resize', measure );
 		window.addEventListener( 'load', measure );
 		window.addEventListener( 'scroll', onScroll, { passive: true } );
