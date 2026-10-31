@@ -49,9 +49,15 @@ abstract class Baspar_Widget_Base extends Widget_Base {
 	 * in the editor only, shown inline so they're easy to spot.
 	 */
 	public function render_content() {
+		$level = ob_get_level();
 		try {
+			ob_start();
 			parent::render_content();
+			echo self::mark_persian_text( (string) ob_get_clean() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- already-rendered widget HTML.
 		} catch ( \Throwable $e ) {
+			while ( ob_get_level() > $level ) {
+				ob_end_clean();
+			}
 			if ( function_exists( 'baspar_elements_log_fatal' ) ) {
 				\baspar_elements_log_fatal( $e );
 			}
@@ -62,6 +68,39 @@ abstract class Baspar_Widget_Base extends Widget_Base {
 				);
 			}
 		}
+	}
+
+
+	/**
+	 * Add `is-fa` to every element whose own text contains Persian/Arabic
+	 * script. The design uses a letter-spaced monospace face for small Latin
+	 * labels (kickers, codes); applied to Persian text that tracking breaks the
+	 * cursive joins ("گ ر ی د"). CSS resets font + tracking on `.is-fa`.
+	 *
+	 * @param string $html Rendered widget HTML.
+	 * @return string
+	 */
+	protected static function mark_persian_text( $html ) {
+		if ( '' === $html || ! preg_match( '/[\x{0600}-\x{06FF}]/u', $html ) ) {
+			return $html;
+		}
+		$out = preg_replace_callback(
+			'#<(span|div|p|strong|em|b|small|h[1-6]|li|a|label|button|td|th|figcaption)(\s[^<>]*)?>(?=[^<]*[\x{0600}-\x{06FF}])#u',
+			static function ( $m ) {
+				$attrs = isset( $m[2] ) ? $m[2] : '';
+				if ( preg_match( '#\sclass=(["\'])(.*?)\1#s', $attrs, $c ) ) {
+					if ( preg_match( '#(^|\s)is-fa(\s|$)#', $c[2] ) ) {
+						return $m[0];
+					}
+					$attrs = str_replace( $c[0], ' class=' . $c[1] . trim( $c[2] . ' is-fa' ) . $c[1], $attrs );
+				} else {
+					$attrs .= ' class="is-fa"';
+				}
+				return '<' . $m[1] . $attrs . '>';
+			},
+			$html
+		);
+		return null === $out ? $html : $out;
 	}
 
 	/**
@@ -79,7 +118,9 @@ abstract class Baspar_Widget_Base extends Widget_Base {
 	 * @return string[]
 	 */
 	public function get_style_depends() {
-		return array( 'baspar-elements', 'baspar-elements-fonts' );
+		// Only this widget's CSS bundle (the page head usually has it already;
+		// this is the safety net for places the page scan can't see).
+		return \BasparElements\widget_style_handles( preg_replace( '/^baspar-/', '', $this->get_name() ) );
 	}
 
 	/**
@@ -290,5 +331,33 @@ abstract class Baspar_Widget_Base extends Widget_Base {
 	 */
 	protected function reveal_class( $settings ) {
 		return ( isset( $settings['enable_reveal'] ) && 'yes' === $settings['enable_reveal'] ) ? 'baspar-reveal' : '';
+	}
+
+	/**
+	 * "Full width" switch for site chrome (topbar / header / footer). Makes the
+	 * widget span the whole window even inside a boxed section — needed with
+	 * Hello Elementor, which (unlike Woodmart) doesn't stretch those areas.
+	 */
+	protected function add_bleed_control() {
+		$this->add_control(
+			'bleed',
+			array(
+				'label'        => __( 'تمام عرض صفحه (حتی داخل سکشن جعبه‌ای)', 'baspar-elements' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'return_value' => 'yes',
+				'default'      => 'yes',
+				'description'  => __( 'برای قالب هلو: پس‌زمینه این بخش از لبه تا لبه صفحه کشیده می‌شود و محتوا وسط می‌ماند.', 'baspar-elements' ),
+			)
+		);
+	}
+
+	/**
+	 * Class for the bleed switch.
+	 *
+	 * @param array $settings Widget settings.
+	 * @return string
+	 */
+	protected function bleed_class( $settings ) {
+		return ( ! isset( $settings['bleed'] ) || 'yes' === $settings['bleed'] ) ? ' bspr-bleed' : '';
 	}
 }

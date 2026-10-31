@@ -34,6 +34,15 @@ function icon_svg( $name, $size = 24 ) {
 		'instagram' => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="%1$d" height="%1$d"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".75" fill="currentColor"/></svg>',
 		'telegram'  => '<svg viewBox="0 0 24 24" fill="currentColor" width="%1$d" height="%1$d"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg>',
 		'arrow'     => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="%1$d" height="%1$d"><path d="M14 6l-6 6 6 6"/></svg>',
+		'arrow-right'=> '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="%1$d" height="%1$d"><path d="M10 6l6 6-6 6"/></svg>',
+		'grid'      => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="%1$d" height="%1$d"><rect x="4" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5"/></svg>',
+		'list'      => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="%1$d" height="%1$d"><path d="M9 6h11M9 12h11M9 18h11"/><circle cx="4.5" cy="6" r="1"/><circle cx="4.5" cy="12" r="1"/><circle cx="4.5" cy="18" r="1"/></svg>',
+		'bale'      => '<svg viewBox="0 0 24 24" width="%1$d" height="%1$d" aria-hidden="true"><path fill="currentColor" d="M0 12V1.6C0 .3 1.4-.4 2.5.2 3.4.7 5 1.8 6.2 2.7A12 12 0 1 1 0 12z"/><path d="M6.7 12.1l3.7 3.7 6.9-7" fill="none" stroke="var(--bale-ic,#0DCA9B)" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+		'zoom'      => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="%1$d" height="%1$d"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>',
+		'share'     => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="%1$d" height="%1$d"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>',
+		'link'      => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="%1$d" height="%1$d"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>',
+		'tag'       => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="%1$d" height="%1$d"><path d="M20.6 13.4l-7.2 7.2a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg>',
+		'doc'       => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="%1$d" height="%1$d"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg>',
 		'arrow-down'=> '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="%1$d" height="%1$d"><path d="M6 10l6 6 6-6"/></svg>',
 		'check'     => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="%1$d" height="%1$d"><path d="M20 6L9 17l-5-5"/></svg>',
 		'plus'      => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="%1$d" height="%1$d"><path d="M12 5v14M5 12h14"/></svg>',
@@ -61,6 +70,13 @@ function icon_svg( $name, $size = 24 ) {
 		'search'    => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="%1$d" height="%1$d"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>',
 		'menu'      => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="%1$d" height="%1$d"><path d="M3 6h18M3 12h18M3 18h18"/></svg>',
 		'x'         => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="%1$d" height="%1$d"><path d="M18 6L6 18M6 6l12 12"/></svg>',
+		'food'      => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="%1$d" height="%1$d"><path d="M3 11h18v2a8 8 0 0 1-16 0v-2z"/><path d="M3 18h18"/><path d="M9 8c0-2 2-2 2-4M14 8c0-2 1-2 1-4"/></svg>',
+		'pill'      => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="%1$d" height="%1$d"><rect x="2" y="9" width="20" height="6" rx="3" transform="rotate(-30 12 12)"/><path d="M9 7.5l5.5 9.5"/></svg>',
+		'chip'      => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="%1$d" height="%1$d"><rect x="7" y="7" width="10" height="10" rx="1"/><path d="M10 3v2M14 3v2M10 19v2M14 19v2M3 10h2M3 14h2M19 10h2M19 14h2"/></svg>',
+		'leather'   => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="%1$d" height="%1$d"><path d="M3 17c0-3 1-5 3-5 1.5 0 2 1 3.5 1 1.5 0 2-2 4-2 3 0 8 2 8 6v1H3v-1z"/><path d="M6 12V8l4-3 3 3"/></svg>',
+		'textile'   => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="%1$d" height="%1$d"><path d="M4 4h16v6l-4 2v8H8v-8l-4-2z"/><path d="M9 4l3 3 3-3"/></svg>',
+		'steel'     => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="%1$d" height="%1$d"><path d="M3 8l4-4 4 4-4 4-4-4z"/><path d="M13 12l4-4 4 4-4 4-4-4z"/><path d="M8 16l4-4 4 4-4 4-4-4z"/></svg>',
+		'car'       => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="%1$d" height="%1$d"><path d="M3 13l2-6h14l2 6"/><path d="M3 13v5h2v-2h14v2h2v-5H3z"/><circle cx="7" cy="16" r="1"/><circle cx="17" cy="16" r="1"/></svg>',
 	);
 
 	$key = isset( $icons[ $name ] ) ? $name : 'package';
@@ -104,6 +120,13 @@ function icon_options() {
 		'instagram' => __( 'اینستاگرام', 'baspar-elements' ),
 		'cart'      => __( 'سبد خرید', 'baspar-elements' ),
 		'star'      => __( 'ستاره', 'baspar-elements' ),
+		'food'      => __( 'غذایی', 'baspar-elements' ),
+		'pill'      => __( 'دارویی', 'baspar-elements' ),
+		'chip'      => __( 'الکترونیک', 'baspar-elements' ),
+		'leather'   => __( 'چرم و کفش', 'baspar-elements' ),
+		'textile'   => __( 'نساجی', 'baspar-elements' ),
+		'steel'     => __( 'فلز و فولاد', 'baspar-elements' ),
+		'car'       => __( 'خودرو', 'baspar-elements' ),
 	);
 }
 
@@ -135,4 +158,291 @@ function flag_options() {
 		'turkey'  => __( 'ترکیه', 'baspar-elements' ),
 		'iran'    => __( 'ایران', 'baspar-elements' ),
 	);
+}
+
+/**
+ * Convert Latin digits in a string to Persian digits.
+ *
+ * @param string|int|float $value Value to convert.
+ * @return string
+ */
+function fa_num( $value ) {
+	$latin   = array( '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' );
+	$persian = array( '۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹' );
+	return str_replace( $latin, $persian, (string) $value );
+}
+
+/**
+ * Resolve the WooCommerce product for the current context.
+ *
+ * Order of resolution: the global $product (set on single product pages and in
+ * the Woo loop) → the queried post → in the Elementor editor (or any preview),
+ * the most recent published product so the widgets show real data while editing
+ * a Theme Builder template. Returns null when WooCommerce is inactive or no
+ * product can be resolved.
+ *
+ * @return \WC_Product|null
+ */
+function current_product() {
+	if ( ! function_exists( 'wc_get_product' ) ) {
+		return null;
+	}
+
+	global $product;
+	if ( $product instanceof \WC_Product ) {
+		return $product;
+	}
+
+	$id = get_the_ID();
+	if ( $id && 'product' === get_post_type( $id ) ) {
+		$resolved = wc_get_product( $id );
+		if ( $resolved instanceof \WC_Product ) {
+			return $resolved;
+		}
+	}
+
+	// Editor / preview fallback: pick the latest product so the design shows
+	// real data instead of an empty widget while building a template.
+	$is_preview = is_admin();
+	if ( ! $is_preview && isset( \Elementor\Plugin::$instance->editor ) ) {
+		$is_preview = \Elementor\Plugin::$instance->editor->is_edit_mode();
+	}
+	if ( ! $is_preview && function_exists( 'is_preview' ) ) {
+		$is_preview = is_preview();
+	}
+	if ( $is_preview ) {
+		$latest = get_posts(
+			array(
+				'post_type'      => 'product',
+				'posts_per_page' => 1,
+				'post_status'    => 'publish',
+				'orderby'        => 'date',
+				'order'          => 'DESC',
+				'fields'         => 'ids',
+			)
+		);
+		if ( ! empty( $latest ) ) {
+			$resolved = wc_get_product( $latest[0] );
+			if ( $resolved instanceof \WC_Product ) {
+				return $resolved;
+			}
+		}
+	}
+
+	return null;
+}
+
+/**
+ * Best-effort brand lookup for a product.
+ *
+ * WooCommerce has no single universal brand field, so we probe the common brand
+ * taxonomies (native WC 9.6+ `product_brand`, Perfect Brands `pwb-brand`, YITH,
+ * etc.) and fall back to a product attribute whose name looks like "brand".
+ *
+ * @param \WC_Product $product Product object.
+ * @return string Brand name(s), comma separated, or empty string.
+ */
+function product_brand( $product ) {
+	if ( ! ( $product instanceof \WC_Product ) ) {
+		return '';
+	}
+	$pid = $product->get_id();
+
+	// 1) Known brand taxonomies.
+	$taxonomies = array( 'product_brand', 'pwb-brand', 'yith_product_brand', 'pa_brand', 'berocket_brand_collection' );
+	foreach ( $taxonomies as $tax ) {
+		if ( ! taxonomy_exists( $tax ) ) {
+			continue;
+		}
+		$names = wp_get_post_terms( $pid, $tax, array( 'fields' => 'names' ) );
+		if ( ! is_wp_error( $names ) && ! empty( $names ) ) {
+			return implode( '، ', $names );
+		}
+	}
+
+	// 2) A product attribute that looks like a brand.
+	foreach ( $product->get_attributes() as $attribute ) {
+		$raw   = $attribute->get_name();
+		$label = wc_attribute_label( $raw );
+		$hay   = strtolower( $raw . ' ' . $label );
+		if ( false === strpos( $hay, 'brand' ) && false === strpos( $label, 'برند' ) ) {
+			continue;
+		}
+		if ( $attribute->is_taxonomy() ) {
+			$names = wc_get_product_terms( $pid, $raw, array( 'fields' => 'names' ) );
+			if ( ! empty( $names ) ) {
+				return implode( '، ', $names );
+			}
+		} else {
+			$options = $attribute->get_options();
+			if ( ! empty( $options ) ) {
+				return implode( '، ', $options );
+			}
+		}
+	}
+
+	return '';
+}
+
+/**
+ * Return a product's visible attributes as label => value(s) pairs.
+ *
+ * @param \WC_Product $product Product object.
+ * @return array<string,string>
+ */
+function product_specs( $product ) {
+	$rows = array();
+	if ( ! ( $product instanceof \WC_Product ) ) {
+		return $rows;
+	}
+	foreach ( $product->get_attributes() as $attribute ) {
+		if ( ! $attribute->get_visible() ) {
+			continue;
+		}
+		$label = wc_attribute_label( $attribute->get_name() );
+		if ( $attribute->is_taxonomy() ) {
+			$values = wc_get_product_terms( $product->get_id(), $attribute->get_name(), array( 'fields' => 'names' ) );
+			$value  = is_array( $values ) ? implode( '، ', $values ) : '';
+		} else {
+			$value = implode( '، ', $attribute->get_options() );
+		}
+		if ( '' !== $value ) {
+			$rows[ $label ] = $value;
+		}
+	}
+	return $rows;
+}
+
+/**
+ * Make sure an internal link ends with a trailing slash.
+ *
+ * Only site-relative paths and same-host absolute URLs are touched; external
+ * URLs, anchors, tel:/mailto: links, query strings and file URLs (with an
+ * extension) are returned as they are.
+ *
+ * @param string $url URL as typed in the control.
+ * @return string
+ */
+function slash_url( $url ) {
+	$url = trim( (string) $url );
+	if ( '' === $url || '#' === $url[0] || preg_match( '#^(tel:|mailto:|sms:|javascript:)#i', $url ) ) {
+		return $url;
+	}
+	if ( preg_match( '#^(https?:)?//#i', $url ) ) {
+		$host = wp_parse_url( home_url(), PHP_URL_HOST );
+		$to   = wp_parse_url( $url, PHP_URL_HOST );
+		if ( ! $host || ! $to || strtolower( $host ) !== strtolower( $to ) ) {
+			return $url;
+		}
+	} elseif ( '/' !== $url[0] ) {
+		return $url;
+	}
+	if ( false !== strpos( $url, '?' ) || false !== strpos( $url, '#' ) ) {
+		return $url;
+	}
+	if ( '/' === substr( $url, -1 ) || preg_match( '#\.[a-z0-9]{2,5}$#i', $url ) ) {
+		return $url;
+	}
+	return $url . '/';
+}
+
+/**
+ * Allowed inline HTML for short rich-text fields (FAQ answers, etc.).
+ *
+ * @return array
+ */
+function inline_kses() {
+	return array(
+		'a'      => array( 'href' => true, 'target' => true, 'rel' => true, 'title' => true ),
+		'strong' => array(),
+		'b'      => array(),
+		'em'     => array(),
+		'i'      => array(),
+		'br'     => array(),
+	);
+}
+
+/**
+ * Add the trailing slash to same-site links inside an HTML string.
+ *
+ * @param string $html HTML (already sanitized).
+ * @return string
+ */
+function slash_links( $html ) {
+	return preg_replace_callback(
+		'#(<a\s[^>]*?href=")([^"]*)(")#i',
+		static function ( $m ) {
+			return $m[1] . esc_attr( slash_url( html_entity_decode( $m[2] ) ) ) . $m[3];
+		},
+		(string) $html
+	);
+}
+
+/**
+ * Display name of a product's primary category.
+ *
+ * Uses the Rank Math primary category when set, otherwise the first assigned
+ * category other than the default "uncategorized" one. Always the term *name*
+ * (never the slug); percent-encoded leftovers are decoded.
+ *
+ * @param int $post_id Product ID.
+ * @return string
+ */
+function primary_cat_name( $post_id ) {
+	$terms = get_the_terms( $post_id, 'product_cat' );
+	if ( ! is_array( $terms ) || ! $terms ) {
+		return '';
+	}
+	$term       = null;
+	$primary_id = (int) get_post_meta( $post_id, 'rank_math_primary_product_cat', true );
+	if ( $primary_id ) {
+		foreach ( $terms as $t ) {
+			if ( (int) $t->term_id === $primary_id ) {
+				$term = $t;
+				break;
+			}
+		}
+	}
+	if ( ! $term ) {
+		$default = (int) get_option( 'default_product_cat' );
+		foreach ( $terms as $t ) {
+			if ( (int) $t->term_id !== $default && 'uncategorized' !== $t->slug ) {
+				$term = $t;
+				break;
+			}
+		}
+		$term = $term ? $term : reset( $terms );
+	}
+	$name = trim( (string) $term->name );
+	if ( '' === $name ) {
+		$name = (string) $term->slug;
+	}
+	if ( false !== strpos( $name, '%' ) ) {
+		$name = rawurldecode( $name );
+	}
+	return $name;
+}
+
+/**
+ * Persian digits for plain values ("25 کیلوگرم" → "۲۵ کیلوگرم"), but codes
+ * that contain Latin letters ("IM888", "R-838") stay as they are.
+ *
+ * @param string $value Value.
+ * @return string
+ */
+function fa_num_smart( $value ) {
+	$value = (string) $value;
+	return preg_match( '/[A-Za-z]/', $value ) ? $value : fa_num( $value );
+}
+
+/**
+ * Upgrade http:// to https:// for URLs typed into widget controls (social
+ * profiles etc.); everything else is returned unchanged.
+ *
+ * @param string $url URL.
+ * @return string
+ */
+function force_https( $url ) {
+	$url = (string) $url;
+	return preg_match( '#^http://(www\.)?(t\.me|telegram\.me|instagram\.com|wa\.me|ble\.ir|eitaa\.com|linkedin\.com|aparat\.com|youtube\.com|basparmarket\.com)#i', $url ) ? 'https://' . substr( $url, 7 ) : $url;
 }

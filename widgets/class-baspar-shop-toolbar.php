@@ -111,15 +111,15 @@ class Baspar_Shop_Toolbar extends Baspar_Widget_Base {
 
 				<div class="cat-tools">
 					<?php if ( 'yes' === $s['show_search'] ) : ?>
-						<form style="position:relative" action="<?php echo esc_url( $shop_url ); ?>" method="get" role="search">
+						<form class="cat-search" action="<?php echo esc_url( $shop_url ); ?>" method="get" role="search">
 							<input type="hidden" name="post_type" value="product">
-							<input type="search" name="s" value="<?php echo esc_attr( $current_s ); ?>" placeholder="<?php echo esc_attr( $s['search_placeholder'] ); ?>" style="padding:8px 12px 8px 32px;border:1px solid var(--line-2);border-radius:8px;font-family:inherit;font-size:13px;width:200px" />
-							<span style="position:absolute;left:8px;top:50%;transform:translateY(-50%);color:var(--ink-3);pointer-events:none"><?php echo icon_svg( 'search', 14 ); // phpcs:ignore ?></span>
+							<span class="cat-search-ic" aria-hidden="true"><?php echo icon_svg( 'search', 16 ); // phpcs:ignore ?></span>
+							<input type="search" class="cat-search-input" name="s" value="<?php echo esc_attr( $current_s ); ?>" placeholder="<?php echo esc_attr( $s['search_placeholder'] ); ?>" aria-label="<?php echo esc_attr( $s['search_placeholder'] ); ?>" />
 						</form>
 					<?php endif; ?>
 
 					<?php if ( 'yes' === $s['show_sort'] ) : ?>
-						<form method="get" class="bspr-sort-form" style="display:contents">
+						<form method="get" class="bspr-sort-form">
 							<?php
 							// Preserve existing query parameters except orderby and paged.
 							foreach ( $_GET as $k => $v ) : // phpcs:ignore
@@ -133,7 +133,7 @@ class Baspar_Shop_Toolbar extends Baspar_Widget_Base {
 								}
 							endforeach;
 							?>
-							<select class="cat-sort" name="orderby" onchange="this.form.submit()">
+							<select class="cat-sort" name="orderby" aria-label="<?php esc_attr_e( 'مرتب‌سازی', 'baspar-elements' ); ?>" onchange="this.form.submit()">
 								<option value="menu_order" <?php selected( $current_orderby, 'menu_order' ); ?>><?php esc_html_e( 'پیش‌فرض', 'baspar-elements' ); ?></option>
 								<option value="date" <?php selected( $current_orderby, 'date' ); ?>><?php esc_html_e( 'جدیدترین', 'baspar-elements' ); ?></option>
 								<option value="popularity" <?php selected( $current_orderby, 'popularity' ); ?>><?php esc_html_e( 'پرفروش‌ترین', 'baspar-elements' ); ?></option>
@@ -147,8 +147,8 @@ class Baspar_Shop_Toolbar extends Baspar_Widget_Base {
 
 					<?php if ( 'yes' === $s['show_view'] ) : ?>
 						<div class="cat-view" data-view-toggle data-target="<?php echo esc_attr( $s['view_target'] ); ?>">
-							<button type="button" class="is-on" data-mode="grid" aria-label="grid"><?php echo icon_svg( 'grid', 16 ); // phpcs:ignore ?></button>
-							<button type="button" data-mode="list" aria-label="list"><?php echo icon_svg( 'list', 16 ); // phpcs:ignore ?></button>
+							<button type="button" class="is-on" data-mode="grid" aria-label="<?php esc_attr_e( 'نمایش شبکه‌ای', 'baspar-elements' ); ?>"><?php echo icon_svg( 'grid', 16 ); // phpcs:ignore ?></button>
+							<button type="button" data-mode="list" aria-label="<?php esc_attr_e( 'نمایش لیستی', 'baspar-elements' ); ?>"><?php echo icon_svg( 'list', 16 ); // phpcs:ignore ?></button>
 						</div>
 					<?php endif; ?>
 				</div>

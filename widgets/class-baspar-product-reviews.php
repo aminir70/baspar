@@ -1,6 +1,9 @@
 <?php
 /**
- * Product reviews — score header (4.8 / 5 stars) + 4 review cards.
+ * Product reviews — score header (average / stars) + review cards.
+ *
+ * Reads the rating summary and the individual reviews live from the current
+ * WooCommerce product's approved comments. Nothing is entered by hand.
  *
  * @package BasparElements
  */
@@ -8,8 +11,9 @@
 namespace BasparElements\Widgets;
 
 use Elementor\Controls_Manager;
-use Elementor\Repeater;
 use function BasparElements\icon_svg;
+use function BasparElements\fa_num;
+use function BasparElements\current_product;
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
@@ -19,28 +23,18 @@ class Baspar_Product_Reviews extends Baspar_Widget_Base {
 	public function get_icon() { return 'eicon-rating'; }
 
 	protected function register_controls() {
-		$this->start_controls_section( 'content', array( 'label' => __( 'محتوا', 'baspar-elements' ) ) );
-		$this->add_control( 'score', array( 'label' => __( 'امتیاز کلی', 'baspar-elements' ), 'type' => Controls_Manager::TEXT, 'default' => '۴.۸' ) );
-		$this->add_control( 'stars', array( 'label' => __( 'تعداد ستاره (۱-۵)', 'baspar-elements' ), 'type' => Controls_Manager::NUMBER, 'default' => 5, 'min' => 1, 'max' => 5 ) );
-		$this->add_control( 'count', array( 'label' => __( 'تعداد نظرات', 'baspar-elements' ), 'type' => Controls_Manager::TEXT, 'default' => '۲۴ نظر' ) );
-
-		$rep = new Repeater();
-		$rep->add_control( 'name', array( 'label' => __( 'نام', 'baspar-elements' ), 'type' => Controls_Manager::TEXT ) );
-		$rep->add_control( 'company', array( 'label' => __( 'شرکت/شغل', 'baspar-elements' ), 'type' => Controls_Manager::TEXT ) );
-		$rep->add_control( 'date', array( 'label' => __( 'تاریخ', 'baspar-elements' ), 'type' => Controls_Manager::TEXT ) );
-		$rep->add_control( 'stars', array( 'label' => __( 'ستاره (۱-۵)', 'baspar-elements' ), 'type' => Controls_Manager::NUMBER, 'default' => 5, 'min' => 1, 'max' => 5 ) );
-		$rep->add_control( 'text', array( 'label' => __( 'نظر', 'baspar-elements' ), 'type' => Controls_Manager::TEXTAREA, 'rows' => 3 ) );
-		$this->add_control( 'items', array(
-			'label' => __( 'نظرات', 'baspar-elements' ),
-			'type' => Controls_Manager::REPEATER, 'fields' => $rep->get_controls(),
-			'title_field' => '{{{ name }}}',
-			'default' => array(
-				array( 'name' => 'احمدی', 'company' => 'کارخانه رنگ تهران', 'date' => '۲ ماه پیش', 'stars' => 5, 'text' => 'کیفیت گرید عالی، تطابق کامل با COA. توصیه می‌کنم.' ),
-				array( 'name' => 'رضایی', 'company' => 'صنایع کامپوزیت', 'date' => '۱ ماه پیش', 'stars' => 5, 'text' => 'تحویل سریع و پشتیبانی فنی خیلی خوب.' ),
-				array( 'name' => 'کریمی', 'company' => 'تولیدی پلاستیک', 'date' => '۳ هفته پیش', 'stars' => 4, 'text' => 'گرید مناسب فرمولاسیون ما؛ قیمت کمی بالاتر از انتظار.' ),
-				array( 'name' => 'محمدی', 'company' => 'شرکت پوشش', 'date' => '۲ هفته پیش', 'stars' => 5, 'text' => 'مشاوره کارشناس فنی واقعاً کارگشا بود.' ),
-			),
-		) );
+		$this->start_controls_section( 'content', array( 'label' => __( 'نظرات (پویا)', 'baspar-elements' ) ) );
+		$this->add_control(
+			'info',
+			array(
+				'type'            => Controls_Manager::RAW_HTML,
+				'raw'             => __( 'امتیاز، تعداد و متن نظرات به‌صورت خودکار از نظرات ثبت‌شده‌ی همین محصول خوانده می‌شوند.', 'baspar-elements' ),
+				'content_classes' => 'elementor-descriptor',
+			)
+		);
+		$this->add_control( 'summary_title', array( 'label' => __( 'عنوان جعبه امتیاز', 'baspar-elements' ), 'type' => Controls_Manager::TEXT, 'default' => 'رضایت بالای مشتریان' ) );
+		$this->add_control( 'summary_sub', array( 'label' => __( 'زیرعنوان جعبه امتیاز', 'baspar-elements' ), 'type' => Controls_Manager::TEXT, 'default' => 'بر اساس نظرات ثبت‌شده توسط مشتریان واقعی.' ) );
+		$this->add_control( 'limit', array( 'label' => __( 'حداکثر تعداد نمایش', 'baspar-elements' ), 'type' => Controls_Manager::NUMBER, 'default' => 4, 'min' => 1, 'max' => 30 ) );
 		$this->add_reveal_toggle();
 		$this->end_controls_section();
 		$this->start_controls_section( 'style', array( 'label' => __( 'استایل', 'baspar-elements' ), 'tab' => Controls_Manager::TAB_STYLE ) );
@@ -58,32 +52,79 @@ class Baspar_Product_Reviews extends Baspar_Widget_Base {
 	}
 
 	protected function render() {
-		$s = $this->get_settings_for_display();
+		$s       = $this->get_settings_for_display();
+		$product = current_product();
+
+		if ( ! $product ) {
+			if ( $this->is_editor() ) {
+				echo '<div class="baspar-scope" style="padding:24px;text-align:center;color:#6B5E80">' . esc_html__( 'این ویجت نظرات را از محصول ووکامرس می‌خواند. آن را در قالب «محصول تکی» قرار دهید.', 'baspar-elements' ) . '</div>';
+			}
+			return;
+		}
+
+		$pid     = $product->get_id();
+		$average = (float) $product->get_average_rating();
+		$total   = (int) $product->get_review_count();
+
+		$reviews = get_comments(
+			array(
+				'post_id' => $pid,
+				'status'  => 'approve',
+				'type'    => 'review',
+				'number'  => max( 1, (int) $s['limit'] ),
+			)
+		);
+
+		if ( empty( $reviews ) ) {
+			if ( $this->is_editor() ) {
+				echo '<div class="baspar-scope" style="padding:24px;text-align:center;color:#6B5E80">' . esc_html__( 'هنوز نظری برای این محصول ثبت نشده است.', 'baspar-elements' ) . '</div>';
+			}
+			return;
+		}
+
+		$count_label = sprintf(
+			/* translators: %s: number of reviews. */
+			_n( '%s نظر', '%s نظر', $total, 'baspar-elements' ),
+			fa_num( $total )
+		);
 		?>
 		<div class="baspar-scope">
 			<div class="<?php echo esc_attr( $this->reveal_class( $s ) ); ?>" style="display:flex;align-items:center;gap:20px;padding:24px 28px;background:linear-gradient(180deg,var(--brand-tint),#fff);border:1px solid var(--line);border-radius:calc(var(--radius) + 4px);margin-bottom:24px">
 				<div style="text-align:center;padding-left:24px;border-left:1px solid var(--line)">
-					<div style="font-size:48px;font-weight:800;color:var(--brand-deep);line-height:1;letter-spacing:-0.02em"><?php echo esc_html( $s['score'] ); ?></div>
-					<div style="display:flex;gap:2px;justify-content:center;margin-top:8px"><?php echo $this->stars( (int) $s['stars'] ); // phpcs:ignore ?></div>
-					<div style="font-size:12px;color:var(--ink-3);margin-top:6px"><?php echo esc_html( $s['count'] ); ?></div>
+					<div style="font-size:48px;font-weight:800;color:var(--brand-deep);line-height:1;letter-spacing:-0.02em"><?php echo esc_html( fa_num( number_format_i18n( $average, 1 ) ) ); ?></div>
+					<div style="display:flex;gap:2px;justify-content:center;margin-top:8px"><?php echo $this->stars( (int) round( $average ) ); // phpcs:ignore ?></div>
+					<div style="font-size:12px;color:var(--ink-3);margin-top:6px"><?php echo esc_html( $count_label ); ?></div>
 				</div>
 				<div>
-					<strong style="font-size:17px;color:var(--brand-deep);display:block;margin-bottom:6px">رضایت بالای مشتریان</strong>
-					<span style="font-size:13.5px;color:var(--ink-2)">بر اساس نظرات ثبت‌شده توسط مشتریان واقعی.</span>
+					<strong style="font-size:17px;color:var(--brand-deep);display:block;margin-bottom:6px"><?php echo esc_html( $s['summary_title'] ); ?></strong>
+					<span style="font-size:13.5px;color:var(--ink-2)"><?php echo esc_html( $s['summary_sub'] ); ?></span>
 				</div>
 			</div>
 			<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px">
-				<?php foreach ( (array) $s['items'] as $r ) : ?>
+				<?php
+				foreach ( $reviews as $review ) :
+					$rating   = (int) get_comment_meta( $review->comment_ID, 'rating', true );
+					$verified = wc_review_is_from_verified_owner( $review->comment_ID );
+					$ago      = sprintf(
+						/* translators: %s: human-readable time difference. */
+						__( '%s پیش', 'baspar-elements' ),
+						human_time_diff( strtotime( $review->comment_date_gmt ), current_time( 'timestamp', true ) )
+					);
+					?>
 					<div style="background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px">
 						<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
 							<div>
-								<strong style="font-size:14.5px;color:var(--brand-deep);display:block"><?php echo esc_html( $r['name'] ); ?></strong>
-								<span style="font-size:12px;color:var(--ink-3)"><?php echo esc_html( $r['company'] ); ?></span>
+								<strong style="font-size:14.5px;color:var(--brand-deep);display:block"><?php echo esc_html( $review->comment_author ); ?></strong>
+								<?php if ( $verified ) : ?>
+									<span style="font-size:12px;color:var(--brand)"><?php echo esc_html__( 'خریدار تأییدشده', 'baspar-elements' ); ?></span>
+								<?php endif; ?>
 							</div>
-							<span style="font-family:var(--mono);font-size:11px;color:var(--ink-3)"><?php echo esc_html( $r['date'] ); ?></span>
+							<span style="font-family:var(--mono);font-size:11px;color:var(--ink-3)"><?php echo esc_html( fa_num( $ago ) ); ?></span>
 						</div>
-						<div style="display:flex;gap:2px;margin-bottom:10px"><?php echo $this->stars( (int) $r['stars'] ); // phpcs:ignore ?></div>
-						<p style="font-size:13.5px;color:var(--ink-2);line-height:1.7;margin:0"><?php echo esc_html( $r['text'] ); ?></p>
+						<?php if ( $rating ) : ?>
+							<div style="display:flex;gap:2px;margin-bottom:10px"><?php echo $this->stars( $rating ); // phpcs:ignore ?></div>
+						<?php endif; ?>
+						<p style="font-size:13.5px;color:var(--ink-2);line-height:1.7;margin:0"><?php echo esc_html( $review->comment_content ); ?></p>
 					</div>
 				<?php endforeach; ?>
 			</div>

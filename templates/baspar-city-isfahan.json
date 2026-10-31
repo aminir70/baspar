@@ -1,0 +1,886 @@
+{
+  "version": "0.4",
+  "title": "Baspar — خرید مواد اولیه شیمیایی در اصفهان",
+  "type": "page",
+  "content": [
+    {
+      "id": "a102",
+      "elType": "section",
+      "settings": {},
+      "elements": [
+        {
+          "id": "a103",
+          "elType": "column",
+          "settings": {
+            "_column_size": 100,
+            "_inline_size": null
+          },
+          "elements": [
+            {
+              "id": "a101",
+              "elType": "widget",
+              "settings": {},
+              "elements": [],
+              "widgetType": "baspar-topbar"
+            }
+          ],
+          "isInner": false
+        }
+      ],
+      "isInner": false
+    },
+    {
+      "id": "a105",
+      "elType": "section",
+      "settings": {},
+      "elements": [
+        {
+          "id": "a106",
+          "elType": "column",
+          "settings": {
+            "_column_size": 100,
+            "_inline_size": null
+          },
+          "elements": [
+            {
+              "id": "a104",
+              "elType": "widget",
+              "settings": {},
+              "elements": [],
+              "widgetType": "baspar-header"
+            }
+          ],
+          "isInner": false
+        }
+      ],
+      "isInner": false
+    },
+    {
+      "id": "a108",
+      "elType": "section",
+      "settings": {},
+      "elements": [
+        {
+          "id": "a109",
+          "elType": "column",
+          "settings": {
+            "_column_size": 100,
+            "_inline_size": null
+          },
+          "elements": [
+            {
+              "id": "a107",
+              "elType": "widget",
+              "settings": {
+                "kicker": "CITY · ISFAHAN",
+                "title": "خرید مواد اولیه شیمیایی در اصفهان",
+                "sub": "بسپارمارکت مواد اولیه شیمیایی صنایع اصفهان — از قطب رنگ‌سازی محمودآباد تا صنایع فولاد و پلیمر — را با ارسال سریع، قیمت روز و گواهی COA کارخانه تأمین می‌کند.",
+                "path": [
+                  {
+                    "text": "صفحه اصلی",
+                    "link": {
+                      "url": "/"
+                    }
+                  },
+                  {
+                    "text": "خرید مواد اولیه شیمیایی",
+                    "link": {
+                      "url": "/buy-chemical-raw-materials/"
+                    }
+                  },
+                  {
+                    "text": "اصفهان",
+                    "link": {
+                      "url": ""
+                    }
+                  }
+                ]
+              },
+              "elements": [],
+              "widgetType": "baspar-breadcrumb"
+            }
+          ],
+          "isInner": false
+        }
+      ],
+      "isInner": false
+    },
+    {
+      "id": "a10b",
+      "elType": "section",
+      "settings": {
+        "padding": {
+          "unit": "px",
+          "top": "0",
+          "right": "24",
+          "bottom": "60",
+          "left": "24",
+          "isLinked": false
+        }
+      },
+      "elements": [
+        {
+          "id": "a10c",
+          "elType": "column",
+          "settings": {
+            "_column_size": 100,
+            "_inline_size": null
+          },
+          "elements": [
+            {
+              "id": "a10a",
+              "elType": "widget",
+              "settings": {
+                "items": [
+                  {
+                    "icon": "pin",
+                    "label": "استان",
+                    "value": "اصفهان"
+                  },
+                  {
+                    "icon": "truck",
+                    "label": "ارسال از",
+                    "value": "انبار مرکزی تهران"
+                  },
+                  {
+                    "icon": "clock",
+                    "label": "زمان تحویل",
+                    "value": "۱ تا ۲ روز کاری"
+                  },
+                  {
+                    "icon": "shield",
+                    "label": "گارانتی مغایرت",
+                    "value": "۴۸ ساعت رسمی"
+                  }
+                ]
+              },
+              "elements": [],
+              "widgetType": "baspar-city-facts"
+            }
+          ],
+          "isInner": false
+        }
+      ],
+      "isInner": false
+    },
+    {
+      "id": "a10f",
+      "elType": "section",
+      "settings": {
+        "padding": {
+          "unit": "px",
+          "top": "60",
+          "right": "24",
+          "bottom": "60",
+          "left": "24",
+          "isLinked": false
+        }
+      },
+      "elements": [
+        {
+          "id": "a110",
+          "elType": "column",
+          "settings": {
+            "_column_size": 100,
+            "_inline_size": null
+          },
+          "elements": [
+            {
+              "id": "a10d",
+              "elType": "widget",
+              "settings": {
+                "kicker": "LOCAL SUPPLY",
+                "title": "تأمین‌کننده‌ی مواد اولیه شیمیایی صنایع اصفهان",
+                "sub": "تأمین مستقیم، قیمت روز، دیتاشیت و COA کارخانه — با ارسال سریع به کارخانه‌ها و واحدهای تولیدی اصفهان و شهرهای اطراف."
+              },
+              "elements": [],
+              "widgetType": "baspar-section-heading"
+            },
+            {
+              "id": "a10e",
+              "elType": "widget",
+              "settings": {
+                "content": "<p><strong>خرید مواد اولیه شیمیایی در اصفهان</strong> برای یکی از صنعتی‌ترین استان‌های کشور اهمیت ویژه‌ای دارد. اصفهان قطب رنگ‌سازی ایران (شهرک صنعتی محمودآباد)، مرکز صنایع فولاد و متالورژی و یکی از پایگاه‌های مهم پلیمر و نساجی کشور است.</p><p>بسپارمارکت با واردات مستقیم و موجودی گسترده، رزین‌ها، پیگمنت، حلال، گرانول پلیمری و افزودنی‌های تخصصی مورد نیاز صنایع اصفهان را با دیتاشیت کارخانه و گواهی COA تأمین می‌کند. ارسال از انبار مرکزی تهران با باربری معتبر و تحویل درب کارخانه انجام می‌شود.</p>"
+              },
+              "elements": [],
+              "widgetType": "baspar-prose"
+            }
+          ],
+          "isInner": false
+        }
+      ],
+      "isInner": false
+    },
+    {
+      "id": "a113",
+      "elType": "section",
+      "settings": {
+        "background_background": "classic",
+        "background_color": "#FAF8FC",
+        "padding": {
+          "unit": "px",
+          "top": "60",
+          "right": "24",
+          "bottom": "60",
+          "left": "24",
+          "isLinked": false
+        }
+      },
+      "elements": [
+        {
+          "id": "a114",
+          "elType": "column",
+          "settings": {
+            "_column_size": 100,
+            "_inline_size": null
+          },
+          "elements": [
+            {
+              "id": "a111",
+              "elType": "widget",
+              "settings": {
+                "kicker": "LOGISTICS · DELIVERY",
+                "title": "ارسال مواد اولیه شیمیایی به اصفهان",
+                "sub": "مسیر و زمان تحویل محموله از انبار بسپارمارکت تا درب کارخانه‌ی شما در اصفهان."
+              },
+              "elements": [],
+              "widgetType": "baspar-section-heading"
+            },
+            {
+              "id": "a112",
+              "elType": "widget",
+              "settings": {
+                "origin_value": "انبار مرکزی تهران",
+                "dest_value": "اصفهان",
+                "distance_value": "≈ ۴۵۰ کیلومتر",
+                "transit_value": "۱ تا ۲ روز کاری",
+                "side_title": "تحویل به شهرها و مناطق اطراف",
+                "side_text": "ارسال از انبار مرکزی تهران با باربری معتبر؛ تحویل به اصفهان و شهرهای صنعتی اطراف طی ۱ تا ۲ روز کاری.",
+                "areas": [
+                  {
+                    "name": "اصفهان"
+                  },
+                  {
+                    "name": "نجف‌آباد"
+                  },
+                  {
+                    "name": "شاهین‌شهر"
+                  },
+                  {
+                    "name": "خمینی‌شهر"
+                  },
+                  {
+                    "name": "فولادشهر"
+                  },
+                  {
+                    "name": "کاشان"
+                  },
+                  {
+                    "name": "مبارکه"
+                  }
+                ]
+              },
+              "elements": [],
+              "widgetType": "baspar-shipment-route"
+            }
+          ],
+          "isInner": false
+        }
+      ],
+      "isInner": false
+    },
+    {
+      "id": "a117",
+      "elType": "section",
+      "settings": {
+        "padding": {
+          "unit": "px",
+          "top": "60",
+          "right": "24",
+          "bottom": "60",
+          "left": "24",
+          "isLinked": false
+        }
+      },
+      "elements": [
+        {
+          "id": "a118",
+          "elType": "column",
+          "settings": {
+            "_column_size": 100,
+            "_inline_size": null
+          },
+          "elements": [
+            {
+              "id": "a115",
+              "elType": "widget",
+              "settings": {
+                "kicker": "INDUSTRIAL ZONES · 6",
+                "title": "ارسال به شهرک‌های صنعتی اصفهان",
+                "sub": "محموله‌ها را مستقیم به انبار کارخانه در شهرک‌ها و نواحی صنعتی اصفهان تحویل می‌دهیم."
+              },
+              "elements": [],
+              "widgetType": "baspar-section-heading"
+            },
+            {
+              "id": "a116",
+              "elType": "widget",
+              "settings": {
+                "items": [
+                  {
+                    "name": "شهرک صنعتی مورچه‌خورت",
+                    "note": "از بزرگ‌ترین شهرک‌های صنعتی کشور در شمال اصفهان."
+                  },
+                  {
+                    "name": "شهرک صنعتی محمودآباد",
+                    "note": "قطب رنگ‌سازی و رزین ایران."
+                  },
+                  {
+                    "name": "شهرک صنعتی جی",
+                    "note": "صنایع شیمیایی و تولیدی شرق اصفهان."
+                  },
+                  {
+                    "name": "شهرک صنعتی رازی اصفهان",
+                    "note": "واحدهای پلیمری، رنگ و شیمیایی."
+                  },
+                  {
+                    "name": "شهرک صنعتی سگزی",
+                    "note": "صنایع کاشی، سرامیک و مصالح."
+                  },
+                  {
+                    "name": "منطقه صنعتی دولت‌آباد",
+                    "note": "صنایع تبدیلی و بسته‌بندی شمال اصفهان."
+                  }
+                ]
+              },
+              "elements": [],
+              "widgetType": "baspar-city-zones"
+            }
+          ],
+          "isInner": false
+        }
+      ],
+      "isInner": false
+    },
+    {
+      "id": "a11b",
+      "elType": "section",
+      "settings": {
+        "background_background": "classic",
+        "background_color": "#FAF8FC",
+        "padding": {
+          "unit": "px",
+          "top": "60",
+          "right": "24",
+          "bottom": "60",
+          "left": "24",
+          "isLinked": false
+        }
+      },
+      "elements": [
+        {
+          "id": "a11c",
+          "elType": "column",
+          "settings": {
+            "_column_size": 100,
+            "_inline_size": null
+          },
+          "elements": [
+            {
+              "id": "a119",
+              "elType": "widget",
+              "settings": {
+                "kicker": "SERVED INDUSTRIES · 6",
+                "title": "صنایع اصفهان که تأمین می‌کنیم",
+                "sub": "مواد اولیه‌ی مورد نیاز صنایع شاخص اصفهان، متناسب با گرید و کاربرد هر واحد تولیدی."
+              },
+              "elements": [],
+              "widgetType": "baspar-section-heading"
+            },
+            {
+              "id": "a11a",
+              "elType": "widget",
+              "settings": {
+                "items": [
+                  {
+                    "icon": "palette",
+                    "title": "رنگ و رزین",
+                    "desc": "قطب رنگ‌سازی کشور؛ رزین، حلال و پیگمنت برای واحدهای محمودآباد."
+                  },
+                  {
+                    "icon": "steel",
+                    "title": "فولاد و متالورژی",
+                    "desc": "مواد شیمیایی کمکی و افزودنی برای صنایع فولاد و ذوب."
+                  },
+                  {
+                    "icon": "layers",
+                    "title": "پلیمر و پلاستیک",
+                    "desc": "گرانول و افزودنی برای کارخانه‌های پلاستیک اصفهان."
+                  },
+                  {
+                    "icon": "textile",
+                    "title": "نساجی",
+                    "desc": "مواد شیمیایی تکمیل و رنگرزی برای صنایع نساجی."
+                  },
+                  {
+                    "icon": "building",
+                    "title": "کاشی و سرامیک",
+                    "desc": "افزودنی‌ها و مواد اولیه‌ی صنایع کاشی و سرامیک."
+                  },
+                  {
+                    "icon": "factory",
+                    "title": "ریخته‌گری و قطعه‌سازی",
+                    "desc": "رزین و مواد کمکی برای صنایع ریخته‌گری."
+                  }
+                ]
+              },
+              "elements": [],
+              "widgetType": "baspar-city-industries"
+            }
+          ],
+          "isInner": false
+        }
+      ],
+      "isInner": false
+    },
+    {
+      "id": "a11f",
+      "elType": "section",
+      "settings": {
+        "padding": {
+          "unit": "px",
+          "top": "60",
+          "right": "24",
+          "bottom": "60",
+          "left": "24",
+          "isLinked": false
+        }
+      },
+      "elements": [
+        {
+          "id": "a120",
+          "elType": "column",
+          "settings": {
+            "_column_size": 100,
+            "_inline_size": null
+          },
+          "elements": [
+            {
+              "id": "a11d",
+              "elType": "widget",
+              "settings": {
+                "kicker": "CATEGORIES · 06",
+                "title": "دسته‌بندی مواد اولیه شیمیایی موجود",
+                "sub": "بیش از ۱۰۰ نوع ماده اولیه در ۶ دسته‌بندی تخصصی. روی هر تب کلیک کنید تا گریدهای موجود را ببینید."
+              },
+              "elements": [],
+              "widgetType": "baspar-section-heading"
+            },
+            {
+              "id": "a11e",
+              "elType": "widget",
+              "settings": {},
+              "elements": [],
+              "widgetType": "baspar-categories-tabs"
+            }
+          ],
+          "isInner": false
+        }
+      ],
+      "isInner": false
+    },
+    {
+      "id": "a123",
+      "elType": "section",
+      "settings": {
+        "background_background": "classic",
+        "background_color": "#FAF8FC",
+        "padding": {
+          "unit": "px",
+          "top": "60",
+          "right": "24",
+          "bottom": "60",
+          "left": "24",
+          "isLinked": false
+        }
+      },
+      "elements": [
+        {
+          "id": "a124",
+          "elType": "column",
+          "settings": {
+            "_column_size": 100,
+            "_inline_size": null
+          },
+          "elements": [
+            {
+              "id": "a121",
+              "elType": "widget",
+              "settings": {
+                "kicker": "BESTSELLERS · TOP 12",
+                "title": "پرفروش‌ترین مواد اولیه شیمیایی در اصفهان",
+                "sub": "بر اساس میزان خرید و درخواست استعلام مشتریان صنعتی در ۱۲ ماه گذشته."
+              },
+              "elements": [],
+              "widgetType": "baspar-section-heading"
+            },
+            {
+              "id": "a122",
+              "elType": "widget",
+              "settings": {
+                "orderby": "popularity",
+                "count": 12,
+                "columns": "4"
+              },
+              "elements": [],
+              "widgetType": "baspar-products"
+            }
+          ],
+          "isInner": false
+        }
+      ],
+      "isInner": false
+    },
+    {
+      "id": "a127",
+      "elType": "section",
+      "settings": {
+        "padding": {
+          "unit": "px",
+          "top": "60",
+          "right": "24",
+          "bottom": "60",
+          "left": "24",
+          "isLinked": false
+        }
+      },
+      "elements": [
+        {
+          "id": "a128",
+          "elType": "column",
+          "settings": {
+            "_column_size": 100,
+            "_inline_size": null
+          },
+          "elements": [
+            {
+              "id": "a125",
+              "elType": "widget",
+              "settings": {
+                "kicker": "HOW IT WORKS · 04 STEPS",
+                "title": "مراحل خرید و ارسال",
+                "sub": "فرآیند ساده، شفاف و قابل پیگیری از استعلام تا تحویل."
+              },
+              "elements": [],
+              "widgetType": "baspar-section-heading"
+            },
+            {
+              "id": "a126",
+              "elType": "widget",
+              "settings": {
+                "items": [
+                  {
+                    "title": "انتخاب محصول",
+                    "desc": "از طریق فهرست محصولات یا تماس با کارشناس، ماده اولیه و گرید مورد نیاز را مشخص کنید."
+                  },
+                  {
+                    "title": "دریافت پیش‌فاکتور",
+                    "desc": "قیمت روز، موجودی انبار و شرایط ارسال در پیش‌فاکتور رسمی ارسال می‌شود."
+                  },
+                  {
+                    "title": "پرداخت و بارگیری",
+                    "desc": "پس از تأیید پرداخت، محموله برای ارسال به اصفهان با باربری معتبر بارگیری می‌شود."
+                  },
+                  {
+                    "title": "تحویل با COA",
+                    "desc": "محموله همراه با COA و در صورت نیاز MSDS تحویل داده می‌شود. گارانتی ۴۸ ساعته در صورت مغایرت."
+                  }
+                ]
+              },
+              "elements": [],
+              "widgetType": "baspar-process"
+            }
+          ],
+          "isInner": false
+        }
+      ],
+      "isInner": false
+    },
+    {
+      "id": "a12a",
+      "elType": "section",
+      "settings": {},
+      "elements": [
+        {
+          "id": "a12b",
+          "elType": "column",
+          "settings": {
+            "_column_size": 100,
+            "_inline_size": null
+          },
+          "elements": [
+            {
+              "id": "a129",
+              "elType": "widget",
+              "settings": {
+                "kicker": "TALK TO AN EXPERT",
+                "title": "برای خرید در اصفهان، الان استعلام بگیرید",
+                "text": "کارشناسان مهندس شیمی و پلیمر بسپارمارکت، آماده مشاوره رایگان درباره انتخاب گرید مناسب، قیمت روز و شرایط ارسال به اصفهان هستند.",
+                "buttons": [
+                  {
+                    "text": "خانم خلیفه",
+                    "sub": "۰۹۱۲۰۹۹۷۶۵۱",
+                    "icon": "whatsapp",
+                    "white": "yes",
+                    "link": {
+                      "url": "https://wa.me/989120997651"
+                    }
+                  },
+                  {
+                    "text": "خانم طاهری",
+                    "sub": "۰۹۱۲۰۷۳۳۹۶۵",
+                    "icon": "whatsapp",
+                    "white": "",
+                    "link": {
+                      "url": "https://wa.me/989120733965"
+                    }
+                  }
+                ]
+              },
+              "elements": [],
+              "widgetType": "baspar-mid-cta"
+            }
+          ],
+          "isInner": false
+        }
+      ],
+      "isInner": false
+    },
+    {
+      "id": "a12e",
+      "elType": "section",
+      "settings": {
+        "padding": {
+          "unit": "px",
+          "top": "60",
+          "right": "24",
+          "bottom": "60",
+          "left": "24",
+          "isLinked": false
+        }
+      },
+      "elements": [
+        {
+          "id": "a12f",
+          "elType": "column",
+          "settings": {
+            "_column_size": 100,
+            "_inline_size": null
+          },
+          "elements": [
+            {
+              "id": "a12c",
+              "elType": "widget",
+              "settings": {
+                "kicker": "NATIONWIDE DELIVERY",
+                "title": "خرید مواد اولیه شیمیایی از سایر شهرها",
+                "sub": "ارسال با باربری معتبر به تمام شهرهای ایران. صفحه‌ی شهر خود را انتخاب کنید."
+              },
+              "elements": [],
+              "widgetType": "baspar-section-heading"
+            },
+            {
+              "id": "a12d",
+              "elType": "widget",
+              "settings": {
+                "items": [
+                  {
+                    "name": "خرید از تهران",
+                    "link": {
+                      "url": "/buy-chemical-raw-materials-tehran/"
+                    }
+                  },
+                  {
+                    "name": "خرید از شیراز",
+                    "link": {
+                      "url": "/buy-chemical-raw-materials-shiraz/"
+                    }
+                  },
+                  {
+                    "name": "خرید از مشهد",
+                    "link": {
+                      "url": "/buy-chemical-raw-materials-mashhad/"
+                    }
+                  },
+                  {
+                    "name": "خرید از تبریز",
+                    "link": {
+                      "url": "/buy-chemical-raw-materials-tabriz/"
+                    }
+                  }
+                ]
+              },
+              "elements": [],
+              "widgetType": "baspar-cities"
+            }
+          ],
+          "isInner": false
+        }
+      ],
+      "isInner": false
+    },
+    {
+      "id": "a132",
+      "elType": "section",
+      "settings": {
+        "background_background": "classic",
+        "background_color": "#FAF8FC",
+        "padding": {
+          "unit": "px",
+          "top": "60",
+          "right": "24",
+          "bottom": "60",
+          "left": "24",
+          "isLinked": false
+        }
+      },
+      "elements": [
+        {
+          "id": "a133",
+          "elType": "column",
+          "settings": {
+            "_column_size": 100,
+            "_inline_size": null
+          },
+          "elements": [
+            {
+              "id": "a130",
+              "elType": "widget",
+              "settings": {
+                "kicker": "FAQ · 5 QUESTIONS",
+                "title": "سوالات متداول خرید در اصفهان",
+                "sub": "پاسخ به رایج‌ترین سوالات مشتریان اصفهان درباره خرید و ارسال مواد اولیه شیمیایی."
+              },
+              "elements": [],
+              "widgetType": "baspar-section-heading"
+            },
+            {
+              "id": "a131",
+              "elType": "widget",
+              "settings": {
+                "items": [
+                  {
+                    "q": "زمان ارسال مواد اولیه شیمیایی به اصفهان چقدر است؟",
+                    "a": "برای محصولات موجود، ارسال از انبار مرکزی تهران طی ۱ تا ۲ روز کاری با باربری معتبر به اصفهان انجام می‌شود."
+                  },
+                  {
+                    "q": "آیا به شهرک صنعتی محمودآباد (رنگ‌سازی) ارسال دارید؟",
+                    "a": "بله، تحویل مستقیم به انبار کارخانه در شهرک محمودآباد، مورچه‌خورت، جی و سایر شهرک‌های صنعتی اصفهان انجام می‌شود."
+                  },
+                  {
+                    "q": "قیمت مواد اولیه شیمیایی چرا روی سایت درج نشده است؟",
+                    "a": "قیمت مواد اولیه شیمیایی به‌دلیل نوسانات نرخ ارز و بازار جهانی روزانه تغییر می‌کند. برای دقیق‌ترین قیمت روز، استعلام تلفنی یا واتس‌اپ توصیه می‌شود."
+                  },
+                  {
+                    "q": "آیا بسپارمارکت گواهی COA ارائه می‌دهد؟",
+                    "a": "بله، تمام محصولات وارداتی با گواهی COA کارخانه‌ی سازنده تحویل می‌شوند. برای محصولات داخلی نیز در صورت درخواست، آنالیز معتبر ارائه می‌گردد."
+                  },
+                  {
+                    "q": "روش‌های پرداخت چیست؟",
+                    "a": "پرداخت به‌صورت کارت‌به‌کارت، واریز بانکی به حساب شرکت یا برای مشتریان قدیمی پرداخت در محل امکان‌پذیر است. برای خریدهای عمده، شرایط پرداخت اقساطی نیز قابل مذاکره است."
+                  }
+                ]
+              },
+              "elements": [],
+              "widgetType": "baspar-faq"
+            }
+          ],
+          "isInner": false
+        }
+      ],
+      "isInner": false
+    },
+    {
+      "id": "a135",
+      "elType": "section",
+      "settings": {},
+      "elements": [
+        {
+          "id": "a136",
+          "elType": "column",
+          "settings": {
+            "_column_size": 100,
+            "_inline_size": null
+          },
+          "elements": [
+            {
+              "id": "a134",
+              "elType": "widget",
+              "settings": {
+                "title": "آماده خرید مواد اولیه شیمیایی در اصفهان هستید؟",
+                "sub": "استعلام قیمت روز رایگان و بدون تعهد است. مشخصات ماده‌ی مورد نیاز خود را برای کارشناسان ما ارسال کنید تا سریع‌ترین پیشنهاد قیمت و ارسال به اصفهان را دریافت کنید."
+              },
+              "elements": [],
+              "widgetType": "baspar-final-cta"
+            }
+          ],
+          "isInner": false
+        }
+      ],
+      "isInner": false
+    },
+    {
+      "id": "a138",
+      "elType": "section",
+      "settings": {},
+      "elements": [
+        {
+          "id": "a139",
+          "elType": "column",
+          "settings": {
+            "_column_size": 100,
+            "_inline_size": null
+          },
+          "elements": [
+            {
+              "id": "a137",
+              "elType": "widget",
+              "settings": {},
+              "elements": [],
+              "widgetType": "baspar-footer"
+            }
+          ],
+          "isInner": false
+        }
+      ],
+      "isInner": false
+    },
+    {
+      "id": "a13b",
+      "elType": "section",
+      "settings": {},
+      "elements": [
+        {
+          "id": "a13c",
+          "elType": "column",
+          "settings": {
+            "_column_size": 100,
+            "_inline_size": null
+          },
+          "elements": [
+            {
+              "id": "a13a",
+              "elType": "widget",
+              "settings": {},
+              "elements": [],
+              "widgetType": "baspar-float-whatsapp"
+            }
+          ],
+          "isInner": false
+        }
+      ],
+      "isInner": false
+    }
+  ],
+  "page_settings": {}
+}

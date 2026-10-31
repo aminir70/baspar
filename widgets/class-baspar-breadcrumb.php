@@ -35,7 +35,7 @@ class Baspar_Breadcrumb extends Baspar_Widget_Base {
 		$this->start_controls_section( 'content', array( 'label' => __( 'محتوا', 'baspar-elements' ) ) );
 		$this->add_control( 'kicker', array( 'label' => __( 'برچسب لاتین', 'baspar-elements' ), 'type' => Controls_Manager::TEXT, 'default' => 'ABOUT US' ) );
 		$this->add_control( 'title', array( 'label' => __( 'عنوان', 'baspar-elements' ), 'type' => Controls_Manager::TEXT, 'default' => 'درباره ما' ) );
-		$this->add_control( 'sub', array( 'label' => __( 'توضیح', 'baspar-elements' ), 'type' => Controls_Manager::TEXTAREA, 'rows' => 3 ) );
+		$this->add_control( 'sub', array( 'label' => __( 'توضیح', 'baspar-elements' ), 'type' => Controls_Manager::WYSIWYG ) );
 
 		$rep = new Repeater();
 		$rep->add_control( 'text', array( 'label' => __( 'متن', 'baspar-elements' ), 'type' => Controls_Manager::TEXT ) );
@@ -71,7 +71,7 @@ class Baspar_Breadcrumb extends Baspar_Widget_Base {
 				<div class="bcrumb-inner">
 					<?php if ( $s['kicker'] ) : ?><div class="bcrumb-kicker mono"><?php echo esc_html( $s['kicker'] ); ?></div><?php endif; ?>
 					<h1><?php echo esc_html( $s['title'] ); ?></h1>
-					<?php if ( $s['sub'] ) : ?><p><?php echo esc_html( $s['sub'] ); ?></p><?php endif; ?>
+					<?php if ( $s['sub'] ) : ?><div class="rich-text"><?php echo wp_kses_post( $s['sub'] ); ?></div><?php endif; ?>
 					<nav class="bcrumb-nav">
 						<?php
 						$count = count( (array) $s['path'] );

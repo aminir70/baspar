@@ -1,7 +1,11 @@
 <?php
 /**
  * Product info column — mono header + h1 + code row + specs table +
- * CTA box + meta row + 3 action buttons.
+ * CTA box + meta row.
+ *
+ * Product data (title, SKU, brand, categories, short description and the spec
+ * table) is read live from the current WooCommerce product. The CTA box and the
+ * trust badges are site-wide, so they stay configurable.
  *
  * @package BasparElements
  */
@@ -11,6 +15,9 @@ namespace BasparElements\Widgets;
 use Elementor\Controls_Manager;
 use Elementor\Repeater;
 use function BasparElements\icon_svg;
+use function BasparElements\current_product;
+use function BasparElements\product_brand;
+use function BasparElements\product_specs;
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
@@ -20,42 +27,17 @@ class Baspar_Product_Info extends Baspar_Widget_Base {
 	public function get_icon() { return 'eicon-product-info'; }
 
 	protected function register_controls() {
-		$this->start_controls_section( 'head', array( 'label' => __( 'هدر', 'baspar-elements' ) ) );
-		$this->add_control( 'kicker', array( 'label' => __( 'برچسب لاتین', 'baspar-elements' ), 'type' => Controls_Manager::TEXT, 'default' => 'PRODUCT · INDUSTRIAL GRADE' ) );
-		$this->add_control( 'title', array( 'label' => __( 'عنوان', 'baspar-elements' ), 'type' => Controls_Manager::TEXT, 'default' => 'تیتانیوم دی‌اکسید R-838' ) );
-
-		$cr = new Repeater();
-		$cr->add_control( 'label', array( 'label' => __( 'برچسب', 'baspar-elements' ), 'type' => Controls_Manager::TEXT ) );
-		$cr->add_control( 'value', array( 'label' => __( 'مقدار', 'baspar-elements' ), 'type' => Controls_Manager::TEXT ) );
-		$this->add_control( 'codes', array(
-			'label' => __( 'سلول‌های کد', 'baspar-elements' ),
-			'type' => Controls_Manager::REPEATER, 'fields' => $cr->get_controls(),
-			'title_field' => '{{{ label }}}',
-			'default' => array(
-				array( 'label' => 'BRAND', 'value' => 'Lomon' ),
-				array( 'label' => 'ORIGIN', 'value' => 'China' ),
-				array( 'label' => 'PKG', 'value' => '۲۵kg / کیسه' ),
-			),
-		) );
-		$this->add_control( 'desc', array( 'label' => __( 'توضیح کوتاه', 'baspar-elements' ), 'type' => Controls_Manager::TEXTAREA, 'rows' => 3, 'default' => 'تیتانیوم دی‌اکسید گرید Rutile با پراکنش بالا، مناسب صنایع رنگ‌سازی و پلاستیک.' ) );
-		$this->end_controls_section();
-
-		$this->start_controls_section( 'specs', array( 'label' => __( 'جدول مشخصات', 'baspar-elements' ) ) );
-		$this->add_control( 'specs_head', array( 'label' => __( 'برچسب جدول', 'baspar-elements' ), 'type' => Controls_Manager::TEXT, 'default' => 'KEY SPECIFICATIONS' ) );
-		$sp = new Repeater();
-		$sp->add_control( 'label', array( 'label' => __( 'مشخصه', 'baspar-elements' ), 'type' => Controls_Manager::TEXT ) );
-		$sp->add_control( 'value', array( 'label' => __( 'مقدار', 'baspar-elements' ), 'type' => Controls_Manager::TEXT ) );
-		$this->add_control( 'specs', array(
-			'label' => __( 'مشخصات', 'baspar-elements' ),
-			'type' => Controls_Manager::REPEATER, 'fields' => $sp->get_controls(),
-			'title_field' => '{{{ label }}}',
-			'default' => array(
-				array( 'label' => 'خلوص (TiO₂)', 'value' => '≥ ۹۸٪' ),
-				array( 'label' => 'چگالی', 'value' => '۴.۱ g/cm³' ),
-				array( 'label' => 'pH', 'value' => '۶.۵ – ۸.۵' ),
-				array( 'label' => 'COA', 'value' => 'بله' ),
-			),
-		) );
+		$this->start_controls_section( 'head', array( 'label' => __( 'اطلاعات محصول (پویا)', 'baspar-elements' ) ) );
+		$this->add_control(
+			'info',
+			array(
+				'type'            => Controls_Manager::RAW_HTML,
+				'raw'             => __( 'عنوان، کد (SKU)، برند، دسته‌بندی، توضیح کوتاه و جدول مشخصات به‌صورت خودکار از همین محصول خوانده می‌شوند.', 'baspar-elements' ),
+				'content_classes' => 'elementor-descriptor',
+			)
+		);
+		$this->add_control( 'specs_head', array( 'label' => __( 'برچسب جدول مشخصات', 'baspar-elements' ), 'type' => Controls_Manager::TEXT, 'default' => 'KEY SPECIFICATIONS' ) );
+		$this->add_control( 'show_short_desc', array( 'label' => __( 'نمایش توضیح کوتاه محصول', 'baspar-elements' ), 'type' => Controls_Manager::SWITCHER, 'return_value' => 'yes', 'default' => 'yes' ) );
 		$this->end_controls_section();
 
 		$this->start_controls_section( 'cta', array( 'label' => __( 'باکس استعلام و دکمه‌ها', 'baspar-elements' ) ) );
@@ -67,7 +49,7 @@ class Baspar_Product_Info extends Baspar_Widget_Base {
 		$this->add_control( 'btn2_link', array( 'label' => __( 'لینک ۲', 'baspar-elements' ), 'type' => Controls_Manager::URL, 'default' => array( 'url' => 'tel:+989120733965' ) ) );
 
 		$mr = new Repeater();
-		$mr->add_control( 'icon', array( 'label' => __( 'آیکون', 'baspar-elements' ), 'type' => Controls_Manager::SELECT, 'options' => array( 'truck' => 'ارسال', 'shield' => 'گارانتی', 'doc' => 'COA', 'package' => 'بسته‌بندی' ), 'default' => 'truck' ) );
+		$mr->add_control( 'icon', array( 'label' => __( 'آیکون', 'baspar-elements' ), 'type' => Controls_Manager::SELECT, 'options' => array( 'truck' => 'ارسال', 'shield' => 'گارانتی', 'info' => 'COA', 'package' => 'بسته‌بندی' ), 'default' => 'truck' ) );
 		$mr->add_control( 'text', array( 'label' => __( 'متن', 'baspar-elements' ), 'type' => Controls_Manager::TEXT ) );
 		$this->add_control( 'meta', array(
 			'label' => __( 'بج‌های پایین', 'baspar-elements' ),
@@ -76,39 +58,87 @@ class Baspar_Product_Info extends Baspar_Widget_Base {
 			'default' => array(
 				array( 'icon' => 'truck', 'text' => 'ارسال ۲۴ ساعته' ),
 				array( 'icon' => 'shield', 'text' => 'گارانتی مغایرت' ),
-				array( 'icon' => 'doc', 'text' => 'COA و دیتاشیت' ),
-				array( 'icon' => 'package', 'text' => 'بسته‌بندی ۲۵kg' ),
+				array( 'icon' => 'info', 'text' => 'COA و دیتاشیت' ),
+				array( 'icon' => 'package', 'text' => 'بسته‌بندی استاندارد' ),
 			),
 		) );
+		$this->end_controls_section();
+
+		$this->start_controls_section( 'style', array( 'label' => __( 'استایل', 'baspar-elements' ), 'tab' => Controls_Manager::TAB_STYLE ) );
+		$this->add_color( 'accent', __( 'رنگ اصلی', 'baspar-elements' ), '', '--brand' );
+		$this->add_typography( 'title_typo', __( 'تایپوگرافی عنوان', 'baspar-elements' ), '.prod-info-head h1' );
 		$this->end_controls_section();
 	}
 
 	protected function render() {
-		$s = $this->get_settings_for_display();
+		$s       = $this->get_settings_for_display();
+		$product = current_product();
+
+		if ( ! $product ) {
+			if ( $this->is_editor() ) {
+				echo '<div class="baspar-scope" style="padding:24px;text-align:center;color:#6B5E80">' . esc_html__( 'این ویجت اطلاعات را از محصول ووکامرس می‌خواند. آن را در قالب «محصول تکی» قرار دهید.', 'baspar-elements' ) . '</div>';
+			}
+			return;
+		}
+
+		$pid     = $product->get_id();
+		$sku     = $product->get_sku();
+		$brand   = product_brand( $product );
+		$specs   = product_specs( $product );
+		$short   = $product->get_short_description();
+
+		// Category names for the kicker + code row.
+		$cat_names = wp_get_post_terms( $pid, 'product_cat', array( 'fields' => 'names' ) );
+		$cat_names = is_wp_error( $cat_names ) ? array() : $cat_names;
+		$primary_cat = ! empty( $cat_names ) ? $cat_names[0] : '';
+		if ( $primary_cat ) {
+			$kicker = function_exists( 'mb_strtoupper' ) ? mb_strtoupper( $primary_cat, 'UTF-8' ) : strtoupper( $primary_cat );
+		} else {
+			$kicker = __( 'محصول', 'baspar-elements' );
+		}
+
+		// Code row: SKU + brand + primary category (skip empties).
+		$codes = array();
+		if ( $sku ) {
+			$codes[] = array( 'label' => 'SKU', 'value' => $sku );
+		}
+		if ( $brand ) {
+			$codes[] = array( 'label' => 'BRAND', 'value' => $brand );
+		}
+		if ( $primary_cat ) {
+			$codes[] = array( 'label' => 'CATEGORY', 'value' => $primary_cat );
+		}
 		?>
 		<div class="baspar-scope">
 			<div class="prod-info">
 				<div class="prod-info-head">
-					<span class="mono"><?php echo esc_html( $s['kicker'] ); ?></span>
-					<h1><?php echo esc_html( $s['title'] ); ?></h1>
-					<div class="prod-code-row">
-						<?php foreach ( (array) $s['codes'] as $c ) : ?>
-							<div><span class="mono"><?php echo esc_html( $c['label'] ); ?></span><strong><?php echo esc_html( $c['value'] ); ?></strong></div>
-						<?php endforeach; ?>
-					</div>
-				</div>
-				<p style="font-size:15px;color:var(--ink-2);line-height:1.85;margin:0"><?php echo esc_html( $s['desc'] ); ?></p>
-
-				<div class="prod-specs">
-					<div class="prod-specs-head"><?php echo esc_html( $s['specs_head'] ); ?></div>
-					<table>
-						<tbody>
-							<?php foreach ( (array) $s['specs'] as $sp ) : ?>
-								<tr><td><?php echo esc_html( $sp['label'] ); ?></td><td><?php echo esc_html( $sp['value'] ); ?></td></tr>
+					<span class="mono"><?php echo esc_html( $kicker ); ?></span>
+					<h1><?php echo esc_html( $product->get_name() ); ?></h1>
+					<?php if ( ! empty( $codes ) ) : ?>
+						<div class="prod-code-row">
+							<?php foreach ( $codes as $c ) : ?>
+								<div><span class="mono"><?php echo esc_html( $c['label'] ); ?></span><strong><?php echo esc_html( $c['value'] ); ?></strong></div>
 							<?php endforeach; ?>
-						</tbody>
-					</table>
+						</div>
+					<?php endif; ?>
 				</div>
+
+				<?php if ( 'yes' === $s['show_short_desc'] && $short ) : ?>
+					<div style="font-size:15px;color:var(--ink-2);line-height:1.85;margin:0"><?php echo wp_kses_post( wpautop( $short ) ); ?></div>
+				<?php endif; ?>
+
+				<?php if ( ! empty( $specs ) ) : ?>
+					<div class="prod-specs">
+						<?php if ( $s['specs_head'] ) : ?><div class="prod-specs-head"><?php echo esc_html( $s['specs_head'] ); ?></div><?php endif; ?>
+						<table>
+							<tbody>
+								<?php foreach ( $specs as $label => $value ) : ?>
+									<tr><td><?php echo esc_html( $label ); ?></td><td><?php echo esc_html( $value ); ?></td></tr>
+								<?php endforeach; ?>
+							</tbody>
+						</table>
+					</div>
+				<?php endif; ?>
 
 				<div class="prod-cta-box">
 					<span class="mono"><?php echo esc_html( $s['cta_kicker'] ); ?></span>
@@ -119,11 +149,13 @@ class Baspar_Product_Info extends Baspar_Widget_Base {
 					</div>
 				</div>
 
-				<div class="prod-meta-row">
-					<?php foreach ( (array) $s['meta'] as $m ) : ?>
-						<span class="pm"><?php echo icon_svg( $m['icon'] ? $m['icon'] : 'truck', 16 ); // phpcs:ignore ?><?php echo esc_html( $m['text'] ); ?></span>
-					<?php endforeach; ?>
-				</div>
+				<?php if ( ! empty( $s['meta'] ) ) : ?>
+					<div class="prod-meta-row">
+						<?php foreach ( (array) $s['meta'] as $m ) : ?>
+							<span class="pm"><?php echo icon_svg( $m['icon'] ? $m['icon'] : 'truck', 16 ); // phpcs:ignore ?><?php echo esc_html( $m['text'] ); ?></span>
+						<?php endforeach; ?>
+					</div>
+				<?php endif; ?>
 			</div>
 		</div>
 		<?php
