@@ -118,3 +118,20 @@ Risk: none (only adds to a list).
 ## How to rebuild after editing CSS/JS
 `assets/css/baspar-elements.css` and `assets/js/baspar-elements.js` stay the
 files to edit; then run `tools/build.sh` (needs python3 and node).
+
+## 1.9.1 follow-up
+Problem found on the live site: /product/dop/ printed 5 Baspar stylesheets.
+Cause: Elementor saves each document's widget style dependencies once
+(post meta `_elementor_page_assets`) and enqueues that saved list on every
+visit. Lists saved under 1.8.x contain `baspar-elements` (the full file);
+lists of theme templates saved under 1.9.0 contained bundle handles because
+they were computed before the page plan was decided.
+Fix: page plan decided once (lazily, after the main query); constant widget
+handles; `print_styles_array` filter keeps only the planned stylesheet;
+one-time removal of saved lists from older versions.
+Tested on a local WordPress 6.x + Elementor + WooCommerce + Hello site with
+the plugin: reproduced the 5-file output with 1.9.0 and stale lists, then
+1.9.1 printed exactly 1 Baspar stylesheet on the home page, product, post and
+page; 0 on pages without Baspar widgets; only all.min.css with
+BASPAR_ELEMENTS_CSS_ALL; also 1 when Baspar handles are enqueued early at
+priority 10 (as Elementor Pro does).

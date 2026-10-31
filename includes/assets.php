@@ -93,14 +93,47 @@ function register_assets() {
 		$deps = 'core' === $b ? array() : array( 'baspar-css-core' );
 		wp_register_style( 'baspar-css-' . $b, $base . ( $dbg ? 'css/src/' . $b . '.css' : 'css/dist/' . $b . '.min.css' ), $deps, $v );
 	}
-	wp_register_style(
-		'baspar-elements-fonts',
-		'https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap',
-		array(),
-		null // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion -- Google Fonts URL must stay stable.
-	);
+	// Webfonts: self-hosted, declared inline (no render-blocking font
+	// stylesheet). A browser only downloads a file when text on the page
+	// uses that font and range, e.g. JetBrains Mono only where it's shown.
+	wp_register_style( 'baspar-elements-fonts', false, array(), $v );
+	wp_add_inline_style( 'baspar-elements-fonts', font_face_css() );
 	$script_args = array( 'in_footer' => true, 'strategy' => 'defer' );
 	wp_register_script( 'baspar-elements', $base . ( $dbg ? 'js/baspar-elements.js' : 'js/dist/baspar-elements.min.js' ), array(), $v, $script_args );
+}
+
+/**
+ * @font-face rules for the self-hosted fonts.
+ *
+ * @return string
+ */
+function font_face_css() {
+	$rows = include BASPAR_ELEMENTS_PATH . 'includes/fonts.php';
+	$base = BASPAR_ELEMENTS_ASSETS . 'fonts/';
+	$css  = '';
+	foreach ( (array) $rows as $r ) {
+		$css .= sprintf(
+			"@font-face{font-family:'%s';font-style:normal;font-weight:%s;font-display:swap;src:url(%s) format('woff2');unicode-range:%s}",
+			$r[0],
+			$r[2],
+			esc_url( $base . $r[1] . '?ver=' . BASPAR_ELEMENTS_VERSION ),
+			$r[3]
+		);
+	}
+	return $css;
+}
+
+/**
+ * Preload the Persian text font (used above the fold on every Baspar page).
+ */
+function preload_font() {
+	if ( ! page_css_plan()['mode'] ) {
+		return;
+	}
+	printf(
+		'<link rel="preload" href="%s" as="font" type="font/woff2" crossorigin>' . "\n",
+		esc_url( BASPAR_ELEMENTS_ASSETS . 'fonts/vazirmatn-arabic.woff2?ver=' . BASPAR_ELEMENTS_VERSION )
+	);
 }
 
 /**
@@ -292,18 +325,95 @@ function combined_css_url( $bundles ) {
 }
 
 /**
- * How the current page got its CSS: 'all', 'page' (one combined file),
- * 'split' (separate bundle files) or '' (none).
+ * The page's CSS plan, decided once per request (after the main query):
+ *   mode    'all'   full stylesheet (editor, preview, kill switch)
+ *           'page'  one combined file (normal)
+ *           'split' separate bundle files (uploads not writable / SCRIPT_DEBUG)
+ *           ''      no Baspar widget found (widgets' own dependencies apply)
+ *   bundles bundles in the page file, url its address.
  *
- * @param string|null $set Internal setter.
- * @return string
+ * Anyone may ask (Elementor reads widget dependencies before our enqueue
+ * runs); the answer is the same every time.
+ *
+ * @return array{mode:string,bundles:string[],url:string}
  */
-function page_css_mode( $set = null ) {
-	static $mode = '';
-	if ( null !== $set ) {
-		$mode = $set;
+function page_css_plan() {
+	static $plan = null;
+	$none = array( 'mode' => '', 'bundles' => array(), 'url' => '' );
+	if ( null !== $plan ) {
+		return $plan;
 	}
-	return $mode;
+	if ( is_admin() && ! wp_doing_ajax() ) {
+		return $none;
+	}
+	if ( load_all_assets() ) {
+		$plan = array( 'mode' => 'all', 'bundles' => array(), 'url' => '' );
+		return $plan;
+	}
+	if ( ! did_action( 'wp' ) ) {
+		return $none; // Query not ready yet: decide later, don't cache.
+	}
+	$bundles = page_bundles();
+	if ( ! $bundles ) {
+		$plan = $none;
+		return $plan;
+	}
+	$url  = assets_debug() ? '' : combined_css_url( $bundles );
+	$plan = array( 'mode' => $url ? 'page' : 'split', 'bundles' => $bundles, 'url' => $url );
+	return $plan;
+}
+
+/**
+ * Last word on what prints (head and footer): whatever enqueued Baspar
+ * handles — widget dependencies, Elementor's saved per-page asset lists
+ * (`_elementor_page_assets`, which may still hold 1.8.x handles), Elementor
+ * Pro's theme templates — only the planned stylesheet remains.
+ *
+ * @param string[] $todo Handles about to print.
+ * @return string[]
+ */
+function filter_print_styles( $todo ) {
+	if ( ! is_array( $todo ) || ( is_admin() && ! wp_doing_ajax() ) ) {
+		return $todo;
+	}
+	$plan = page_css_plan();
+	$mode = $plan['mode'];
+	if ( '' === $mode ) {
+		return $todo; // Nothing planned: keep what widgets asked for.
+	}
+	$out = array();
+	foreach ( $todo as $h ) {
+		if ( 'baspar-elements' === $h && 'all' !== $mode ) {
+			continue;
+		}
+		if ( 0 === strpos( (string) $h, 'baspar-css-' ) && 'baspar-css-page' !== $h ) {
+			$b = substr( $h, 11 );
+			if ( 'all' === $mode ) {
+				continue;
+			}
+			if ( 'page' === $mode && ( 'core' === $b || in_array( $b, $plan['bundles'], true ) ) ) {
+				continue;
+			}
+		}
+		$out[] = $h;
+	}
+	return $out;
+}
+
+/**
+ * Elementor saves each document's style dependencies once
+ * (`_elementor_page_assets`) and reuses them. Lists saved by older versions
+ * name handles that no longer fit (1.8.x: the full stylesheet); clear them
+ * once after an update so Elementor saves fresh ones.
+ */
+function maybe_reset_elementor_assets() {
+	if ( get_option( 'baspar_elements_assets_ver' ) === BASPAR_ELEMENTS_VERSION ) {
+		return;
+	}
+	global $wpdb;
+	$wpdb->query( "DELETE FROM {$wpdb->postmeta} WHERE meta_key = '_elementor_page_assets' AND meta_value LIKE '%baspar-%'" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+	wp_cache_flush_group( 'post_meta' );
+	update_option( 'baspar_elements_assets_ver', BASPAR_ELEMENTS_VERSION, true );
 }
 
 /**
@@ -313,15 +423,14 @@ function enqueue_page_assets() {
 	if ( is_admin() ) {
 		return;
 	}
-	if ( load_all_assets() ) {
-		page_css_mode( 'all' );
+	$plan = page_css_plan();
+	if ( 'all' === $plan['mode'] ) {
 		wp_enqueue_style( 'baspar-elements' );
 		wp_enqueue_style( 'baspar-elements-fonts' );
 		wp_enqueue_script( 'baspar-elements' );
 		return;
 	}
-	$bundles = page_bundles();
-	if ( ! $bundles ) {
+	if ( ! $plan['mode'] ) {
 		return; // No Baspar widget here: no CSS, JS or webfont.
 	}
 	if ( is_product_page_with_hero() && apply_filters( 'baspar_elements_critical_css', true ) ) {
@@ -332,13 +441,10 @@ function enqueue_page_assets() {
 			wp_add_inline_style( 'baspar-critical', $crit );
 		}
 	}
-	$url = assets_debug() ? '' : combined_css_url( $bundles );
-	if ( $url ) {
-		page_css_mode( 'page' );
-		wp_enqueue_style( 'baspar-css-page', $url, array(), null ); // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion -- version is in the file name.
+	if ( 'page' === $plan['mode'] ) {
+		wp_enqueue_style( 'baspar-css-page', $plan['url'], array(), null ); // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion -- version is in the file name.
 	} else {
-		page_css_mode( 'split' );
-		foreach ( $bundles as $b ) {
+		foreach ( $plan['bundles'] as $b ) {
 			wp_enqueue_style( 'baspar-css-' . $b );
 		}
 	}
@@ -405,21 +511,12 @@ function preload_product_image() {
  * @return string[]
  */
 function widget_style_handles( $slug ) {
-	if ( load_all_assets() ) {
+	// Always the same answer for a widget (Elementor saves it per page);
+	// filter_print_styles() drops what the page stylesheet already holds.
+	if ( 'all' === page_css_plan()['mode'] ) {
 		return array( 'baspar-elements', 'baspar-elements-fonts' );
 	}
-	$b = widget_bundle( $slug );
-	// Already in the page stylesheet printed in <head>: nothing more to load
-	// (loading the bundle again would repeat its rules later in the page).
-	if ( 'page' === page_css_mode() && in_array( $b, page_bundles(), true ) ) {
-		return array( 'baspar-css-page', 'baspar-elements-fonts' );
-	}
-	$h = array( 'baspar-css-core' );
-	if ( 'core' !== $b ) {
-		$h[] = 'baspar-css-' . $b;
-	}
-	$h[] = 'baspar-elements-fonts';
-	return $h;
+	return array( 'baspar-css-' . widget_bundle( $slug ), 'baspar-elements-fonts' );
 }
 
 /**

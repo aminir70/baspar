@@ -4,7 +4,7 @@ Tags: elementor, woocommerce, widgets, rtl, persian
 Requires at least: 5.8
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.9.0
+Stable tag: 1.9.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,6 +37,26 @@ Requires Elementor. WooCommerce is required only for the product/category widget
    Templates → Saved Templates → Import Templates.
 
 == Changelog ==
+
+= 1.9.1 =
+* Fix: product pages printed five Baspar stylesheets (page file + core +
+  product + side + all.min.css). Elementor saves each page's widget style
+  dependencies once (_elementor_page_assets) and reuses them: lists saved by
+  1.8.x named the full stylesheet, and theme templates had saved the bundle
+  handles before the page plan existed. Now:
+  - the page plan is decided once per request, available to any caller;
+  - widgets always declare the same handles (their bundle);
+  - a print_styles_array filter prints only the planned file, whoever
+    enqueued Baspar handles (head and footer);
+  - saved Elementor lists from older versions are cleared once after update.
+  Result: one Baspar stylesheet per page (all.min.css only with
+  BASPAR_ELEMENTS_CSS_ALL).
+* Webfonts self-hosted (Vazirmatn arabic/latin/latin-ext, JetBrains Mono
+  latin/latin-ext — variable WOFF2, OFL) with inline @font-face and
+  font-display:swap: no render-blocking Google Fonts stylesheet; the Persian
+  font is preloaded; JetBrains Mono downloads only where it is shown.
+* WP Rocket: uploads/baspar-elements/ excluded from CSS minify (already
+  minified, versioned by file name).
 
 = 1.9.0 =
 * Speed (mobile LCP / CLS). Details and test notes: docs/perf-1.9.0.md.

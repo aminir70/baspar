@@ -1,0 +1,6 @@
+Vazirmatn (c) Saber Rastikerdar and contributors — SIL Open Font License 1.1
+https://github.com/rastikerdar/vazirmatn
+JetBrains Mono (c) JetBrains — SIL Open Font License 1.1
+https://github.com/JetBrains/JetBrainsMono
+Files are the variable-weight WOFF2 subsets served by Google Fonts
+(Vazirmatn: arabic, latin, latin-ext; JetBrains Mono: latin, latin-ext).

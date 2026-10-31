@@ -182,6 +182,11 @@ final class Plugin {
 		add_action( 'init', '\BasparElements\register_assets', 20 );
 		add_action( 'wp_enqueue_scripts', '\BasparElements\enqueue_page_assets', 20 );
 		add_action( 'wp_head', '\BasparElements\preload_product_image', 2 );
+		add_action( 'wp_head', '\BasparElements\preload_font', 2 );
+		// Only the planned stylesheet prints, whoever enqueued Baspar handles.
+		add_filter( 'print_styles_array', '\BasparElements\filter_print_styles', 99 );
+		// Clear Elementor's saved per-page asset lists from older versions once.
+		add_action( 'init', '\BasparElements\maybe_reset_elementor_assets', 30 );
 		add_action( 'elementor/editor/after_enqueue_styles', array( $this, 'enqueue_editor_styles' ) );
 
 		// Responsive WebP copies of product images.
@@ -210,6 +215,8 @@ final class Plugin {
 	public function rocket_exclude_assets( $list ) {
 		$list   = (array) $list;
 		$list[] = '/wp-content/plugins/baspar-elements/assets/(.*)';
+		// The per-page stylesheet is already minified and versioned by name.
+		$list[] = '/wp-content/uploads/baspar-elements/(.*)';
 		return $list;
 	}
 
