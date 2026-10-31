@@ -615,6 +615,7 @@
 .baspar-scope .prl-arrow:hover,.baspar-scope .prl-arrow:focus{background:var(--brand);color:#fff;border-color:var(--brand)}
 .baspar-scope .prl-arrow.is-prev{right:-20px}
 .baspar-scope .prl-arrow.is-next{left:-20px}
+.baspar-scope .prl-rail.is-static .prl-arrow,.baspar-scope .prl-rail.is-static .prl-progress{display:none}
 .baspar-scope .prl-progress{position:relative;height:4px;margin:0 auto;max-width:220px;border-radius:4px;background:var(--line);overflow:hidden}
 .baspar-scope .prl-progress span{position:absolute;top:0;bottom:0;right:0;width:20%;border-radius:4px;background:linear-gradient(90deg,#9333EA,#6D28D9);transition:transform .25s}
 .baspar-scope .prl-empty{padding:30px;text-align:center;color:var(--ink-3);border:1px dashed var(--line-2);border-radius:20px}

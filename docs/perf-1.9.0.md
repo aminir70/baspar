@@ -96,3 +96,25 @@ Risk: none (only adds to a list).
 ## 7. Release
 - Version 1.9.0 (new `?ver=` on every file). The 1.8.1 CSS/JS are kept in
   `backup/1.8.1/` in the repository (not shipped in the zip).
+
+## Test results (before release)
+- Computed style of every element inside Baspar widgets, old full file vs. the
+  1.9.0 page file (+ 1.9.0 script), 12 live pages × 1366 px and 390 px:
+  0 styling differences. Left-over differences were all timing (counters in
+  the middle of counting, a WordPress-core lazy-image property, one scroll
+  reveal under heavy CPU load — re-checked separately: identical).
+- Functional (new script on live pages): mega-menu category hover, mobile
+  drawer, product tabs + indicator, slider arrows/progress, counters, scroll
+  motion, FAQ, TOC highlight, reading progress, sticky sidebar, random
+  products, gallery lightbox, floating WhatsApp — all pass, no JS errors.
+  (The live header uses Elementor Pro's sticky; the plugin then stays out.)
+- DOP page, phone emulation, Slow 4G + 4× CPU, 3 runs: LCP median
+  2488 ms → 1904 ms; CLS ≈ 0 in both.
+- DOP page with the Baspar CSS made asynchronous and 2.5 s late: layout
+  shift 0 with the critical block (0.91 without it in the same test).
+- Baspar CSS per page (gzip): product 55 KB → ~15.5 KB, post ~15 KB,
+  home ~22 KB. Script 8.6 KB → 5.3 KB gzip.
+
+## How to rebuild after editing CSS/JS
+`assets/css/baspar-elements.css` and `assets/js/baspar-elements.js` stay the
+files to edit; then run `tools/build.sh` (needs python3 and node).

@@ -28,7 +28,7 @@
 		var first = true;
 		var io = new IntersectionObserver( function ( entries ) {
 			entries.forEach( function ( e ) {
-				if ( e.isIntersecting && ( first || ! opts.threshold || e.intersectionRatio >= opts.threshold ) ) {
+				if ( e.isIntersecting ) { // same rule as before 1.9.0
 					show( e.target, first );
 					io.unobserve( e.target );
 				}

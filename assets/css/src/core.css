@@ -283,6 +283,11 @@ body.baspar-nav-lock{overflow:hidden}
   0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,.7)}
   50%{box-shadow:0 0 0 6px rgba(34,197,94,0)}
 }
+.baspar-scope .blog-meta .author{display:inline-flex;align-items:center;gap:8px}
+.baspar-scope .blog-meta .au-av{width:24px;height:24px;border-radius:50%;
+  background:var(--brand);color:#fff;
+  display:inline-flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:700;}
 .baspar-scope html{scroll-behavior:smooth}
 .baspar-scope body{margin:0;
   font-family:var(--font);
@@ -342,11 +347,23 @@ body.baspar-nav-lock{overflow:hidden}
   0%{transform:scale(1);opacity:.7}
   100%{transform:scale(1.5);opacity:0}
 }
+.baspar-scope .bs-grid.is-list .pcard, .baspar-scope .products.is-list .pcard{flex-direction:row;
+  align-items:stretch;}
 .baspar-scope .bs-grid.is-list .pcard-img, .baspar-scope .products.is-list .pcard-img{width:200px;
   flex-shrink:0;
   aspect-ratio:1.2/1;}
+.baspar-scope .bs-grid.is-list .pcard-body, .baspar-scope .products.is-list .pcard-body{padding:18px 22px;
+  flex:1;}
+.baspar-scope .bs-grid.is-list .pcard-foot, .baspar-scope .products.is-list .pcard-foot{border-top:0;
+  border-right:1px solid var(--line);
+  padding:18px 22px;
+  flex-direction:column;
+  justify-content:center;
+  gap:6px;}
 @media(max-width:680px){
+.baspar-scope .bs-grid.is-list .pcard, .baspar-scope .products.is-list .pcard{flex-direction:column}
 .baspar-scope .bs-grid.is-list .pcard-img, .baspar-scope .products.is-list .pcard-img{width:auto}
+.baspar-scope .bs-grid.is-list .pcard-foot, .baspar-scope .products.is-list .pcard-foot{border-right:0;border-top:1px solid var(--line);flex-direction:row}
 }
 .baspar-scope .areas{display:flex;flex-wrap:wrap;gap:8px}
 .baspar-scope .ltr{white-space:nowrap}
@@ -473,7 +490,6 @@ html.baspar-js .baspar-scope .baspar-reveal:not(.in){opacity:1;transform:none}
 .baspar-scope .sbx-more:hover{background:var(--brand);color:#fff}
 .elementor-column.bspr-sticky-col,.e-con.bspr-sticky-col{position:sticky;top:var(--bspr-sticky-top,100px);align-self:flex-start;z-index:2}
 .elementor-column.bspr-sticky-col > .elementor-widget-wrap{height:auto}
-.baspar-scope .pdh-share button.is-copied{background:#16a34a;border-color:#16a34a;color:#fff}
 @media(max-width:820px){
 body:has(.pd-mbar) .bspr-fwa{display:none}
 }
@@ -662,4 +678,3 @@ html.baspar-motion .baspar-scope [data-anim]{transition-delay:calc(min(var(--i,0
 @media(prefers-reduced-motion:reduce){
 html.baspar-motion .baspar-scope [data-anim]{opacity:1;translate:none;scale:none}
 }
-.baspar-scope .prl-rail.is-static .prl-arrow,.baspar-scope .prl-rail.is-static .prl-progress{display:none}
