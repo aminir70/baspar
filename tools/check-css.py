@@ -17,8 +17,13 @@ ok = True
 for p in pages:
     url = '%s%s?nocache=%d' % (base, p, time.time())
     req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0 (Linux; Android 11) Mobile'})
-    html = urllib.request.urlopen(req, timeout=60).read().decode('utf-8', 'replace')
-    css = [m.group(1) for m in re.finditer(r"<link[^>]+rel=['\"]stylesheet['\"][^>]+href=['\"]([^'\"]*baspar[^'\"]*)['\"]", html)]
+    try:
+        html = urllib.request.urlopen(req, timeout=60).read().decode('utf-8', 'replace')
+    except Exception as e:  # noqa: BLE001
+        print('ERR %-30s %s' % (p, e))
+        ok = False
+        continue
+    css = [m.group(1) for m in re.finditer(r"<link[^>]+rel=['\"]stylesheet['\"][^>]+href=['\"]([^'\"]*baspar-elements[^'\"]*)['\"]", html)]
     gf = 'fonts.googleapis.com/css2?family=Vazirmatn' in html
     status = 'OK ' if len(css) <= 1 and not gf else 'BAD'
     ok = ok and status == 'OK '
