@@ -23,9 +23,6 @@
 .baspar-scope .cat-view{display:inline-flex;background:var(--surface-2);border:1px solid var(--line);border-radius:8px;overflow:hidden;}
 @media(max-width:680px){
 .baspar-scope .cat-sidebar{position:static}
-}
-.baspar-scope .bs-grid.is-list, .baspar-scope .products.is-list{grid-template-columns:1fr !important;}
-@media(max-width:680px){
 .baspar-scope .cat-sidebar{order:2}
 }
 .baspar-scope .cat-view{display:inline-flex;align-items:center;gap:2px;padding:3px;background:var(--surface-2);border:1px solid var(--line);border-radius:10px}

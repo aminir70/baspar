@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-const BUNDLE_ORDER = array( 'core', 'home', 'product', 'blog', 'side', 'shop', 'pages' );
+const BUNDLE_ORDER = array( 'core', 'home', 'product', 'blog', 'side', 'shop', 'pages', 'prices' );
 
 /**
  * Widget slug (without "baspar-") => bundle.
@@ -100,6 +100,8 @@ function register_assets() {
 	wp_add_inline_style( 'baspar-elements-fonts', font_face_css() );
 	$script_args = array( 'in_footer' => true, 'strategy' => 'defer' );
 	wp_register_script( 'baspar-elements', $base . ( $dbg ? 'js/baspar-elements.js' : 'js/dist/baspar-elements.min.js' ), array(), $v, $script_args );
+	// Price board (only pages with that widget).
+	wp_register_script( 'baspar-prices', $base . ( $dbg ? 'js/prices.js' : 'js/dist/prices.min.js' ), array(), $v, $script_args );
 }
 
 /**

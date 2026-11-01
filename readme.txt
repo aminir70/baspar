@@ -4,7 +4,7 @@ Tags: elementor, woocommerce, widgets, rtl, persian
 Requires at least: 5.8
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.9.1
+Stable tag: 1.10.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,6 +37,26 @@ Requires Elementor. WooCommerce is required only for the product/category widget
    Templates → Saved Templates → Import Templates.
 
 == Changelog ==
+
+= 1.10.0 =
+* New: petrochemical base prices page (widget «قیمت پایه محصولات پتروشیمی»,
+  template baspar-polymer-prices.json, admin page بسپار ← قیمت‌های پایه).
+  - Weekly base prices of ~436 grades in 24 polymer groups (official prices
+    of مدیریت توسعه صنایع پایین‌دستی for the commodity exchange) read from
+    the Wikiplast weekly post's HTML table — not images — twice a day
+    (WP-Cron); history kept in two tables (weeks, rows) so every grade has a
+    price chart. If the server can't reach Wikiplast directly the page is read
+    through the r.jina.ai reader (can be turned off). Manual fallbacks: post
+    URL, saved HTML file, pasted table, CSV. One-click history backfill.
+  - Page: week, dollar rate and its trend, market pulse (average change,
+    up/down share, top movers), group heat tiles, instant search (Persian /
+    Latin digits), producer / group / direction filters, sort, units
+    (toman/kg, rial/kg, million toman/ton, $/ton), bookmarks, filters in the
+    URL (shareable), 12-week sparklines, detail modal with history chart
+    (3/6/12 months), purchase calculator (tons + VAT), WhatsApp/Bale price
+    inquiry with a ready message, compare up to 4 grades, CSV export, print.
+  - Full table rendered on the server (SEO) + schema.org Dataset;
+    REST API /wp-json/baspar/v1/prices and /prices/history.
 
 = 1.9.1 =
 * Fix: product pages printed five Baspar stylesheets (page file + core +

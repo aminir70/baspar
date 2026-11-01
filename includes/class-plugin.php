@@ -135,6 +135,8 @@ final class Plugin {
 		'product-rail',
 		'about-v2',
 		'home-blog',
+		// Petrochemical base prices page (1.10.0).
+		'price-board',
 		// City landing pages (buy-chemical-raw-materials-{city}).
 		'city-facts',
 		'prose',
@@ -175,6 +177,13 @@ final class Plugin {
 		require_once BASPAR_ELEMENTS_PATH . 'includes/home.php';
 		require_once BASPAR_ELEMENTS_PATH . 'includes/assets.php';
 		require_once BASPAR_ELEMENTS_PATH . 'includes/images.php';
+		// Petrochemical base prices (storage, importer, admin, REST).
+		require_once BASPAR_ELEMENTS_PATH . 'includes/prices/data.php';
+		require_once BASPAR_ELEMENTS_PATH . 'includes/prices/import.php';
+		require_once BASPAR_ELEMENTS_PATH . 'includes/prices/board.php';
+		if ( is_admin() ) {
+			require_once BASPAR_ELEMENTS_PATH . 'includes/prices/admin.php';
+		}
 
 		// Assets (1.9.0): only the CSS bundles / script / webfont a page uses
 		// (see includes/assets.php). Handles are registered early so widget

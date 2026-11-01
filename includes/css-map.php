@@ -75,6 +75,7 @@ return array(
 	'post-hero' => 'blog',
 	'post-share' => 'blog',
 	'post-toc' => 'blog',
+	'price-board' => 'prices',
 	'principles' => 'pages',
 	'process' => 'pages',
 	'product-cats-codes' => 'pages',

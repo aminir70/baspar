@@ -127,7 +127,6 @@
 .baspar-scope .pdh-share > span{display:inline-flex;align-items:center;gap:6px;margin-left:4px}
 .baspar-scope .pdh-share a,.baspar-scope .pdh-share button{width:34px;height:34px;min-height:0;padding:0;margin:0;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--ink-3);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s}
 .baspar-scope .pdh-share a:hover,.baspar-scope .pdh-share button:hover{background:var(--brand);border-color:var(--brand);color:#fff}
-.baspar-scope .pdh-share button.is-copied{background:#16a34a;border-color:#16a34a;color:#fff}
 .baspar-scope .pdh-buy{position:sticky;top:100px}
 @media(max-width:1200px){
 .baspar-scope .pdh-buy{position:static}
@@ -186,18 +185,7 @@ body:has(.pd-mbar){padding-bottom:76px}
 .baspar-scope .pda-n{font-size:11px;background:var(--brand-50);color:var(--brand);padding:1px 7px;border-radius:999px}
 .baspar-scope .pda .pda-cta{margin-right:auto;background:var(--brand);color:#fff}
 .baspar-scope .pda .pda-cta:hover{background:var(--brand-2);color:#fff}
-.baspar-scope .pdf{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
-.baspar-scope .pdf li{display:flex;align-items:center;gap:12px;margin:0;padding:16px;background:#fff;border:1px solid var(--line);border-radius:16px}
 .baspar-scope .pdf-ic{flex:0 0 46px;height:46px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:var(--brand-50);color:var(--brand)}
-.baspar-scope .pdf strong{display:block;font-size:14px;font-weight:800;color:var(--brand-deep);line-height:1.5}
-.baspar-scope .pdf small{display:block;font-size:12px;color:var(--ink-3);margin-top:2px}
-@media(max-width:1100px){
-.baspar-scope .pdf{grid-template-columns:repeat(3,minmax(0,1fr))}
-}
-@media(max-width:640px){
-.baspar-scope .pdf{grid-template-columns:repeat(2,minmax(0,1fr))}
-.baspar-scope .pdf li{flex-direction:column;align-items:flex-start;gap:8px;padding:14px}
-}
 .baspar-scope .pds-table{width:100%;border-collapse:separate;border-spacing:0;background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;font-size:14.5px}
 .baspar-scope .pds-table th,.baspar-scope .pds-table td{padding:14px 18px;border-bottom:1px solid var(--line);text-align:right;vertical-align:top;line-height:1.8}
 .baspar-scope .pds-table th{width:34%;background:var(--surface-2);color:var(--ink-3);font-weight:600}
@@ -293,9 +281,6 @@ body:has(.pd-mbar){padding-bottom:76px}
 .baspar-scope .pdb{background:#fff;border:1px solid var(--line);border-radius:22px;padding:28px clamp(18px,3vw,36px)}
 .elementor-widget-baspar-pd-anchors{position:sticky;top:12px;z-index:40}
 body.admin-bar .elementor-widget-baspar-pd-anchors{top:44px}
-@media(max-width:640px){
-.baspar-scope .pdf li:last-child:nth-child(odd){grid-column:1 / -1;flex-direction:row;align-items:center}
-}
 .baspar-scope .pdh-grid{align-items:stretch}
 .baspar-scope .pdh-gallery{display:flex;flex-direction:column;gap:18px;min-width:0}
 .baspar-scope .pdh-gallery .pdg{position:static}

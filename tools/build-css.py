@@ -31,7 +31,7 @@ import sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, 'assets/css/baspar-elements.css')
 
-BUNDLES = ['core', 'home', 'product', 'blog', 'side', 'shop', 'pages']
+BUNDLES = ['core', 'home', 'product', 'blog', 'side', 'shop', 'pages', 'prices']
 WIDGET_BUNDLE = {
     'core': ['topbar', 'header', 'footer', 'float-whatsapp'],
     'home': ['hero', 'categories', 'trust', 'products', 'product-tabs', 'promo', 'brands', 'about-box',
@@ -46,6 +46,7 @@ WIDGET_BUNDLE = {
     # Sidebar widgets: used on single posts and on the product page.
     'side': ['side-cta', 'side-posts', 'side-cats', 'side-products', 'side-banner', 'side-links'],
     'shop': ['shop-sidebar', 'shop-toolbar', 'term-description'],
+    'prices': ['price-board'],
 }
 # Shared include files -> bundles that call them.
 INCLUDE_BUNDLE = {
@@ -54,6 +55,7 @@ INCLUDE_BUNDLE = {
     'includes/product.php': {'product'},
     'includes/home.php': {'home'},
     'widgets/class-baspar-widget-base.php': {'core'},
+    'assets/js/prices.js': {'prices'},  # Builds the price board's rows, modals and tray.
 }
 # Classes the script only reads or toggles; counted only when nothing else
 # prints the class (e.g. the lightbox the script builds).

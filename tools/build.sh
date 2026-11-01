@@ -8,4 +8,6 @@ python3 tools/build-css.py
 mkdir -p assets/js/dist
 ${TERSER:-npx --yes terser@5.31.0} assets/js/baspar-elements.js --compress --mangle --comments false \
 	-o assets/js/dist/baspar-elements.min.js
+${TERSER:-npx --yes terser@5.31.0} assets/js/prices.js --compress --mangle --comments false \
+	-o assets/js/dist/prices.min.js
 echo "built: assets/css/dist/*.min.css, assets/js/dist/baspar-elements.min.js"
