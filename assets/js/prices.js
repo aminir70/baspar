@@ -73,14 +73,6 @@
 		this.drawDollar();
 		var tools = root.querySelector( '[data-prb-tools]' );
 		if ( tools ) { tools.hidden = false; }
-		// Keep the sticky toolbar below the site's sticky header.
-		var place = function () {
-			var h = document.querySelector( '.baspar-scope .header, .elementor-location-header .elementor-sticky' );
-			var px = h ? Math.round( h.getBoundingClientRect().height ) + 8 : 8;
-			root.style.setProperty( '--prb-sticky', Math.min( px, 140 ) + 'px' );
-		};
-		if ( window.requestAnimationFrame ) { requestAnimationFrame( function () { setTimeout( place, 0 ); } ); }
-		window.addEventListener( 'resize', place );
 	}
 
 	PriceBoard.prototype = {

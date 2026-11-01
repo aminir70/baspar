@@ -57,7 +57,7 @@
 .baspar-scope .prb-tile .c{position:relative;margin-top:4px;font-size:12.5px;font-weight:800;direction:ltr;unicode-bidi:isolate;color:var(--ink-3)}
 .baspar-scope .prb-tile.is-up .c{color:var(--up)}
 .baspar-scope .prb-tile.is-down .c{color:var(--down)}
-.baspar-scope .prb-tools{position:sticky;top:var(--prb-sticky,8px);z-index:20;display:flex;flex-direction:column;gap:10px;padding:12px;margin-bottom:10px;border-radius:20px;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);border:1px solid var(--line);box-shadow:0 18px 36px -30px rgba(46,16,101,.5)}
+.baspar-scope .prb-tools{position:relative;z-index:20;display:flex;flex-direction:column;gap:10px;padding:12px;margin-bottom:10px;border-radius:20px;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);border:1px solid var(--line);box-shadow:0 18px 36px -30px rgba(46,16,101,.5)}
 .baspar-scope .prb-tools[hidden]{display:none}
 .baspar-scope .prb-search{display:flex;align-items:center;gap:10px;padding:0 14px;height:48px;border-radius:14px;background:var(--surface-2);border:1px solid var(--line);color:var(--ink-3);transition:border-color .2s,box-shadow .2s}
 .baspar-scope .prb-search:focus-within{border-color:var(--brand);box-shadow:0 0 0 3px rgba(109,40,217,.15);background:#fff}
@@ -105,8 +105,8 @@
 .baspar-scope .prb-table tbody tr.prb-row:hover > *{background:var(--brand-tint)}
 .baspar-scope .prb-row.is-cmp > *{background:#F5F3FF}
 .baspar-scope .prb-grp th{padding:14px 14px 10px;background:linear-gradient(90deg,var(--brand-50),#fff);border-bottom:1px solid var(--line);text-align:start}
-.baspar-scope .prb-grp th span{font-size:14.5px;font-weight:900;color:var(--brand-deep)}
-.baspar-scope .prb-grp th small{margin-inline-start:10px;font-size:12px;color:var(--ink-3);font-weight:600}
+.baspar-scope .prb-grp th span{font-size:14.5px;font-weight:900;color:var(--brand-deep);unicode-bidi:isolate}
+.baspar-scope .prb-grp th small{display:inline-block;margin-inline-start:10px;font-size:12px;color:var(--ink-3);font-weight:600;unicode-bidi:isolate}
 .baspar-scope .prb-grp th small b{font-weight:800}
 .baspar-scope .prb-table .c-star{width:44px;padding-inline-end:0}
 .baspar-scope .prb-table .c-grade{font-weight:800;color:var(--brand-deep)}
