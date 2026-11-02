@@ -73,6 +73,7 @@
 		this.drawDollar();
 		var tools = root.querySelector( '[data-prb-tools]' );
 		if ( tools ) { tools.hidden = false; }
+		this.initFab( tools );
 	}
 
 	PriceBoard.prototype = {
@@ -301,6 +302,47 @@
 				? 'نمایش <b>' + fa( rows.length ) + '</b> از ' + fa( this.b.rows.length ) + ' گرید · <button type="button" class="prb-link" data-prb-reset>حذف فیلترها</button>'
 				: '<b>' + fa( rows.length ) + '</b> گرید · قیمت‌ها به ' + UNIT_LABEL[ this.st.unit ];
 			this.root.setAttribute( 'data-unit', this.st.unit );
+			this.paintFab( rows.length, filtered );
+		},
+
+		/* ---- floating search button ---------------------------------------
+		   Shows once the filter bar has scrolled out of view while the table is
+		   still on screen; brings the bar back and focuses the search box. */
+		initFab: function ( tools ) {
+			var self = this, table = this.root.querySelector( '.prb-tablewrap' );
+			if ( ! tools || ! table || ! ( 'IntersectionObserver' in window ) ) { return; }
+			var fab = document.createElement( 'div' );
+			fab.className = 'baspar-scope prb-fab-wrap';
+			fab.innerHTML = '<button type="button" class="prb-fab" aria-label="جستجو و فیلتر قیمت‌ها">' +
+				'<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>' +
+				'<span class="t">جستجو و فیلتر</span><span class="n" hidden></span></button>';
+			document.body.appendChild( fab );
+			this.fab = fab;
+			var toolsOut = false, tableIn = false;
+			function show() { fab.classList.toggle( 'is-on', toolsOut && tableIn ); }
+			new IntersectionObserver( function ( en ) {
+				// Out of view only when the bar is above the viewport (scrolled past).
+				toolsOut = ! en[ 0 ].isIntersecting && en[ 0 ].boundingClientRect.top < 0;
+				show();
+			} ).observe( tools );
+			new IntersectionObserver( function ( en ) { tableIn = en[ 0 ].isIntersecting; show(); } ).observe( table );
+			fab.querySelector( 'button' ).addEventListener( 'click', function () {
+				var hdr = document.querySelector( '.baspar-scope .header' );
+				var off = ( hdr ? hdr.getBoundingClientRect().height : 0 ) + 12;
+				var y = tools.getBoundingClientRect().top + window.pageYOffset - off;
+				var reduce = window.matchMedia && window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches;
+				window.scrollTo( { top: Math.max( 0, y ), behavior: reduce ? 'auto' : 'smooth' } );
+				var q = self.root.querySelector( '[data-prb-q]' );
+				if ( q ) { setTimeout( function () { q.focus( { preventScroll: true } ); q.select(); }, reduce ? 0 : 450 ); }
+			} );
+			this.paintFab( this.visible().length, this.visible().length !== this.b.rows.length );
+		},
+		paintFab: function ( n, filtered ) {
+			if ( ! this.fab ) { return; }
+			var badge = this.fab.querySelector( '.n' );
+			badge.hidden = ! filtered;
+			badge.textContent = filtered ? fa( n ) + ' گرید' : '';
+			this.fab.classList.toggle( 'has-filter', !! filtered );
 		},
 		paintRowState: function () {
 			var self = this;
@@ -341,6 +383,7 @@
 			if ( ! tray ) { return; }
 			tray.hidden = ! this.cmp.length;
 			this.root.classList.toggle( 'has-tray', this.cmp.length > 0 );
+			if ( this.fab ) { this.fab.classList.toggle( 'above-tray', this.cmp.length > 0 ); }
 			tray.querySelector( '[data-prb-tray-list]' ).innerHTML = this.cmp.map( function ( k, i ) {
 				var r = self.byKey[ k ];
 				return '<span class="prb-chip" style="--c:' + COLORS[ i ] + '"><i></i>' + esc( r.gr ) + '<button type="button" data-prb-tray-x="' + esc( k ) + '" aria-label="حذف">' + ICON.x + '</button></span>';

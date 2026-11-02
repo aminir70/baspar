@@ -286,14 +286,18 @@ function combined_css_url( $bundles ) {
 	if ( ! empty( $up['error'] ) || empty( $up['basedir'] ) ) {
 		return '';
 	}
-	$dir  = trailingslashit( $up['basedir'] ) . 'baspar-elements';
-	$name = 'page-' . sanitize_file_name( BASPAR_ELEMENTS_VERSION ) . '-' . substr( md5( implode( ',', $bundles ) ), 0, 10 ) . '.css';
+	$dir   = trailingslashit( $up['basedir'] ) . 'baspar-elements';
+	$src   = BASPAR_ELEMENTS_PATH . 'assets/css/dist/parts.json';
+	// Version + build id of the stylesheet: any rebuild gets a new file name,
+	// even without a version bump, so a stale copy is never served.
+	$build = substr( md5( (string) @filemtime( $src ) . '-' . (string) @filesize( $src ) ), 0, 6 ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
+	$gen   = 'page-' . sanitize_file_name( BASPAR_ELEMENTS_VERSION ) . '-' . $build . '-';
+	$name  = $gen . substr( md5( implode( ',', $bundles ) ), 0, 10 ) . '.css';
 	$path = $dir . '/' . $name;
 	$url  = trailingslashit( $up['baseurl'] ) . 'baspar-elements/' . $name;
 	if ( is_readable( $path ) && filesize( $path ) > 0 ) {
 		return $url;
 	}
-	$src = BASPAR_ELEMENTS_PATH . 'assets/css/dist/parts.json';
 	$parts = is_readable( $src ) ? json_decode( (string) file_get_contents( $src ), true ) : null; // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
 	if ( ! is_array( $parts ) ) {
 		return '';
@@ -308,9 +312,9 @@ function combined_css_url( $bundles ) {
 	if ( '' === $css || ! wp_mkdir_p( $dir ) ) {
 		return '';
 	}
-	// Remove files of older plugin versions.
+	// Remove files of older versions / builds.
 	foreach ( (array) glob( $dir . '/page-*.css' ) as $old ) {
-		if ( $old && false === strpos( basename( $old ), 'page-' . sanitize_file_name( BASPAR_ELEMENTS_VERSION ) . '-' ) ) {
+		if ( $old && 0 !== strpos( basename( $old ), $gen ) ) {
 			wp_delete_file( $old );
 		}
 	}

@@ -4,7 +4,7 @@ Tags: elementor, woocommerce, widgets, rtl, persian
 Requires at least: 5.8
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.10.1
+Stable tag: 1.10.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,6 +37,14 @@ Requires Elementor. WooCommerce is required only for the product/category widget
    Templates → Saved Templates → Import Templates.
 
 == Changelog ==
+
+= 1.10.2 =
+* Price page: floating «جستجو و فیلتر» button — appears once the filter bar
+  has scrolled away while the table is on screen, scrolls back to the bar and
+  focuses the search box; shows the number of grades when filters are on;
+  round icon button on phones, moves above the compare tray.
+* The combined page stylesheet's file name now includes a build id, so a
+  rebuilt stylesheet is never served from an older cached file.
 
 = 1.10.1 =
 * Price page: the search / filter bar no longer follows the page while
