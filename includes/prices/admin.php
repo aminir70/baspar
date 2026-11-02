@@ -127,6 +127,8 @@ function handle_admin() {
 					'attribution' => sanitize_text_field( $in['attribution'] ?? '' ),
 					'whatsapp'    => sanitize_text_field( $in['whatsapp'] ?? '' ),
 					'vat'         => max( 0, min( 30, (float) ( $in['vat'] ?? 10 ) ) ),
+					'sidebar'     => empty( $in['sidebar'] ) ? 0 : 1,
+					'page_url'    => esc_url_raw( $in['page_url'] ?? '' ),
 				),
 				false
 			);
@@ -214,6 +216,8 @@ function render_admin() {
 				<p><label><?php esc_html_e( 'آدرس آرشیو', 'baspar-elements' ); ?><br><input type="url" name="s[archive_url]" value="<?php echo esc_attr( $s['archive_url'] ); ?>" dir="ltr" class="regular-text"></label></p>
 				<p><label><?php esc_html_e( 'متن منبع زیر جدول', 'baspar-elements' ); ?><br><input type="text" name="s[attribution]" value="<?php echo esc_attr( $s['attribution'] ); ?>" class="large-text"></label></p>
 				<p><label><?php esc_html_e( 'شماره واتس‌اپ استعلام (خالی = کارشناس پیش‌فرض)', 'baspar-elements' ); ?><br><input type="text" name="s[whatsapp]" value="<?php echo esc_attr( $s['whatsapp'] ); ?>" dir="ltr"></label></p>
+				<p><label><input type="checkbox" name="s[sidebar]" value="1" <?php checked( $s['sidebar'] ); ?>> <?php esc_html_e( 'بنر قیمت پایه در سایدبار نوشته‌ها و محصولات (خودکار)', 'baspar-elements' ); ?></label></p>
+				<p><label><?php esc_html_e( 'آدرس صفحه قیمت‌ها (خالی = پیدا کردن خودکار)', 'baspar-elements' ); ?><br><input type="url" name="s[page_url]" value="<?php echo esc_attr( $s['page_url'] ); ?>" dir="ltr" class="regular-text" placeholder="<?php echo esc_attr( page_url() ); ?>"></label></p>
 				<p><label><?php esc_html_e( 'ارزش افزوده در ماشین‌حساب (٪)', 'baspar-elements' ); ?> <input type="number" name="s[vat]" value="<?php echo esc_attr( $s['vat'] ); ?>" min="0" max="30" step="0.5" style="width:70px"></label></p>
 				<p><button class="button button-primary"><?php esc_html_e( 'ذخیره', 'baspar-elements' ); ?></button></p>
 				<?php

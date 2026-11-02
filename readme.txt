@@ -4,7 +4,7 @@ Tags: elementor, woocommerce, widgets, rtl, persian
 Requires at least: 5.8
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.10.4
+Stable tag: 1.10.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,6 +37,11 @@ Requires Elementor. WooCommerce is required only for the product/category widget
    Templates → Saved Templates → Import Templates.
 
 == Changelog ==
+
+= 1.10.5 =
+* New: sidebar banner for the petrochemical base prices page — this week's date, average change, base dollar trend line and the busiest groups, linking to the price page.
+* It is added automatically to post and product sidebars (before «آخرین نوشته‌ها» / «دسته‌ها»); turn it off or set the link in بسپار ← قیمت‌های پایه.
+* New widget «بسپار — کناری: بنر قیمت پایه پتروشیمی» to place it by hand; a page that has it gets no automatic copy.
 
 = 1.10.4 =
 * Price page structured data (Dataset): `license` (setting «لینک شرایط

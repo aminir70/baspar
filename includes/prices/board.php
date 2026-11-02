@@ -229,3 +229,124 @@ add_action(
 		);
 	}
 );
+
+/* ------------------------------------------------------------------------
+ * Sidebar banner (widget «کناری: قیمت پایه» + automatic insert)
+ * --------------------------------------------------------------------- */
+
+/**
+ * URL of the price page: the setting, else the first published page that
+ * holds the price board widget (looked up once, then remembered).
+ *
+ * @return string
+ */
+function page_url() {
+	$s = settings();
+	if ( ! empty( $s['page_url'] ) ) {
+		return $s['page_url'];
+	}
+	$id = (int) get_option( 'baspar_prices_page_id' );
+	if ( ( ! $id || 'publish' !== get_post_status( $id ) ) && ! get_transient( 'baspar_prices_page_none' ) ) {
+		global $wpdb;
+		$id = (int) $wpdb->get_var( "SELECT p.ID FROM {$wpdb->posts} p JOIN {$wpdb->postmeta} m ON m.post_id = p.ID AND m.meta_key = '_elementor_data' WHERE p.post_type = 'page' AND p.post_status = 'publish' AND m.meta_value LIKE '%baspar-price-board%' ORDER BY p.ID ASC LIMIT 1" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+		update_option( 'baspar_prices_page_id', $id, false );
+		if ( ! $id ) {
+			set_transient( 'baspar_prices_page_none', 1, 12 * HOUR_IN_SECONDS ); // Look again later.
+		}
+	}
+	return $id ? (string) get_permalink( $id ) : '';
+}
+
+/**
+ * Sidebar banner markup ('' when there are no prices yet or no page).
+ *
+ * @param array $o title, cta, url, groups (how many).
+ * @return string
+ */
+function sidebar_banner( $o = array() ) {
+	$b   = board();
+	$url = ! empty( $o['url'] ) ? $o['url'] : page_url();
+	if ( ! $b || ! $url ) {
+		return '';
+	}
+	$o   = array_merge( array( 'title' => 'قیمت پایه محصولات پتروشیمی', 'cta' => 'مشاهده جدول قیمت‌ها', 'groups' => 3 ), array_filter( $o ) );
+	$num = static function ( $n, $d = 0 ) {
+		return strtr( \BasparElements\fa_num( number_format( (float) $n, $d, '.', ',' ) ), array( ',' => '٬', '.' => '٫' ) );
+	};
+	$pct = static function ( $v ) use ( $num ) {
+		return null === $v ? '—' : ( $v > 0 ? '+' : ( $v < 0 ? '−' : '' ) ) . $num( abs( $v ), 2 ) . '٪';
+	};
+	$cls = static function ( $v ) {
+		return $v > 0 ? 'is-up' : ( $v < 0 ? 'is-down' : '' );
+	};
+	$w      = $b['week'];
+	$groups = $b['groups'];
+	usort( $groups, static function ( $a, $c ) {
+		return $c['n'] <=> $a['n'];
+	} );
+	$groups = array_slice( $groups, 0, max( 0, (int) $o['groups'] ) );
+	// Dollar trend as a tiny sparkline.
+	$spark = '';
+	$ds    = array_column( (array) $b['dollars'], 1 );
+	if ( count( $ds ) > 2 ) {
+		$min = min( $ds );
+		$max = max( $ds );
+		$n   = count( $ds );
+		$pts = array();
+		foreach ( $ds as $i => $v ) {
+			$pts[] = round( 2 + 116 * $i / ( $n - 1 ), 1 ) . ',' . round( $max === $min ? 14 : 2 + 24 * ( 1 - ( $v - $min ) / ( $max - $min ) ), 1 );
+		}
+		$spark = '<span class="spb-trend"><small>' . esc_html__( 'روند دلار پایه', 'baspar-elements' ) . '</small><svg class="spb-spark" viewBox="0 0 120 28" preserveAspectRatio="none" aria-hidden="true"><polyline points="' . esc_attr( implode( ' ', $pts ) ) . '"/></svg></span>';
+	}
+	ob_start();
+	?>
+	<div class="baspar-scope spb-wrap">
+		<a class="spb" href="<?php echo esc_url( $url ); ?>">
+			<span class="spb-top"><span class="spb-live"><i aria-hidden="true"></i><?php echo esc_html( 'هفته ' . $w['date'] ); ?></span><?php if ( null !== $b['stats']['avg'] ) : ?><span class="spb-chg <?php echo esc_attr( $cls( $b['stats']['avg'] ) ); ?>" title="<?php esc_attr_e( 'میانگین تغییر هفته', 'baspar-elements' ); ?>"><?php echo esc_html( $pct( $b['stats']['avg'] ) ); ?></span><?php endif; ?></span>
+			<strong class="spb-t"><?php echo esc_html( $o['title'] ); ?></strong>
+			<span class="spb-sub"><?php echo esc_html( $num( $w['count'] ) . ' گرید' . ( $w['dollar'] ? ' · دلار پایه ' . $num( round( $w['dollar'] / 10 ) ) . ' تومان' : '' ) ); ?></span>
+			<?php echo $spark; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built above from numbers. ?>
+			<?php if ( $groups ) : ?>
+				<span class="spb-rows">
+					<?php foreach ( $groups as $g ) : ?>
+						<span class="spb-row"><b><?php echo esc_html( $g['short'] ); ?></b><em class="<?php echo esc_attr( $cls( $g['avg'] ) ); ?>"><?php echo esc_html( $pct( $g['avg'] ) ); ?></em></span>
+					<?php endforeach; ?>
+				</span>
+			<?php endif; ?>
+			<span class="spb-btn"><?php echo esc_html( $o['cta'] ); ?><?php echo \BasparElements\icon_svg( 'arrow', 16 ); // phpcs:ignore ?></span>
+		</a>
+	</div>
+	<?php
+	return (string) ob_get_clean();
+}
+
+/**
+ * Automatic insert into the sidebars of posts and products: once per page,
+ * right before the first of these sidebar widgets (after the contact box /
+ * table of contents). Skipped when the page already has the banner widget.
+ */
+add_filter(
+	'elementor/widget/render_content',
+	static function ( $content, $widget ) {
+		static $done = false;
+		if ( $done || is_admin() || ! is_singular( array( 'post', 'product' ) ) || ! settings()['sidebar'] ) {
+			return $content;
+		}
+		$name = $widget->get_name();
+		if ( 'baspar-side-prices' === $name ) {
+			$done = true; // Placed by hand: no automatic copy.
+			return $content;
+		}
+		if ( ! in_array( $name, array( 'baspar-side-posts', 'baspar-side-cats', 'baspar-side-links', 'baspar-side-products' ), true ) ) {
+			return $content;
+		}
+		if ( function_exists( '\\BasparElements\\page_widgets' ) && in_array( 'side-prices', \BasparElements\page_widgets(), true ) ) {
+			$done = true;
+			return $content;
+		}
+		$done = true;
+		return sidebar_banner() . $content;
+	},
+	10,
+	2
+);

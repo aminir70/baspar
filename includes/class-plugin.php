@@ -137,6 +137,7 @@ final class Plugin {
 		'home-blog',
 		// Petrochemical base prices page (1.10.0).
 		'price-board',
+		'side-prices',
 		// City landing pages (buy-chemical-raw-materials-{city}).
 		'city-facts',
 		'prose',

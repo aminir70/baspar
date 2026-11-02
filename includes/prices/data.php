@@ -103,6 +103,8 @@ function settings() {
 			'attribution' => 'منبع: مدیریت توسعه صنایع پایین‌دستی پتروشیمی (قیمت پایه بورس کالا)، به نقل از ویکی‌پلاست',
 			'whatsapp'    => '',         // Price inquiry number; empty = default sales experts.
 			'vat'         => 10,         // VAT % for the calculator.
+			'sidebar'     => 1,          // Banner in the sidebars of posts and products.
+			'page_url'    => '',         // Price page; empty = found automatically.
 		),
 		is_array( $s ) ? $s : array()
 	);

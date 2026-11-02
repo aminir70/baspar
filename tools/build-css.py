@@ -44,7 +44,7 @@ WIDGET_BUNDLE = {
              'post-grid', 'blog-topics', 'post-hero', 'post-content', 'post-toc', 'related-posts',
              'post-comments'],
     # Sidebar widgets: used on single posts and on the product page.
-    'side': ['side-cta', 'side-posts', 'side-cats', 'side-products', 'side-banner', 'side-links'],
+    'side': ['side-cta', 'side-posts', 'side-cats', 'side-products', 'side-banner', 'side-links', 'side-prices'],
     'shop': ['shop-sidebar', 'shop-toolbar', 'term-description'],
     'prices': ['price-board'],
 }
@@ -55,7 +55,8 @@ INCLUDE_BUNDLE = {
     'includes/product.php': {'product'},
     'includes/home.php': {'home'},
     'widgets/class-baspar-widget-base.php': {'core'},
-    'assets/js/prices.js': {'prices'},  # Builds the price board's rows, modals and tray.
+    'assets/js/prices.js': {'prices'},
+    'includes/prices/board.php': {'side'},  # Sidebar price banner markup.  # Builds the price board's rows, modals and tray.
 }
 # Classes the script only reads or toggles; counted only when nothing else
 # prints the class (e.g. the lightbox the script builds).

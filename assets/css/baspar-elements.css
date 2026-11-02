@@ -3653,6 +3653,36 @@ a.sbn:hover{transform:translateY(-3px)}
 .baspar-scope .sbn-text{font-size:13.5px;line-height:1.9;opacity:.92}
 .baspar-scope .sbn-btn{align-self:flex-start;margin-top:6px;display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border-radius:999px;background:#fff;color:var(--brand-deep);font-size:13px;font-weight:800;transition:gap .2s}
 .baspar-scope a.sbn:hover .sbn-btn{gap:10px}
+/* Sidebar: petrochemical base prices banner (1.10.5) */
+.baspar-scope.spb-wrap{margin:0 0 22px}
+.baspar-scope .spb{position:relative;display:flex;flex-direction:column;gap:10px;overflow:hidden;isolation:isolate;padding:20px 20px 18px;border-radius:18px;text-decoration:none;color:#fff;background:linear-gradient(155deg,#3A1470,var(--brand-deep,#1B0537) 62%,#12031F);box-shadow:0 22px 44px -24px rgba(27,5,55,.8);transition:transform .25s,box-shadow .25s}
+.baspar-scope .spb::before{content:"";position:absolute;inset:-60px -40px auto auto;width:190px;height:190px;border-radius:50%;background:radial-gradient(circle,rgba(167,139,250,.35),transparent 70%);z-index:-1}
+.baspar-scope .spb::after{content:"";position:absolute;inset:auto auto -90px -70px;width:200px;height:200px;border-radius:50%;border:1px solid rgba(255,255,255,.12);z-index:-1}
+.baspar-scope a.spb:hover{transform:translateY(-3px);box-shadow:0 28px 50px -24px rgba(27,5,55,.9)}
+.baspar-scope .spb-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.baspar-scope .spb-live{display:inline-flex;align-items:center;gap:7px;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,.1);font-size:11.5px;font-weight:700;color:rgba(255,255,255,.88)}
+.baspar-scope .spb-live i{position:relative;width:7px;height:7px;border-radius:50%;background:#34D399}
+.baspar-scope .spb-live i::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:2px solid #34D399;opacity:0;animation:spb-ping 2s ease-out infinite}
+@keyframes spb-ping{0%{transform:scale(.5);opacity:.8}100%{transform:scale(1.6);opacity:0}}
+.baspar-scope .spb-chg{direction:ltr;padding:3px 9px;border-radius:999px;font-size:12px;font-weight:800;background:rgba(255,255,255,.12);color:#fff}
+.baspar-scope .spb-chg.is-up{background:rgba(52,211,153,.18);color:#6EE7B7}
+.baspar-scope .spb-chg.is-down{background:rgba(248,113,113,.18);color:#FCA5A5}
+.baspar-scope .spb-t{font-size:18px;font-weight:900;line-height:1.6;color:#fff}
+.baspar-scope .spb-sub{font-size:12.5px;color:rgba(255,255,255,.72);line-height:1.7}
+.baspar-scope .spb-trend{display:flex;align-items:center;gap:10px}
+.baspar-scope .spb-trend small{flex:none;font-size:11px;color:rgba(255,255,255,.55)}
+.baspar-scope .spb-spark{display:block;flex:1;min-width:0;height:28px;overflow:visible}
+.baspar-scope .spb-spark polyline{fill:none;stroke:#A78BFA;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.baspar-scope .spb-rows{display:flex;flex-direction:column;gap:6px;padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.08)}
+.baspar-scope .spb-row{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:12.5px}
+.baspar-scope .spb-row b{font-weight:700;color:rgba(255,255,255,.9);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.baspar-scope .spb-row em{direction:ltr;font-style:normal;font-weight:800;color:rgba(255,255,255,.7);flex:none}
+.baspar-scope .spb-row em.is-up{color:#6EE7B7}
+.baspar-scope .spb-row em.is-down{color:#FCA5A5}
+.baspar-scope .spb-btn{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:4px;padding:11px 16px;border-radius:12px;background:#fff;color:var(--brand-deep,#1B0537);font-size:13.5px;font-weight:800;transition:gap .2s,background .2s}
+.baspar-scope .spb-btn svg{width:16px;height:16px;flex:none}
+.baspar-scope a.spb:hover .spb-btn{gap:10px;background:#F3EEFF}
+@media (prefers-reduced-motion:reduce){.baspar-scope .spb-live i::after{animation:none}.baspar-scope a.spb:hover{transform:none}}
 
 /* link cards */
 .baspar-scope .sln{display:flex;flex-direction:column;gap:10px}

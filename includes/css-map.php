@@ -99,6 +99,7 @@ return array(
 	'side-cta' => 'side',
 	'side-links' => 'side',
 	'side-posts' => 'side',
+	'side-prices' => 'side',
 	'side-products' => 'side',
 	'social-showcase' => 'pages',
 	'stats' => 'pages',
