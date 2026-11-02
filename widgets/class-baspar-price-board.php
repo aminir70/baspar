@@ -66,6 +66,17 @@ class Baspar_Price_Board extends Baspar_Widget_Base {
 			'description' => __( 'هر هفته خودکار پر می‌شود: {date} تاریخ، {valid} معتبر تا، {dollar} دلار (تومان)، {count} تعداد گرید، {groups} تعداد گروه، {avg} میانگین تغییر، {up} / {down} تعداد افزایشی / کاهشی، {top_group} و {top_group_pct} گروه با بیشترین افزایش.', 'baspar-elements' ),
 		) );
 		$this->add_control( 'seo_collapse', array( 'label' => __( 'نمایش خلاصه با دکمه «ادامه مطلب»', 'baspar-elements' ), 'type' => Controls_Manager::SWITCHER, 'return_value' => 'yes', 'default' => 'yes' ) );
+		$this->add_control( 'license_url', array(
+			'label'       => __( 'لینک شرایط استفاده از داده‌ها (license)', 'baspar-elements' ),
+			'type'        => Controls_Manager::URL,
+			'description' => __( 'برای داده‌های ساختاریافته گوگل (Dataset). خالی = بند «شرایط استفاده از داده‌ها» در پایین همین صفحه.', 'baspar-elements' ),
+		) );
+		$this->add_control( 'terms_text', array(
+			'label'   => __( 'متن شرایط استفاده از داده‌ها', 'baspar-elements' ),
+			'type'    => Controls_Manager::TEXTAREA,
+			'rows'    => 3,
+			'default' => 'قیمت‌های این صفحه قیمت پایه رسمی محصولات پتروشیمی است که مدیریت توسعه صنایع پایین‌دستی پتروشیمی هر هفته برای عرضه در بورس کالا اعلام می‌کند و بسپارمارکت آن را برای اطلاع‌رسانی نمایش می‌دهد. مالکیت داده‌ها با منبع رسمی است؛ برای استفاده یا انتشار دوباره به منبع رسمی مراجعه کنید. این قیمت‌ها پیشنهاد فروش نیستند.',
+		) );
 		$this->end_controls_section();
 	}
 
@@ -343,6 +354,7 @@ class Baspar_Price_Board extends Baspar_Widget_Base {
 
 				<footer class="prb-foot">
 					<?php if ( $s['note'] ) : ?><p class="prb-note"><?php echo icon_svg( 'info', 16 ); // phpcs:ignore ?><span><?php echo esc_html( $s['note'] ); ?></span></p><?php endif; ?>
+					<?php if ( empty( $s['license_url']['url'] ) && ! empty( $s['terms_text'] ) ) : ?><p class="prb-terms" id="prb-terms"><b><?php esc_html_e( 'شرایط استفاده از داده‌ها:', 'baspar-elements' ); ?></b> <?php echo esc_html( $s['terms_text'] ); ?></p><?php endif; ?>
 					<?php if ( $set['attribution'] ) : ?><p class="prb-src"><?php echo esc_html( $set['attribution'] ); ?><?php if ( $w['url'] ) : ?> — <a href="<?php echo esc_url( $w['url'] ); ?>" target="_blank" rel="noopener nofollow"><?php esc_html_e( 'خبر این هفته', 'baspar-elements' ); ?></a><?php endif; ?></p><?php endif; ?>
 				</footer>
 
@@ -391,6 +403,23 @@ class Baspar_Price_Board extends Baspar_Widget_Base {
 		);
 		if ( $b['week']['url'] ) {
 			$data['isBasedOn'] = $b['week']['url'];
+		}
+		// Terms of use: the setting, else the note at the bottom of this page.
+		$license = ! empty( $s['license_url']['url'] ) ? $s['license_url']['url'] : ( ! empty( $s['terms_text'] ) ? get_permalink() . '#prb-terms' : '' );
+		if ( $license ) {
+			$data['license'] = esc_url_raw( $license );
+		}
+		$data['isAccessibleForFree'] = true;
+		// The official weekly file as a downloadable distribution.
+		if ( $b['week']['pdf'] ) {
+			$data['distribution'] = array(
+				array(
+					'@type'          => 'DataDownload',
+					'name'           => 'فایل رسمی قیمت پایه — ' . $b['week']['date'],
+					'encodingFormat' => 'application/pdf',
+					'contentUrl'     => esc_url_raw( $b['week']['pdf'] ),
+				),
+			);
 		}
 		echo '<script type="application/ld+json">' . wp_json_encode( $data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>';
 	}

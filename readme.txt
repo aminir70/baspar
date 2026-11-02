@@ -4,7 +4,7 @@ Tags: elementor, woocommerce, widgets, rtl, persian
 Requires at least: 5.8
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.10.3
+Stable tag: 1.10.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,6 +37,12 @@ Requires Elementor. WooCommerce is required only for the product/category widget
    Templates → Saved Templates → Import Templates.
 
 == Changelog ==
+
+= 1.10.4 =
+* Price page structured data (Dataset): `license` (setting «لینک شرایط
+  استفاده از داده‌ها», else the new «شرایط استفاده از داده‌ها» note at the
+  bottom of the page), `isAccessibleForFree`, and the weekly official PDF as
+  `distribution` — removes Search Console's optional "license" warning.
 
 = 1.10.3 =
 * Price page: hint under the search bar (tap a grade for its chart and the

@@ -4816,3 +4816,5 @@ html.prb-lock{overflow:hidden}
 .baspar-scope .prb-seo-t:checked ~ .prb-seo-more svg{transform:rotate(180deg)}
 .baspar-scope .prb-seo-t:focus-visible ~ .prb-seo-more{outline:2px solid var(--brand);outline-offset:2px}
 @media print{.baspar-scope .prb-seo.is-collapsible .prb-seo-body{max-height:none;-webkit-mask-image:none;mask-image:none}.baspar-scope .prb-seo-more{display:none}}
+.baspar-scope .prb-terms{margin:0;font-size:12.5px;line-height:2;color:var(--ink-3)}
+.baspar-scope .prb-terms b{color:var(--ink-2);font-weight:700}
