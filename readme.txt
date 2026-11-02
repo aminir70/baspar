@@ -4,7 +4,7 @@ Tags: elementor, woocommerce, widgets, rtl, persian
 Requires at least: 5.8
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.10.2
+Stable tag: 1.10.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,6 +37,12 @@ Requires Elementor. WooCommerce is required only for the product/category widget
    Templates → Saved Templates → Import Templates.
 
 == Changelog ==
+
+= 1.10.3 =
+* Price page: hint under the search bar (tap a grade for its chart and the
+  purchase calculator) and an SEO text box at the bottom («ادامه مطلب»),
+  filled every week with the date, dollar rate, number of grades, average
+  change and the group with the biggest increase; editable in the widget.
 
 = 1.10.2 =
 * Price page: floating «جستجو و فیلتر» button — appears once the filter bar

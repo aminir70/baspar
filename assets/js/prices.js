@@ -318,8 +318,10 @@
 				'<span class="t">جستجو و فیلتر</span><span class="n" hidden></span></button>';
 			document.body.appendChild( fab );
 			this.fab = fab;
-			var toolsOut = false, tableIn = false;
-			function show() { fab.classList.toggle( 'is-on', toolsOut && tableIn ); }
+			var toolsOut = false, tableIn = false, seoIn = false;
+			function show() { fab.classList.toggle( 'is-on', toolsOut && tableIn && ! seoIn ); }
+			var seo = this.root.querySelector( '.prb-seo' );
+			if ( seo ) { new IntersectionObserver( function ( en ) { seoIn = en[ 0 ].isIntersecting; show(); } ).observe( seo ); }
 			new IntersectionObserver( function ( en ) {
 				// Out of view only when the bar is above the viewport (scrolled past).
 				toolsOut = ! en[ 0 ].isIntersecting && en[ 0 ].boundingClientRect.top < 0;

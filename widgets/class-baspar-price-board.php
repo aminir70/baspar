@@ -44,8 +44,62 @@ class Baspar_Price_Board extends Baspar_Widget_Base {
 		) );
 		$this->add_control( 'show_pulse', array( 'label' => __( 'نبض بازار (خلاصه هفته)', 'baspar-elements' ), 'type' => Controls_Manager::SWITCHER, 'return_value' => 'yes', 'default' => 'yes' ) );
 		$this->add_control( 'show_tiles', array( 'label' => __( 'کاشی گروه‌ها', 'baspar-elements' ), 'type' => Controls_Manager::SWITCHER, 'return_value' => 'yes', 'default' => 'yes' ) );
+		$this->add_control( 'hint', array( 'label' => __( 'راهنمای زیر نوار جستجو', 'baspar-elements' ), 'type' => Controls_Manager::TEXT, 'default' => 'روی نام هر گرید بزنید تا نمودار تغییرات قیمت و ماشین‌حساب خرید را ببینید.' ) );
 		$this->add_control( 'note', array( 'label' => __( 'یادداشت زیر جدول', 'baspar-elements' ), 'type' => Controls_Manager::TEXTAREA, 'rows' => 3, 'default' => 'قیمت‌ها «قیمت پایه» عرضه در بورس کالا (ریال بر کیلوگرم، بدون ارزش افزوده و حمل) هستند و با قیمت فروش در بازار فرق دارند. برای قیمت روز، موجودی و ارسال با کارشناسان بسپارمارکت تماس بگیرید.' ) );
 		$this->end_controls_section();
+
+		$this->start_controls_section( 'seo', array( 'label' => __( 'متن سئو (پایین صفحه)', 'baspar-elements' ) ) );
+		$this->add_control( 'seo_show', array( 'label' => __( 'نمایش', 'baspar-elements' ), 'type' => Controls_Manager::SWITCHER, 'return_value' => 'yes', 'default' => 'yes' ) );
+		$this->add_control( 'seo_text', array(
+			'label'       => __( 'متن', 'baspar-elements' ),
+			'type'        => Controls_Manager::WYSIWYG,
+			'default'     => '<h2>قیمت پایه محصولات پتروشیمی امروز</h2>
+<p>قیمت پایه محصولات پتروشیمی امروز ({date}) با دلار {dollar} تومان اعلام شد و تا {valid} معتبر است. در این صفحه قیمت پایه {count} گرید از {groups} گروه محصول پلیمری، از پلی‌اتیلن سبک و سنگین و پلی‌پروپیلن تا پی‌وی‌سی، پلی‌استایرن، PET، ABS و SBR، را در یک جدول قابل جستجو همراه با تغییرات هفته و نمودار سابقه قیمت می‌بینید.</p>
+<h3>قیمت پایه محصولات پتروشیمی در بورس کالا چیست؟</h3>
+<p>قیمت پایه، نقطه شروع عرضه هر محصول در تالار محصولات پتروشیمی بورس کالای ایران است و رقابت خریداران از همین عدد آغاز می‌شود. قیمت پایه محصولات پتروشیمی در بورس کالا هر هفته از سوی مدیریت توسعه صنایع پایین‌دستی پتروشیمی، بر پایه قیمت‌های جهانی و نرخ دلار حواله مرکز مبادله محاسبه و اعلام می‌شود؛ به همین دلیل قیمت معامله در بورس و قیمت فروش در بازار آزاد معمولاً با قیمت پایه فرق دارد.</p>
+<h3>افزایش قیمت پایه محصولات پتروشیمی در این هفته</h3>
+<p>در اعلام قیمت پایه محصولات پتروشیمی این هفته، میانگین تغییر قیمت گریدها {avg} بود؛ {up} گرید افزایش و {down} گرید کاهش قیمت داشتند. بیشترین افزایش میانگین به گروه «{top_group}» با {top_group_pct} رسید. با گزینه‌های «افزایشی» و «کاهشی» و مرتب‌سازی بر اساس «بیشترین افزایش»، گریدهایی را که بیشترین تغییر را داشته‌اند جدا کنید.</p>
+<h3>قیمت های پایه محصولات پتروشیمی را چطور بخوانیم؟</h3>
+<p>قیمت های پایه محصولات پتروشیمی به ریال بر کیلوگرم اعلام می‌شوند؛ در این جدول می‌توانید واحد را به تومان بر کیلوگرم، میلیون تومان بر تن یا دلار بر تن تغییر دهید. با زدن روی نام هر گرید، نمودار تغییر قیمت در ۳، ۶ و ۱۲ ماه گذشته و ماشین‌حساب خرید را می‌بینید و با دکمه مقایسه، تا چهار گرید را کنار هم بررسی می‌کنید.</p>
+<h3>خرید مواد اولیه پلیمری از بسپارمارکت</h3>
+<p>هر هفته به محض اینکه قیمت پایه محصولات پتروشیمی اعلام شد، جدول این صفحه به‌روز می‌شود. برای قیمت روز بازار، موجودی و ارسال مواد اولیه پلیمری و شیمیایی به سراسر ایران، از دکمه استعلام قیمت کنار هر گرید استفاده کنید یا راهنمای <a href="/buy-chemical-raw-materials/">خرید مواد اولیه شیمیایی</a> را ببینید.</p>',
+			'description' => __( 'هر هفته خودکار پر می‌شود: {date} تاریخ، {valid} معتبر تا، {dollar} دلار (تومان)، {count} تعداد گرید، {groups} تعداد گروه، {avg} میانگین تغییر، {up} / {down} تعداد افزایشی / کاهشی، {top_group} و {top_group_pct} گروه با بیشترین افزایش.', 'baspar-elements' ),
+		) );
+		$this->add_control( 'seo_collapse', array( 'label' => __( 'نمایش خلاصه با دکمه «ادامه مطلب»', 'baspar-elements' ), 'type' => Controls_Manager::SWITCHER, 'return_value' => 'yes', 'default' => 'yes' ) );
+		$this->end_controls_section();
+	}
+
+	/**
+	 * SEO text with this week's numbers filled in.
+	 *
+	 * @param string $html Text with placeholders.
+	 * @param array  $b    Board.
+	 * @return string
+	 */
+	private function seo_html( $html, $b ) {
+		$w   = $b['week'];
+		$top = null;
+		foreach ( $b['groups'] as $g ) {
+			if ( null !== $g['avg'] && ( ! $top || $g['avg'] > $top['avg'] ) ) {
+				$top = $g;
+			}
+		}
+		$pct = static function ( $v ) {
+			return null === $v ? '—' : ( $v > 0 ? '+' : ( $v < 0 ? '−' : '' ) ) . self::num( abs( $v ), 2 ) . '٪';
+		};
+		$map = array(
+			'{date}'          => $w['date'],
+			'{valid}'         => $w['valid_until'] ? $w['valid_until'] : __( 'هفته آینده', 'baspar-elements' ),
+			'{dollar}'        => $w['dollar'] ? self::num( round( $w['dollar'] / 10 ) ) : '—',
+			'{count}'         => fa_num( $w['count'] ),
+			'{groups}'        => fa_num( count( $b['groups'] ) ),
+			'{avg}'           => $pct( $b['stats']['avg'] ),
+			'{up}'            => fa_num( $b['stats']['up'] ),
+			'{down}'          => fa_num( $b['stats']['down'] ),
+			'{top_group}'     => $top ? $top['name'] : '—',
+			'{top_group_pct}' => $top ? $pct( $top['avg'] ) : '—',
+		);
+		return wp_kses_post( strtr( (string) $html, array_map( 'esc_html', $map ) ) );
 	}
 
 	/**
@@ -245,6 +299,7 @@ class Baspar_Price_Board extends Baspar_Widget_Base {
 					</div>
 				</div>
 
+				<?php if ( ! empty( $s['hint'] ) ) : ?><p class="prb-hint"><?php echo icon_svg( 'zoom', 16 ); // phpcs:ignore ?><span><?php echo esc_html( $s['hint'] ); ?></span></p><?php endif; ?>
 				<p class="prb-count" data-prb-count aria-live="polite"></p>
 
 				<div class="prb-tablewrap">
@@ -290,6 +345,17 @@ class Baspar_Price_Board extends Baspar_Widget_Base {
 					<?php if ( $s['note'] ) : ?><p class="prb-note"><?php echo icon_svg( 'info', 16 ); // phpcs:ignore ?><span><?php echo esc_html( $s['note'] ); ?></span></p><?php endif; ?>
 					<?php if ( $set['attribution'] ) : ?><p class="prb-src"><?php echo esc_html( $set['attribution'] ); ?><?php if ( $w['url'] ) : ?> — <a href="<?php echo esc_url( $w['url'] ); ?>" target="_blank" rel="noopener nofollow"><?php esc_html_e( 'خبر این هفته', 'baspar-elements' ); ?></a><?php endif; ?></p><?php endif; ?>
 				</footer>
+
+				<?php if ( 'yes' === ( $s['seo_show'] ?? '' ) && trim( wp_strip_all_tags( (string) $s['seo_text'] ) ) ) :
+					$collapse = 'yes' === ( $s['seo_collapse'] ?? '' );
+					$sid      = 'prb-seo-' . $this->get_id();
+					?>
+					<section class="prb-seo<?php echo $collapse ? ' is-collapsible' : ''; ?>" aria-label="<?php esc_attr_e( 'درباره قیمت پایه محصولات پتروشیمی', 'baspar-elements' ); ?>">
+						<?php if ( $collapse ) : ?><input type="checkbox" id="<?php echo esc_attr( $sid ); ?>" class="prb-seo-t" hidden><?php endif; ?>
+						<div class="prb-seo-body"><?php echo $this->seo_html( $s['seo_text'], $b ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wp_kses_post in seo_html(). ?></div>
+						<?php if ( $collapse ) : ?><label for="<?php echo esc_attr( $sid ); ?>" class="prb-seo-more"><span class="o"><?php esc_html_e( 'ادامه مطلب', 'baspar-elements' ); ?></span><span class="c"><?php esc_html_e( 'بستن', 'baspar-elements' ); ?></span><?php echo icon_svg( 'arrow-down', 16 ); // phpcs:ignore ?></label><?php endif; ?>
+					</section>
+				<?php endif; ?>
 
 				<div class="prb-tray" data-prb-tray hidden>
 					<div class="prb-tray-in"><span class="prb-tray-k"><?php echo icon_svg( 'layers', 16 ); // phpcs:ignore ?><?php esc_html_e( 'مقایسه', 'baspar-elements' ); ?></span><div class="prb-tray-list" data-prb-tray-list></div><button type="button" class="prb-btn is-primary" data-prb-compare><?php esc_html_e( 'مقایسه نمودار', 'baspar-elements' ); ?></button><button type="button" class="prb-link" data-prb-tray-clear><?php esc_html_e( 'پاک کردن', 'baspar-elements' ); ?></button></div>
