@@ -55,8 +55,9 @@ INCLUDE_BUNDLE = {
     'includes/product.php': {'product'},
     'includes/home.php': {'home'},
     'widgets/class-baspar-widget-base.php': {'core'},
-    'assets/js/prices.js': {'prices'},
-    'includes/prices/board.php': {'side'},  # Sidebar price banner markup.  # Builds the price board's rows, modals and tray.
+    'assets/js/prices.js': {'prices'},  # Builds the price board's rows, modals and tray.
+    'includes/prices/board.php': {'side'},  # Sidebar price banner markup.
+    'includes/catalog.php': {'home'},  # Product cards for «مشاهده بیشتر» (products widget).
 }
 # Classes the script only reads or toggles; counted only when nothing else
 # prints the class (e.g. the lightbox the script builds).

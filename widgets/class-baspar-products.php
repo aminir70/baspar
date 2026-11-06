@@ -11,7 +11,9 @@ namespace BasparElements\Widgets;
 
 use Elementor\Controls_Manager;
 use function BasparElements\icon_svg;
-use function BasparElements\primary_cat_name;
+use function BasparElements\product_card_html;
+use function BasparElements\more_query_args;
+use function BasparElements\more_token;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -21,6 +23,26 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Class Baspar_Products
  */
 class Baspar_Products extends Baspar_Widget_Base {
+
+	/**
+	 * Args of the last product query (for the "load more" token).
+	 *
+	 * @var array
+	 */
+	private $last_args = array();
+
+	/**
+	 * Paging mode: '' (off), 'more' or 'numbers'.
+	 *
+	 * @param array $s Settings.
+	 * @return string
+	 */
+	private function pager( $s ) {
+		if ( 'yes' !== ( $s['enable_pagination'] ?? '' ) ) {
+			return '';
+		}
+		return ( isset( $s['pager'] ) && 'numbers' === $s['pager'] ) ? 'numbers' : 'more';
+	}
 
 	public function get_name() {
 		return 'baspar-products';
@@ -112,7 +134,41 @@ class Baspar_Products extends Baspar_Widget_Base {
 				'type'         => Controls_Manager::SWITCHER,
 				'return_value' => 'yes',
 				'default'      => '',
-				'description'  => __( 'فعال کنید تا لینک‌های صفحه‌بندی زیر گرید نشان داده شوند.', 'baspar-elements' ),
+				'description'  => __( 'فعال کنید تا بقیه محصولات هم در دسترس باشند (دکمه «مشاهده بیشتر» یا شماره صفحه).', 'baspar-elements' ),
+			)
+		);
+		$this->add_control(
+			'pager',
+			array(
+				'label'       => __( 'نوع صفحه‌بندی', 'baspar-elements' ),
+				'type'        => Controls_Manager::SELECT,
+				'default'     => 'more',
+				'options'     => array(
+					'more'    => __( 'دکمه «مشاهده بیشتر» (یک صفحه برای هر دسته)', 'baspar-elements' ),
+					'numbers' => __( 'شماره صفحه', 'baspar-elements' ),
+				),
+				'description' => __( 'با دکمه «مشاهده بیشتر» هر دسته فقط یک آدرس دارد و محصولات بعدی بدون رفتن به صفحه دیگر اضافه می‌شوند (بهتر برای سئو).', 'baspar-elements' ),
+				'condition'   => array( 'enable_pagination' => 'yes' ),
+			)
+		);
+		$this->add_control(
+			'more_text',
+			array(
+				'label'     => __( 'متن دکمه', 'baspar-elements' ),
+				'type'      => Controls_Manager::TEXT,
+				'default'   => 'مشاهده محصولات بیشتر',
+				'condition' => array( 'enable_pagination' => 'yes', 'pager' => 'more' ),
+			)
+		);
+		$this->add_control(
+			'more_step',
+			array(
+				'label'       => __( 'تعداد محصول با هر کلیک', 'baspar-elements' ),
+				'type'        => Controls_Manager::NUMBER,
+				'min'         => 0,
+				'max'         => 48,
+				'description' => __( 'خالی = همان «تعداد در هر صفحه».', 'baspar-elements' ),
+				'condition'   => array( 'enable_pagination' => 'yes', 'pager' => 'more' ),
 			)
 		);
 		$this->add_reveal_toggle();
@@ -179,11 +235,14 @@ class Baspar_Products extends Baspar_Widget_Base {
 		if ( ! function_exists( 'wc_get_product' ) ) {
 			return null;
 		}
-		$per_page  = max( 1, (int) $s['count'] );
-		$paged_qv  = ( get_query_var( 'paged' ) ) ? (int) get_query_var( 'paged' ) : ( get_query_var( 'page' ) ? (int) get_query_var( 'page' ) : 1 );
-		// Allow ?bspr_page= on pages where the main query's paged is unused.
-		if ( isset( $_GET['bspr_page'] ) ) { // phpcs:ignore
-			$paged_qv = max( 1, (int) $_GET['bspr_page'] ); // phpcs:ignore
+		$per_page = max( 1, (int) $s['count'] );
+		$paged_qv = 1;
+		if ( 'numbers' === $this->pager( $s ) ) {
+			$paged_qv = ( get_query_var( 'paged' ) ) ? (int) get_query_var( 'paged' ) : ( get_query_var( 'page' ) ? (int) get_query_var( 'page' ) : 1 );
+			// ?bspr_page= also works where /page/N/ is redirected (product archives).
+			if ( isset( $_GET['bspr_page'] ) ) { // phpcs:ignore
+				$paged_qv = max( 1, (int) $_GET['bspr_page'] ); // phpcs:ignore
+			}
 		}
 
 		// ---------- Current query mode: inherit from the page's main query ----------
@@ -224,6 +283,11 @@ class Baspar_Products extends Baspar_Widget_Base {
 				$args = $this->apply_orderby( $args, sanitize_text_field( wp_unslash( $_GET['orderby'] ) ) ); // phpcs:ignore
 			}
 
+			$args['baspar_stable'] = true;
+			if ( isset( $args['orderby'] ) && 'rand' === $args['orderby'] ) {
+				$args['orderby'] = 'RAND(' . wp_rand( 1, 99999 ) . ')'; // Same random order for «مشاهده بیشتر».
+			}
+			$this->last_args = $args;
 			return new \WP_Query( $args );
 		}
 
@@ -270,6 +334,11 @@ class Baspar_Products extends Baspar_Widget_Base {
 			);
 		}
 
+		$args['baspar_stable'] = true;
+		if ( isset( $args['orderby'] ) && 'rand' === $args['orderby'] ) {
+			$args['orderby'] = 'RAND(' . wp_rand( 1, 99999 ) . ')'; // Same random order for «مشاهده بیشتر».
+		}
+		$this->last_args = $args;
 		return new \WP_Query( $args );
 	}
 
@@ -291,39 +360,15 @@ class Baspar_Products extends Baspar_Widget_Base {
 		<div class="baspar-scope">
 			<div class="bs-grid cols-<?php echo esc_attr( $s['columns'] ); ?>">
 				<?php
-				$i = 0;
+				$i    = 0;
+				$card = array(
+					'show_cat' => 'yes' === $s['show_cat'],
+					'foot'     => $s['foot_text'],
+					'class'    => $this->reveal_class( $s ),
+				);
 				while ( $q->have_posts() ) :
 					$q->the_post();
-					$product = wc_get_product( get_the_ID() );
-					if ( ! $product ) {
-						continue;
-					}
-					$cats     = wc_get_product_category_list( get_the_ID() );
-					$cat_name = primary_cat_name( get_the_ID() );
-					$sku   = $product->get_sku();
-					$thumb = get_the_post_thumbnail( get_the_ID(), 'medium', array( 'loading' => 'lazy' ) );
-					?>
-					<a href="<?php the_permalink(); ?>" class="pcard <?php echo esc_attr( $this->reveal_class( $s ) ); ?>" data-reveal-delay="<?php echo esc_attr( $i * 40 ); ?>">
-						<div class="pcard-img <?php echo $thumb ? 'has-image' : ''; ?>">
-							<?php if ( $sku ) : ?><span class="pcard-tag"><?php echo esc_html( $sku ); ?></span><?php endif; ?>
-							<?php
-							if ( $thumb ) {
-								echo $thumb; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-							} else {
-								echo icon_svg( 'package', 40 ); // phpcs:ignore
-							}
-							?>
-						</div>
-						<div class="pcard-body">
-							<?php if ( 'yes' === $s['show_cat'] && $cat_name ) : ?><span class="pcard-cat"><?php echo esc_html( $cat_name ); ?></span><?php endif; ?>
-							<div class="pcard-name"><?php the_title(); ?></div>
-						</div>
-						<div class="pcard-foot">
-							<span><?php echo esc_html( $s['foot_text'] ); ?></span>
-							<?php echo icon_svg( 'arrow', 14 ); // phpcs:ignore ?>
-						</div>
-					</a>
-					<?php
+					echo product_card_html( get_the_ID(), $card + array( 'delay' => $i * 40 ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in product_card_html().
 					++$i;
 				endwhile;
 				wp_reset_postdata();
@@ -331,13 +376,18 @@ class Baspar_Products extends Baspar_Widget_Base {
 			</div>
 
 			<?php
-			if ( 'yes' === $s['enable_pagination'] && $q->max_num_pages > 1 ) {
+			if ( 'more' === $this->pager( $s ) && $q->found_posts > $q->post_count ) {
+				$this->render_more( $s, $q );
+			} elseif ( 'numbers' === $this->pager( $s ) && $q->max_num_pages > 1 ) {
 				$current = max( 1, (int) ( isset( $_GET['bspr_page'] ) ? $_GET['bspr_page'] : ( get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1 ) ) ); // phpcs:ignore
 				$big     = 999999999;
+				// Product archives live on one URL (/page/N/ redirects), so
+				// number them with ?bspr_page=N there.
+				$archive = \BasparElements\single_page_archives() && \BasparElements\is_product_archive();
 				$links   = paginate_links(
 					array(
-						'base'      => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
-						'format'    => '?paged=%#%',
+						'base'      => $archive ? add_query_arg( 'bspr_page', '%#%', remove_query_arg( 'bspr_page', get_pagenum_link( 1, false ) ) ) : str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+						'format'    => $archive ? '' : '?paged=%#%',
 						'current'   => $current,
 						'total'     => $q->max_num_pages,
 						'type'      => 'array',
@@ -382,6 +432,47 @@ class Baspar_Products extends Baspar_Widget_Base {
 				}
 			}
 			?>
+		</div>
+		<?php
+	}
+
+	/**
+	 * «مشاهده محصولات بیشتر» button; the script loads the next batch from
+	 * /wp-json/baspar/v1/products and appends it to the grid.
+	 *
+	 * @param array     $s Settings.
+	 * @param \WP_Query $q First-page query.
+	 */
+	private function render_more( $s, $q ) {
+		$total = (int) $q->found_posts;
+		$shown = (int) $q->post_count;
+		$step  = (int) ( $s['more_step'] ?? 0 );
+		$step  = $step > 0 ? min( 48, $step ) : max( 1, (int) $s['count'] );
+		$data  = array(
+			'data-bspr-more' => more_token( more_query_args( $this->last_args ) ),
+			'data-url'       => rest_url( 'baspar/v1/products' ),
+			'data-total'     => $total,
+			'data-loaded'    => $shown,
+			'data-step'      => $step,
+			'data-cat'       => 'yes' === $s['show_cat'] ? 1 : 0,
+			'data-foot'      => $s['foot_text'],
+		);
+		$attr  = '';
+		foreach ( $data as $k => $v ) {
+			$attr .= ' ' . $k . '="' . esc_attr( (string) $v ) . '"';
+		}
+		$text = '' !== trim( (string) ( $s['more_text'] ?? '' ) ) ? $s['more_text'] : __( 'مشاهده محصولات بیشتر', 'baspar-elements' );
+		?>
+		<div class="bspr-more"<?php echo $attr; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped above. ?>>
+			<p class="bspr-more-count" aria-live="polite"><?php
+				/* translators: 1: shown, 2: total */
+				echo wp_kses_post( sprintf( __( 'نمایش <b>%1$s</b> از <b>%2$s</b> محصول', 'baspar-elements' ), \BasparElements\fa_num( number_format_i18n( $shown ) ), \BasparElements\fa_num( number_format_i18n( $total ) ) ) );
+			?></p>
+			<span class="bspr-more-bar" aria-hidden="true"><i style="width:<?php echo esc_attr( (string) round( 100 * $shown / max( 1, $total ), 1 ) ); ?>%"></i></span>
+			<button type="button" class="bspr-more-btn">
+				<span class="bspr-more-t"><?php echo esc_html( $text ); ?></span>
+				<?php echo icon_svg( 'arrow-down', 16 ); // phpcs:ignore ?>
+			</button>
 		</div>
 		<?php
 	}

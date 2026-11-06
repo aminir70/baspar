@@ -7,6 +7,30 @@
 .baspar-scope .pcard{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;transition:all .2s;color:inherit;height:100%}
 .baspar-scope .pcard-img img{width:100%;height:100%;object-fit:cover;position:relative;z-index:1}
 .baspar-scope .pcard-img.has-image::after{display:none}
+.baspar-scope .bspr-more{display:flex;flex-direction:column;align-items:center;gap:12px;margin:34px auto 6px;max-width:360px;text-align:center}
+.baspar-scope .bspr-more.is-done{display:none}
+.baspar-scope .bspr-more-count{margin:0;font-size:13px;color:var(--muted,#6B5E80)}
+.baspar-scope .bspr-more-count b{color:var(--ink);font-weight:800}
+.baspar-scope .bspr-more-bar{display:block;width:180px;height:4px;border-radius:99px;background:var(--line);overflow:hidden}
+.baspar-scope .bspr-more-bar i{display:block;height:100%;border-radius:inherit;background:var(--brand);transition:width .5s ease}
+.baspar-scope .bspr-more-btn{position:relative;-webkit-tap-highlight-color:transparent;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-width:240px;min-height:48px;padding:12px 26px;border:1.5px solid var(--brand);border-radius:999px;background:#fff;color:var(--brand);font:inherit;font-size:14.5px;font-weight:800;cursor:pointer;transition:background .2s,color .2s,box-shadow .2s,transform .1s}
+@media (hover:hover){
+.baspar-scope .bspr-more-btn:hover{background:var(--brand);color:#fff;box-shadow:0 14px 30px -16px rgba(109,40,217,.55)}
+.baspar-scope .bspr-more-btn:hover svg{transform:translateY(2px)}
+}
+.baspar-scope .bspr-more-btn:active{transform:scale(.98)}
+.baspar-scope .bspr-more-btn:focus-visible{outline:2px solid var(--brand);outline-offset:3px}
+.baspar-scope .bspr-more-btn svg{transition:transform .2s}
+.baspar-scope .bspr-more.is-loading .bspr-more-btn{color:transparent;cursor:progress}
+.baspar-scope .bspr-more.is-loading .bspr-more-btn::after{content:"";position:absolute;inset:0;margin:auto;width:20px;height:20px;border-radius:50%;border:2.5px solid var(--brand);border-top-color:transparent;animation:bspr-spin .7s linear infinite}
+.baspar-scope .bspr-more.is-error .bspr-more-btn::before{content:"خطا در بارگذاری — دوباره امتحان کنید";position:absolute;top:calc(100% + 8px);right:0;left:0;font-size:12px;font-weight:600;color:#DC2626}
+@keyframes bspr-spin{to{transform:rotate(360deg)}}
+.baspar-scope .pcard.is-new{animation:bspr-card-in .45s ease both}
+@keyframes bspr-card-in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){
+.baspar-scope .pcard.is-new{animation:none}
+.baspar-scope .bspr-more-bar i{transition:none}
+}
 .baspar-scope .lp-panel{display:none}
 .baspar-scope .lp-panel.is-active{display:grid}
 @media(max-width:680px){
@@ -278,6 +302,9 @@
 @media(max-width:920px){
 .baspar-scope .blog-grid{grid-template-columns:1fr}
 }
+.baspar-scope .foot{background:var(--brand-deep);
+  border-top:1px solid rgba(255,255,255,.08);
+  color:#A89BC2;}
 .baspar-scope .bs-grid.is-list .pcard, .baspar-scope .products.is-list .pcard{flex-direction:row;
   align-items:stretch;}
 .baspar-scope .bs-grid.is-list .pcard-img, .baspar-scope .products.is-list .pcard-img{width:200px;

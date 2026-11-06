@@ -4,7 +4,7 @@ Tags: elementor, woocommerce, widgets, rtl, persian
 Requires at least: 5.8
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.10.5
+Stable tag: 1.11.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,6 +37,12 @@ Requires Elementor. WooCommerce is required only for the product/category widget
    Templates → Saved Templates → Import Templates.
 
 == Changelog ==
+
+= 1.11.0 =
+* Product categories and the shop are now one page each: the products widget shows the first batch and a «مشاهده محصولات بیشتر» button adds the rest without leaving the page (new default for «صفحه‌بندی»; «شماره صفحه» is still available).
+* Old /page/N/ addresses of the shop and product categories redirect (301) to the first page; rel="next"/"prev" links (Rank Math, Yoast) are removed there. Turn off with the filter baspar_elements_single_page_archives.
+* «Back» from a product returns to the same place in the opened list.
+* Stable product order between batches (no repeated or skipped products).
 
 = 1.10.5 =
 * New: sidebar banner for the petrochemical base prices page — this week's date, average change, base dollar trend line and the busiest groups, linking to the price page.

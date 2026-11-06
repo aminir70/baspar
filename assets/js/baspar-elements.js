@@ -857,6 +857,141 @@
 	}
 
 	/* ---- Boot ----------------------------------------------------------- */
+	/* ---- Products: «مشاهده محصولات بیشتر» --------------------------------
+	   Product categories stay on one URL: the button appends the next batch
+	   from /wp-json/baspar/v1/products. What was loaded is remembered for the
+	   tab, so «Back» from a product returns to the same spot in the list. */
+	function faNum( n ) {
+		try {
+			return Number( n ).toLocaleString( 'fa-IR' );
+		} catch ( e ) {
+			return String( n );
+		}
+	}
+	function moreKey() {
+		return 'bspr-more:' + location.pathname + location.search;
+	}
+	function moreState( box ) {
+		return {
+			loaded: parseInt( box.getAttribute( 'data-loaded' ), 10 ) || 0,
+			total: parseInt( box.getAttribute( 'data-total' ), 10 ) || 0
+		};
+	}
+	function morePaint( box ) {
+		var st = moreState( box );
+		var count = box.querySelector( '.bspr-more-count' );
+		if ( count ) {
+			count.innerHTML = 'نمایش <b>' + faNum( st.loaded ) + '</b> از <b>' + faNum( st.total ) + '</b> محصول';
+		}
+		var bar = box.querySelector( '.bspr-more-bar i' );
+		if ( bar ) {
+			bar.style.width = Math.min( 100, 100 * st.loaded / Math.max( 1, st.total ) ) + '%';
+		}
+		// Toolbar text («نمایش ۱–۱۲ از ۱۶۳ محصول») follows the list.
+		var tb = document.querySelector( '.cat-count' );
+		if ( tb && box.hasAttribute( 'data-painted' ) ) {
+			tb.innerHTML = 'نمایش <strong>' + faNum( 1 ) + '–' + faNum( st.loaded ) + '</strong> از <strong>' + faNum( st.total ) + '</strong> محصول';
+		}
+		box.classList.toggle( 'is-done', st.loaded >= st.total );
+	}
+	function moreLoad( box, limit, done ) {
+		var st = moreState( box );
+		var grid = box.parentElement && box.parentElement.querySelector( '.bs-grid' );
+		var btn = box.querySelector( '.bspr-more-btn' );
+		if ( ! grid || ! btn || box.classList.contains( 'is-loading' ) || st.loaded >= st.total ) {
+			return;
+		}
+		var url = box.getAttribute( 'data-url' );
+		url += ( url.indexOf( '?' ) > -1 ? '&' : '?' ) +
+			'q=' + encodeURIComponent( box.getAttribute( 'data-bspr-more' ) ) +
+			'&offset=' + st.loaded + '&limit=' + limit +
+			'&cat=' + ( box.getAttribute( 'data-cat' ) || 0 ) +
+			'&foot=' + encodeURIComponent( box.getAttribute( 'data-foot' ) || '' );
+		box.classList.add( 'is-loading' );
+		box.classList.remove( 'is-error' );
+		btn.setAttribute( 'aria-busy', 'true' );
+		btn.disabled = true;
+		fetch( url, { credentials: 'same-origin', headers: { Accept: 'application/json' } } )
+			.then( function ( r ) {
+				if ( ! r.ok ) {
+					throw new Error( r.status );
+				}
+				return r.json();
+			} )
+			.then( function ( d ) {
+				var before = grid.children.length;
+				grid.insertAdjacentHTML( 'beforeend', d.html || '' );
+				box.setAttribute( 'data-loaded', st.loaded + ( d.count || 0 ) );
+				if ( d.total ) {
+					box.setAttribute( 'data-total', d.total );
+				}
+				if ( ! d.count ) {
+					box.setAttribute( 'data-total', st.loaded ); // Nothing more to show.
+				}
+				box.setAttribute( 'data-painted', '1' );
+				morePaint( box );
+				if ( done ) {
+					done( grid.children[ before ] );
+				}
+			} )
+			.catch( function () {
+				box.classList.add( 'is-error' );
+			} )
+			.then( function () {
+				box.classList.remove( 'is-loading' );
+				btn.removeAttribute( 'aria-busy' );
+				btn.disabled = false;
+			} );
+	}
+	function initMore( root ) {
+		var boxes = ( root || document ).querySelectorAll( '.bspr-more:not([data-more-ready])' );
+		boxes.forEach( function ( box ) {
+			box.setAttribute( 'data-more-ready', '1' );
+			var initial = moreState( box ).loaded;
+			box.querySelector( '.bspr-more-btn' ).addEventListener( 'click', function ( e ) {
+				var keyboard = 0 === e.detail;
+				moreLoad( box, parseInt( box.getAttribute( 'data-step' ), 10 ) || 12, function ( first ) {
+					if ( keyboard && first && first.focus ) {
+						first.focus(); // Keyboard users continue from the new products.
+					}
+				} );
+			} );
+			// Remember how far the list was opened (only the first list of the page).
+			if ( box !== document.querySelector( '.bspr-more' ) ) {
+				return;
+			}
+			var save = function () {
+				var st = moreState( box );
+				try {
+					if ( st.loaded > initial ) {
+						sessionStorage.setItem( moreKey(), JSON.stringify( { n: st.loaded, y: window.scrollY } ) );
+					} else {
+						sessionStorage.removeItem( moreKey() );
+					}
+				} catch ( err ) {}
+			};
+			window.addEventListener( 'pagehide', save );
+			box.parentElement.addEventListener( 'click', function ( e ) {
+				if ( e.target.closest && e.target.closest( '.pcard' ) ) {
+					save();
+				}
+			} );
+			var nav = window.performance && performance.getEntriesByType ? performance.getEntriesByType( 'navigation' )[ 0 ] : null;
+			if ( ! nav || 'back_forward' !== nav.type ) {
+				return;
+			}
+			var saved = null;
+			try {
+				saved = JSON.parse( sessionStorage.getItem( moreKey() ) || 'null' );
+			} catch ( err ) {}
+			if ( saved && saved.n > initial ) {
+				moreLoad( box, Math.min( 200, saved.n - initial ), function () {
+					window.scrollTo( 0, saved.y || 0 );
+				} );
+			}
+		} );
+	}
+
 	function boot( root ) {
 		initStickyHeader();
 		initMotion( root );
@@ -875,6 +1010,7 @@
 		initRandomLists( root );
 		initStickySidebar();
 		initFloatWa();
+		initMore( root );
 	}
 
 	if ( 'loading' === document.readyState ) {
