@@ -82,7 +82,7 @@ class Baspar_Team extends Baspar_Widget_Base {
 		$cols = isset( $s['columns'] ) && $s['columns'] ? (int) $s['columns'] : 3;
 		?>
 		<div class="baspar-scope">
-			<div class="team-grid" style="grid-template-columns:repeat(<?php echo esc_attr( $cols ); ?>,1fr)">
+			<div class="team-grid" style="--cols:<?php echo esc_attr( $cols ); ?>">
 				<?php
 				$i = 0;
 				foreach ( (array) $s['items'] as $m ) :

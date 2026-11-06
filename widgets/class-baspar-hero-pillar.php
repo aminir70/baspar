@@ -11,6 +11,8 @@ namespace BasparElements\Widgets;
 use Elementor\Controls_Manager;
 use Elementor\Repeater;
 use function BasparElements\icon_svg;
+use function BasparElements\slash_url;
+use function BasparElements\slash_links;
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
@@ -23,8 +25,8 @@ class Baspar_Hero_Pillar extends Baspar_Widget_Base {
 		$this->start_controls_section( 'text', array( 'label' => __( 'متن', 'baspar-elements' ) ) );
 		$this->add_control( 'eyebrow_mono', array( 'label' => __( 'برچسب لاتین', 'baspar-elements' ), 'type' => Controls_Manager::TEXT, 'default' => 'EST. 2020 · CHEMICAL TRADE' ) );
 		$this->add_control( 'eyebrow_fa', array( 'label' => __( 'برچسب فارسی', 'baspar-elements' ), 'type' => Controls_Manager::TEXT, 'default' => 'کیهان بسپار نیک اندیشان' ) );
-		$this->add_control( 'title', array( 'label' => __( 'عنوان (<em> هایلایت)', 'baspar-elements' ), 'type' => Controls_Manager::WYSIWYG, 'default' => 'خرید مستقیم <em>مواد اولیه شیمیایی</em><br>از مرجع تخصصی صنایع' ) );
-		$this->add_control( 'subtitle', array( 'label' => __( 'زیرعنوان', 'baspar-elements' ), 'type' => Controls_Manager::TEXTAREA, 'rows' => 4, 'default' => 'تأمین و توزیع تخصصی مواد اولیه پلیمر، رنگ، رزین و شیمیایی برای کارخانه‌ها و واحدهای تولیدی در سراسر ایران.' ) );
+		$this->add_control( 'title', array( 'label' => __( 'عنوان (<em> هایلایت)', 'baspar-elements' ), 'type' => Controls_Manager::WYSIWYG, 'default' => 'خرید مواد اولیه شیمیایی<br>مستقیم از واردکننده، فروش عمده و بسته‌ای', 'description' => __( 'فقط متن؛ تگ‌های عنوان (h1..h6)، p و استایل درون‌خطی هنگام نمایش حذف می‌شوند. اگر خالی بماند تگ H1 اصلاً چاپ نمی‌شود.', 'baspar-elements' ) ) );
+		$this->add_control( 'subtitle', array( 'label' => __( 'زیرعنوان', 'baspar-elements' ), 'type' => Controls_Manager::WYSIWYG, 'default' => '<p>مواد اولیه شیمیایی را خودمان وارد می‌کنیم و از انبار تهران به کارخانه‌ها و کارگاه‌ها می‌فروشیم؛ از گرانول پلیمر و رزین تا حلال، تیتان، مواد اولیه لاستیک و شوینده. کمترین سفارش یک بسته کامل است، کیسه یا بشکه. قیمت‌ها چون با ارز تغییر می‌کنند استعلامی‌اند: نام محصول، گرید و مقدار را بفرستید، پیش‌فاکتور همان روز کاری می‌رسد.</p><p>اگر می‌خواهید بدانید بار از کجا می‌آید و با کدام کارخانه‌ها کار می‌کنیم، صفحه <a href="/chemical-importer/">وارد کننده مواد اولیه شیمیایی</a> را بخوانید.</p>' ) );
 		$this->add_control( 'btn1_text', array( 'label' => __( 'دکمه ۱', 'baspar-elements' ), 'type' => Controls_Manager::TEXT, 'default' => 'استعلام در واتس‌اپ' ) );
 		$this->add_control( 'btn1_link', array( 'label' => __( 'لینک ۱', 'baspar-elements' ), 'type' => Controls_Manager::URL, 'default' => array( 'url' => 'https://wa.me/989120997651' ) ) );
 		$this->add_control( 'btn2_text', array( 'label' => __( 'دکمه ۲', 'baspar-elements' ), 'type' => Controls_Manager::TEXT, 'default' => 'تماس تلفنی' ) );
@@ -70,9 +72,25 @@ class Baspar_Hero_Pillar extends Baspar_Widget_Base {
 		$this->end_controls_section();
 	}
 
+	/**
+	 * Title → clean inline HTML (only em/strong/br). Heading/paragraph wrappers and
+	 * inline styles pasted into the editor are dropped so the page never gets a
+	 * nested or duplicate H1. Returns '' when there is no visible text.
+	 *
+	 * @param string $html Raw control value.
+	 * @return string
+	 */
+	private function clean_title( $html ) {
+		$html = preg_replace( '#</?(h[1-6]|p|div|span|font|section)\b[^>]*>#i', '', (string) $html );
+		$html = wp_kses( $html, array( 'em' => array(), 'strong' => array(), 'b' => array(), 'br' => array() ) );
+		$html = trim( preg_replace( '#^(\s|<br\s*/?>|&nbsp;)+|(\s|<br\s*/?>|&nbsp;)+$#i', '', $html ) );
+		return '' === trim( wp_strip_all_tags( str_replace( '&nbsp;', ' ', $html ) ) ) ? '' : $html;
+	}
+
 	protected function render() {
 		$s = $this->get_settings_for_display();
 		$rev = $this->reveal_class( $s );
+		$h1  = $this->clean_title( $s['title'] );
 		?>
 		<div class="baspar-scope">
 			<section class="hero">
@@ -80,11 +98,11 @@ class Baspar_Hero_Pillar extends Baspar_Widget_Base {
 				<div class="hero-inner">
 					<div class="<?php echo esc_attr( $rev ); ?>">
 						<div class="hero-eyebrow"><span class="mono"><?php echo esc_html( $s['eyebrow_mono'] ); ?></span><span class="eyebrow-line"></span><span><?php echo esc_html( $s['eyebrow_fa'] ); ?></span></div>
-						<h1 class="hero-h1"><?php echo wp_kses_post( $s['title'] ); ?></h1>
-						<p class="hero-sub"><?php echo esc_html( $s['subtitle'] ); ?></p>
+						<?php if ( '' !== $h1 ) : ?><h1 class="hero-h1"><?php echo $h1; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- sanitized in clean_title(). ?></h1><?php endif; ?>
+						<div class="hero-sub rich-text"><?php echo slash_links( wp_kses_post( $s['subtitle'] ) ); // phpcs:ignore ?></div>
 						<div class="hero-ctas">
-							<?php if ( $s['btn1_text'] ) : ?><a href="<?php echo esc_url( $s['btn1_link']['url'] ?? '#' ); ?>" class="btn btn-whatsapp"><?php echo icon_svg( 'whatsapp', 18 ); // phpcs:ignore ?><?php echo esc_html( $s['btn1_text'] ); ?></a><?php endif; ?>
-							<?php if ( $s['btn2_text'] ) : ?><a href="<?php echo esc_url( $s['btn2_link']['url'] ?? '#' ); ?>" class="btn btn-ghost"><?php echo icon_svg( 'phone', 18 ); // phpcs:ignore ?><?php echo esc_html( $s['btn2_text'] ); ?></a><?php endif; ?>
+							<?php if ( $s['btn1_text'] ) : ?><a href="<?php echo esc_url( slash_url( $s['btn1_link']['url'] ?? '#' ) ); ?>" class="btn btn-whatsapp"><?php echo icon_svg( 'whatsapp', 18 ); // phpcs:ignore ?><?php echo esc_html( $s['btn1_text'] ); ?></a><?php endif; ?>
+							<?php if ( $s['btn2_text'] ) : ?><a href="<?php echo esc_url( slash_url( $s['btn2_link']['url'] ?? '#' ) ); ?>" class="btn btn-ghost"><?php echo icon_svg( 'phone', 18 ); // phpcs:ignore ?><?php echo esc_html( $s['btn2_text'] ); ?></a><?php endif; ?>
 						</div>
 						<ul class="hero-bullets">
 							<?php foreach ( (array) $s['bullets'] as $b ) : ?><li><?php echo icon_svg( 'check', 14 ); // phpcs:ignore ?><?php echo esc_html( $b['text'] ); ?></li><?php endforeach; ?>
@@ -95,7 +113,7 @@ class Baspar_Hero_Pillar extends Baspar_Widget_Base {
 							<div class="hv-tag"><?php echo esc_html( $s['frame_tag'] ); ?></div>
 							<div class="hv-placeholder">
 								<?php if ( ! empty( $s['product_image']['url'] ) ) : ?>
-									<img src="<?php echo esc_url( $s['product_image']['url'] ); ?>" alt="<?php echo esc_attr( $s['product_title'] ); ?>" style="width:100%;height:100%;object-fit:cover" />
+									<img src="<?php echo esc_url( $s['product_image']['url'] ); ?>" alt="<?php echo esc_attr( $s['product_title'] ); ?>" />
 								<?php else : ?>
 									<div class="hv-stripes" aria-hidden="true"></div>
 									<div class="hv-ph-text">

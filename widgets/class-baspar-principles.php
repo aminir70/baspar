@@ -50,7 +50,7 @@ class Baspar_Principles extends Baspar_Widget_Base {
 		$s = $this->get_settings_for_display();
 		?>
 		<div class="baspar-scope">
-			<div class="trust-grid" style="grid-template-columns:repeat(3,1fr)">
+			<div class="trust-grid trust-grid-3">
 				<?php $i = 0; foreach ( (array) $s['items'] as $it ) : ++$i; ?>
 					<div class="trust-card <?php echo esc_attr( $this->reveal_class( $s ) ); ?>" data-reveal-delay="<?php echo esc_attr( $i * 60 ); ?>">
 						<div class="trust-icon"><?php echo icon_svg( $it['icon'] ? $it['icon'] : 'shield', 28 ); // phpcs:ignore ?></div>

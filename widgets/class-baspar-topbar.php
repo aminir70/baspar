@@ -10,6 +10,7 @@ namespace BasparElements\Widgets;
 use Elementor\Controls_Manager;
 use Elementor\Repeater;
 use function BasparElements\icon_svg;
+use function BasparElements\force_https;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -101,13 +102,14 @@ class Baspar_Topbar extends Baspar_Widget_Base {
 		$this->add_color( 'bg', __( 'رنگ پس‌زمینه', 'baspar-elements' ), '', 'background' );
 		$this->add_color( 'txt', __( 'رنگ متن', 'baspar-elements' ), '.topbar-inner', 'color' );
 		$this->add_typography( 'typo', __( 'تایپوگرافی', 'baspar-elements' ), '.topbar-inner' );
+		$this->add_bleed_control();
 		$this->end_controls_section();
 	}
 
 	protected function render() {
 		$s = $this->get_settings_for_display();
 		?>
-		<div class="baspar-scope bspr-topbar topbar">
+		<div class="baspar-scope bspr-topbar topbar<?php echo esc_attr( $this->bleed_class( $s ) ); ?>">
 			<div class="topbar-inner">
 				<div class="topbar-left">
 					<span class="dot"></span>
@@ -115,10 +117,10 @@ class Baspar_Topbar extends Baspar_Widget_Base {
 				</div>
 				<div class="topbar-right">
 					<?php if ( ! empty( $s['telegram']['url'] ) ) : ?>
-						<a href="<?php echo esc_url( $s['telegram']['url'] ); ?>" class="tb-link" aria-label="تلگرام"><?php echo icon_svg( 'telegram', 14 ); /* phpcs:ignore */ ?></a>
+						<a href="<?php echo esc_url( force_https( $s['telegram']['url'] ) ); ?>" class="tb-link" aria-label="تلگرام"><?php echo icon_svg( 'telegram', 14 ); /* phpcs:ignore */ ?></a>
 					<?php endif; ?>
 					<?php if ( ! empty( $s['instagram']['url'] ) ) : ?>
-						<a href="<?php echo esc_url( $s['instagram']['url'] ); ?>" class="tb-link" aria-label="اینستاگرام"><?php echo icon_svg( 'instagram', 14 ); /* phpcs:ignore */ ?></a>
+						<a href="<?php echo esc_url( force_https( $s['instagram']['url'] ) ); ?>" class="tb-link" aria-label="اینستاگرام"><?php echo icon_svg( 'instagram', 14 ); /* phpcs:ignore */ ?></a>
 					<?php endif; ?>
 					<span class="tb-divider"></span>
 					<?php if ( $s['email'] ) : ?>
