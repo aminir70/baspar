@@ -10,6 +10,7 @@ namespace BasparElements\Widgets;
 use Elementor\Controls_Manager;
 use Elementor\Repeater;
 use function BasparElements\icon_svg;
+use function BasparElements\slash_url;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -36,7 +37,7 @@ class Baspar_Cities extends Baspar_Widget_Base {
 		$this->start_controls_section( 'content', array( 'label' => __( 'شهرها', 'baspar-elements' ) ) );
 		$rep = new Repeater();
 		$rep->add_control( 'name', array( 'label' => __( 'شهر', 'baspar-elements' ), 'type' => Controls_Manager::TEXT ) );
-		$rep->add_control( 'link', array( 'label' => __( 'لینک', 'baspar-elements' ), 'type' => Controls_Manager::URL ) );
+		$rep->add_control( 'link', array( 'label' => __( 'لینک', 'baspar-elements' ), 'type' => Controls_Manager::URL, 'description' => __( 'اختیاری؛ اگر خالی باشد شهر بدون لینک نمایش داده می‌شود.', 'baspar-elements' ) ) );
 		$this->add_control(
 			'items',
 			array(
@@ -46,10 +47,10 @@ class Baspar_Cities extends Baspar_Widget_Base {
 				'title_field' => '{{{ name }}}',
 				'default'     => array(
 					array( 'name' => 'تهران' ),
-					array( 'name' => 'شیراز' ),
-					array( 'name' => 'اصفهان' ),
-					array( 'name' => 'تبریز' ),
-					array( 'name' => 'مشهد' ),
+					array( 'name' => 'شیراز', 'link' => array( 'url' => '/buying-chemical-raw-materials-from-shiraz/' ) ),
+					array( 'name' => 'اصفهان', 'link' => array( 'url' => '/buying-chemical-raw-materials-from-isfahan/' ) ),
+					array( 'name' => 'تبریز', 'link' => array( 'url' => '/buying-chemical-raw-materials-from-tabriz/' ) ),
+					array( 'name' => 'مشهد', 'link' => array( 'url' => '/purchase-of-chemical-raw-materials-from-mashhad/' ) ),
 					array( 'name' => 'اهواز' ),
 					array( 'name' => 'کرج' ),
 					array( 'name' => 'قم' ),
@@ -72,13 +73,20 @@ class Baspar_Cities extends Baspar_Widget_Base {
 		<div class="baspar-scope">
 			<div class="cities <?php echo esc_attr( $this->reveal_class( $s ) ); ?>">
 				<?php foreach ( (array) $s['items'] as $c ) :
-					$url = ! empty( $c['link']['url'] ) ? $c['link']['url'] : '#';
+					$url = ! empty( $c['link']['url'] ) ? trim( $c['link']['url'] ) : '';
 					?>
-					<a href="<?php echo esc_url( $url ); ?>" class="city-card">
-						<span class="city-dot"></span>
-						<span><?php echo esc_html( $c['name'] ); ?></span>
-						<?php echo icon_svg( 'arrow', 16 ); // phpcs:ignore ?>
-					</a>
+					<?php if ( '' !== $url && '#' !== $url ) : ?>
+						<a href="<?php echo esc_url( slash_url( $url ) ); ?>" class="city-card">
+							<span class="city-dot"></span>
+							<span><?php echo esc_html( $c['name'] ); ?></span>
+							<?php echo icon_svg( 'arrow', 16 ); // phpcs:ignore ?>
+						</a>
+					<?php else : ?>
+						<span class="city-card">
+							<span class="city-dot"></span>
+							<span><?php echo esc_html( $c['name'] ); ?></span>
+						</span>
+					<?php endif; ?>
 				<?php endforeach; ?>
 			</div>
 		</div>

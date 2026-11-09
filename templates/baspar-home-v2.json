@@ -1,0 +1,664 @@
+{
+ "version": "0.4",
+ "title": "بسپار — صفحه اصلی (نسخه ۲، هلو)",
+ "type": "page",
+ "page_settings": {
+  "template": "elementor_header_footer",
+  "hide_title": "yes",
+  "background_background": "classic",
+  "background_color": "#FBF9FE"
+ },
+ "content": [
+  {
+   "id": "b99542c",
+   "elType": "section",
+   "settings": {
+    "layout": "full_width",
+    "gap": "no",
+    "padding": {
+     "unit": "px",
+     "top": "0",
+     "right": "0",
+     "bottom": "0",
+     "left": "0",
+     "isLinked": true
+    },
+    "margin": {
+     "unit": "px",
+     "top": "0",
+     "right": 0,
+     "bottom": "0",
+     "left": 0,
+     "isLinked": true
+    }
+   },
+   "elements": [
+    {
+     "id": "19a599e",
+     "elType": "column",
+     "settings": {
+      "_column_size": 100,
+      "_inline_size": null,
+      "padding": {
+       "unit": "px",
+       "top": "0",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": true
+      }
+     },
+     "elements": [
+      {
+       "id": "5fe1822",
+       "elType": "widget",
+       "settings": {},
+       "elements": [],
+       "widgetType": "baspar-hero-v2"
+      }
+     ],
+     "isInner": false
+    }
+   ],
+   "isInner": false
+  },
+  {
+   "id": "a833b78",
+   "elType": "section",
+   "settings": {
+    "layout": "full_width",
+    "gap": "no",
+    "padding": {
+     "unit": "px",
+     "top": "0",
+     "right": "0",
+     "bottom": "0",
+     "left": "0",
+     "isLinked": true
+    },
+    "margin": {
+     "unit": "px",
+     "top": "0",
+     "right": 0,
+     "bottom": "0",
+     "left": 0,
+     "isLinked": true
+    }
+   },
+   "elements": [
+    {
+     "id": "b753569",
+     "elType": "column",
+     "settings": {
+      "_column_size": 100,
+      "_inline_size": null,
+      "padding": {
+       "unit": "px",
+       "top": "0",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": true
+      }
+     },
+     "elements": [
+      {
+       "id": "954b136",
+       "elType": "widget",
+       "settings": {
+        "anchor": "home-cats"
+       },
+       "elements": [],
+       "widgetType": "baspar-cat-tiles"
+      }
+     ],
+     "isInner": false
+    }
+   ],
+   "isInner": false
+  },
+  {
+   "id": "e5ff6e1",
+   "elType": "section",
+   "settings": {
+    "layout": "full_width",
+    "gap": "no",
+    "padding": {
+     "unit": "px",
+     "top": "0",
+     "right": "0",
+     "bottom": "0",
+     "left": "0",
+     "isLinked": true
+    },
+    "margin": {
+     "unit": "px",
+     "top": "0",
+     "right": 0,
+     "bottom": "0",
+     "left": 0,
+     "isLinked": true
+    }
+   },
+   "elements": [
+    {
+     "id": "764a507",
+     "elType": "column",
+     "settings": {
+      "_column_size": 100,
+      "_inline_size": null,
+      "padding": {
+       "unit": "px",
+       "top": "0",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": true
+      }
+     },
+     "elements": [
+      {
+       "id": "43dfb0c",
+       "elType": "widget",
+       "settings": {},
+       "elements": [],
+       "widgetType": "baspar-image-banners"
+      }
+     ],
+     "isInner": false
+    }
+   ],
+   "isInner": false
+  },
+  {
+   "id": "d9539ce",
+   "elType": "section",
+   "settings": {
+    "layout": "full_width",
+    "gap": "no",
+    "padding": {
+     "unit": "px",
+     "top": "0",
+     "right": "0",
+     "bottom": "0",
+     "left": "0",
+     "isLinked": true
+    },
+    "margin": {
+     "unit": "px",
+     "top": "0",
+     "right": 0,
+     "bottom": "0",
+     "left": 0,
+     "isLinked": true
+    }
+   },
+   "elements": [
+    {
+     "id": "1cfcf2b",
+     "elType": "column",
+     "settings": {
+      "_column_size": 100,
+      "_inline_size": null,
+      "padding": {
+       "unit": "px",
+       "top": "0",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": true
+      }
+     },
+     "elements": [
+      {
+       "id": "c845723",
+       "elType": "widget",
+       "settings": {},
+       "elements": [],
+       "widgetType": "baspar-cta-strip"
+      }
+     ],
+     "isInner": false
+    }
+   ],
+   "isInner": false
+  },
+  {
+   "id": "7e183f9",
+   "elType": "section",
+   "settings": {
+    "layout": "full_width",
+    "gap": "no",
+    "padding": {
+     "unit": "px",
+     "top": "0",
+     "right": "0",
+     "bottom": "0",
+     "left": "0",
+     "isLinked": true
+    },
+    "margin": {
+     "unit": "px",
+     "top": "0",
+     "right": 0,
+     "bottom": "0",
+     "left": 0,
+     "isLinked": true
+    }
+   },
+   "elements": [
+    {
+     "id": "14df09e",
+     "elType": "column",
+     "settings": {
+      "_column_size": 100,
+      "_inline_size": null,
+      "padding": {
+       "unit": "px",
+       "top": "0",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": true
+      }
+     },
+     "elements": [
+      {
+       "id": "ed8031e",
+       "elType": "widget",
+       "settings": {
+        "layout": "tabs"
+       },
+       "elements": [],
+       "widgetType": "baspar-product-rail"
+      }
+     ],
+     "isInner": false
+    }
+   ],
+   "isInner": false
+  },
+  {
+   "id": "08ac27c",
+   "elType": "section",
+   "settings": {
+    "layout": "full_width",
+    "gap": "no",
+    "padding": {
+     "unit": "px",
+     "top": "0",
+     "right": "0",
+     "bottom": "0",
+     "left": "0",
+     "isLinked": true
+    },
+    "margin": {
+     "unit": "px",
+     "top": "0",
+     "right": 0,
+     "bottom": "0",
+     "left": 0,
+     "isLinked": true
+    }
+   },
+   "elements": [
+    {
+     "id": "a41f3f0",
+     "elType": "column",
+     "settings": {
+      "_column_size": 100,
+      "_inline_size": null,
+      "padding": {
+       "unit": "px",
+       "top": "0",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": true
+      }
+     },
+     "elements": [
+      {
+       "id": "1300134",
+       "elType": "widget",
+       "settings": {
+        "columns": "1",
+        "columns_tablet": "1",
+        "columns_mobile": "1",
+        "frame": "",
+        "items": [
+         {
+          "title": "نیک بیاندیش، نیک بیاموز، نیک برگزین",
+          "image": {
+           "url": "https://basparmarket.com/wp-content/uploads/2024/06/Shoar-Sherkat-01-4.png",
+           "id": ""
+          },
+          "link": {
+           "url": ""
+          },
+          "_id": "92a4f46"
+         }
+        ]
+       },
+       "elements": [],
+       "widgetType": "baspar-image-banners"
+      }
+     ],
+     "isInner": false
+    }
+   ],
+   "isInner": false
+  },
+  {
+   "id": "f4aa0f1",
+   "elType": "section",
+   "settings": {
+    "layout": "full_width",
+    "gap": "no",
+    "padding": {
+     "unit": "px",
+     "top": "0",
+     "right": "0",
+     "bottom": "0",
+     "left": "0",
+     "isLinked": true
+    },
+    "margin": {
+     "unit": "px",
+     "top": "0",
+     "right": 0,
+     "bottom": "0",
+     "left": 0,
+     "isLinked": true
+    }
+   },
+   "elements": [
+    {
+     "id": "4a578f2",
+     "elType": "column",
+     "settings": {
+      "_column_size": 100,
+      "_inline_size": null,
+      "padding": {
+       "unit": "px",
+       "top": "0",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": true
+      }
+     },
+     "elements": [
+      {
+       "id": "109c6bc",
+       "elType": "widget",
+       "settings": {
+        "layout": "showcase",
+        "sc_term": 120,
+        "sc_kicker": "TITANIUM DIOXIDE",
+        "sc_title": "تیتان",
+        "sc_image": {
+         "url": "https://basparmarket.com/wp-content/uploads/2024/06/تیتان.png",
+         "id": ""
+        },
+        "sc_text": "دی‌اکسید تیتانیوم روتایل و آناتاز از برندهای معتبر، برای رنگ، پلاستیک، کاغذ و پوشش‌های صنعتی."
+       },
+       "elements": [],
+       "widgetType": "baspar-product-rail"
+      }
+     ],
+     "isInner": false
+    }
+   ],
+   "isInner": false
+  },
+  {
+   "id": "022450a",
+   "elType": "section",
+   "settings": {
+    "layout": "full_width",
+    "gap": "no",
+    "padding": {
+     "unit": "px",
+     "top": "0",
+     "right": "0",
+     "bottom": "0",
+     "left": "0",
+     "isLinked": true
+    },
+    "margin": {
+     "unit": "px",
+     "top": "0",
+     "right": 0,
+     "bottom": "0",
+     "left": 0,
+     "isLinked": true
+    }
+   },
+   "elements": [
+    {
+     "id": "a1bc3a0",
+     "elType": "column",
+     "settings": {
+      "_column_size": 100,
+      "_inline_size": null,
+      "padding": {
+       "unit": "px",
+       "top": "0",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": true
+      }
+     },
+     "elements": [
+      {
+       "id": "5f30ba0",
+       "elType": "widget",
+       "settings": {
+        "layout": "showcase",
+        "sc_term": 119,
+        "sc_kicker": "RESIN",
+        "sc_title": "رزین",
+        "sc_image": {
+         "url": "https://basparmarket.com/wp-content/uploads/2024/06/رزین.png",
+         "id": ""
+        },
+        "sc_text": "رزین‌های اپوکسی، پلی‌استر، آلکید و اکریلیک برای صنایع رنگ، چسب و کامپوزیت؛ با برگه آنالیز و مشاوره فنی.",
+        "sc_side": "yes"
+       },
+       "elements": [],
+       "widgetType": "baspar-product-rail"
+      }
+     ],
+     "isInner": false
+    }
+   ],
+   "isInner": false
+  },
+  {
+   "id": "432691d",
+   "elType": "section",
+   "settings": {
+    "layout": "full_width",
+    "gap": "no",
+    "padding": {
+     "unit": "px",
+     "top": "0",
+     "right": "0",
+     "bottom": "0",
+     "left": "0",
+     "isLinked": true
+    },
+    "margin": {
+     "unit": "px",
+     "top": "0",
+     "right": 0,
+     "bottom": "0",
+     "left": 0,
+     "isLinked": true
+    }
+   },
+   "elements": [
+    {
+     "id": "5caa3b9",
+     "elType": "column",
+     "settings": {
+      "_column_size": 100,
+      "_inline_size": null,
+      "padding": {
+       "unit": "px",
+       "top": "0",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": true
+      }
+     },
+     "elements": [
+      {
+       "id": "99bc8c3",
+       "elType": "widget",
+       "settings": {},
+       "elements": [],
+       "widgetType": "baspar-about-v2"
+      }
+     ],
+     "isInner": false
+    }
+   ],
+   "isInner": false
+  },
+  {
+   "id": "23071bd",
+   "elType": "section",
+   "settings": {
+    "layout": "full_width",
+    "gap": "no",
+    "padding": {
+     "unit": "px",
+     "top": "0",
+     "right": "0",
+     "bottom": "0",
+     "left": "0",
+     "isLinked": true
+    },
+    "margin": {
+     "unit": "px",
+     "top": "0",
+     "right": 0,
+     "bottom": "0",
+     "left": 0,
+     "isLinked": true
+    }
+   },
+   "elements": [
+    {
+     "id": "ec1fcbd",
+     "elType": "column",
+     "settings": {
+      "_column_size": 100,
+      "_inline_size": null,
+      "padding": {
+       "unit": "px",
+       "top": "0",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": true
+      }
+     },
+     "elements": [
+      {
+       "id": "4542117",
+       "elType": "widget",
+       "settings": {},
+       "elements": [],
+       "widgetType": "baspar-home-blog"
+      }
+     ],
+     "isInner": false
+    }
+   ],
+   "isInner": false
+  },
+  {
+   "id": "dc4ad69",
+   "elType": "section",
+   "settings": {
+    "layout": "full_width",
+    "gap": "no",
+    "padding": {
+     "unit": "px",
+     "top": "0",
+     "right": "0",
+     "bottom": "40",
+     "left": "0",
+     "isLinked": false
+    },
+    "margin": {
+     "unit": "px",
+     "top": "0",
+     "right": 0,
+     "bottom": "0",
+     "left": 0,
+     "isLinked": true
+    }
+   },
+   "elements": [
+    {
+     "id": "7af2f27",
+     "elType": "column",
+     "settings": {
+      "_column_size": 100,
+      "_inline_size": null,
+      "padding": {
+       "unit": "px",
+       "top": "0",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": true
+      }
+     },
+     "elements": [
+      {
+       "id": "6bcc14e",
+       "elType": "widget",
+       "settings": {
+        "tone": "ink",
+        "icon": "globe",
+        "kicker": "CHEMICAL IMPORTER",
+        "title": "وارد کننده مواد اولیه شیمیایی",
+        "text": "بسپارمارکت با ۷+ سال تجربه واردات مستقیم از چین، آلمان و ترکیه، مواد اولیه شیمیایی مورد نیاز کارخانه‌ها و واحدهای تولیدی را با قیمت رقابتی، دیتاشیت و COA معتبر تأمین می‌کند. امکان سفارش سفارشی برای محصولات خاص فراهم است.",
+        "points": [
+         {
+          "text": "واردات مستقیم",
+          "_id": "92d11a9"
+         },
+         {
+          "text": "دیتاشیت و COA",
+          "_id": "0c48b82"
+         },
+         {
+          "text": "سفارش اختصاصی",
+          "_id": "6ec1161"
+         }
+        ],
+        "btn_text": "خدمات واردات",
+        "btn_link": {
+         "url": "/chemical-importer/"
+        },
+        "reverse": "yes"
+       },
+       "elements": [],
+       "widgetType": "baspar-cta-strip"
+      }
+     ],
+     "isInner": false
+    }
+   ],
+   "isInner": false
+  }
+ ]
+}

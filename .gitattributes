@@ -1,0 +1,4 @@
+backup export-ignore
+docs export-ignore
+tools export-ignore
+extras export-ignore

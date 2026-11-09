@@ -1,0 +1,369 @@
+{
+ "version": "0.4",
+ "title": "Baspar — قالب تک مقاله",
+ "type": "single-post",
+ "page_settings": {},
+ "content": [
+  {
+   "id": "fbeea70",
+   "elType": "section",
+   "settings": {
+    "padding": {
+     "unit": "px",
+     "top": "8",
+     "right": "0",
+     "bottom": "0",
+     "left": "0",
+     "isLinked": false
+    },
+    "content_width": {
+     "unit": "px",
+     "size": 1280
+    }
+   },
+   "elements": [
+    {
+     "id": "2d3eb15",
+     "elType": "column",
+     "settings": {
+      "_column_size": 100,
+      "_inline_size": null
+     },
+     "elements": [
+      {
+       "id": "037ef47",
+       "elType": "widget",
+       "settings": {
+        "blog_label": "وبلاگ",
+        "blog_link": {
+         "url": "/blog/"
+        }
+       },
+       "elements": [],
+       "widgetType": "baspar-post-hero"
+      }
+     ],
+     "isInner": false
+    }
+   ],
+   "isInner": false
+  },
+  {
+   "id": "65637ee",
+   "elType": "section",
+   "settings": {
+    "padding": {
+     "unit": "px",
+     "top": "48",
+     "right": "0",
+     "bottom": "56",
+     "left": "0",
+     "isLinked": false
+    },
+    "content_width": {
+     "unit": "px",
+     "size": 1280
+    },
+    "gap": "wider"
+   },
+   "elements": [
+    {
+     "id": "d121c3b",
+     "elType": "column",
+     "settings": {
+      "_column_size": 70,
+      "_inline_size": null,
+      "_inline_size_tablet": 64
+     },
+     "elements": [
+      {
+       "id": "660366c",
+       "elType": "widget",
+       "settings": {
+        "title": "فهرست مطالب",
+        "collapsed": "yes",
+        "sticky": "",
+        "_margin": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "24",
+         "left": "0",
+         "isLinked": false
+        }
+       },
+       "elements": [],
+       "widgetType": "baspar-post-toc"
+      },
+      {
+       "id": "6619dd9",
+       "elType": "widget",
+       "settings": {},
+       "elements": [],
+       "widgetType": "baspar-post-content"
+      },
+      {
+       "id": "00cb981",
+       "elType": "widget",
+       "settings": {
+        "_margin": {
+         "unit": "px",
+         "top": "32",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        }
+       },
+       "elements": [],
+       "widgetType": "baspar-post-share"
+      },
+      {
+       "id": "561b6f3",
+       "elType": "widget",
+       "settings": {
+        "_margin": {
+         "unit": "px",
+         "top": "24",
+         "right": "0",
+         "bottom": "0",
+         "left": "0",
+         "isLinked": false
+        }
+       },
+       "elements": [],
+       "widgetType": "baspar-author-box"
+      }
+     ],
+     "isInner": false
+    },
+    {
+     "id": "71dad73",
+     "elType": "column",
+     "settings": {
+      "_column_size": 30,
+      "_inline_size": null,
+      "_inline_size_tablet": 36
+     },
+     "elements": [
+      {
+       "id": "78884bb",
+       "elType": "widget",
+       "settings": {
+        "_margin": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "20",
+         "left": "0",
+         "isLinked": false
+        }
+       },
+       "elements": [],
+       "widgetType": "baspar-side-cta"
+      },
+      {
+       "id": "6325aba",
+       "elType": "widget",
+       "settings": {
+        "_margin": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "20",
+         "left": "0",
+         "isLinked": false
+        }
+       },
+       "elements": [],
+       "widgetType": "baspar-side-links"
+      },
+      {
+       "id": "94fc12e",
+       "elType": "widget",
+       "settings": {
+        "link": {
+         "url": "/shop/"
+        },
+        "eyebrow": "SHOP",
+        "title": "فروشگاه مواد اولیه شیمیایی",
+        "text": "بیش از ۱۰۰ گرید موجود در انبار تهران؛ قیمت روز با استعلام.",
+        "btn": "مشاهده محصولات",
+        "tone": "purple",
+        "_margin": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "20",
+         "left": "0",
+         "isLinked": false
+        }
+       },
+       "elements": [],
+       "widgetType": "baspar-side-banner"
+      },
+      {
+       "id": "af40e4c",
+       "elType": "widget",
+       "settings": {
+        "_margin": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "20",
+         "left": "0",
+         "isLinked": false
+        }
+       },
+       "elements": [],
+       "widgetType": "baspar-side-posts"
+      },
+      {
+       "id": "4d55fbb",
+       "elType": "widget",
+       "settings": {
+        "_margin": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "20",
+         "left": "0",
+         "isLinked": false
+        }
+       },
+       "elements": [],
+       "widgetType": "baspar-side-cats"
+      },
+      {
+       "id": "2251aba",
+       "elType": "widget",
+       "settings": {
+        "link": {
+         "url": "/chemical-importer/"
+        },
+        "eyebrow": "DIRECT IMPORT",
+        "title": "واردات اختصاصی و سفارشی",
+        "text": "گرید خاص دارید؟ از کارخانه سازنده برایتان وارد می‌کنیم.",
+        "btn": "اطلاعات بیشتر",
+        "tone": "dark",
+        "_margin": {
+         "unit": "px",
+         "top": "0",
+         "right": "0",
+         "bottom": "20",
+         "left": "0",
+         "isLinked": false
+        }
+       },
+       "elements": [],
+       "widgetType": "baspar-side-banner"
+      },
+      {
+       "id": "db5c641",
+       "elType": "widget",
+       "settings": {},
+       "elements": [],
+       "widgetType": "baspar-side-products"
+      }
+     ],
+     "isInner": false
+    }
+   ],
+   "isInner": false
+  },
+  {
+   "id": "6228db7",
+   "elType": "section",
+   "settings": {
+    "padding": {
+     "unit": "px",
+     "top": "64",
+     "right": "0",
+     "bottom": "64",
+     "left": "0",
+     "isLinked": false
+    },
+    "content_width": {
+     "unit": "px",
+     "size": 1280
+    },
+    "background_background": "classic",
+    "background_color": "#F7F4FB"
+   },
+   "elements": [
+    {
+     "id": "66ab41a",
+     "elType": "column",
+     "settings": {
+      "_column_size": 100,
+      "_inline_size": null
+     },
+     "elements": [
+      {
+       "id": "21716fe",
+       "elType": "widget",
+       "settings": {
+        "kicker": "KEEP READING",
+        "title": "مقالات مرتبط",
+        "sub": ""
+       },
+       "elements": [],
+       "widgetType": "baspar-section-heading"
+      },
+      {
+       "id": "bbdd798",
+       "elType": "widget",
+       "settings": {
+        "count": 3,
+        "columns": "3"
+       },
+       "elements": [],
+       "widgetType": "baspar-related-posts"
+      }
+     ],
+     "isInner": false
+    }
+   ],
+   "isInner": false
+  },
+  {
+   "id": "dd4407b",
+   "elType": "section",
+   "settings": {
+    "padding": {
+     "unit": "px",
+     "top": "48",
+     "right": "0",
+     "bottom": "64",
+     "left": "0",
+     "isLinked": false
+    },
+    "content_width": {
+     "unit": "px",
+     "size": 900
+    }
+   },
+   "elements": [
+    {
+     "id": "a88ef96",
+     "elType": "column",
+     "settings": {
+      "_column_size": 100,
+      "_inline_size": null
+     },
+     "elements": [
+      {
+       "id": "ed5e29a",
+       "elType": "widget",
+       "settings": {},
+       "elements": [],
+       "widgetType": "baspar-post-comments"
+      }
+     ],
+     "isInner": false
+    }
+   ],
+   "isInner": false
+  }
+ ]
+}

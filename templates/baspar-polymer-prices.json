@@ -1,0 +1,50 @@
+{
+ "version": "0.4",
+ "title": "بسپار — قیمت پایه محصولات پتروشیمی",
+ "type": "page",
+ "page_settings": {
+  "template": "elementor_header_footer",
+  "hide_title": "yes",
+  "background_background": "classic",
+  "background_color": "#FBF9FE"
+ },
+ "content": [
+  {
+   "id": "a1b2c3d",
+   "elType": "section",
+   "settings": {
+    "layout": "full_width",
+    "gap": "no",
+    "padding": {
+     "unit": "px",
+     "top": "0",
+     "right": "0",
+     "bottom": "0",
+     "left": "0",
+     "isLinked": true
+    }
+   },
+   "elements": [
+    {
+     "id": "a1b2c3e",
+     "elType": "column",
+     "settings": {
+      "_column_size": 100,
+      "_inline_size": null
+     },
+     "elements": [
+      {
+       "id": "a1b2c3f",
+       "elType": "widget",
+       "settings": {},
+       "elements": [],
+       "widgetType": "baspar-price-board"
+      }
+     ],
+     "isInner": false
+    }
+   ],
+   "isInner": false
+  }
+ ]
+}
