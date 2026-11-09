@@ -410,13 +410,57 @@ function dollar_series( $n = 26 ) {
 }
 
 /**
+ * Remove the cached copy of the price page from the common page-cache
+ * plugins right now (a cached page keeps showing the previous week).
+ */
+function purge_price_page() {
+	$url = function_exists( __NAMESPACE__ . '\\page_url' ) ? page_url() : '';
+	if ( '' === $url ) {
+		return;
+	}
+	if ( function_exists( 'rocket_clean_files' ) ) {
+		rocket_clean_files( array( $url ) );
+	}
+	if ( function_exists( 'w3tc_flush_url' ) ) {
+		w3tc_flush_url( $url );
+	}
+	if ( function_exists( 'wpsc_delete_url_cache' ) ) {
+		wpsc_delete_url_cache( $url );
+	}
+	do_action( 'litespeed_purge_url', $url );
+	do_action( 'baspar_prices_page_purged', $url );
+}
+
+/**
+ * Clear every cached page (the sidebar price banner is on posts and products).
+ */
+function purge_all_pages() {
+	do_action( 'baspar_prices_updated' );
+	if ( function_exists( 'rocket_clean_domain' ) ) {
+		rocket_clean_domain();
+	}
+}
+
+/**
  * Drop cached board data (after an import or a delete).
  */
 function flush_cache() {
+	static $queued = false;
 	delete_transient( 'baspar_prices_board' );
 	delete_transient( 'baspar_prices_sparks' );
-	// One page-cache purge a minute after the last change (a history
-	// backfill saves many weeks in a row).
+	// The price page itself: immediately, not through WP-Cron (cron only
+	// runs when a visitor reaches PHP, which a cached site rarely does).
+	purge_price_page();
+	// Everything else (posts and products with the sidebar banner): when this
+	// request ends if an admin made the change; a history backfill saves many
+	// weeks in a row, so there it is one purge a minute after the last change.
+	if ( is_admin() && ! wp_doing_cron() && ! doing_action( 'baspar_prices_backfill' ) ) {
+		if ( ! $queued ) {
+			$queued = true;
+			add_action( 'shutdown', __NAMESPACE__ . '\\purge_all_pages' );
+		}
+		return;
+	}
 	wp_clear_scheduled_hook( 'baspar_prices_purge' );
 	wp_schedule_single_event( time() + 60, 'baspar_prices_purge' );
 }

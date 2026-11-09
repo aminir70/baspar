@@ -599,10 +599,5 @@ add_action( 'baspar_prices_backfill', __NAMESPACE__ . '\\run_backfill' );
 // Cached pages show the new prices right away.
 add_action(
 	'baspar_prices_purge',
-	static function () {
-		do_action( 'baspar_prices_updated' );
-		if ( function_exists( 'rocket_clean_domain' ) ) {
-			rocket_clean_domain();
-		}
-	}
+	__NAMESPACE__ . '\\purge_all_pages'
 );

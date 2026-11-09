@@ -4,7 +4,7 @@ Tags: elementor, woocommerce, widgets, rtl, persian
 Requires at least: 5.8
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.11.1
+Stable tag: 1.11.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,6 +37,9 @@ Requires Elementor. WooCommerce is required only for the product/category widget
    Templates → Saved Templates → Import Templates.
 
 == Changelog ==
+
+= 1.11.2 =
+* Fix: a new price week (imported or added in the admin) did not show on /polymer-prices/ when the page was cached by WP Rocket — the cache was only cleared by a delayed WP-Cron job. The price page's cached copy is now removed immediately (WP Rocket, W3 Total Cache, WP Super Cache, LiteSpeed) and the rest of the site is cleared when the admin request ends.
 
 = 1.11.1 =
 * Fix: links inside articles, product texts and category descriptions were smaller than the words around them (Elementor Site Settings → Links typography set every link to 12px «bvazir»). They now take the size and font of their sentence.
