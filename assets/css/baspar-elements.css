@@ -3672,6 +3672,17 @@ a.sbn:hover{transform:translateY(-3px)}
 .baspar-scope .sbn-text{font-size:13.5px;line-height:1.9;opacity:.92}
 .baspar-scope .sbn-btn{align-self:flex-start;margin-top:6px;display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border-radius:999px;background:#fff;color:var(--brand-deep);font-size:13px;font-weight:800;transition:gap .2s}
 .baspar-scope a.sbn:hover .sbn-btn{gap:10px}
+/* Editor text: Persian font + links as big as the words around them (1.11.1).
+   Elementor Site Settings → Typography → Links prints `.elementor-kit-N a`
+   {font-size:12px; font-family:bvazir}, which made every link in articles,
+   product texts and category descriptions smaller than its sentence. The
+   Elementor Pro category description / post content widgets also sit outside
+   .baspar-scope, so their text used the theme's system font. */
+.baspar-scope .bspr-article a,.baspar-scope .rich-text a,.baspar-scope .prod-desc-body a,.baspar-scope .city-prose a,
+.elementor-widget-woocommerce-archive-description .elementor-widget-container a,.elementor-widget-theme-post-content .elementor-widget-container a,
+.elementor-widget-woocommerce-product-content .elementor-widget-container a,.elementor-widget-woocommerce-product-short-description .elementor-widget-container a{font-family:inherit;font-size:inherit;line-height:inherit}
+.elementor-widget-woocommerce-archive-description .elementor-widget-container,.elementor-widget-theme-post-content .elementor-widget-container,
+.elementor-widget-woocommerce-product-content .elementor-widget-container,.elementor-widget-woocommerce-product-short-description .elementor-widget-container{font-family:"Vazirmatn",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:2}
 /* Sidebar: petrochemical base prices banner (1.10.5) */
 .baspar-scope.spb-wrap{margin:0 0 22px}
 .baspar-scope .spb{position:relative;display:flex;flex-direction:column;gap:10px;overflow:hidden;isolation:isolate;padding:20px 20px 18px;border-radius:18px;text-decoration:none;color:#fff;background:linear-gradient(155deg,#3A1470,var(--brand-deep,#1B0537) 62%,#12031F);box-shadow:0 22px 44px -24px rgba(27,5,55,.8);transition:transform .25s,box-shadow .25s}

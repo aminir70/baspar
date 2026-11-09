@@ -4,7 +4,7 @@ Tags: elementor, woocommerce, widgets, rtl, persian
 Requires at least: 5.8
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.11.0
+Stable tag: 1.11.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,6 +37,10 @@ Requires Elementor. WooCommerce is required only for the product/category widget
    Templates → Saved Templates → Import Templates.
 
 == Changelog ==
+
+= 1.11.1 =
+* Fix: links inside articles, product texts and category descriptions were smaller than the words around them (Elementor Site Settings → Links typography set every link to 12px «bvazir»). They now take the size and font of their sentence.
+* Fix: the Elementor Pro category description, post content and product content widgets now use Vazirmatn instead of the theme's system font.
 
 = 1.11.0 =
 * Product categories and the shop are now one page each: the products widget shows the first batch and a «مشاهده محصولات بیشتر» button adds the rest without leaving the page (new default for «صفحه‌بندی»; «شماره صفحه» is still available).

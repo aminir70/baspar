@@ -488,6 +488,8 @@ html.baspar-js .baspar-scope .baspar-reveal:not(.in){opacity:1;transform:none}
 .baspar-scope .sbx-t{flex:1;margin:0;font-size:15px;font-weight:800;color:var(--brand-deep);line-height:1.5}
 .baspar-scope .sbx-more{font-size:12px;font-weight:700;color:var(--brand);text-decoration:none;padding:5px 11px;border-radius:999px;background:var(--brand-50);white-space:nowrap;transition:background .15s,color .15s}
 .baspar-scope .sbx-more:hover{background:var(--brand);color:#fff}
+.baspar-scope .bspr-article a,.baspar-scope .rich-text a,.baspar-scope .prod-desc-body a,.baspar-scope .city-prose a, .elementor-widget-woocommerce-archive-description .elementor-widget-container a,.elementor-widget-theme-post-content .elementor-widget-container a, .elementor-widget-woocommerce-product-content .elementor-widget-container a,.elementor-widget-woocommerce-product-short-description .elementor-widget-container a{font-family:inherit;font-size:inherit;line-height:inherit}
+.elementor-widget-woocommerce-archive-description .elementor-widget-container,.elementor-widget-theme-post-content .elementor-widget-container, .elementor-widget-woocommerce-product-content .elementor-widget-container,.elementor-widget-woocommerce-product-short-description .elementor-widget-container{font-family:"Vazirmatn",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:2}
 .elementor-column.bspr-sticky-col,.e-con.bspr-sticky-col{position:sticky;top:var(--bspr-sticky-top,100px);align-self:flex-start;z-index:2}
 .elementor-column.bspr-sticky-col > .elementor-widget-wrap{height:auto}
 .baspar-scope .pdh-share button.is-copied{background:#16a34a;border-color:#16a34a;color:#fff}
